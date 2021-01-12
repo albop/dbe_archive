@@ -74,7 +74,6 @@
 
 ---
 
-
 ## Big Data Era and Machine Learning (1)
 
 ![](NVIDIA_Portrait_Example.jpeg)
@@ -82,6 +81,7 @@
 Deep learning: artificial neural nets
 
 ---
+nvi
 ## Big Data Era and Machine Learning (2)
 
 <img src=sentiment_analysis.png width=80%>
@@ -93,6 +93,7 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
 ## Programming in Python
 
 - Easy, clean, widespread programming language
+  - free
   - libraries for virtually any task
 - <!-- .element: class="fragment" -->Lingua franca of machine learning community
 - <!-- .element: class="fragment" -->Data analysts/Statisticians/Researchers spend most of their time...
@@ -123,7 +124,7 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
 | 7       | 02/03      | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
 | 8       | 09/03      | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                               |
 | 9       | 30/03      | natural language processing                                                                          |
-| 9       | 30/03      | presentation of data project, programming test                                                       |
+| 10       | ?     | presentation of data project, programming test                                                       |
 
 ---
 
