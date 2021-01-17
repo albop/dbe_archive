@@ -2,6 +2,12 @@
 
 ---
 
+## Shortcuts
+
+[Slides](https://albop.github.io/)
+
+---
+
 ## Communication
 
 
@@ -81,7 +87,7 @@
 Deep learning: artificial neural nets
 
 ---
-nvi
+
 ## Big Data Era and Machine Learning (2)
 
 <img src=sentiment_analysis.png width=80%>
