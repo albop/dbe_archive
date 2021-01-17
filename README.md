@@ -4,7 +4,7 @@
 
 ## Shortcuts
 
-[Slides](https://albop.github.io/)
+[Slides](https://albop.github.io/dbe/)
 
 ---
 
