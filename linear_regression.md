@@ -77,7 +77,7 @@ plt.savefig("data_description.png")
 
 - For any variable $v$ with $N$ observations:
   - mean: $\overline{v} = \frac{1}{N} \sum_{i=1}^N v_i$
-  - variance $V({v}) = \frac{1}{N} \sum_{i=1}^N \left(v_i - \overline{v} \right)$
+  - variance $V({v}) = \frac{1}{N} \sum_{i=1}^N \left(v_i - \overline{v} \right)^2$
   - standard deviation : $\sigma(v)=\sqrt{V(v)}$
 
 </div>
@@ -141,6 +141,7 @@ df.cov()
 
 <div class="col">
 
+<div class="fragment">
 
 ```python
 df.corr()
@@ -153,9 +154,10 @@ df.corr()
 | prestige  | 0.837801 | 0.851916  | 1.000000 |
 
 </div>
+
+</div>
 </div>
 
-[GRAPHS]
 
 ---
 
@@ -284,7 +286,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 - We can say that income and education are positively *correlated*
 - We can say that  a unit increase in education is associated with a 0.59 increase in income
-- We can say that  a unit increase in education *explains* with a 0.59 increase in income
+- We can say that  a unit increase in education *explains* a 0.59 increase in income
 - But:
   - here *explains* does __not__ mean *cause*
 
@@ -341,7 +343,8 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 ![](experimental/../experiments/residuals_circus.png)
 
-
+- a well specified model, residuals must look like *white noise* (i.i.d.: independent and identically distributed)
+- when residuals are clearly abnormal, the model must be changed
 
 ---
 
@@ -349,7 +352,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 - What is the share of the total variance explained by the variance of my prediction?
 
-    $$R^2 = \frac{Var(\alpha + \beta x_i)}{Var(y_i)} = r_{x,y}$$
+    $$R^2 = \frac{Var(\alpha + \beta x_i)}{Var(y_i)} = Cor(x,y)$$
 
 - Coefficient of determination is a measure of the explanatory power of a regression
   - but not of the *significance* of a coefficient
@@ -357,7 +360,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 - In one-dimensional case, it is possible to have small R2, yet a very precise regression coefficient.
 
-----
+---
 
 
 <!-- 
@@ -400,7 +403,7 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 - <!-- .element class="fragment" data-fragment-index="4" --> How confident am I in these estimates ?
   - I could have gotten a completely different one...
-  - clearly, the bigger $N$, the more confident...
+  - clearly, the bigger $N$, the more confident I am...
 
 
 </div>
@@ -466,7 +469,7 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 - Given the values $\alpha$, $\beta$, $\sigma$ of the true model, we can model the distribution of the estimates.
     - $mean(\hat{\beta}) = (\hat{\beta}) $ (__unbiased__)
-    - $\sigma(\hat{\beta}) =  Var(y_i) \sum_i \epsilon_i^2
+    - $\sigma(\hat{\beta}) =  \frac{\sigma^2}{Var(x_i)}$
 
 - Goal construct statistics whose distribution is known, to validate/invalidate a model
 
@@ -531,11 +534,11 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 - Given estimate, $\hat{\beta}$ with standard deviation $\sigma(\hat{\beta})$
 
-- Given a probability threshold $\alpha$ (for instance $\alpha=0.05$) we can compute $t*$ such that $P(|t|>t*)=\alpha$
+- Given a probability threshold $\alpha$ (for instance $\alpha=0.05$) we can compute $t^{\star}$ such that $P(|t|>t*)=\alpha$
 
 - We construct the __confidence interval__:
 
-$$I^{\alpha} = [\hat{\beta}-t\sigma(\hat{\beta}), \hat{\beta}+t\sigma(\hat{\beta})]
+$$I^{\alpha} = [\hat{\beta}-t\sigma(\hat{\beta}), \hat{\beta}+t\sigma(\hat{\beta})]$$
 
 - Interpretation: given the estimated value, one is 95 \% sure ($1-\alpha$) the estimated parameter falls in this interval
 

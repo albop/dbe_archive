@@ -121,9 +121,9 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
 
 | Session | Date (tbc) | Content                                                                                              |
 | ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
-| <mark>1</mark>       | <mark>12/01</mark>      | <mark> housekeeping,  basic data types and language structure </mark>                                |
-| 2       | 19/01      | databases, data representation, interactivity (matplotlib, altair, widgets)                          |
-| 3       | 26/01      | ordinary least squares (linear regression, multiple regression)                                      |
+| 1       | 12/01      | housekeeping,  basic data types and <mark>language structure</mark>                                |
+| 2       | 19/01      | databases, data representation, <mark>interactivity</mark> (matplotlib, altair, widgets)                          |
+| <mark>3</mark>       | <mark>26/01</mark>     | ordinary least squares (<mark>linear regression</mark>, multiple regression)                                      |
 | 4       | 02/02      | regression inference and categorical variables                                                       |
 | 5       | 09/02      | instrumental variables                                                                               |
 | 6       | 23/02      | panel data                                                                                           |
