@@ -237,7 +237,7 @@ $$L(\alpha,\beta) = \sum_{i=1}^N (e_i)^2$$
 
 <div class="col">
 
-- Try to chose $\alpha, \beta$ so as to minimize the sum of the squares $L\alpha(α, β)$
+- Try to chose $\alpha, \beta$ so as to minimize the sum of the squares $L(α, β)$
 
 - It is a convex minimization problem: unique solution
 
@@ -248,13 +248,13 @@ $$L(\alpha,\beta) = \sum_{i=1}^N (e_i)^2$$
 
 <div class="r-stack">
 
-<img src="experiments/errors_1.png" class="fragment visible-current" data-fragment-order="1"> 
+<img src="experiments/errors_1.png" class="fragment visible-current" data-fragment-order="1" width=40%> 
 
-<img src="experiments/errors_2.png" class="fragment visible-current" data-fragment-order="2">
+<img src="experiments/errors_2.png" class="fragment visible-current" data-fragment-order="2" width=40%>
 
-<img src="experiments/errors_3.png" class="fragment visible-current" data-fragment-order="3">
+<img src="experiments/errors_3.png" class="fragment visible-current" data-fragment-order="3" width=40%>
 
-<img src="experiments/errors_4.png" class="fragment visible-current" data-fragment-order="4">
+<img src="experiments/errors_4.png" class="fragment visible-current" data-fragment-order="4" width=40%>
 
 </div>
 
@@ -299,7 +299,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 ### Predictions
 
 - It is possible to make *predictions* with the model:
-  - How much would an occupation which hires 60% high fare salary-wise?
+  - How much would an occupation which hires 60% high schoolers fare salary-wise?
 
 <img src="experiments/prediction.png">
 
