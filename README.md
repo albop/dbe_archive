@@ -5,9 +5,14 @@
 ## Shortcuts
 
 - [Slides](https://albop.github.io/dbe/)
-  - [Introduction](https://albop.github.io/dbe/)
-  - [Data Frames](https://albop.github.io/dbe/2_dataframes)
-  - [Linear Regression](https://albop.github.io/dbe/3_linear_regression)
+  - [Introduction](https://albop.github.io/dbe/slides/index)
+  - [Data Frames](https://albop.github.io/dbe/slides/2_dataframes)
+  - [Linear Regression](https://albop.github.io/dbe/slides/3_linear_regression)
+
+How to create pdfs?
+- open a set of slides
+- add ?print-pdf to the url (for instance: `https://albop.github.io/dbe/slides/2_dataframes?print-pdf`)
+- print the page as a pdf with your navigator
 
 ---
 
