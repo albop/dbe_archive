@@ -1,0 +1,7 @@
+dbnomics
+vega_datasets
+seaborn
+altair
+matplotlib
+scipy
+pandas
