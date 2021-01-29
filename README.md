@@ -6,7 +6,7 @@
 
 - [Slides](https://albop.github.io/dbe/)
   - [Introduction](https://albop.github.io/dbe/slides/index)
-  - [Data Frames](https://albop.github.io/dbe/slides/2_dataframes)
+  - [Numeric Python and Data Frames](https://albop.github.io/dbe/slides/2_dataframes)
   - [Linear Regression](https://albop.github.io/dbe/slides/3_linear_regression)
 
 How to create pdfs?
@@ -20,7 +20,7 @@ How to create pdfs?
 
 Direct links:
 - Python basics: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises-correction.ipynb))
-- Dataframe: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises_correction.ipynb)))
+- Dataframe: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises_correction.ipynb))
 
 ---
 
