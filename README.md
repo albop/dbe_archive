@@ -2,7 +2,7 @@
 
 ---
 
-## Shortcuts
+## Slides
 
 - [Slides](https://albop.github.io/dbe/)
   - [Introduction](https://albop.github.io/dbe/slides/index)
@@ -13,6 +13,14 @@ How to create pdfs?
 - open a set of slides
 - add ?print-pdf to the url (for instance: `https://albop.github.io/dbe/slides/2_dataframes?print-pdf`)
 - print the page as a pdf with your navigator
+
+---
+
+## Shortcuts
+
+Direct links:
+- Python basics: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises-correction.ipynb))
+- Dataframe: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises_correction.ipynb)))
 
 ---
 
