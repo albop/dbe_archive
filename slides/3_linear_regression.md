@@ -25,6 +25,7 @@
 - $y$: income
   - Percentage of occupational incumbents in the 1950 US Census who earned $3,500 or more per year
 - $z$: Percentage of respondents in a social survey who rated the occupation as “good” or better in prestige 
+
 ----
 
 ### Quick look
@@ -60,7 +61,7 @@ plt.ylabel("Income")
 plt.savefig("data_description.png")
 ```
 
-![](experiments/data_description.png)
+![](graphs/data_description.png)
 
 </div>
 
@@ -172,13 +173,10 @@ df.corr()
 
 <div class="col">
 
-- Consider the line:
-$$y = α + β x$$
-
-- <!-- .element class="fragment" data-fragment-order=2 --> Several possibilities. 
-- <!-- .element class="fragment" data-fragment-order=3 --> Which one do we choose to represent the model?
-
-- <!-- .element class="fragment" data-fragment-order=4 -->Need some criterium.
+- Consider the line: $$y = α + β x$$
+- <!-- .element class="fragment" data-fragment-index="2" --> Several possibilities. 
+- <!-- .element class="fragment" data-fragment-index="3" --> Which one do we choose to represent the model?
+- <!-- .element class="fragment" data-fragment-index="4" -->Need some criterium.
 
 </div>
 
@@ -186,11 +184,11 @@ $$y = α + β x$$
 
 <div class="r-stack">
 
-<img src="experiments/which_line_1.png" class="fragment visible-current" data-fragment-order="1"> 
+<img src="graphs/which_line_1.png" class="fragment visible-current" data-fragment-index=2>
 
-<img src="experiments/which_line_2.png" class="fragment visible-current" data-fragment-order="2">
+<img src="graphs/which_line_2.png" class="fragment visible-current" data-fragment-index=3>
 
-<img src="experiments/which_line_3.png" class="fragment visible-current" data-fragment-order="3">
+<img src="graphs/which_line_3.png" class="fragment visible-current" data-fragment-index=4>
 </div>
 
 </div>
@@ -207,20 +205,21 @@ $$y = α + β x$$
 
 <div class="col">
 
-- <!-- .element class="fragment" data-fragment-order="1" --> Compare the model to the data:
+- <!-- .element class="fragment" data-fragment-index="1" --> Compare the model to the data:
 $$y_i = \alpha + \beta x_i + \underbrace{e_i}_{\text{prediction error}}$$
--<!-- .element class="fragment" data-fragment-order="2" --> Square Errors
+-<!-- .element class="fragment" data-fragment-index="2" --> Square Errors
 $${e_i}^2 = (y_i-\alpha-\beta x_i)^2$$
-- <!-- .element class="fragment" data-fragment-order="3" -->Loss Function: sum of squares
+- <!-- .element class="fragment" data-fragment-index="3" -->Loss Function: sum of squares
 $$L(\alpha,\beta) = \sum_{i=1}^N (e_i)^2$$
 </div>
 
-
+<div class="col">
 <div class="r-stack">
+<img src="graphs/errors_0.png" class="fragment visible-current" data-fragment-index=1> 
 
-<img src="experiments/errors_1.png" class="fragment visible-current" data-fragment-order=1> 
+<img src="graphs/errors_1.png" class="fragment visible-current" data-fragment-index=2> 
 
-<img src="experiments/errors_2.png" class="fragment visible-current" data-fragment-order=2>
+<img src="graphs/errors_2.png" class="fragment visible-current" data-fragment-index=3>
 
 
 </div>
@@ -237,24 +236,19 @@ $$L(\alpha,\beta) = \sum_{i=1}^N (e_i)^2$$
 
 <div class="col">
 
-- Try to chose $\alpha, \beta$ so as to minimize the sum of the squares $L(α, β)$
-
-- It is a convex minimization problem: unique solution
-
-- This direct iterative procedure is used in machine learning
+- <!-- .element class="fragment" data-fragment-index="1" -->Try to chose $\alpha, \beta$ so as to minimize the sum of the squares $L(α, β)$
+- <!-- .element class="fragment" data-fragment-index="2" -->It is a convex minimization problem: unique solution
+- <!-- .element class="fragment" data-fragment-index="3" -->This direct iterative procedure is used in machine learning
 
 </div>
 
+<div class="col">
 
 <div class="r-stack">
 
-<img src="experiments/errors_1.png" class="fragment visible-current" data-fragment-order="1" width=40%> 
-
-<img src="experiments/errors_2.png" class="fragment visible-current" data-fragment-order="2" width=40%>
-
-<img src="experiments/errors_3.png" class="fragment visible-current" data-fragment-order="3" width=40%>
-
-<img src="experiments/errors_4.png" class="fragment visible-current" data-fragment-order="4" width=40%>
+<img src="graphs/errors_2.png" class="fragment visible-current" data-fragment-index="2" width=100%>
+<img src="graphs/errors_3.png" class="fragment visible-current" data-fragment-index="3" width=100%>
+<img src="graphs/errors_4.png" class="fragment visible-current" data-fragment-index="4" width=100%>
 
 </div>
 
@@ -301,7 +295,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 - It is possible to make *predictions* with the model:
   - How much would an occupation which hires 60% high schoolers fare salary-wise?
 
-<img src="experiments/prediction.png">
+<img src="graphs/prediction.png">
 
 - Prediction: salary measure is $45.4$
 - OK, but that seems noisy, how much do I really predict ? Can I get a sense of the precision of my prediction ?
@@ -316,7 +310,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 <div class="col">
 
 - Plot the residuals: 
-<img src="experiments/residuals.png">
+<img src="graphs/residuals.png">
 
 </div>
 
@@ -341,12 +335,12 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 ### What could go wrong
 
-![](experimental/../experiments/residuals_circus.png)
+![](experimental/../graphs/residuals_circus.png)
 
 - a well specified model, residuals must look like *white noise* (i.i.d.: independent and identically distributed)
 - when residuals are clearly abnormal, the model must be changed
 
----
+----
 
 ### Variance decomposition
 
@@ -412,9 +406,9 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 <div class="r-stack">
 
-<img src="experiments/regression_uncertainty_1.png" class="fragment" data-fragment-index=1 >
-<img src="experiments/regression_uncertainty_2.png" class="fragment" data-fragment-index=2>
-<img src="experiments/regression_uncertainty_3.png" class="fragment" data-fragment-index=3>
+<img src="graphs/regression_uncertainty_1.png" class="fragment current-visible" data-fragment-index=1 >
+<img src="graphs/regression_uncertainty_2.png" class="fragment current-visible" data-fragment-index=2>
+<img src="graphs/regression_uncertainty_3.png" class="fragment current-visible" data-fragment-index=3>
 </div>
 
 </div>
@@ -443,17 +437,17 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 <div class="col">
 
 <div class="r-stack">
-    <img src="experiments/random_estimates_1.png" class="fragment" data-fragment-index=2>
-    <img src="experiments/random_estimates_2.png" class="fragment" data-fragment-index=3>
-    <img src="experiments/random_estimates_3.png" class="fragment" data-fragment-index=4>
-    <img src="experiments/random_estimates_4.png" class="fragment" data-fragment-index=5>
-    <img src="experiments/random_estimates_5.png" class="fragment" data-fragment-index=6>
-    <img src="experiments/random_estimates_6.png" class="fragment" data-fragment-index=7>
-    <img src="experiments/random_estimates_7.png" class="fragment" data-fragment-index=8>
-    <img src="experiments/random_estimates_8.png" class="fragment" data-fragment-index=9>
-    <img src="experiments/random_estimates_9.png" class="fragment" data-fragment-index=10>
-    <img src="experiments/random_estimates_10.png" class="fragment" data-fragment-index=11>
-    <img src="experiments/random_estimates_100.png" class="fragment" data-fragment-index=12>
+    <img src="graphs/random_estimates_1.png" class="fragment" data-fragment-index=2>
+    <img src="graphs/random_estimates_2.png" class="fragment" data-fragment-index=3>
+    <img src="graphs/random_estimates_3.png" class="fragment" data-fragment-index=4>
+    <img src="graphs/random_estimates_4.png" class="fragment" data-fragment-index=5>
+    <img src="graphs/random_estimates_5.png" class="fragment" data-fragment-index=6>
+    <img src="graphs/random_estimates_6.png" class="fragment" data-fragment-index=7>
+    <img src="graphs/random_estimates_7.png" class="fragment" data-fragment-index=8>
+    <img src="graphs/random_estimates_8.png" class="fragment" data-fragment-index=9>
+    <img src="graphs/random_estimates_9.png" class="fragment" data-fragment-index=10>
+    <img src="graphs/random_estimates_10.png" class="fragment" data-fragment-index=11>
+    <img src="graphs/random_estimates_100.png" class="fragment" data-fragment-index=12>
 <div>
 
 </div>
