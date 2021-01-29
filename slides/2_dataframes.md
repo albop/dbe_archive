@@ -1239,13 +1239,6 @@ index = (df['species']=='virginica')
 df.loc[index,'totalLength'] = df.loc[index,'sLength'] + 1.5*df[index]['pLength']
 ```
 
-    <ipython-input-57-c1b3e665535b>:4: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      df.loc[index]['totalLength'] = df.loc[index,'sLength'] + 1.5*df[index]['pLength']
-
 ---
 
 ## Reshaping DataFrames
@@ -1720,6 +1713,7 @@ df_long.groupby("country").apply(lambda df: df.mean())
 - Lots of subtleties when data gets complicated
     - we'll see them in due time
 
+----
 
 ```python
 txt_long_1 = """year,country,measure
@@ -1734,13 +1728,6 @@ open("dummy_long_1.csv",'w').write(txt_long_1)
 ```
 
 
-
-
-    136
-
-
-
-
 ```python
 txt_long_2 = """year,country,recipient
 2018,"france",maxime
@@ -1753,27 +1740,95 @@ txt_long_2 = """year,country,recipient
 open("dummy_long_2.csv",'w').write(txt_long_2)
 ```
 
+```python
+df_long_1 = pd.read_csv('dummy_long_1.csv')
+df_long_2 = pd.read_csv('dummy_long_2.csv')
+```
 
 
 
-    150
 
+----
 
+## Merging two DataFrames with pandas
 
 
 ```python
- """year,country,value,type
-2018,"france",950.0,measure
-2019,"france",960.0,measure
-2020,"france",1000.0,measure
-2018,"usa",2500.0,measure
-2019,"usa",2150.0,measure
-2020,"usa",2300.0,measure
-2018,"france",maxime,type
-2019,"france",mauricette,recipient
-2020,"france",mathilde,recipient
-2018,"usa",sherlock,recipient
-2019,"usa",watson,recipient
-2020,"usa",moriarty,recipient
-"""
+df_long_1.merge(df_long_2)
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>country</th>
+      <th>measure</th>
+      <th>recipient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>france</td>
+      <td>950.0</td>
+      <td>maxime</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>france</td>
+      <td>960.0</td>
+      <td>mauricette</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>france</td>
+      <td>1000.0</td>
+      <td>mathilde</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>usa</td>
+      <td>2500.0</td>
+      <td>sherlock</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>usa</td>
+      <td>2150.0</td>
+      <td>watson</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020</td>
+      <td>usa</td>
+      <td>2300.0</td>
+      <td>moriarty</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
