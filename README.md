@@ -1,5 +1,7 @@
 # Data-Based Economics
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albop/dbe/HEAD?urlpath=lab)
+
 ---
 
 ## Slides
