@@ -5,3 +5,4 @@ altair
 matplotlib
 scipy
 pandas
+rise
