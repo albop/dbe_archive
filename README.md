@@ -10,7 +10,7 @@
   - [Introduction](https://albop.github.io/dbe/slides/index)
   - [Numeric Python and Data Frames](https://albop.github.io/dbe/slides/2_dataframes)
   - [Linear Regression](https://albop.github.io/dbe/slides/3_linear_regression)
-  - [Multiple Regression](https://albop.github.io/dbe/slides/4_multple_regressions)
+  - [Multiple Regression](https://albop.github.io/dbe/slides/4_multiple_regressions)
 
 How to create pdfs?
 - open a set of slides
