@@ -24,7 +24,8 @@ How to create pdfs?
 Direct links:
 - Python basics: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises-correction.ipynb))
 - Dataframe: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises_correction.ipynb))
-
+- Regressions: ([data](https://raw.githubusercontent.com/albop/dbe/main/Session_4/Regressions.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_4/data.dta))
+- 
 ---
 
 ## Communication
