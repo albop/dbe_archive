@@ -286,7 +286,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 ---
 
-## Variance Decomposition
+## Explained Variance
 
 ----
 
@@ -342,17 +342,35 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 ----
 
-### Variance decomposition
+### Explained Variance
+
+<div class="container">
+
+<div class="col">
 
 - What is the share of the total variance explained by the variance of my prediction?
+    $$R^2 = \frac{\overbrace{Var(\alpha + \beta x_i)}^{\text{MSS}} } {\underbrace{Var(y_i)}\_{\text{TSS}}} = \frac{MSS}{TSS} = (Cor(x,y))^2$$
+    $$R^2 = 1-\frac{\overbrace{Var(y_i - \alpha + \beta x_i)}^{\text{RSS}} } { \underbrace{Var(y_i)}\_{{\text{TSS}  }}} = 1 - \frac{RSS}{TSS} $$
+    - MSS: model sum of squares, explained variance
+    - RSS: residual sum of square, unexplained variance
+    - TSS: total sum of squares, total variance
+  
+</div>
+<div class="col">
 
-    $$R^2 = \frac{Var(\alpha + \beta x_i)}{Var(y_i)} = Cor(x,y)$$
-
-- Coefficient of determination is a measure of the explanatory power of a regression
+- <!-- .element: class="fragment" --> Coefficient of determination is a measure of the explanatory power of a regression
   - but not of the *significance* of a coefficient
   - we'll get back to it when we see multivariate regressions
 
-- In one-dimensional case, it is possible to have small R2, yet a very precise regression coefficient.
+- <!-- .element: class="fragment" --> In one-dimensional case, it is possible to have small R2, yet a very precise regression coefficient.
+
+</div>
+
+----
+
+### Graphical Representation 
+
+<img src="r-squared.png" width=60%>
 
 ---
 
@@ -392,8 +410,10 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
     - errors are independent ...
     - and normallly distributed ...
     - with constant variance (homoscedastic)
-- <!-- .element class="fragment" data-fragment-index="2" -->Using this data-generation process, I draw randomly $N$ data points
-- <!-- .element class="fragment" data-fragment-index="3" -->Then I compute my estimate $\hat{α}$, $\hat{β}$
+- <!-- .element class="fragment" data-fragment-index="2" -->Using this data-generation process, I have drawns randomly $N$ data points (a.k.a. gathered the data) 
+  - maybe an acual *sample* (for instance $N$ patients)
+  - an abstract sample otherwise
+- <!-- .element class="fragment" data-fragment-index="3" -->Then computed my estimate $\hat{α}$, $\hat{β}$
 
 - <!-- .element class="fragment" data-fragment-index="4" --> How confident am I in these estimates ?
   - I could have gotten a completely different one...
@@ -406,16 +426,16 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 <div class="r-stack">
 
-<img src="graphs/regression_uncertainty_1.png" class="fragment current-visible" data-fragment-index=1 >
-<img src="graphs/regression_uncertainty_2.png" class="fragment current-visible" data-fragment-index=2>
-<img src="graphs/regression_uncertainty_3.png" class="fragment current-visible" data-fragment-index=3>
+<img src="graphs/regression_uncertainty_1.png" class="fragment current-visible" data-fragment-index=1 width=100%>
+<img src="graphs/regression_uncertainty_2.png" class="fragment current-visible" data-fragment-index=2 width=100%>
+<img src="graphs/regression_uncertainty_3.png" class="fragment" data-fragment-index=3 width=100%>
 </div>
 
 </div>
 
 ----
 
-### Statistical inference (simplified)
+### Statistical inference (2)
 
 
 <div class="container">
@@ -426,6 +446,7 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 - <!-- .element class="fragment" data-fragment-index="2" --> Imagine the actual data generating process was given by $\hat{α} + \hat{\beta} x + \epsilon$ where $\epsilon \sim \mathcal{N}(0,Var({e_i}))$
 - <!-- .element class="fragment" data-fragment-index="3" --> If I draw randomly $N$ points using this D.G.P. I get new estimates.
 - <!-- .element class="fragment" data-fragment-index="12" -->And if I make randomly many draws, I get a <strong>distribution</strong> for my estimate.
+    - I get an estimated $\hat{\sigma}(\beta)$
     - were my initial estimates very likely ?
     - or could they have taken any value with another draw from the data ?
     - in the example, we see that estimates around of 0.7 or 0.9, would be compatible with the data
@@ -437,16 +458,16 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 <div class="col">
 
 <div class="r-stack">
-    <img src="graphs/random_estimates_1.png" class="fragment" data-fragment-index=2>
-    <img src="graphs/random_estimates_2.png" class="fragment" data-fragment-index=3>
-    <img src="graphs/random_estimates_3.png" class="fragment" data-fragment-index=4>
-    <img src="graphs/random_estimates_4.png" class="fragment" data-fragment-index=5>
-    <img src="graphs/random_estimates_5.png" class="fragment" data-fragment-index=6>
-    <img src="graphs/random_estimates_6.png" class="fragment" data-fragment-index=7>
-    <img src="graphs/random_estimates_7.png" class="fragment" data-fragment-index=8>
-    <img src="graphs/random_estimates_8.png" class="fragment" data-fragment-index=9>
-    <img src="graphs/random_estimates_9.png" class="fragment" data-fragment-index=10>
-    <img src="graphs/random_estimates_10.png" class="fragment" data-fragment-index=11>
+    <img src="graphs/random_estimates_1.png" class="fragment current-visible" data-fragment-index=2>
+    <img src="graphs/random_estimates_2.png" class="fragment current-visible" data-fragment-index=3>
+    <img src="graphs/random_estimates_3.png" class="fragment current-visible" data-fragment-index=4>
+    <img src="graphs/random_estimates_4.png" class="fragment current-visible" data-fragment-index=5>
+    <img src="graphs/random_estimates_5.png" class="fragment current-visible" data-fragment-index=6>
+    <img src="graphs/random_estimates_6.png" class="fragment current-visible" data-fragment-index=7>
+    <img src="graphs/random_estimates_7.png" class="fragment current-visible" data-fragment-index=8>
+    <img src="graphs/random_estimates_8.png" class="fragment current-visible" data-fragment-index=9>
+    <img src="graphs/random_estimates_9.png" class="fragment current-visible" data-fragment-index=10>
+    <img src="graphs/random_estimates_10.png" class="fragment current-visible" data-fragment-index=11>
     <img src="graphs/random_estimates_100.png" class="fragment" data-fragment-index=12>
 <div>
 
@@ -457,21 +478,24 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 ----
 
-### Main take away
+### Main takeaway
 
-- Given the true model, all estimators are random variables
+- <!-- .element class="fragment" --> Given the true model, <strong>all estimators are random variables</strong> of the data generating process
 
-- Given the values $\alpha$, $\beta$, $\sigma$ of the true model, we can model the distribution of the estimates.
+- <!-- .element class="fragment" -->Given the values $\alpha$, $\beta$, $\sigma$ of the true model, we can model the distribution of the estimates.
+- <!-- .element class="fragment" -->Some closed forms:
+    - $\hat{\sigma}^2 = Var(y_i - \alpha -\beta x_i)$ estimated variance of the residuals
     - $mean(\hat{\beta}) = (\hat{\beta}) $ (__unbiased__)
     - $\sigma(\hat{\beta}) =  \frac{\sigma^2}{Var(x_i)}$
 
-- Goal construct statistics whose distribution is known, to validate/invalidate a model
+- <!-- .element class="fragment" -->These statististics or any functon of them can be computed exactly, *given the data().
+- <!-- .element class="fragment" -->Their distribution depends, on the data-generating process
+- <!-- .element class="fragment" -->Can we produce statistics whose distribution is known given mild assumptions on the data-generating process?
+  - if so, we can assess how likely are our observations
 
 ---- 
 
-
 ### Fisher-Statistic
-
 
 <div class="container">
 
@@ -481,19 +505,18 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
   - Hypothesis H0: $α=β=0$ (model explains nothing)
   - Hypothesis H1: (model explains something)
   - Fisher Statistics: $F=\frac{Explained Variance}{Unexplained Variance}$
-- <!-- .element class="fragment" --> Distribution of $F$ is known theoretically. 
+- <!-- .element class="fragment"  data-fragment-index="2" --> Distribution of $F$ is known theoretically. 
   - It depends on the number of degrees of Freedom. (Here $N-2=18$)
 - <!-- .element class="fragment" --> In our case, $Fstat=40.48$. What was the probability it was that big if $H0$ is true ? 
     - <!-- .element class="fragment" --> extremely small: $Prob(F>Fstat|H0)=5.41e-6$
     - <!-- .element class="fragment" --> we can reject $H0$ with $p-value=5e-6$
-- <!-- .element class="fragment" --> In social science, typical p-value is 5%.
-
+- <!-- .element class="fragment" --> In social science, typical required p-value is 5%.
 
 </div>
 
 <div class="col">
 
-![](fisher.png)
+<img src=fisher.png class="fragment" data-fragment-index=2>
 
 </div>
 
@@ -515,9 +538,15 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
     - intuitively: compare mean of estimator to its standard deviation
     - also a function of degrees of freedom
 
-- Significance levels (read in a table):
+- Significance levels (read in a table or use software):
   - for 18 degrees of freedom, $P(|t|>t^{\star})=0.05$  with $t^{\star}=1.734$
   - if $t>t^{\star}$ we are $95%$ confident the coefficient is *significant*
+
+----
+
+### Student tables
+
+<img src=student_table.png width=60%>
 
 
 ----
@@ -539,3 +568,5 @@ $$I^{\alpha} = [\hat{\beta}-t\sigma(\hat{\beta}), \hat{\beta}+t\sigma(\hat{\beta
 ---
 
 ## Now let's practice
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Y6ljFaKRTrI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

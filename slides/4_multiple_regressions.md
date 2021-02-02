@@ -1,4 +1,4 @@
-# Linear Regression
+# Multiple Regressions
 
 <style>
 .container{
@@ -11,35 +11,15 @@
 
 ---
 
-## Descriptive Statistics
+## The problem
 
 ----
 
-### A Simple Dataset
-
-- Duncan's Occupational Prestige Data
-
-- Many *occupations* in 1950.
-- $x$: education
-  - Percentage of occupational incumbents in 1950 who were high school graduates
-- $y$: income
-  - Percentage of occupational incumbents in the 1950 US Census who earned $3,500 or more per year
-- $z$: Percentage of respondents in a social survey who rated the occupation as “good” or better in prestige 
-
-----
-
-### Quick look
+### Remember dataset from last time
 
 <div class="container">
 
 <div class="col">
-
-```python
-import statsmodels.api as sm
-dataset = sm.datasets.get_rdataset("Duncan", "carData")
-df = dataset.data
-df.head()
-```
 
 |            | type | income | education | prestige |
 | ---------- | ---- | ------ | --------- | -------- |
@@ -53,15 +33,11 @@ df.head()
 
 <div class="col">
 
-```
-plt.plot(df['education'],df['income'],'o')
-plt.grid()
-plt.xlabel("Education")
-plt.ylabel("Income")
-plt.savefig("data_description.png")
-```
-
-![](graphs/data_description.png)
+- Last week we "ran" a linear regression: $y = \alpha + \beta x$. Result:
+  $$\text{income} = xx + 0.72 \text{education}$$
+- Should we have looked at "prestige" instead ? 
+  $$\text{income} = xx + 0.83 \text{prestige}$$
+- Which one is better?
 
 </div>
 
@@ -69,473 +45,385 @@ plt.savefig("data_description.png")
 
 ----
 
-### Descriptive Statistics
+### Prestige or Education
 
+<img src=prestige_or_education.png width=80%>
+
+  - if the goal is to predict: the one with higher explained variance 
+    - `prestige` has higher $R^2$ ($0.83^2$)
+  - unless we *are* interested in the effect of education
+
+----
+
+### Multiple regression
+
+- What about using both?
+  - 2 variables model:
+    $$\text{income} = \alpha + \beta_1 \text{education} + \beta_2 \text{prestige}$$
+  - will *probably* improve prediction power (explained variance)
+  - $\beta_1$ might not be meaningful on its own anymore (education and prestige are correlated)
+
+----
+
+### Fitting a model
+
+Now we are trying to fit a __plane__ to a cloud of points.
+
+
+<img src=empty_data.png>
+<img src=2d_regression.png>
+
+----
+
+### Minimization Criterium
+
+- Take all observations: $(\text{income}\_n,\text{education}\_n,\text{prestige}\_n)\_{n\in[0,N]}$
+- Objective: sum of squares
+$$ L(\alpha, \beta_1, \beta_2) = \sum_i \left( \underbrace{ \alpha + \beta_1 \text{education}\_n + \beta_2 \text{prestige}\_n - \text{income}\_n }\_{e_n=\text{prediction error} }\right)^2 $$
+- Minimize loss function in $\alpha$, $\beta_1$, $\beta_2$
+- Again, we can perform numerical optimization (machine learning approach)
+  - ... but there is an explicit formula
+
+----
+
+### Ordinary Least Square
+
+<!-- .slide: data-background="#585959" -->
 
 <div class="container">
 
 <div class="col">
-
-- For any variable $v$ with $N$ observations:
-  - mean: $\overline{v} = \frac{1}{N} \sum_{i=1}^N v_i$
-  - variance $V({v}) = \frac{1}{N} \sum_{i=1}^N \left(v_i - \overline{v} \right)^2$
-  - standard deviation : $\sigma(v)=\sqrt{V(v)}$
-
-</div>
-
-<div>
-
-```
-df.describe()
-```
-
-|       | income    | education  | prestige  |
-| ----- | --------- | ---------- | --------- |
-| count | 45.000000 | 45.000000  | 45.000000 |
-| mean  | 41.866667 | 52.555556  | 47.688889 |
-| std   | 24.435072 | 29.760831  | 31.510332 |
-| min   | 7.000000  | 7.000000   | 3.000000  |
-| 25 %  | 21.000000 | 26.000000  | 16.000000 |
-| 50 %  | 42.000000 | 45.000000  | 41.000000 |
-| 75 %  | 64.000000 | 84.000000  | 81.000000 |
-| max   | 81.000000 | 100.000000 | 97.000000 |
-
-</div>
-
-----
-
-###  Relation between variables
-
-- How do we measure relations between two variables (with $N$ observations)
-  - Covariance: $Cov(x,y) = \frac{1}{N}\sum_i (x_i-\overline{x})(y_i-\overline{y})$
-  - Correlation: $Cor(x,y) = \frac{Cov(x,y)}{\sigma(x)\sigma(y)}$
-
-- By construction, $Cor(x,y)\in[-1,1]$
-  - if $Cor(x,y)>0$, x and y are __positively correlated__
-  - if $Cor(x,y)<0$, x and y are __negatively correlated__
-
-- Interpretation: 
-  - <!-- .element class="fragment" --> no interpretation!
-  - correlation is not causality
-  - also: data can be correlated by pure chance (spurious [correlation](https://www.tylervigen.com/spurious-correlations))
-
-----
-
-### Examples
-
-<div class="container">
-
-<div class="col">
-
-
-```python
-df.cov()
-```
-
-|           | income     | education  | prestige   |
-| --------- | ---------- | ---------- | ---------- |
-| income    | 597.072727 | 526.871212 | 645.071212 |
-| education | 526.871212 | 885.707071 | 798.904040 |
-| prestige  | 645.071212 | 798.904040 | 992.901010 |
+$$Y = \begin{bmatrix}
+\text{income}_1 \\\\
+\vdots \\\\
+\text{income}_N 
+\end{bmatrix}$$
+$$X = \begin{bmatrix}
+1 & \text{education}_1 & \text{prestige}_1 \\\\
+\vdots & \vdots & \vdots \\\\
+1 &\text{education}_N & \text{prestige}_N
+\end{bmatrix}$$
 
 </div>
 
 <div class="col">
 
-<div class="fragment">
-
-```python
-df.corr()
-```
-
-|           | income   | education | prestige |
-| --------- | -------- | --------- | -------- |
-| income    | 1.000000 | 0.724512  | 0.837801 |
-| education | 0.724512 | 1.000000  | 0.851916 |
-| prestige  | 0.837801 | 0.851916  | 1.000000 |
+- Matrix Version (look for $B = \left( \alpha,  \beta_1 , \beta_2 \right)$): $$Y =  X B + E$$
+- Note that constant can be interpreted as a "variable"
+- Loss function $$L(A,B) = (Y - X B)' (Y - X B)$$
+- Result of minimization $\min_{(A,B)} L(A,B)$ :
+    $$\begin{bmatrix}\alpha & \beta_1 & \beta_2 \end{bmatrix} = (X'X)^{-1} X' Y $$
 
 </div>
 
 </div>
-</div>
 
+----
+
+### Solution
+
+- Result: $$\text{income} = 10.43  + 0.03 \times \text{education} + 0.62 \times \text{prestige}$$
+- Questions:
+  - is it a *better* regression than the other?
+  - is the coefficient in front of `education` significant?
+  - how do we interpret it?
+  - can we build confidence intervals?
 
 ---
 
-## Fitting the data
+
+## Explained Variance
+
+- As in the 1d case we can compare:
+  - the variability of the model predictions ($MSS$)
+  - the variance of the data ($TSS$, T for total)
+- Coefficient of determination:
+  $$R^2 = \frac{MSS}{TSS}$$
+- Or:
+  $$R^2 = 1-\frac{RSS}{SST}$$
+  where $RSS$ is the non explained variance
 
 ----
 
-### A Linear Model
+### Adjusted R squared
 
 
 <div class="container">
 
 <div class="col">
-
-- Consider the line: $$y = α + β x$$
-- <!-- .element class="fragment" data-fragment-index="2" --> Several possibilities. 
-- <!-- .element class="fragment" data-fragment-index="3" --> Which one do we choose to represent the model?
-- <!-- .element class="fragment" data-fragment-index="4" -->Need some criterium.
-
-</div>
-
-<div class="col">
-
-<div class="r-stack">
-
-<img src="graphs/which_line_1.png" class="fragment visible-current" data-fragment-index=2>
-
-<img src="graphs/which_line_2.png" class="fragment visible-current" data-fragment-index=3>
-
-<img src="graphs/which_line_3.png" class="fragment visible-current" data-fragment-index=4>
-</div>
-
-</div>
-
-</div>
-
-
-----
-
-### Least Square Criterium
-
-
-<div class="container">
-
-<div class="col">
-
-- <!-- .element class="fragment" data-fragment-index="1" --> Compare the model to the data:
-$$y_i = \alpha + \beta x_i + \underbrace{e_i}_{\text{prediction error}}$$
--<!-- .element class="fragment" data-fragment-index="2" --> Square Errors
-$${e_i}^2 = (y_i-\alpha-\beta x_i)^2$$
-- <!-- .element class="fragment" data-fragment-index="3" -->Loss Function: sum of squares
-$$L(\alpha,\beta) = \sum_{i=1}^N (e_i)^2$$
-</div>
-
-<div class="col">
-<div class="r-stack">
-<img src="graphs/errors_0.png" class="fragment visible-current" data-fragment-index=1> 
-
-<img src="graphs/errors_1.png" class="fragment visible-current" data-fragment-index=2> 
-
-<img src="graphs/errors_2.png" class="fragment visible-current" data-fragment-index=3>
-
-
-</div>
-
-
-</div>
-
-----
-
-### Minimizing Least Squares
-
-
-<div class="container">
-
-<div class="col">
-
-- <!-- .element class="fragment" data-fragment-index="1" -->Try to chose $\alpha, \beta$ so as to minimize the sum of the squares $L(α, β)$
-- <!-- .element class="fragment" data-fragment-index="2" -->It is a convex minimization problem: unique solution
-- <!-- .element class="fragment" data-fragment-index="3" -->This direct iterative procedure is used in machine learning
-
-</div>
-
-<div class="col">
-
-<div class="r-stack">
-
-<img src="graphs/errors_2.png" class="fragment visible-current" data-fragment-index="2" width=100%>
-<img src="graphs/errors_3.png" class="fragment visible-current" data-fragment-index="3" width=100%>
-<img src="graphs/errors_4.png" class="fragment visible-current" data-fragment-index="4" width=100%>
-
-</div>
-
-
-</div>
-
-
-----
-
-### Ordinary Least Squares (1)
-
-- The mathematical problem $\min_{\alpha,\beta} L(\alpha,\beta)$ has one unique solution
-  - proof not important here
-
-- Solution is given by the explicit formula:
-$$\hat{\alpha} = \overline{y} - \hat{\beta} \overline{x}$$
-$$\hat{\beta} = \frac{Cov({x,y})}{Var(y)} = Cor(x,y) \frac{\sigma(y)}{\sigma({x})}$$
-
-- $\hat{\alpha}$ and $\hat{\beta}$ are *estimators*.
-  - Hence the hats.
-  - More on that later.
-
-----
-
-### Concrete Example
 
 - In our example:
-$$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
-- We can say that income and education are positively *correlated*
-- We can say that  a unit increase in education is associated with a 0.59 increase in income
-- We can say that  a unit increase in education *explains* a 0.59 increase in income
-- But:
-  - here *explains* does __not__ mean *cause*
+| Regression           | $R^2$  | <span class="fragment" data-fragment-index="3"> $R^2_{adj}$ </span> |
+| -------------------- | ------ | ----------- |
+| education            | 0.525  | <span class="fragment" data-fragment-index="3"> 0.514 </span>       |
+| prestige             | 0.702  | <span class="fragment" data-fragment-index="3"> 0.695 </span>       |
+| education + prestige | 0.7022 | <span class="fragment" data-fragment-index="3"> 0.688 </span>       |
 
----
-
-## Variance Decomposition
-
-----
-
-### Predictions
-
-- It is possible to make *predictions* with the model:
-  - How much would an occupation which hires 60% high schoolers fare salary-wise?
-
-<img src="graphs/prediction.png">
-
-- Prediction: salary measure is $45.4$
-- OK, but that seems noisy, how much do I really predict ? Can I get a sense of the precision of my prediction ?
-
-----
-
-### Look at the residuals
-
-<div class="container">
-
-
-<div class="col">
-
-- Plot the residuals: 
-<img src="graphs/residuals.png">
+<img class="fragment" data-fragment-index=2 src="overfitting.png" width=80%>
 
 </div>
 
 <div class="col">
 
-- Any abnormal observation?
-- Theory requires residuals to be:
-  - zero-mean
-  - non-correlated
-  - normally distributed
-- That looks like a normal distribution
-    - standard deviation is $\sigma(e_i) = 16.84$
-- A more honnest prediction would be $45.6 ± 16.84$
+- Fact:
+  - adding more regressors always improve $R^2$
+  - why not throw everything in? (kitchen sink regressions)
+  - <!-- .element: class="fragment" data-fragment-index="2" --> two many regressors: <strong>overfitting</strong> the data
+- <!-- .element: class="fragment" data-fragment-index="3" --> Penalise additional regressors: <strong>adjusted R^2</strong>
+  - example formula: 
+    - $N$: number of observations
+    - $p$ number of variables
+  $$R^2_{adj} = 1-(1-R^2)\frac{N-1}{N-p-1}$$
 
 </div>
 
-
 </div>
-
-
-----
-
-### What could go wrong
-
-![](experimental/../graphs/residuals_circus.png)
-
-- a well specified model, residuals must look like *white noise* (i.i.d.: independent and identically distributed)
-- when residuals are clearly abnormal, the model must be changed
-
-----
-
-### Variance decomposition
-
-- What is the share of the total variance explained by the variance of my prediction?
-
-    $$R^2 = \frac{Var(\alpha + \beta x_i)}{Var(y_i)} = Cor(x,y)$$
-
-- Coefficient of determination is a measure of the explanatory power of a regression
-  - but not of the *significance* of a coefficient
-  - we'll get back to it when we see multivariate regressions
-
-- In one-dimensional case, it is possible to have small R2, yet a very precise regression coefficient.
 
 ---
 
 
-<!-- 
-## Statistical Model
-
-- Can we estimate the variance of the data ?
-- Can we estimate a *statistical model*:
-
-$$y_i = α + β x_i + \epsilon_i$$
-$$\epsilon_i  \sim \mathcal{N}\left({0,σ^{2}}\right)$$
-
-- We want estimates for: $\hat{α}, \hat{β}, \hat{σ}$
-- Turns out the OLS estimator is BLUE:
-$$\hat{α} = \overline{y} - \hat{β} \overline{x}$$
-$$\hat{β} = r_{x,y} \frac{s(y)}{s{x}}$$
-$$\hat{\sigma} = r_{x,y} \frac{s(y)}{s{x}}$$ -->
-
-
-## Statistical inference
+## Interpretation and variable change
 
 ----
 
-### Statistical model
+### Making a regression with statsmodels
 
+```python
+import statsmodels
+```
 
+We use a special `API` inspired by `R`:
 
-<div class="container">
-
-<div class="col">
-
-
-- <!-- .element class="fragment" data-fragment-index="1" --> Imagine the true model is:
-$$y = α + β x + \epsilon$$
-$$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
-    - errors are independent ...
-    - and normallly distributed ...
-    - with constant variance (homoscedastic)
-- <!-- .element class="fragment" data-fragment-index="2" -->Using this data-generation process, I draw randomly $N$ data points
-- <!-- .element class="fragment" data-fragment-index="3" -->Then I compute my estimate $\hat{α}$, $\hat{β}$
-
-- <!-- .element class="fragment" data-fragment-index="4" --> How confident am I in these estimates ?
-  - I could have gotten a completely different one...
-  - clearly, the bigger $N$, the more confident I am...
-
-
-</div>
-
-<div class="col">
-
-<div class="r-stack">
-
-<img src="graphs/regression_uncertainty_1.png" class="fragment current-visible" data-fragment-index=1 >
-<img src="graphs/regression_uncertainty_2.png" class="fragment current-visible" data-fragment-index=2>
-<img src="graphs/regression_uncertainty_3.png" class="fragment current-visible" data-fragment-index=3>
-</div>
-
-</div>
+```python
+import statsmodels.formula.api as smf
+```
 
 ----
 
-### Statistical inference (simplified)
+### Performing a regression
 
 
-<div class="container">
+Running a regression with `statsmodels`
+```
+model = smf.OLS('income ~ education', , df)  # model
+model.fit  # perform the regression
+res.describe()
+```
 
-<div class="col">
+- 'income ~ education' is the model *formula*
 
-- <!-- .element class="fragment" data-fragment-index="1" --> Assume we have computed $\hat{\alpha}$, $\hat{\beta}$ from the data. Let's make a thought experiment instead.
-- <!-- .element class="fragment" data-fragment-index="2" --> Imagine the actual data generating process was given by $\hat{α} + \hat{\beta} x + \epsilon$ where $\epsilon \sim \mathcal{N}(0,Var({e_i}))$
-- <!-- .element class="fragment" data-fragment-index="3" --> If I draw randomly $N$ points using this D.G.P. I get new estimates.
-- <!-- .element class="fragment" data-fragment-index="12" -->And if I make randomly many draws, I get a <strong>distribution</strong> for my estimate.
-    - were my initial estimates very likely ?
-    - or could they have taken any value with another draw from the data ?
-    - in the example, we see that estimates around of 0.7 or 0.9, would be compatible with the data
-- <!-- .element class="fragment" data-fragment-index="13" -->How do we formalize these ideas?
-  - Statistical tests.
+Result:
 
-</div>
-
-<div class="col">
-
-<div class="r-stack">
-    <img src="graphs/random_estimates_1.png" class="fragment" data-fragment-index=2>
-    <img src="graphs/random_estimates_2.png" class="fragment" data-fragment-index=3>
-    <img src="graphs/random_estimates_3.png" class="fragment" data-fragment-index=4>
-    <img src="graphs/random_estimates_4.png" class="fragment" data-fragment-index=5>
-    <img src="graphs/random_estimates_5.png" class="fragment" data-fragment-index=6>
-    <img src="graphs/random_estimates_6.png" class="fragment" data-fragment-index=7>
-    <img src="graphs/random_estimates_7.png" class="fragment" data-fragment-index=8>
-    <img src="graphs/random_estimates_8.png" class="fragment" data-fragment-index=9>
-    <img src="graphs/random_estimates_9.png" class="fragment" data-fragment-index=10>
-    <img src="graphs/random_estimates_10.png" class="fragment" data-fragment-index=11>
-    <img src="graphs/random_estimates_100.png" class="fragment" data-fragment-index=12>
-<div>
-
-</div>
-
-
-<div>
-
-----
-
-### Main take away
-
-- Given the true model, all estimators are random variables
-
-- Given the values $\alpha$, $\beta$, $\sigma$ of the true model, we can model the distribution of the estimates.
-    - $mean(\hat{\beta}) = (\hat{\beta}) $ (__unbiased__)
-    - $\sigma(\hat{\beta}) =  \frac{\sigma^2}{Var(x_i)}$
-
-- Goal construct statistics whose distribution is known, to validate/invalidate a model
-
----- 
-
-
-### Fisher-Statistic
-
-
-<div class="container">
-
-<div class="col">
-
-- Test
-  - Hypothesis H0: $α=β=0$ (model explains nothing)
-  - Hypothesis H1: (model explains something)
-  - Fisher Statistics: $F=\frac{Explained Variance}{Unexplained Variance}$
-- <!-- .element class="fragment" --> Distribution of $F$ is known theoretically. 
-  - It depends on the number of degrees of Freedom. (Here $N-2=18$)
-- <!-- .element class="fragment" --> In our case, $Fstat=40.48$. What was the probability it was that big if $H0$ is true ? 
-    - <!-- .element class="fragment" --> extremely small: $Prob(F>Fstat|H0)=5.41e-6$
-    - <!-- .element class="fragment" --> we can reject $H0$ with $p-value=5e-6$
-- <!-- .element class="fragment" --> In social science, typical p-value is 5%.
-
-
-</div>
-
-<div class="col">
-
-![](fisher.png)
-
-</div>
-
-</div>
+```
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                 income   R-squared:                       0.525
+Model:                            OLS   Adj. R-squared:                  0.514
+Method:                 Least Squares   F-statistic:                     47.51
+Date:                Tue, 02 Feb 2021   Prob (F-statistic):           1.84e-08
+Time:                        05:21:25   Log-Likelihood:                -190.42
+No. Observations:                  45   AIC:                             384.8
+Df Residuals:                      43   BIC:                             388.5
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+==============================================================================
+Intercept     10.6035      5.198      2.040      0.048       0.120      21.087
+education      0.5949      0.086      6.893      0.000       0.421       0.769
+==============================================================================
+Omnibus:                        9.841   Durbin-Watson:                   1.736
+Prob(Omnibus):                  0.007   Jarque-Bera (JB):               10.609
+Skew:                           0.776   Prob(JB):                      0.00497
+Kurtosis:                       4.802   Cond. No.                         123.
+==============================================================================
+```
 
 ----
 
-### Student test
+### Formula mini-language
+
+- With `statsmodels` formulas, can be supplied with R-style syntax
+- Examples: 
+
+| Formula                          | Model                                                                               |
+| -------------------------------- | ----------------------------------------------------------------------------------- |
+| `income ~ education`:            | $\text{income}_i = \alpha + \beta \text{education}_i$                               |
+| `income ~ prestige`:             | $\text{income}_i = \alpha + \beta \text{prestige}_i$                                |
+| `income ~ prestige - 1`:         | $\text{income}_i = \beta \text{prestige}_i$ (no intercept)                          |
+| `income ~ education + prestige`: | $\text{income}_i = \alpha + \beta_1 \text{education}_i + \beta_2 \text{prestige}_i$ |
+
+----
+
+### Formula mini-language
+
+- One can use formulas to apply transformations to variables
+
+| Formula                    | Model                                                     |
+| -------------------------- | --------------------------------------------------------- |
+| `log(P) ~ log(M) + log(Y)` | $\log(P_i) = \alpha + \alpha_1 \log(M_i) + \alpha_2 \log(Y_i)$   (log-log)  |
+| `log(Y) ~ i`                | $\log(P_i) = \alpha + i_i$  (semi-logs) |
+
+- This is useful if the true relationship is nonlinear
+- Also useful, to interpret the coefficients
+
+----
 
 
-- So our estimate is $y = \underbrace{0.121}\_{\tilde{\alpha}} + \underbrace{0.794}\_{\tilde{\beta}} x$.
-    - we know $\tilde{\beta}$ is a bit random (it's an estimator)
-    - are we even sure $\tilde{\beta}$ could not have been zero?
 
-- Student Test:
-  - H0: $\beta=0$
-  - H1: $\beta \neq 0$
-  - Statistics: $t=\frac{\hat{\beta}}{\sigma(\hat{\beta})}$
-    - intuitively: compare mean of estimator to its standard deviation
-    - also a function of degrees of freedom
+### Coefficients interpetation
 
-- Significance levels (read in a table):
-  - for 18 degrees of freedom, $P(|t|>t^{\star})=0.05$  with $t^{\star}=1.734$
-  - if $t>t^{\star}$ we are $95%$ confident the coefficient is *significant*
+- Example:
+  - (`police_spending` and `prevention_policies` in million dollars)
+  $$ \text{number_or_crimes} = 0.005\\% - 0.001 \text{pol_spend} - 0.005 \text{prev_pol} + 0.002 \text{population density}$$
+- reads: *when holding other variables constant a 0.1 million increase in police spending reduces crime rate by 0.001\%*
+- interpretation?
+  - problematic because variables have different units
+  - we can say that prevention policies are more efficient than police spending *ceteris paribus*
+- Take logs:
+$$ \log(\text{number_or_crimes}) = 0.005\\% - 0.15 \log(\text{pol_spend}) - 0.4 \log(\text{prev_pol}) + 0.2 \log(\text{population density})$$ 
+  - now we have an estimate of elasticities
+  - a $1\%$ increase in police spending leads to a $0.15\%$ decrease in the number of crimes
 
+---
+
+## Statistical Inference
+
+----
+
+### Hypotheses
+
+- We make some hypotheses on the data generation process:
+  - $y = X \beta + \epsilon$
+  - $\mathbb{E}\left[ \epsilon \right] = 0$
+  - $\epsilon$ multivariate normal with covariance matrix $\sigma^2 I_n$
+- Under these hypotheses:
+  - $\hat{\beta}$ is an unbiased estimate of true parameter $\beta$
+  - one can prove $Var(\hat{\beta}) = \sigma^2 I_n$
+  - $\sigma$ can be estimated by $\hat{\sigma}=S\frac{\sum_i (y_i-{pred}_i)^2}{N-p}$
+    - $N-p$: degrees of freedoms
+  - one can estimate: $\sigma(\beta_k)$
+    - it is the $i$-th diagonal element of $\tilde{\sigma}^2 X'X$
+
+----
+
+### Is the regression significant?
+
+- Simillar
+- Fisher criterium (F-test):
+  - $H0$: all coeficients are 0
+    - i.e. true model is $y=\alpha + \epsilon$
+  - $H1$: some coefficients are not 0
+  - statistics: $$F=\frac{MSR}{MSE}$$
+    - $MSR$: mean-squared error of constant model
+    - $MSE$: mean-squared error of full model
+- Under the model assumptions, distribution of $F$ is known, one can produce a p-value.
+  - probability to obtain this statistics given hypotheses 0
+  - if very low, H0 is rejected
+
+----
+
+### Is each coefficient significant ?
+
+- Student test. Given a coefficient $\beta_k$:
+  - $H0$: coefficient is 0
+  - $H1$: coefficient is not zero
+  - statistics: $t = \frac{\beta_k}{\sigma(\beta_k)}$
+    - where $\sigma(\beta_k)$ is $i$-th diagonal element of $\tilde{\sigma}^2 X'X$
+- Under the inference hypotheses, distribution of $t$ is known.
+- Compute $t$. Check acceptance threshold $t*$ at probability $\alpha$.
+  - Coefficient is significant with probability $1-\alpha$ if $t>t*$
+- Or compute implied acceptance rate $\alpha$ for $t$.
+  - if $t$ is high enough, null hypothesis is rejected
 
 ----
 
 ### Confidence intervals
 
-- The student test can also be used to construct confidence intervals.
+- Same as in the 1d case.
+- Take estimate $\color{red}{\beta_i}$ with an estimate of its standard deviation $\color{red}{\tilde{\sigma}(\beta_i)}$
+- Compute student $\color{red}{t^{\star}}$ at $\color{red}{\alpha}$ confidence level (ex: $\alpha=5\\%$) such that:
+  - $P(|t|>t^{\star})<\alpha$
+- Produce confidence intervals at $\alpha$ confidence level:
+  - $[\color{red}{\beta_i} - t^{\star} \color{red}{\tilde{\sigma}(\beta_i)}, \color{red}{\beta_i} + t^{\star} \color{red}{\tilde{\sigma}(\beta_i)}]$
 
-- Given estimate, $\hat{\beta}$ with standard deviation $\sigma(\hat{\beta})$
+----
 
-- Given a probability threshold $\alpha$ (for instance $\alpha=0.05$) we can compute $t^{\star}$ such that $P(|t|>t*)=\alpha$
+### Other tests
 
-- We construct the __confidence interval__:
-
-$$I^{\alpha} = [\hat{\beta}-t\sigma(\hat{\beta}), \hat{\beta}+t\sigma(\hat{\beta})]$$
-
-- Interpretation: given the estimated value, one is 95 \% sure ($1-\alpha$) the estimated parameter falls in this interval
+- The tests seen so far rely on strong statistical assumptions (normality, homoscedasticity, etc..)
+- Some tests can be used to test these assumptions:
+  - *Jarque-Bera*: is the distribution of data truly normal
+  - *Durbin-Watson*: are residuals autocorrelated (makes sense for time-series)
+  - ...
+- In case assumptions are not met...
+  - ... still possible to do economitrics
+  - ... but beyond the scope of this course 
 
 ---
 
-## Now let's practice
+## Variable selection
+
+----
+
+### Not enough coefficients
+
+- Suppose you run a regression:
+$$y = \alpha + \beta_1 x_1 + \epsilon$$
+- But unknowingly to you, the actual model is
+$$y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \eta$$
+- The residual $y - \alpha - \beta_1 x_1$ is not white noise
+  - specification hypotheses are violated
+  - estimate $\beta_1$ will have a bias (omitted variable bias)
+  - to correct the bias we add $x_2$ ("control"for $x_2$)
+
+----
+
+### Example
+
+- Suppose I want to check Okun's law. I consider the following model: $$\text{gdp_growth} = \alpha + \beta \times \text{unemployment}$$
+- I obtain: $$\text{gdp_growth} = 0.01 - 0.1 \times \text{unemployment} + e_i$$
+- Then I inspect visually the residuals: not normal at all!
+- Conclusion: my regression is misspecified, $0.1$ is a biased (useless) estimate
+- I need to *control* for additional variables. For instance: $$\text{gdp_growth} = \alpha + \beta_1 \text{unemployment} + \beta_2 \text{interest rate}$$
+- Until the residuals are actually white noise
+
+----
+
+### Colinear regressors
+
+- What happens if two regressors are (almost) colinear? $$y = \alpha + \beta_1 x_1 + \beta_2 x_2$$ where $x_2 = \kappa x_1$
+- Intuitively: parameters are not unique
+  - if $y = \alpha + \beta_1 x_1$ is the right model...
+  - then $y = \alpha + \beta_1 \lambda x_1 + (1-\lambda) \frac{1}{\kappa} x_2$ is exactly as good...
+- Mathematically: $(X'X)$ is not invertible.
+- When regressors are almost colinear, coefficients can have a lot of variability.
+- Test: correlation plot, correlation statistics
+
+----
+
+### Too many regressors
+
+$$y = \alpha + \beta_1 x_1 + ... \beta_n x_n$$
+
+Which regressors to choose ?
+
+- Method 1 : remove coefficients with lowest t to maximize adjusted R-squared
+  - remove regressors with lowest t
+  - regress again
+  - see if adjusted $R^2$ is decreasing
+    - if so continue
+    - otherwise cancel last step and stop
+- Method 2 : choose combination to maximize Akaike Information Criterium
+  - AIC: $p - log(L)$
+  - $L$ is likelihood
+  - computed by all good econometrc softwares
+
+---
+
+## Coming next: instrumental variables
+
+Watch: 
+
+<iframe width="1000" height="600" src="https://www.youtube.com/embed/NLgB2WGGKUw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
