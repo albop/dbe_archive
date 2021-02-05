@@ -155,7 +155,7 @@ $$X = \begin{bmatrix}
 - In our example:
 
 | Regression           | $R^2$  | <span class="fragment" data-fragment-index="3"> $R^2_{adj}$ </span> |
-| -------------------- | ------ | ----------- |
+| -------------------- | ------ | ------------------------------------------------------------------- |
 | education            | 0.525  | <span class="fragment" data-fragment-index="3"> 0.514 </span>       |
 | prestige             | 0.702  | <span class="fragment" data-fragment-index="3"> 0.695 </span>       |
 | education + prestige | 0.7022 | <span class="fragment" data-fragment-index="3"> 0.688 </span>       |
@@ -206,8 +206,8 @@ import statsmodels.formula.api as smf
 
 Running a regression with `statsmodels`
 ```
-model = smf.OLS('income ~ education', , df)  # model
-model.fit  # perform the regression
+model = smf.ols('income ~ education',  df)  # model
+res = model.fit()  # perform the regression
 res.describe()
 ```
 
@@ -247,12 +247,12 @@ Kurtosis:                       4.802   Cond. No.                         123.
 - With `statsmodels` formulas, can be supplied with R-style syntax
 - Examples: 
 
-| Formula                          | Model                                                                               |
-| -------------------------------- | ----------------------------------------------------------------------------------- |
-| `income ~ education`:            | $\text{income}_i = \alpha + \beta \text{education}_i$                               |
-| `income ~ prestige`:             | $\text{income}_i = \alpha + \beta \text{prestige}_i$                                |
-| `income ~ prestige - 1`:         | $\text{income}_i = \beta \text{prestige}_i$ (no intercept)                          |
-| `income ~ education + prestige`: | $\text{income}_i = \alpha + \beta_1 \text{education}_i + \beta_2 \text{prestige}_i$ |
+| Formula                         | Model                                                                               |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| `income ~ education`            | $\text{income}_i = \alpha + \beta \text{education}_i$                               |
+| `income ~ prestige`             | $\text{income}_i = \alpha + \beta \text{prestige}_i$                                |
+| `income ~ prestige - 1`         | $\text{income}_i = \beta \text{prestige}_i$ (no intercept)                          |
+| `income ~ education + prestige` | $\text{income}_i = \alpha + \beta_1 \text{education}_i + \beta_2 \text{prestige}_i$ |
 
 ----
 
@@ -260,10 +260,10 @@ Kurtosis:                       4.802   Cond. No.                         123.
 
 - One can use formulas to apply transformations to variables
 
-| Formula                    | Model                                                     |
-| -------------------------- | --------------------------------------------------------- |
-| `log(P) ~ log(M) + log(Y)` | $\log(P_i) = \alpha + \alpha_1 \log(M_i) + \alpha_2 \log(Y_i)$   (log-log)  |
-| `log(Y) ~ i`                | $\log(P_i) = \alpha + i_i$  (semi-logs) |
+| Formula                    | Model                                                                      |
+| -------------------------- | -------------------------------------------------------------------------- |
+| `log(P) ~ log(M) + log(Y)` | $\log(P_i) = \alpha + \alpha_1 \log(M_i) + \alpha_2 \log(Y_i)$   (log-log) |
+| `log(Y) ~ i`               | $\log(P_i) = \alpha + i_i$  (semi-logs)                                    |
 
 - This is useful if the true relationship is nonlinear
 - Also useful, to interpret the coefficients
