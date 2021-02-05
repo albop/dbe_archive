@@ -2,10 +2,28 @@
 
 ---
 
+## Slides
+
+- [Slides](https://albop.github.io/dbe/)
+  - [Introduction](https://albop.github.io/dbe/slides/index)
+  - [Numeric Python and Data Frames](https://albop.github.io/dbe/slides/2_dataframes)
+  - [Linear Regression](https://albop.github.io/dbe/slides/3_linear_regression)
+  - [Multiple Regression](https://albop.github.io/dbe/slides/4_multiple_regressions)
+
+How to create pdfs?
+- open a set of slides
+- add ?print-pdf to the url (for instance: `https://albop.github.io/dbe/slides/2_dataframes?print-pdf`)
+- print the page as a pdf with your navigator
+
+---
+
 ## Shortcuts
 
-[Slides](https://albop.github.io/dbe/)
-
+Direct links:
+- Python basics: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises-correction.ipynb))
+- Dataframe: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises_correction.ipynb))
+- Regressions: ([data](https://raw.githubusercontent.com/albop/dbe/main/Session_4/Regressions.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_4/data.dta))
+- 
 ---
 
 ## Communication
