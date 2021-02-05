@@ -350,7 +350,7 @@ $$\underbrace{y}\_{\text{income}} = 10 + 0.59 \underbrace{x}\_{education}$$
 
 - What is the share of the total variance explained by the variance of my prediction?
     $$R^2 = \frac{\overbrace{Var(\alpha + \beta x_i)}^{ \text{MSS} } } {\underbrace{Var(y_i)}\_{ \text{TSS} } } = \frac{MSS}{TSS} = (Cor(x,y))^2$$
-    $$R^2 = 1-\frac{\overbrace{Var(y_i - \alpha + \beta x_i)}^{\text{RSS}} } { \underbrace{Var(y_i)}\_{{\text{TSS}  }}} = 1 - \frac{RSS}{TSS} $$
+    $$R^2 = 1-\frac{\overbrace{Var(y_i - \alpha + \beta x_i)}^{\text{RSS}} } { \underbrace{Var(y_i)}\_{ {\text{TSS}  }}} = 1 - \frac{RSS}{TSS} $$
     - MSS: model sum of squares, explained variance
     - RSS: residual sum of square, unexplained variance
     - TSS: total sum of squares, total variance
