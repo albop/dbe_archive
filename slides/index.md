@@ -4,16 +4,36 @@
 
 ## Slides
 
+<style>
+.container{
+    display: flex;
+}
+.col{
+    flex: 1;
+}
+</style>
+
+<div class="container">
+
+<div class="col">
+
 - [Slides](https://albop.github.io/dbe/)
   - [Introduction](https://albop.github.io/dbe/slides/index)
   - [Numeric Python and Data Frames](https://albop.github.io/dbe/slides/2_dataframes)
   - [Linear Regression](https://albop.github.io/dbe/slides/3_linear_regression)
   - [Multiple Regression](https://albop.github.io/dbe/slides/4_multiple_regressions)
+  - [Causality](5_intro_to_causality.html)
+
+</div>
+<div class="col">
 
 How to create pdfs?
 - open a set of slides
 - add ?print-pdf to the url (for instance: `https://albop.github.io/dbe/slides/2_dataframes?print-pdf`)
 - print the page as a pdf with your navigator
+
+</div>
+</div>
 
 ---
 
@@ -23,11 +43,10 @@ Direct links:
 - Python basics: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises-correction.ipynb))
 - Dataframe: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises_correction.ipynb))
 - Regressions: ([data](https://raw.githubusercontent.com/albop/dbe/main/Session_4/Regressions.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_4/data.dta))
-- 
+
 ---
 
 ## Communication
-
 
 - Main website: [https://github.com/albop/dbe](https://github.com/albop/dbe)
   - contains slides and exercises
@@ -137,18 +156,18 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
 
 ## Roadmap
 
-| Session | Date (tbc) | Content                                                                                              |
-| ------- | ---------- | ---------------------------------------------------------------------------------------------------- |
-| 1       | 12/01      | housekeeping,  basic data types and <mark>language structure</mark>                                |
-| 2       | 19/01      | databases, data representation, <mark>interactivity</mark> (matplotlib, altair, widgets)                          |
-| <mark>3</mark>       | <mark>26/01</mark>     | ordinary least squares (<mark>linear regression</mark>, multiple regression)                                      |
-| 4       | 02/02      | regression inference and categorical variables                                                       |
-| 5       | 09/02      | instrumental variables                                                                               |
-| 6       | 23/02      | panel data                                                                                           |
-| 7       | 02/03      | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
-| 8       | 09/03      | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                               |
-| 9       | 30/03      | natural language processing                                                                          |
-| 10       | ?     | presentation of data project, programming test                                                       |
+| Session | Date (tbc)         | Content                                                                                             |
+| ------- | ------------------ | --------------------------------------------------------------------------------------------------- |
+| 1       | 12/01              | housekeeping,  basic data types and language structure                                              |
+| 2       | 19/01              | databases, data representation, interactivity (matplotlib, altair, widgets)                         |
+| 3       | 26/01              | ordinary least squares (inear regression, <mark>multiple regression</mark>)                         |
+| 4       | 02/02              | <mark>regression inference</mark> and <mark>categorical variables</mark>                            |
+| 5       | <mark>23/02</mark> | <mark>instrumental variables</mark>                                                                 |
+| 6       | 30/02              | panel data                                                                                          |
+| 7       | 02/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 8       | 09/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
+| 9       | 23/03              | natural language processing                                                                         |
+| 10      | 30/03              | presentation of data project, programming test                                                      |
 
 ---
 

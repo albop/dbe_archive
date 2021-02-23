@@ -294,31 +294,57 @@ $$ \log(\text{number_or_crimes}) = 0.005\\% - 0.15 \log(\text{pol_spend}) - 0.4 
 
 ### Hypotheses
 
-- We make some hypotheses on the data generation process:
+<div class="container">
+
+<div class="col">
+
+- <!-- .element: class="fragment" -->Recall what we do:
+  - we have the data $X,Y$
+  - we choose a *model*:
+      $$ Y = \alpha + X \beta $$
+  - from the data we compute *estimates*:
+      $$\beta  = (X'X)^{-1} X' Y $$
+      $$\alpha = Y- X \beta $$
+  - estimates are a precise function of data
+    - exact formula not important here
+
+
+</div>
+<div class="col">
+
+- <!-- .element: class="fragment" --> We make some hypotheses on the <em>data generation process</em>:
   - $y = X \beta + \epsilon$
   - $\mathbb{E}\left[ \epsilon \right] = 0$
   - $\epsilon$ multivariate normal with covariance matrix $\sigma^2 I_n$
-- Under these hypotheses:
+- <!-- .element: class="fragment" -->Under these hypotheses:
   - $\hat{\beta}$ is an unbiased estimate of true parameter $\beta$
+    - i.e. $\mathbb{E} [\hat{\beta}] = \beta$
   - one can prove $Var(\hat{\beta}) = \sigma^2 I_n$
   - $\sigma$ can be estimated by $\hat{\sigma}=S\frac{\sum_i (y_i-{pred}_i)^2}{N-p}$
     - $N-p$: degrees of freedoms
-  - one can estimate: $\sigma(\beta_k)$
-    - it is the $i$-th diagonal element of $\tilde{\sigma}^2 X'X$
+  - one can estimate: $\sigma(\hat{\beta_k})$
+    - it is the $i$-th diagonal element of $\hat{\sigma}^2 X'X$
+
+</div>
+
+</div>
 
 ----
 
 ### Is the regression significant?
 
-- Simillar
-- Fisher criterium (F-test):
-  - $H0$: all coeficients are 0
+- <!-- .element: class="fragment" -->Approach is very similar to the one-dimensional case
+- <!-- .element: class="fragment" -->Fisher criterium (F-test):
+  - <!-- .element: class="fragment" --> $H0$: all coeficients are 0
     - i.e. true model is $y=\alpha + \epsilon$
-  - $H1$: some coefficients are not 0
-  - statistics: $$F=\frac{MSR}{MSE}$$
+  - <!-- .element: class="fragment" --> $H1$: some coefficients are not 0
+  
+  - <!-- .element: class="fragment" --> statistics: $$F=\frac{MSR}{MSE}$$
     - $MSR$: mean-squared error of constant model
     - $MSE$: mean-squared error of full model
-- Under the model assumptions, distribution of $F$ is known, one can produce a p-value.
+- <!-- .element: class="fragment" -->Under the model assumptions, distribution of $F$ is known
+   - it is remarkable that it doesn't depend on $\sigma$ !
+- <!-- .element: class="fragment" -->One can produce a p-value.
   - probability to obtain this statistics given hypotheses 0
   - if very low, H0 is rejected
 
@@ -326,27 +352,29 @@ $$ \log(\text{number_or_crimes}) = 0.005\\% - 0.15 \log(\text{pol_spend}) - 0.4 
 
 ### Is each coefficient significant ?
 
-- Student test. Given a coefficient $\beta_k$:
-  - $H0$: coefficient is 0
-  - $H1$: coefficient is not zero
-  - statistics: $t = \frac{\beta_k}{\sigma(\beta_k)}$
-    - where $\sigma(\beta_k)$ is $i$-th diagonal element of $\tilde{\sigma}^2 X'X$
-- Under the inference hypotheses, distribution of $t$ is known.
-- Compute $t$. Check acceptance threshold $t*$ at probability $\alpha$.
-  - Coefficient is significant with probability $1-\alpha$ if $t>t*$
-- Or compute implied acceptance rate $\alpha$ for $t$.
-  - if $t$ is high enough, null hypothesis is rejected
+- <!-- .element: class="fragment" -->Student test. Given a an coefficient $\beta_k$:
+  - <!-- .element: class="fragment" -->$H0$: coefficient is 0
+  - <!-- .element: class="fragment" -->$H1$: coefficient is not zero
+  - <!-- .element: class="fragment" -->statistics: $t = \frac{\hat{\beta_k}}{\hat{\sigma}(\hat{\beta_k})}$
+    - where $\hat{\sigma}(\beta_k)$ is $i$-th diagonal element of $\hat{\sigma}^2 X'X$
+- <!-- .element: class="fragment" -->Under the inference hypotheses, distribution of $t$ is known.
+  - it is a student distribution
+- <!-- .element: class="fragment" -->Procedure:
+  - <!-- .element: class="fragment" -->Compute $t$. Check acceptance threshold $t*$ at probability $\alpha$.
+  - <!-- .element: class="fragment" -->Coefficient is significant with probability $1-\alpha$ if $t>t*$
+  - <!-- .element: class="fragment" -->Or compute implied acceptance rate $\alpha$ for $t$.
+    - if $t$ is high enough, null hypothesis is rejected
 
 ----
 
 ### Confidence intervals
 
 - Same as in the 1d case.
-- Take estimate $\color{red}{\beta_i}$ with an estimate of its standard deviation $\color{red}{\tilde{\sigma}(\beta_i)}$
+- Take estimate $\color{red}{\beta_i}$ with an estimate of its standard deviation $\color{red}{\hat{\sigma}(\beta_i)}$
 - Compute student $\color{red}{t^{\star}}$ at $\color{red}{\alpha}$ confidence level (ex: $\alpha=5\\%$) such that:
   - $P(|t|>t^{\star})<\alpha$
 - Produce confidence intervals at $\alpha$ confidence level:
-  - $[\color{red}{\beta_i} - t^{\star} \color{red}{\tilde{\sigma}(\beta_i)}, \color{red}{\beta_i} + t^{\star} \color{red}{\tilde{\sigma}(\beta_i)}]$
+  - $[\color{red}{\beta_i} - t^{\star} \color{red}{\hat{\sigma}(\beta_i)}, \color{red}{\beta_i} + t^{\star} \color{red}{\hat{\sigma}(\beta_i)}]$
 
 ----
 
@@ -358,13 +386,30 @@ $$ \log(\text{number_or_crimes}) = 0.005\\% - 0.15 \log(\text{pol_spend}) - 0.4 
   - *Durbin-Watson*: are residuals autocorrelated (makes sense for time-series)
   - ...
 - In case assumptions are not met...
-  - ... still possible to do economitrics
+  - ... still possible to do econometrics
   - ... but beyond the scope of this course 
 
 ---
 
 ## Variable selection
 
+----
+
+### Variable selection
+
+- <!-- .element: class="fragment" -->I've got plenty of data:
+  - $y$: gdp
+  - $x_1$: investment
+  - $x_2$: inflation
+  - $x_3$: education
+  - $x_4$: unemployment
+- <!-- .element: class="fragment" -->Many possible regressions:
+  - $y = α + \beta_1 x_1$
+  - $y = α + \beta_2 x_2 + \beta_3 x_4$
+  - ...
+- <!-- .element: class="fragment" -->Which one do I choose ?
+  - putting everything together is not an option (kitchen sink regression)
+  
 ----
 
 ### Not enough coefficients
@@ -375,8 +420,8 @@ $$y = \alpha + \beta_1 x_1 + \epsilon$$
 $$y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \eta$$
 - The residual $y - \alpha - \beta_1 x_1$ is not white noise
   - specification hypotheses are violated
-  - estimate $\beta_1$ will have a bias (omitted variable bias)
-  - to correct the bias we add $x_2$ ("control"for $x_2$)
+  - estimate $\hat{\beta_1}$ will have a bias (omitted variable bias)
+  - to correct the bias we add $x_2$ ("control" for $x_2$)
 
 ----
 
@@ -409,7 +454,7 @@ $$y = \alpha + \beta_1 x_1 + ... \beta_n x_n$$
 
 Which regressors to choose ?
 
-- Method 1 : remove coefficients with lowest t to maximize adjusted R-squared
+- Method 1 : remove coefficients with lowest t (less significant) to maximize adjusted R-squared
   - remove regressors with lowest t
   - regress again
   - see if adjusted $R^2$ is decreasing
@@ -418,12 +463,12 @@ Which regressors to choose ?
 - Method 2 : choose combination to maximize Akaike Information Criterium
   - AIC: $p - log(L)$
   - $L$ is likelihood
-  - computed by all good econometrc softwares
+  - computed by all good econometric softwares
 
 ---
 
-## Coming next: instrumental variables
-
-Watch: 
+## Coming next
 
 <iframe width="1000" height="600" src="https://www.youtube.com/embed/NLgB2WGGKUw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[Intro to causality](5_intro_to_causality.html)
