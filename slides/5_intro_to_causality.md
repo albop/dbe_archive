@@ -416,5 +416,5 @@ $$y = \alpha + \beta \tilde{x} + z + \epsilon$$
   - download replication files for angvist 1990: https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/PLF0YL/ZLIBWH
   - try to replicate the main result from the paper
 
-- Or: skim "The Causal Effect of Education on Wages Revisited" by Matt Dickson
+- Or: skim *The Causal Effect of Education on Wages Revisited* by Matt Dickson
   - understand the IV strategy

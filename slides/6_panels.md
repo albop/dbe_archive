@@ -29,30 +29,38 @@ Dates: time-series
 
 ![](timeseries.png)
 
-- very simple study: structural break
-- going further: *time series analysis*
-  - data is typically autocorrelated
-  - example (AR1) $x_t = a  + b x_{t-1} + \epsilon_t$
-
 </div>
 
 </div>
 
 ----
 
+### Time Series
+
+![](timeseries.png)
+
+- very simple study: structural break
+  - does regression on $[T_1, \overline{T}]$ yield (significantly) different results on $[\overline{T}, T_2]$
+- going further: *time series analysis*
+  - data is typically autocorrelated
+  - example (AR1) $x_t = a  + b x_{t-1} + \epsilon_t$
+
+----
+
 ### Longitudinal Data
 
+<div class="container">
+
+<div class="col">
 
 <div class="r-stack">
 
-<div class="fragment current-visible" >
+<div class="fragment current-visible" data-fragment-index=1 >
 
 - Repeated cross sectional studies
-
+- Index individual by $i\in [1,J]$ and time by $t\in[1,T]$
 [graph repeated cross-sectional]
-
 - we can study evolution of the regression over time
-
   $$\text{date 1}: y_{i,1} = a_1 + b_1 x_{1,1}$$
   ...
   $$\text{date t}: y_{i,t} = a_i + b_i x_{i,1}$$
@@ -60,10 +68,11 @@ Dates: time-series
   $$\text{date T}: y_{i,T} = a_T + b_T x_{i,T}$$
 
 - $y_{i,t}$ and $y_{i,t+1}$ are unrelated
+- One big regression: *pooled* regression.
 
 </div>
 
-<div class="fragment">
+<div class="fragment" data-fragment-index=2>
 
 - Even better: longitudinal data
 
@@ -75,6 +84,15 @@ Dates: time-series
 
 </div>
 
+</div>
+
+</div>
+<div class="col">
+<div class="r-stack">
+<img src="panel_2.jpg" class="fragment visible-current" data-fragment-index=1>
+<img src="panel_1.jpg" class="fragment" data-fragment-index=2>
+</div>
+</div>
 </div>
 
 ----
@@ -141,28 +159,53 @@ Dates: time-series
 
 ### What if you don't take it into account ?
 
-- Suppose we want to measure the growth rate of...
-[wrong graph]
-- What was missing? 
+
+<div class="container">
+
+<div class="col">
+<div class="r-stack">
+<img src="bias_1.jpg" class="fragment current-visible" data-fragment-index=1>
+<img src="bias_2.jpg" class="fragment" data-fragment-index=2>
+</div>
+
+</div>
+
+<div class="col">
+
+- Suppose we want to explain the growth rate of several countries
+- <!-- .element class="fragment" data-fragment-index="2" -->Let's do a big regression (pooled regression)
+  $$y_{i,t} = a + b x_{i,t}$$ (pooled regression)
+- <!-- .element class="fragment" data-fragment-index="3" --> What was missing? 
   - There must be some effects, not captured by the regression, specific to each individual
   - -> Unobserved heterogeneity
 
-$$y_{i,t} = a + b x_{i,t}$$ (pooled regression)
+
+</div>
+</div>
 
 ----
 
 ### Fixed effect
 
+<div class="container">
+<div class="col">
 
-TODO: graph
+<img src="bias_3.jpg" data-fragment-index=2>
+
+</div>
+
+<div class="col">
 
 - capture idiosyncratic variability by adding an individual specific constant
 $$ y_{i,t} = a + a_i +  b x_{i,t} + \epsilon_{i,t}$$
 $a_i$ is called a *fixed effect*
-- We assume some *structure* on the data to discipline the regression.
-- How can we estimate the model? i.e. find  plausible values for $a$, $a_i$, $b$, $\sigma(\epsilon)$, etc.
-- We focus on OLS estimator: 
+- <!-- .element class="fragment" data-fragment-index="3" -->We assume some *structure* on the data to discipline the regression.
+- <!-- .element class="fragment" data-fragment-index="3" -->How can we estimate the model? i.e. find  plausible values for $a$, $a_i$, $b$, $\sigma(\epsilon)$, etc.
+- <!-- .element class="fragment" data-fragment-index="3" -->We focus on OLS estimator: 
   $$\min_{a,a_i, b} \sum_{i,t} ( y_{i,t} - \underbrace{a + a_i +  b x_{i,t}}\_{\text{predicted value}} )^2$$
+
+</div>
+</div>
 
 ----
 
@@ -172,8 +215,7 @@ $a_i$ is called a *fixed effect*
 $$ y_{i,t} = a + a_i +  b x_{i,t} + \epsilon_{i,t}$$
 is equivalent to
 $$ y_{i,t} = a.1 + a_1 d\_{i=1} + \cdots + a_I d_{i=I} +  b x_{i,t} + \epsilon_{i,t}$$
-where $d$ is a dummy variable such that $d_{i=j} = 1 \text{if} i=j , 0 \text{otherwise} $ (TODO: alternative)
-
+where $d$ is a dummy variable such that $d_{i=j} = \begin{cases}1, & \text{if}\ i=j \\\\ 0, & \text{otherwise}\end{cases}$ 
 - Minor problem: $1, d_{i=1}, ... d_{i=I}$ are not independent: $\sum_{j=1}^I \delta_{i=j}=1$
   - Solution: ignore one of them, exactly like the dummies for categorical variables
 
@@ -181,7 +223,6 @@ where $d$ is a dummy variable such that $d_{i=j} = 1 \text{if} i=j , 0 \text{oth
 
 
 ----
-
 
 ### Estimation methods
 
@@ -193,9 +234,7 @@ where $d$ is a dummy variable such that $d_{i=j} = 1 \text{if} i=j , 0 \text{oth
 
 - Like always, we get estimates and significance numbers / confidence intervals
 
----
-
-
+----
 
 ### Time Fixed Effects
 
@@ -209,14 +248,11 @@ $$ y_{i,t} = a + a_t +  b x_{i,t}$$
 
 ### Both Fixed Effects
 
-- We can capture time heterogeneity and individual heterogeneity at the same time:
-
+- We can capture time heterogeneity and individual heterogeneity at the same time.
 $$ y_{i,t} = a + a_i + a_t +  b x_{i,t}$$
-
 - More of it soon.
 
-
----
+----
 
 ### Limitation of fixed effects
 
@@ -232,7 +268,6 @@ $$ y_{i,t} = a + a_i + a_t +  b x_{i,t}$$
 
 ----
 
-
 ### Other models
 
 - Composed coefficients: (coefficients can also be heterogenous in both dimension)
@@ -241,7 +276,7 @@ $$ y_{i,t} = a + a_i + a_t +  b x_{i,t}$$
 
 - Random coefficients ...
 
-----
+---
 
 
 ## Diff in Diff
@@ -323,5 +358,16 @@ $$y_{i,t} = \underbrace{\beta_1 1_{t=1} + \beta_2 1_{t=2}}\_{\text{time fixed ef
 - You might implement a specification like:
 $$y_{i,t} = a_{i} + a_t + \delta T_{i,t} + \beta x_{i,t} + \epsilon_{i,t}$$
 
-
 ---
+
+### In practice
+
+- With `linearmodels` (example):
+  - individual fixed effects:
+  ```invest ~ 1 + value + capital + EntityEffects```
+  - time fixed effects:
+  ```invest ~ 1 + value + capital + TimeEffects```
+  - both
+  ```invest ~ 1 + value + capital + EntityEffects + TimeEffects```
+- Regress with PanelOLS
+  - mathematically equivalent to OLS but more efficient
