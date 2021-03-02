@@ -184,11 +184,11 @@ df.corr()
 
 <div class="r-stack">
 
-<img src="graphs/which_line_1.png" class="fragment visible-current" data-fragment-index=2>
+<img src="graphs/which_line_1.png" class="fragment current-visible" data-fragment-index=2>
 
-<img src="graphs/which_line_2.png" class="fragment visible-current" data-fragment-index=3>
+<img src="graphs/which_line_2.png" class="fragment current-visible" data-fragment-index=3>
 
-<img src="graphs/which_line_3.png" class="fragment visible-current" data-fragment-index=4>
+<img src="graphs/which_line_3.png" class="fragment current-visible" data-fragment-index=4>
 </div>
 
 </div>

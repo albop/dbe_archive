@@ -17,9 +17,10 @@ $$y = \alpha + \beta x_1 + \cdots + \beta x_n$$
 - How do we deal with the following cases?
   - __binary variable__: $x\in \{0,1\}$ (or $\{True, False}$)
     - ex: $\text{gonetowar}$, $\text{hasdegree}$
-  - __hierarchical index__: 
+  - __categorical variable__: 
     - ex: survey result (0: I don't know, 1: I strongly disagree, 2: I disagree, 3: I agree, 4: I strongly agree)
     - there is no ranking of answers
+    - when there is ranking: hierarchical index
   - __nonnumerical variables__:
     - ex: (flower type: $x\in \text{myosotis}, \text{rose}, ...$)
 
@@ -36,13 +37,13 @@ $$y_\text{salary} = \alpha + \beta x_{\text{gonetowar}}$$
 
 ----
 
-### Hierarchical index: 
+### Categorical variable 
 
 - Look at the model:
 $$y_{\text{CO2 emission}} = \alpha + \beta x_{\text{yellow vest support}} $$
 - Where $y_{\text{CO2 emission}}$ is an individual's CO2 emissions and $x_{\text{yellow vest support}}$ is the response the the question *Are you in agreement with the yellow vests demands?*.
 
-- Response is coded up as:
+- Response is coded up as: (in this case it is hierachical)
   - 0: Strongly disagree
   - 1: Disagree
   - 2: Neutral
@@ -62,6 +63,7 @@ $$y_{\text{CO2 emission}} = \alpha + \beta x_{\text{yellow vest support}} $$
 | ----------------------- | -------------- | -------------------- | ----------- | -------------------- |
 | 1                       | 0              | 0                    | 0           | 0                    |
 | 0                       | 1              | 0                    | 0           | 0                    |
+| 0                       | 0              | 0                    | 0           | 0                    |
 | 0                       | 0              | 0                    | 1           | 0                    |
 | 0                       | 0              | 0                    | 0           | 1                    |
 - Values are linked by the specific __dummy coding__.
@@ -122,6 +124,15 @@ $$y_{\text{CO2 emission}} = \alpha + \beta_1 x_{\text{strdis}} + \beta_2 x_{\tex
 ### Hands-on
 
 Use `statsmodels` to create dummy variables with formula API.
+
+- this doesn't work:
+```
+salary ~ activity
+```
+- create dummy variables:
+```
+salary ~ C(activity)
+```
 
 ---
 
@@ -280,7 +291,7 @@ $$\forall \omega, A(\omega) \implies B(\omega)$$
 
 - <!-- .element class="fragment" -->Cause (A): two groups of people  
   - those given a shirt (treatment 1)
-  - those not given a shirt (treatment 2)
+  - those not given a shirt (treatment 0)
 
 - <!-- .element class="fragment" -->Possible consequence (B): performance
 
@@ -304,17 +315,17 @@ $$\forall \omega, A(\omega) \implies B(\omega)$$
 
 ### Randomized Control Experiment
 
-- In medecine: randomize control trial
+- In medecine: randomized control trial
   - Randomize the treatment
 - In economics: randomized field experiments
   - Randomize the control group
-- In any case: treatment and control group need to be independent
+- In any case: treatment needs to be independent
 
 ----
 
 ### Natural experiments
 
-- A natural experiment satifies conditions that treatment is assigned randomly
+- A natural experiment satisfies conditions that treatment is assigned randomly
   - without being organized by the econometrician
 - Exemple: *gender bias in french local elections*
 (jean-pierre eymeoud, paul vertier)

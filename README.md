@@ -25,7 +25,7 @@ Direct links:
 - Python basics: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_1/Exercises-correction.ipynb))
 - Dataframe: ([exercises](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_2/Exercises_correction.ipynb))
 - Regressions: ([data](https://raw.githubusercontent.com/albop/dbe/main/Session_4/Regressions.ipynb), [correction](https://raw.githubusercontent.com/albop/dbe/main/Session_4/data.dta))
-- 
+
 ---
 
 ## Communication
@@ -43,17 +43,18 @@ Direct links:
 
 ## Roadmap
 
+
 | Session | Date (tbc)         | Content                                                                                             |
 | ------- | ------------------ | --------------------------------------------------------------------------------------------------- |
-| 1       | 12/01              | housekeeping,  basic data types and language structure                                              |
+| 1       | 12/01              | housekeeping,  basic data types and <mark>language structure </mark>                                |
 | 2       | 19/01              | databases, data representation, interactivity (matplotlib, altair, widgets)                         |
-| 3       | 26/01              | ordinary least squares (inear regression, multiple regression)                                     |
-| 4       | 02/02              | regression inference and <mark>categorical variables</mark>                                         |
-| 5       | <mark>23/02</mark> | <mark>instrumental variables</mark>                                                                 |
-| 6       | 30/02              | panel data                                                                                          |
-| 7       | 02/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
-| 8       | 09/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
-| 9       | 23/03              | natural language processing                                                                         |
+| 3       | 26/01              | ordinary least squares (inear regression, multiple regression)                                      |
+| 4       | 02/02              | regression inference and categorical variables                                                      |
+| 5       | 23/02              | <mark>instrumental variables</mark>                                                                 |
+| 6       | <mark>02/03</mark> | <mark> panel data </mark>                                                                           |
+| 7       | 09/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 8       | 23/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
+| 9       | 24/03              | natural language processing                                                                         |
 | 10      | 30/03              | presentation of data project, programming test                                                      |
 
 ---

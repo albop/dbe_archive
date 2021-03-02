@@ -303,8 +303,8 @@ $$ \log(\text{number_or_crimes}) = 0.005\\% - 0.15 \log(\text{pol_spend}) - 0.4 
   - we choose a *model*:
       $$ Y = \alpha + X \beta $$
   - from the data we compute *estimates*:
-      $$\beta  = (X'X)^{-1} X' Y $$
-      $$\alpha = Y- X \beta $$
+      $$\hat{\beta}  = (X'X)^{-1} X' Y $$
+      $$\hat{\alpha} = Y- X \beta $$
   - estimates are a precise function of data
     - exact formula not important here
 
@@ -313,9 +313,11 @@ $$ \log(\text{number_or_crimes}) = 0.005\\% - 0.15 \log(\text{pol_spend}) - 0.4 
 <div class="col">
 
 - <!-- .element: class="fragment" --> We make some hypotheses on the <em>data generation process</em>:
-  - $y = X \beta + \epsilon$
+  - $Y = X \beta + \epsilon$
   - $\mathbb{E}\left[ \epsilon \right] = 0$
   - $\epsilon$ multivariate normal with covariance matrix $\sigma^2 I_n$
+    - $\forall i, \sigma(\epsilon_i) = \sigma$
+    - $\forall i,j, cov(\epsilon_i, \epsilon_j) = 0$
 - <!-- .element: class="fragment" -->Under these hypotheses:
   - $\hat{\beta}$ is an unbiased estimate of true parameter $\beta$
     - i.e. $\mathbb{E} [\hat{\beta}] = \beta$
@@ -403,6 +405,7 @@ $$ \log(\text{number_or_crimes}) = 0.005\\% - 0.15 \log(\text{pol_spend}) - 0.4 
   - $x_2$: inflation
   - $x_3$: education
   - $x_4$: unemployment
+  - ...
 - <!-- .element: class="fragment" -->Many possible regressions:
   - $y = α + \beta_1 x_1$
   - $y = α + \beta_2 x_2 + \beta_3 x_4$
@@ -441,14 +444,14 @@ $$y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \eta$$
 - What happens if two regressors are (almost) colinear? $$y = \alpha + \beta_1 x_1 + \beta_2 x_2$$ where $x_2 = \kappa x_1$
 - Intuitively: parameters are not unique
   - if $y = \alpha + \beta_1 x_1$ is the right model...
-  - then $y = \alpha + \beta_1 \lambda x_1 + (1-\lambda) \frac{1}{\kappa} x_2$ is exactly as good...
+  - then $y = \alpha + \beta_1 \lambda x_1 + \beta_2 (1-\lambda) \frac{1}{\kappa} x_2$ is exactly as good...
 - Mathematically: $(X'X)$ is not invertible.
 - When regressors are almost colinear, coefficients can have a lot of variability.
 - Test: correlation plot, correlation statistics
 
 ----
 
-### Too many regressors
+### Choosing regressors
 
 $$y = \alpha + \beta_1 x_1 + ... \beta_n x_n$$
 
