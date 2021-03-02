@@ -23,6 +23,8 @@
   - [Linear Regression](https://albop.github.io/dbe/slides/3_linear_regression)
   - [Multiple Regression](https://albop.github.io/dbe/slides/4_multiple_regressions)
   - [Causality](5_intro_to_causality.html)
+  - [Panels](6_panels.html)
+
 
 </div>
 <div class="col">

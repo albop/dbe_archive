@@ -334,8 +334,7 @@ $$\forall \omega, A(\omega) \implies B(\omega)$$
 - Result: yes, they get 1.5% less votes by right-wing voters
 - How can we be so sure that no other explanation is true?
 
-----
-
+---
 
 
 ## Introduction to Instrumental variables
@@ -367,7 +366,7 @@ $$y = \alpha + \beta x + \epsilon$$
 - We want to establish causality from x to y.
 - But there can be *confounding factors*:
   - variable $z$ which causes both x and y
-  - exemple: chocolate and nobel price
+  - exemple: $x$ is chocolate and $y$ is nobel price
 - If we identfy $z$ we could *control* for $z$:
 $$y = \alpha + \beta_1 x + \beta_2 z + \epsilon$$
   - we would get a better predictor of $y$ but more uncertainty about $\beta_1$ ($x$ and $y$ are colinear)
@@ -376,40 +375,45 @@ $$y = \alpha + \beta_1 x + \beta_2 z + \epsilon$$
 
 ### Reformulate the problem
 
-- Let's assume $T$ is a binary variable: the treatment
+
+<div class="container">
+<div class="col">
+
+- Let's assume $x=T$ is a binary variable: the treatment
 $$y = \alpha + \beta T + z + \epsilon$$
 - There are two groups:
   - those who receive the treatment
 $$y = \alpha + \beta + z_{T=1} + \epsilon$$
   - the others
-$$y = \alpha + z_{T=0} + \epsilon$$
+$$y = \alpha + 0 +  z_{T=0} + \epsilon$$
+
+</div>
+<div class="col">
+
 - Problem: if $z$ is higher in the treatment group, its effect can't be separated from the treatment effect.
 - Intuition: what if we make groups differently?
   - completely independent from $z$ (and $\epsilon$)
   - not independently from $x$ so that one group will receive more treatment than the other
-- To make this group we need a variable $q$ that is:
+- To make this group we need a new variable $q$ that is:
+  - correlated with $x$ so that it will correspond to some treatment effect
   - uncorrelated to $z$ or $\epsilon$ (exogenous)
-  - correlated with $x$
+  
+</div>
+</div>
 
 ----
-
 
 ### Two stage regression
 
 - We would like to redo the treatment groups in a way that is independent from $z$ (and everything contained in $\epsilon$)
-
-- First stage: regress group assignment on the instrument:
-$$x = \alpha_0 + \beta_0 q + \eta$$
-  - we can now predict group assignment in a way that is independent from $z$ (and everything in $\epsilon$)
-$$\tilde{x} = \alpha_0 + \beta_0 q$$
+- First stage: regress group assignment on the instrument: $$x = \alpha_0 + \beta_0 q + \eta$$
+  - we can now predict group assignment in a way that is independent from $z$ (and everything in $\epsilon$) $$\tilde{x} = \alpha_0 + \beta_0 q$$
 - Second stage: use the predicted value instead of the original one
 $$y = \alpha + \beta \tilde{x} + z + \epsilon$$
-
 - Result:
   - If $\beta$ is significantly nonzero, there is a causal effect between $x$ and $y$.
   - Note that $\tilde{x}$ is imperfectly correlated with the treatment: $\beta$ can't be interpreted directly
   - The actual effect will be $\frac{\beta}{Cor(x,\tilde{x})}$ (in 1d)
-
 - We say that we instrument $x$ by $q$.
 
 ----
@@ -422,3 +426,6 @@ $$y = \alpha + \beta \tilde{x} + z + \epsilon$$
 - For next time: 
   - download replication files for angvist 1990: https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/PLF0YL/ZLIBWH
   - try to replicate the main result from the paper
+
+- Or: skim *The Causal Effect of Education on Wages Revisited* by Matt Dickson
+  - understand the IV strategy
