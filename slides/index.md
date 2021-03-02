@@ -162,8 +162,8 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
 | ------- | ------------------ | --------------------------------------------------------------------------------------------------- |
 | 1       | 12/01              | housekeeping,  basic data types and language structure                                              |
 | 2       | 19/01              | databases, data representation, interactivity (matplotlib, altair, widgets)                         |
-| 3       | 26/01              | ordinary least squares (inear regression, <mark>multiple regression</mark>)                         |
-| 4       | 02/02              | <mark>regression inference</mark> and <mark>categorical variables</mark>                            |
+| 3       | 26/01              | ordinary least squares (inear regression, multiple regression)                                     |
+| 4       | 02/02              | regression inference and <mark>categorical variables</mark>                                         |
 | 5       | <mark>23/02</mark> | <mark>instrumental variables</mark>                                                                 |
 | 6       | 30/02              | panel data                                                                                          |
 | 7       | 02/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
