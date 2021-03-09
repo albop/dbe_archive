@@ -25,7 +25,6 @@ Tom Mitchell: *A computer program is said to learn from experience E with respec
 - AIs
   - think and learn
   - mimmic human cognition
-- [TODO]
 </div>
 
 <div class="col">
@@ -49,7 +48,7 @@ Tom Mitchell: *A computer program is said to learn from experience E with respec
 
 - Machine learning:
   - structure data
-  - make predictions (interpolate data) [TODO: explain]
+  - make predictions (interpolate data)
 
 
 ---
@@ -80,8 +79,8 @@ Tom Mitchell: *A computer program is said to learn from experience E with respec
 
 ### Networks
 
-Banking networks
-Production network
+- Banking networks
+- Production network
 
 ![](ml_graphs/StarWarsSocialNetwork1.png)
 
@@ -90,9 +89,12 @@ Production network
 ### Big Data
 
 - __Big__ data:
-  - wide data
-  - long data
+  - wide data (N>>K)
+  - long data (K>>N)
   - heterogenous, unstructured data
+- Might not even fit in memory
+  - out of core computations
+
 
 ---
 
@@ -121,6 +123,7 @@ Production network
 <div class="col">
 
 <div class="r-stack">
+
 
 
 <table class="fragment current-visible">
@@ -156,6 +159,18 @@ Production network
 </tr>
 </table>
 
+<div class="fragment current-visible">
+
+
+__supervised: regression__
+
+![regression](ml_graphs/regression.png)
+
+- Predict: $y = f(x; \theta)$
+
+</div>
+
+
 <table class="fragment current-visible">
 <tr>
 <th>Age</th>
@@ -188,6 +203,17 @@ Production network
 <td>???</td>
 </tr>
 </table>
+
+<div class="fragment current-visible">
+
+__supervised: classification__
+
+![classification](ml_graphs/classification.png)
+
+- Output is discrete
+- Regular trick: $\sigma(f(x; \theta))$ where $\sigma(x)=\frac{1}{1-e^{-x}}$
+
+</div>
 
 
 <table class="fragment current-visible">
@@ -223,31 +249,36 @@ Production network
 </tr>
 </table>
 
+<div class="fragment current-visible">
 
+__unsupervised__
 
+- organize data without labels
+    - dimension reduction: describe data with less parameters
+    - clustering: sort data into "similar groups" ([exemple](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html))
 
 </div>
 
----
+<div class="fragment current-visible">
 
-## Supervised Learning
+__unsupervised: clustering__
 
-----
 
-### supervised (regression)
+![kmeansclustering](ml_graphs/kmeansclustering.gif)
 
-![regression](ml_graphs/regression.png)
+</div>
 
-- Predict: $y = f(x; \theta)$
+<div class="fragment current-visible">
 
-----
+__unsupervised: clustering__
 
-## supervised (classification)
+Women buying desses during the year:
 
-![classification](ml_graphs/classification.png)
+![](ml_graphs/clustering_dress.png)
 
-- Output is discrete
-- Regular trick: $\sigma(f(x; \theta))$ where $\sigma(x)=\frac{1}{1-e^{-x}}$
+</div>
+
+</div>
 
 ----
 
@@ -423,7 +454,9 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
 
 ---
 
--
+## Model validation
+
+----
 
 ## how to evaluate the machine learning
 
@@ -432,25 +465,18 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
     - training set (in-sample)
     - test set (out of sample)
 - evaluate performance on the test set
-
-Performance can be:
-- fitness, number of classification errors (false positive, false negative)
-
-If many traning parameters are used
-- training set (in-sample)
-- validation set (to update hyperparameters)
-- test set (out of sample)
+- Performance can be:
+  - fitness, number of classification errors (false positive, false negative)
+- In many traning parameters are used
+  - training set (in-sample)
+  - validation set (to update hyperparameters)
+  - test set (out of sample)
 
 Rule: the model and the hyperparameters should be chosen _independently from the test set_.
-
----
-
-## Model validation
 
 ----
 
 ## How to judge a model validity?
-
 
 - not easy
 - modeling *asumptions* (specification):
@@ -459,41 +485,15 @@ Rule: the model and the hyperparameters should be chosen _independently from the
 - There is a very general _tradeoff bias/variance_
 - Many ML methods allow to estimate bias (possibly via bootstrapping)
 
----
+----
 
 ![Traintest](ml_graphs/2000px-Traintest.svg.png)
 
 ---
 
+## Examples
 
-## unsupervised learning
-
-- organize data without labels
-    - dimension reduction: describe data with less parameters
-    - clustering: sort data into "similar groups" ([exemple](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html))
-
----
-
-### Clustering
-
-![kmeansclustering](ml_graphs/kmeansclustering.gif)
-
----
-
-### Clustering (2)
-
-Women buying desses during the year:
-
-![](ml_graphs/clustering_dress.png)
-
----
-
-## semi-supervised
-
-- Some data is labeled, some data is not.
-- Mix supervised an nonsupervised algorithms
-
----
+----
 
 ### exemple: sentiment analysis
 
@@ -505,7 +505,7 @@ Women buying desses during the year:
     - First build a smaller vector representing a tweet  for instance word counts. (This is called feature extraction),
     - Regress sentiment on this smaller vector: yields positivity measure for many words.
 
----
+----
 
 ### exemple 2: GANS
 
@@ -519,7 +519,7 @@ Women buying desses during the year:
     
 ![](ml_graphs/gan.png)
 
----
+----
 
 ## Reinforcement Learning
 
