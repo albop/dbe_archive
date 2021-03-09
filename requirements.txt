@@ -6,3 +6,5 @@ matplotlib
 scipy
 pandas
 rise
+linearmodels
+statsmodels
