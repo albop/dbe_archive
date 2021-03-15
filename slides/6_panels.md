@@ -47,7 +47,7 @@ Dates: time-series
 
 ----
 
-### Longitudinal Data
+### Longitudinal Data / Panel Data
 
 <div class="container">
 
@@ -325,6 +325,7 @@ $$\forall i \in \mathcal{G}\_T, \quad y_{i,2} - y_{i,1} = \alpha + \beta x_{i,t}
 $$\forall i \notin \mathcal{G}\_t, \quad y_{i,2} - y_{i,1} = \alpha + \delta + \beta x_{i,t} + \epsilon_{i,t}$$
 - Hypotheses:
   - equal trend ($\alpha$ is the same in both groups)
+  - same effect of all other variables ($\beta$ is the same)
   - $\epsilon_{i,t}$ normally distributed, independent, etc....
   - $x_{i,t}$: (controls) other variables that might explain differences in learning speed
     - must be independent from $\epsilon$ and $T$

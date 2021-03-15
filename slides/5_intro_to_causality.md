@@ -363,6 +363,8 @@ $$\forall \omega, A(\omega) \implies B(\omega)$$
 
 - Take the linear regression:
 $$y = \alpha + \beta x + \epsilon$$
+  - $y$: salary
+  - $x$: went to war
 - We want to establish causality from x to y.
 - But there can be *confounding factors*:
   - variable $z$ which causes both x and y
@@ -406,14 +408,15 @@ $$y = \alpha + 0 +  z_{T=0} + \epsilon$$
 ### Two stage regression
 
 - We would like to redo the treatment groups in a way that is independent from $z$ (and everything contained in $\epsilon$)
+  - $q$ is a binary variable: drafted or not
 - First stage: regress group assignment on the instrument: $$x = \alpha_0 + \beta_0 q + \eta$$
   - we can now predict group assignment in a way that is independent from $z$ (and everything in $\epsilon$) $$\tilde{x} = \alpha_0 + \beta_0 q$$
 - Second stage: use the predicted value instead of the original one
-$$y = \alpha + \beta \tilde{x} + z + \epsilon$$
+$$y = \alpha + \beta_1 \tilde{x} + z + \epsilon$$
 - Result:
   - If $\beta$ is significantly nonzero, there is a causal effect between $x$ and $y$.
   - Note that $\tilde{x}$ is imperfectly correlated with the treatment: $\beta$ can't be interpreted directly
-  - The actual effect will be $\frac{\beta}{Cor(x,\tilde{x})}$ (in 1d)
+  - The actual effect will be $\frac{\beta_1}{\beta_0}$ (in 1d)
 - We say that we instrument $x$ by $q$.
 
 ----
@@ -421,7 +424,7 @@ $$y = \alpha + \beta \tilde{x} + z + \epsilon$$
 ### In practice
 
 - We can use `statsmodels` or `linearmodels` library (look for IV2SLS)
-  - trick: `linearmodels` has a special formula syntax: `salary ~ [draft ~ instrument]`
+  - trick: `linearmodels` has a special formula syntax: `salary ~ [war ~ draft]`
 
 - For next time: 
   - download replication files for angvist 1990: https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/PLF0YL/ZLIBWH
