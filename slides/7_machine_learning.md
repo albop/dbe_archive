@@ -89,11 +89,12 @@ Tom Mitchell: *A computer program is said to learn from experience E with respec
 ### Big Data
 
 - __Big__ data:
-  - wide data (N>>K)
-  - long data (K>>N)
+  - wide data (K>>N)
+  - long data (N>>K)
   - heterogenous, unstructured data
 - Might not even fit in memory
   - out of core computations
+  - learn from a subset of the data
 
 
 ---
@@ -331,8 +332,8 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
     - closed-form solution: $a = X^{\prime}X Y$ and $b= ...$
     - hard to compute if $X$ is very big
 - Incremental learning:
-    - given initial $a_0$
-    - pick $M$ random observations, regress them to get new estimate $a$
+    - given initial $a_0$, $b_0$
+    - pick $B$ random observations, regress them to get new estimate $a$, $b$
       - this minimizes the square of errors
     - update $a_1 \leftarrow a_0 (1-\beta) + \beta a $ where $\beta$ is a learning rate
     - process is not biased (that is $a$ converges to the true value) as long as one decreases $\beta$ sufficiently fast over time
@@ -348,7 +349,7 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
 - define the *empirical* risk (or empirical *cost*)
   $$\xi(\theta, \omega) = \sum_{(x,y) \in \omega} (y - (a x + b))^2$$
 - we want to minimize *theoretical risk*:
-  $$\Xi(\theta) = \mathbb{E} \left[ \Xi(\theta, \omega)\right]$$
+  $$\Xi(\theta) = \mathbb{E} \left[ \xi(\theta, \omega)\right]$$
 
 ----
 
@@ -364,7 +365,7 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
 - Gradient descent:
   - $a_k, b_k$ given
   - compute the gradient (slope) $\nabla_{a,b} f = \begin{bmatrix} \frac{\partial f}{\partial a} \\\\ \frac{\partial f}{\partial b}\end{bmatrix}$
-  - follow the steepest slope:
+  - follow the steepest slope: (Newton Algorithm)
     - $$ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} - \nabla_{a,b} f$$
   - but not too fast: use learning rate $\lambda$:
    $$ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  (1-\lambda) \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} + \lambda (- \nabla_{a,b} f )$$
@@ -414,10 +415,10 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
   - $y = a_1 x_1 + a_2 x_2 + \cdots + a_N x_N + b$ is grossly overidentified.
 
 - Idea: penalize non-zero coefficients to encourage scarcity
-  - Ridge: $\Xi(a,b) = \min_{a,b} \sum_{i=1}^N (a x_i + b - y_i)^2 + \mu \sum_i |a_i|^2$
+  - Ridge: $\Xi(a,b) = \min_{a,b} \sum_{i=1}^N ( \sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|^2$
     - shrinks parameters towards zero
     - closed form
-  - Lasso: $\Xi(a,b) = \min_{a,b} \sum_{i=1}^N (a x_i + b - y_i)^2 + \mu \sum_i |a_i|$
+  - Lasso: $\Xi(a,b) = \min_{a,b} \sum_{i=1}^N (\sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|$
     - eliminates zero coefficients
   - Elastic: Ridge + Lasso
 
