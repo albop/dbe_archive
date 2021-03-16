@@ -55,7 +55,9 @@ Direct links:
 | 7       | <mark>09/03</mark> | <mark>machine learning approach</mark> (regression/classification/clustering, training sets validation set, ...) |
 | 8       | 23/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                                           |
 | 9       | 24/03              | natural language processing                                                                                      |
-| 10      | 30/03              | presentation of data project, programming test                                                                   |
+| 10      | 30/03              | presentation of data project                                                                                     |
+
+__Final exam__: April 13rd, from 9am to 11am. Online.
 
 ---
 
