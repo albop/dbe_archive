@@ -24,7 +24,7 @@
   - [Multiple Regression](https://albop.github.io/dbe/slides/4_multiple_regressions)
   - [Causality](5_intro_to_causality.html)
   - [Panels](6_panels.html)
-  - [Machine Learning](7_panels.html)
+  - [Machine Learning](7_machine_learning.html)
 
 
 </div>
