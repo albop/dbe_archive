@@ -14,6 +14,7 @@
   - [Causality](https://albop.github.io/dbe/slides/5_intro_to_causality)
   - [Panels](https://albop.github.io/dbe/slides/6_panels)
   - [Machine Learning](https://albop.github.io/dbe/slides/7_machine_learning)
+  - [Machine Learning 2](https://albop.github.io/dbe/slides/8_machine_learning_2)
 
 
 How to create pdfs?

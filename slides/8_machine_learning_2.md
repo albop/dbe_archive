@@ -138,7 +138,9 @@ model.predict(X_new)
 ### Classification problem
 
 - Binary Classification 
-  - Goal is to make a *prediction* $c_n = f(x_{1,1}, ... x_{k,n})$ where $y_i$ is a binary variable ($\in[0,1]$ and $(x_{i,n})_k$, $k$ different features to predict $c_n$
+  - Goal is to make a *prediction* $c_n = f(x_{1,1}, ... x_{k,n})$ ...
+  - ...where $y_i$ is a binary variable ($\in[0,1]$
+  - ... and $(x_{i,n})_k$, $k$ different features to predict $c_n$
 - Multicategory Classification
   - The variable to predict takes values in a non ordered set with $p$ different values
 
@@ -150,15 +152,15 @@ model.predict(X_new)
 
 <div class="col">
 
-- Given a regression model (a linear predictor
-    - can be linear, but also works for LASSO, RIDGE...
+- Given a regression model (a linear predictor)
+
 $$ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n $$
 - one can build a classification model:
 $$ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )$$
 where $\sigma(x)=\frac{1}{1+\exp(-x)}$ is the logistic funtion a.k.a. sigmoid 
 - The loss function to minimize is:
 $$L() = \sum_n (c_n - \sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \cdots a_k x_{k,n} ) )^2$$
-
+- This works for any regression model (LASSO, RIDGE, nonlinear...)
 </div>
 
 <div class="col">
@@ -193,7 +195,7 @@ $$ f(x_1, ..., x_n) = \sigma( \underbrace{a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x
 
 - To train the model:
   - train separately all scores (works for any predictor, not just linear)
-  - ... more subtle approaches (not here)
+  - ... there are more subtle approaches (not here)
 
 
 ---
@@ -210,6 +212,7 @@ There are many
 - Nearest Distance
 - neural networks (replace score in sigmoid by n.n.)
 - Decision Trees
+- Support Vector Machines
 
 ----
 
@@ -224,8 +227,9 @@ There are many
   - Assign to $x$ the same category as $x_0$
 - But this would be very susceptible to noise
 - Amended idea: $k-nearest$ neighbours
-  - look for the $k$ points closest to $x$. $x$ is in the same color as the majority of them. 
-- Remark: this algorithm uses euclidean distance. This is why it is important to normalize the dataset.
+  - look for the $k$ points closest to $x$
+  - label $x$ with the same category as the majority of them
+- Remark: this algorithm uses Euclidean distance. This is why it is important to normalize the dataset.
 
 </div>
 
@@ -267,13 +271,57 @@ There are many
 
 ----
 
+### Support Vector Classification
+
+<div class="container">
+
+<div class="col">
+
+- <!-- .element: class="fragment" data-fragment-index="1" --> Separates data by one line (hyperplane).
+- <!-- .element: class="fragment" data-fragment-index="2" --> Chooses the largest margin according to <emph>support vectors</emph>
+- <!-- .element: class="fragment" data-fragment-index="3" --> Can use a nonlinear kernel.
+
+</div>
+
+<div class="col">
+
+<div class="r-stack">
+
+<img class="fragment current-visible" src="graphs/hyperplanes.png" data-fragment-index=1>
+<img class="fragment current-visible" src="graphs/margin.jpg" data-fragment-index=2>
+<img class="fragment current-visible" src="graphs/nonlinear_svm.png" data-fragment-index=3>
+
+</div>
+
+</div>
+</div>
+
+----
+
 ### All these algorithms are super duper easy to use!
+
 
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
 clf = DecisionTreeClassifier(random_state=0)
 ```
+
+...
+
+```python
+from sklearn.svm import SVC
+clf = SVC(random_state=0)
+```
+
+...
+
+```python
+from sklearn.linear_model import Ridge
+clf = Ridge(random_state=0)
+```
+
+
 
 ---
 
@@ -303,7 +351,7 @@ clf = DecisionTreeClassifier(random_state=0)
 | 1         | false positives  (FP) | true positives (TP) |
 
 - Overall accuracy: $\frac{\text{TN}+\text{TP}}{\text{total}}$
-- Sensititvity: $\frac{TP}{FP+TP}$
+- Sensitivity: $\frac{TP}{FP+TP}$
 - False Positive Rate (FPR): $\frac{FP}{TN+FP}$
 
 - In some cases, sensitivity is the actual objective, at the expense of lower FPR
@@ -375,7 +423,3 @@ for train_index, test_index in kf.split(X):
    ## test it on X_test, y_test
 
 ```
-
-
----
-
