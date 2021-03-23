@@ -8,3 +8,4 @@ pandas
 rise
 linearmodels
 statsmodels
+scikit-learn
