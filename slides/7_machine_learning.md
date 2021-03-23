@@ -434,6 +434,18 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
 - Lasso and ridge regression can be trained using Gradient Descent
 - Or obtained using special algorithms
 
+----
+
+### Example: IMF challenge
+
+- An internal IMF challenge to predict crises in countries
+- Lots of different approaches
+- Lots of data:
+  - which one is relevant
+  - machine must select relevant informations
+- Example: *Lasso Regressions and Forecasting Models in Applied Stress Testing* by Jorge A. Chan-Lau
+  - in a given developing country
+  - tries to predict probability of default in various sectors
 
 ---
 
@@ -492,10 +504,8 @@ Rule: the model and the hyperparameters should be chosen _independently from the
 
 ---
 
-## Examples
 
-----
-
+<!-- 
 ### exemple: sentiment analysis
 
 - Given a database of tweets (or Central Banks mpc declarations), build a measure of sentiment (positivity). How?
@@ -532,4 +542,4 @@ Rule: the model and the hyperparameters should be chosen _independently from the
     - objective: $\max \sum_t \beta^t r_t$
 - Method:
     - learn optimal policy $a_t=\pi(s_t; \theta)$ by trying random actions (goal is to find optimal $\theta$)
-    - tradeoff between exploring (random wastes utility) and exploiting (with near-optimal decision)
+    - tradeoff between exploring (random wastes utility) and exploiting (with near-optimal decision) -->
