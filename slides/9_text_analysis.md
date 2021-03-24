@@ -106,13 +106,15 @@ Jan 2006 *Chicago Federal Reserve President Michael Moskow*
 
 ## The even-less glamorous part
 
-- before getting started with text analysis, one needs to get hold of the text in the first place
-- how to extract
+- <!-- .element: class="fragment" -->before getting started with text analysis, one needs to get hold of the text in the first place
+- <!-- .element: class="fragment" -->how to extract
   - webscraping: automate a bot to visit website and download text
   - document extraction: for instance extract the text from pdf docs, get rid of everything irrelevant
-- how to store it
+- <!-- .element: class="fragment" -->how to store it
   - what kind of database?
   - important problem when database is big
+- <!-- .element: class="fragment" -->good news! we won't do it in this course
+  - you need a bit more python-fu
 
 ---
 
@@ -125,6 +127,7 @@ Jan 2006 *Chicago Federal Reserve President Michael Moskow*
 - Let's briefly see how text gets processed.
 - Goal is to transform the text into a numerical vector of *features*
   - Stupid approach: "abc"->[1,2,3]
+  - we need to capture some form of language structure
 - All the steps can be done fairly easily with [nltk](https://www.nltk.org/)
   - nltk is comparable to sklearn in terms of widespread adoption
 
@@ -319,11 +322,22 @@ filtered_words
 
 ### Simplifying the text (2): lexicon normalization
 
+<div class="container">
+
+<div class="col">
+
 - Sometimes, there are several variants of a given word
   - tight, tightening, tighten
-- Stemming: keeping the word root
-- Lemmatization: keeps the word base
+- <!-- .element: class="fragment" data-fragment-index="2" --> Stemming: keeping the word root
+- <!-- .element: class="fragment" data-fragment-index="3" -->Lemmatization: keeps the word base
   - linguistically correct contrary to stemming
+
+
+</div>
+
+<div class="col">
+
+<div class="fragment" data-fragment-index=2>
 
 ```python
 from nltk.stem import PorterStemmer
@@ -334,14 +348,32 @@ stemmed_words=[ps.stem(w) for w in words]
 
 ```
 
+```text
+['tight', 'tighten', 'tighten']
+```
+
+</div>
+<div class="fragment" data-fragment-index=3>
+
+
 ```python
 from nltk.stem.wordnet import WordNetLemmatizer
 lem = WordNetLemmatizer()
 
-words =  ["flying"]
+words =  ["flying", "flyer", "fly"]
 stemmed_words=[ps.stem(w) for w in words]
 lemmatized_words=[ps.stem(w) for w in words]
 ```
+
+```
+# lemmatized
+['flying', 'flyer', 'fly']
+# stemmed
+['fli', 'flyer', 'fli']
+
+</div>
+</div>
+
 
 ---
 
@@ -360,15 +392,51 @@ lemmatized_words=[ps.stem(w) for w in words]
 
 ### Lexical analysis
 
-Example:
+- Use a "sentiment dictionary" to provide a value (positive or negative) for each word
+  - sum the weights to get positive or negative sentiment
 
-$$\text{Sadly}\text{, there wasn't a glimpse of }\text{light} \text{ in his } \text{world } \text{ of intense }\text{suffering}$$
+- <!-- .element: class="fragment" -->Example:
+$$\underbrace{\text{Sadly}}\_{-}\text{, there wasn't a glimpse of }\underbrace{\text{light}}\_{+} \text{ in his } \text{world } \text{ of intense }\underbrace{\text{suffering.}}\_{-}$$
 
-Total: -1+1-1. Sentiment is negative.
+- <!-- .element: class="fragment" -->Total:
+  - -1+1-1. Sentiment is negative.
 
-- Problems:
+- <!-- .element: class="fragment" -->Problems:
     - here, taking grammar into account would change everything
+    - deosn't capture irony
     - our dictionary doesn't have weights for what matters to us
-  
 $$ \text{the central bank forecasts increased }\underbrace{\text{inflation}}\_{?}$$
 
+----
+
+### Machine learning
+
+- Idea: we would like the weights to be endogenously determined
+- <!-- .element: class="fragment" -->$$ \underbrace{\text{the}}_{x_1} \underbrace{\text{ central}}_{x_2} \underbrace{\text{ bank}}_{x_3} \underbrace{\text{ forecasts}}_{x_4} \underbrace{\text{ increased} }_{x_5} \underbrace{\text{ inflation}}_{x_6}$$
+- <!-- .element: class="fragment" -->Suppose we have several texts: we can generate features by counting words
+|       | the | central | bank | forecasts | increased | inflation | economy | exchange rate | crisis | <mark>sentiment</mark> |
+| ----- | --- | ------- | ---- | --------- | --------- | --------- | ------- | ------------- | ------ | ---------------------- |
+| text1 | 1   | 1       | 2    | 1         | 1         | 2         |         |               |        | -1                     |  |
+| text2 | 3   |         |      |           |           | 1         | 1       | 2             |        | +1                     |  |
+| text3 | 4   |         | 1    |           |           | 1         |         | 1             | 1      | -1                     |
+|       |
+
+- <!-- .element: class="fragment" --> We can the train the model:  $y = x_1 f(w_1) + \cdots x_K f(w_K)$ where $y$ is the sentiment and $w_i$ is wordcount of word $w_i$
+  - of course, we need a similar procedure as before (split the training set and evaluation set, ...)
+  - we can use any model (like naive bayesian updating)
+- <!-- .element: class="fragment" -->This approach is called *Bag of Words* (BOW)
+
+----
+
+### Comments
+
+- Bag of words has a few pitfalls:
+    - it requires a big labelled training set
+    - it overweights long documents
+    - there is noise due to the very frequent words that don't affect sentiment
+- Improvement: TF-IDF 
+  - stands for Term-Frequency*Inverse-Distribution-Frequency
+  - replace word frequency $f(w)$ by $$\text{tf-idf} = f(w)\frac{\text{number of documents}}{\text{number of documents containing $w$}}$$
+    
+
+----

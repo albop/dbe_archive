@@ -477,6 +477,7 @@ $$\underbrace{y}\_{\text{explained variable}} = a \underbrace{x}\_{\text{explana
   - separate data in
     - training set (in-sample)
     - test set (out of sample)
+- train using only the training set
 - evaluate performance on the test set
 - Performance can be:
   - fitness, number of classification errors (false positive, false negative)

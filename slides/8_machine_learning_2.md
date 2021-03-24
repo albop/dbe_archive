@@ -39,8 +39,8 @@
 
 - Workflow
   - <!-- .element class="fragment" data-fragment-index="1" --> import data
-    - a matrix X (2d numpy array)
-    - a vector y (1d numpy array)
+    - features: a matrix X (2d numpy array)
+    - labels: a vector y (1d numpy array)
   - <!-- .element class="fragment" data-fragment-index="2" --> split the data, between training and test datasets
     - split needs to be random to avoid any bias
   - <!-- .element class="fragment" data-fragment-index="3" --> normalize the data
@@ -139,7 +139,7 @@ model.predict(X_new)
 
 - Binary Classification 
   - Goal is to make a *prediction* $c_n = f(x_{1,1}, ... x_{k,n})$ ...
-  - ...where $y_i$ is a binary variable ($\in[0,1]$
+  - ...where $c_i$ is a binary variable ($\in\{0,1\}$)
   - ... and $(x_{i,n})_k$, $k$ different features to predict $c_n$
 - Multicategory Classification
   - The variable to predict takes values in a non ordered set with $p$ different values
@@ -157,7 +157,7 @@ model.predict(X_new)
 $$ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n $$
 - one can build a classification model:
 $$ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )$$
-where $\sigma(x)=\frac{1}{1+\exp(-x)}$ is the logistic funtion a.k.a. sigmoid 
+where $\sigma(x)=\frac{1}{1+\exp(-x)}$ is the logistic function a.k.a. sigmoid 
 - The loss function to minimize is:
 $$L() = \sum_n (c_n - \sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \cdots a_k x_{k,n} ) )^2$$
 - This works for any regression model (LASSO, RIDGE, nonlinear...)
@@ -413,7 +413,7 @@ cm = confusion_matrix(y_test, y_pred)
 ```python
 
 from sklearn.model_selection import KFold
-kf = KFold(n_splits=2)
+kf = KFold(n_splits=10)
 
 for train_index, test_index in kf.split(X):
    X_train, X_test = X[train_index], X[test_index]
