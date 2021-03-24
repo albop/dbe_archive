@@ -15,6 +15,8 @@
   - [Panels](https://albop.github.io/dbe/slides/6_panels)
   - [Machine Learning](https://albop.github.io/dbe/slides/7_machine_learning)
   - [Machine Learning 2](https://albop.github.io/dbe/slides/8_machine_learning_2)
+  - [Machine Learning 2](https://albop.github.io/dbe/slides/9_text_analysis)
+
 
 
 How to create pdfs?
@@ -39,19 +41,18 @@ How to create pdfs?
 
 ## Roadmap
 
-
-| Session | Date (tbc)         | Content                                                                                                          |
-| ------- | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| 1       | 12/01              | housekeeping,  basic data types and <mark>language structure </mark>                                             |
-| 2       | 19/01              | databases, data representation, interactivity (matplotlib, altair, widgets)                                      |
-| 3       | 26/01              | ordinary least squares (inear regression, multiple regression)                                                   |
-| 4       | 02/02              | regression inference and categorical variables                                                                   |
-| 5       | 23/02              | instrumental variables                                                                                           |
-| 6       | 02/03              | panel data                                                                                                       |
-| 7       | <mark>09/03</mark> | <mark>machine learning approach</mark> (regression/classification/clustering, training sets validation set, ...) |
-| 8       | 23/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                                           |
-| 9       | 24/03              | natural language processing                                                                                      |
-| 10      | 30/03              | presentation of data project                                                                                     |
+| Session | Date (tbc)         | Content                                                                                             |
+| ------- | ------------------ | --------------------------------------------------------------------------------------------------- |
+| 1       | 12/01              | housekeeping,  basic data types and <mark>language structure </mark>                                |
+| 2       | 19/01              | databases, data representation, interactivity (matplotlib, altair, widgets)                         |
+| 3       | 26/01              | ordinary least squares (inear regression, multiple regression)                                      |
+| 4       | 02/02              | regression inference and categorical variables                                                      |
+| 5       | 23/02              | instrumental variables                                                                              |
+| 6       | 02/03              | panel data                                                                                          |
+| 7       | 09/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 8       | 23/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
+| 9       | <mark>24/03</mark> | natural language processing, mock exam                                                              |
+| 10      | 30/03              | end of natural language processing, Q&A                                                             |
 
 __Final exam__: April 13rd, from 9am to 11am. Online.
 

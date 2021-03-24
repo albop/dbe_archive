@@ -25,6 +25,8 @@
   - [Causality](5_intro_to_causality.html)
   - [Panels](6_panels.html)
   - [Machine Learning](7_machine_learning.html)
+  - [Machine Learning 2](8_machine_learning_2.html)
+  - [Text Analysis](9_text_analysis.html)
 
 
 </div>
@@ -159,18 +161,18 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
 
 ## Roadmap
 
-| Session | Date (tbc) | Content                                                                                             |
-| ------- | ---------- | --------------------------------------------------------------------------------------------------- |
-| 1       | 12/01      | housekeeping,  basic data types and <mark>language structure </mark>                                |
-| 2       | 19/01      | databases, data representation, interactivity (matplotlib, altair, widgets)                         |
-| 3       | 26/01      | ordinary least squares (inear regression, multiple regression)                                      |
-| 4       | 02/02      | regression inference and categorical variables                                                      |
-| 5       | 23/02      | instrumental variables                                                                              |
-| 6       | 02/03      | panel data                                                                                          |
-| 7       | <mark>09/03</mark>      | <mark>machine learning approach</mark> (regression/classification/clustering, training sets validation set, ...) |
-| 8       | 23/03      | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
-| 9       | 24/03      | natural language processing                                                                         |
-| 10      | 30/03      | presentation of data project, programming test                                                      |
+| Session | Date (tbc)         | Content                                                                                             |
+| ------- | ------------------ | --------------------------------------------------------------------------------------------------- |
+| 1       | 12/01              | housekeeping,  basic data types and <mark>language structure </mark>                                |
+| 2       | 19/01              | databases, data representation, interactivity (matplotlib, altair, widgets)                         |
+| 3       | 26/01              | ordinary least squares (inear regression, multiple regression)                                      |
+| 4       | 02/02              | regression inference and categorical variables                                                      |
+| 5       | 23/02              | instrumental variables                                                                              |
+| 6       | 02/03              | panel data                                                                                          |
+| 7       | 09/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 8       | 23/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
+| 9       | <mark>24/03</mark> | natural language processing, mock exam                                                              |
+| 10      | 30/03              | end of natural language processing, Q&A                                                             |
 
 ---
 
