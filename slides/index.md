@@ -171,8 +171,8 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
 | 6       | 02/03              | panel data                                                                                          |
 | 7       | 09/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
 | 8       | 23/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
-| 9       | <mark>24/03</mark> | natural language processing, mock exam                                                              |
-| 10      | 30/03              | end of natural language processing, Q&A                                                             |
+| 9       | 24/03              | natural language processing, mock exam                                                              |
+| 10      | <mark>30/03</mark> | quick recap, Q&A                                                                                    |
 
 ---
 
@@ -183,7 +183,7 @@ Sentiment analysis: predict opinion optimism by analysing tweets [sentiment viz]
   - goals:
     - import some data
     - perform/replicate some econometric work
-    - present result with nice plot
+    - present results with nice plot
   - handled as a Jupyter Notebook (mixes text and code)
   - subjects proposed by myself and other professors
 - Programming test
