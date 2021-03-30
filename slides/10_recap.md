@@ -123,7 +123,7 @@ $y = a + bx$
 
 ---
 
-### Ommtted variable
+### Ommited variable
 
 <div class="container">
 <div class="col">
@@ -146,8 +146,8 @@ $y = a + bx$
 - <!-- .element: class="fragment" data-fragment-index="2" -->We run the regression $y = a + b x$
   - we find $y = 0.21 + \color{red}{0.15} x$
 - <!-- .element: class="fragment" data-fragment-index="3" -->We then realize we have access to a categorical variable $gender \in {male, female}$
-- <!-- .element: class="fragment" data-fragment-index="4" -->We then add the $\delta$ dummy variable to the regression: $y = a + bx + \delta$
-  - we find $ y = -0.04 + \color{red}{0.2} \Delta x - 0.98 \delta$
+- <!-- .element: class="fragment" data-fragment-index="4" -->We then add the $\delta$ dummy variable to the regression: $y = a + bx + c \delta$
+  - we find $ y = -0.04 + \color{red}{0.2} x - 0.98 \delta$
 - <!-- .element: class="fragment" -->Note that adding the indicator
   - <!-- .element: class="fragment" data-fragment-index -->improved the fit  ($R^2$ is 0.623 instead of 0.306)
   - <!-- .element: class="fragment" data-fragment-index -->corrected for the <strong>ommited variable bias</strong> (true value of b is actually 0.2)
@@ -194,8 +194,8 @@ $y = a + bx$
   - it is linked to several ommited variables, most of which we don't observe
 -  <!-- .element: class="fragment"  data-fragment-index="4" --> <b>Fixed Effects</b>: use an indicator for each individual
   - we need to drop the individual specific dummies that we observe (i.e. gender)
-- <!-- .element: class="fragment" data-fragment-index="5" -->Run the regression $y_i = a_i + b x $
-  - we find $ y = a_i + \color{red}{0.18} x $
+- <!-- .element: class="fragment" data-fragment-index="5" -->Run the regression $y_{i,n} = a_i + b x_{i,n} $
+  - we find $ y_{i,n} = a_i + \color{red}{0.18} x_{i,n} $
 - <!-- .element: class="fragment" -->Note that adding the indicator
   - <!-- .element: class="fragment" data-fragment-index -->improved the fit  ($R^2$ is 0.631 instead of 0.278)
   - <!-- .element: class="fragment" data-fragment-index -->corrected for the <strong>unobserved heterogeneity bias</strong> (true value of b is actually 0.2)
