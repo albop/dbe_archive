@@ -123,7 +123,7 @@ $y = a + bx$
 
 ---
 
-### Ommited variable
+### omitted variable
 
 <div class="container">
 <div class="col">
@@ -150,7 +150,7 @@ $y = a + bx$
   - we find $ y = -0.04 + \color{red}{0.2} x - 0.98 \delta$
 - <!-- .element: class="fragment" -->Note that adding the indicator
   - <!-- .element: class="fragment" data-fragment-index -->improved the fit  ($R^2$ is 0.623 instead of 0.306)
-  - <!-- .element: class="fragment" data-fragment-index -->corrected for the <strong>ommited variable bias</strong> (true value of b is actually 0.2)
+  - <!-- .element: class="fragment" data-fragment-index -->corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)
   - <!-- .element: class="fragment" data-fragment-index -->provided an estimate for the effect of variable gender
 
 </div>
@@ -191,7 +191,7 @@ $y = a + bx$
   - we find $y = 1.09 + \color{red}{0.24} x$
 - <!-- .element: class="fragment" data-fragment-index="3" -->But now, the data has a special panel structure.
   - we have a categorical variable corresponding to each individual
-  - it is linked to several ommited variables, most of which we don't observe
+  - it is linked to several omitted variables, most of which we don't observe
 -  <!-- .element: class="fragment"  data-fragment-index="4" --> <b>Fixed Effects</b>: use an indicator for each individual
   - we need to drop the individual specific dummies that we observe (i.e. gender)
 - <!-- .element: class="fragment" data-fragment-index="5" -->Run the regression $y_{i,n} = a_i + b x_{i,n} $
@@ -208,7 +208,7 @@ $y = a + bx$
 
 ### Fixed Effects
 
-- Essentially: the intuition behing correcting for unobserved heterogeneity is the same as the one behind ommitted variable bias.
+- Essentially: the intuition behind correcting for unobserved heterogeneity is the same as the one behind ommitted variable bias.
 - Fixed Effects are essentially dummies specific to some categories of observations
 - In panel data, there are two categories: individual index and time
   - individual (<span style="color: red"> Entity Effects</span>)
@@ -227,7 +227,7 @@ $y = a + bx$
 - Consider the regression model $y = a + b x + \epsilon$
 - When $\epsilon$ is correlated with $x$ we have an __endogeneity__ problem.
   - we can check in the regression results whether the residuals ares correlated with $y$ or $x$
-- Endogeneity can have several sources: ommited variable, measurement error, simultaneity
+- Endogeneity can have several sources: omitted variable, measurement error, simultaneity
   - it creates a bias in the estimate of $a$ and $b$
 - We say we *control* for endogeneity by adding some variables
 - A special case of endogeneity is a __confounding factor__ a variable $z$ which causes at the same time $x$ and $y$
