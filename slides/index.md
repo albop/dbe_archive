@@ -27,6 +27,7 @@
   - [Machine Learning](7_machine_learning.html)
   - [Machine Learning 2](8_machine_learning_2.html)
   - [Text Analysis](9_text_analysis.html)
+  - [Recap](10_recap.html)
 
 
 </div>
