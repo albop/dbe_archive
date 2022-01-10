@@ -41,20 +41,18 @@ How to create pdfs?
 
 ## Roadmap
 
-| Session | Date (tbc)         | Content                                                                                             |
-| ------- | ------------------ | --------------------------------------------------------------------------------------------------- |
-| 1       | 12/01              | housekeeping,  basic data types and language structure                                              |
-| 2       | 19/01              | databases, data representation, interactivity (matplotlib, altair, widgets)                         |
-| 3       | 26/01              | ordinary least squares (inear regression, multiple regression)                                      |
-| 4       | 02/02              | regression inference and categorical variables                                                      |
-| 5       | 23/02              | instrumental variables                                                                              |
-| 6       | 02/03              | panel data                                                                                          |
-| 7       | 09/03              | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
-| 8       | 23/03              | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)                              |
-| 9       | 24/03              | natural language processing, mock exam                                                              |
-| 10      | <mark>30/03</mark> | quick recap, Q&A                                                                                    |
-
-__Final exam__: April 13rd, from 9am to 11am. Online.
+| Session | Date (tbc)          | Content                                                                  |
+| ------- | -------------------  | ----------------------------------------------------------------------- |
+| 1       |  <mark>11/01</mark> | intro, housekeeping,  basic data types and language structure (python)   |
+| 2       | 18/01               | databases, visualization (matplotlib, altair)                            |
+| 3       | 25/01               | ordinary least squares (linear regression, multiple regression)          |
+| 4       | 01/02               | regression inference and categorical variables                           |
+| 5       | 8/02               | instrumental variables                                                   |
+| 6       | 16/02               | panel data                                                               |
+| 7       | 22/02               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 8       | 9/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
+| 9       | 15/03               | natural language processing, mock exam                                   |
+| 10      | 22/03               | quick recap, Q&A                                                         |
 
 ---
 
@@ -65,7 +63,7 @@ __Final exam__: April 13rd, from 9am to 11am. Online.
   - goals:
     - import some data
     - perform/replicate some econometric work
-    - present result with nice plot
+    - present result with nice plots
   - handled as a Jupyter Notebook (mixes text and code)
   - subjects proposed by myself and other professors
 - Programming test
