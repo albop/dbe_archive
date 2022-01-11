@@ -2,7 +2,7 @@
 
 ## Roadmap
 
-| Session | Date (tbc)          | Content                                                                  |
+| Session | Date          | Content                                                                  |
 | ------- | -------------------  | ----------------------------------------------------------------------- |
 | 1       |  <mark>11/01</mark> | intro ([slides](https://www.mosphere.fr/dbe/)), python basics              |
 | 2       | 18/01               | databases, visualization (matplotlib, altair)                            |
@@ -19,16 +19,18 @@
 
 ## Evaluation & Final Examination
 
-- Data Project
+- Data Projects (x2)
   - group work
   - goals:
     - import some data
     - perform/replicate some econometric work
-    - present result with nice plots
+    - present results with nice plots
   - handled as a Jupyter Notebook (mixes text and code)
   - subjects proposed by myself and other professors
-- Programming test
-  - small coding tasks
+- Final Exam:
+  - on computer
+  - test general knowledge of econometrics / machine learning
+  - test *will* be some programming tasks
 
 ---
 
@@ -39,5 +41,6 @@
   - install [VSCode](https://code.visualstudio.com/)
   - make sure python extension is activated and configured in VSCode
 
-- online environement:
-  - use mybinder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albop/dbe/HEAD?urlpath=lab)
+- online environment:
+  - use the mybinder link on the course's github
+  - remember that your work is __not__ saved! make backups

@@ -1,4 +1,6 @@
-# Data-Based Economics: Introduction
+# Data-Based Economics
+
+## Introduction
 
 <style>
 .container{
@@ -47,7 +49,7 @@
 
 ## Data-based economics
 
-- All economists use data all the time
+- Most economists use data all the time
   - to illustrate facts
   - for research purposes
 
@@ -61,18 +63,37 @@
 ## Econometricks
 
 - An art invented by economists: $$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
+
+- Challenge:
+  - find $a$
+  - control $b$
+
+---
+
+## Econometricks (2)
+
+$$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
+
 - <!-- .element: class="fragment" --> Example 1:
   - I want to establish a link between growth and trade openness
   - <!-- .element: class="fragment" -->but my country has only 10 years of historical data... (within dimension)
   - <!-- .element: class="fragment" -->... let's take 50 countries at the same time (between dimension)
   - <!-- .element: class="fragment" -->find a way to analyze both dimensions at the same time
   - <!-- .element: class="fragment" -->-> panel data
+
+---
+
+## Econometricks (3)
+
+$$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
+
 - <!-- .element: class="fragment" --> Example 2:
   -  young men who go to war receive *in average* lower wages when they return than men who didn't go to war
-  -  ... is it because they skipped college?
-  -  ... or did they choose to go to war because they were less skilled for college?
-  -  find a way to extract *causality*
-  -  -> instrumental variables
+  - <!-- .element: class="fragment" --> ... is it because they skipped college?
+  -  <!-- .element: class="fragment" -->... or did they choose to go to war because they were less skilled for college?
+  -  <!-- .element: class="fragment" -->find a way to extract *causality*
+  -  <!-- .element: class="fragment" -->-> instrumental variables
+  -  <!-- .element: class="fragment" -->This was worth a Nobel Prize! (D. Card, J. Angrist, G.W. Imbens)
 
 ---
 
