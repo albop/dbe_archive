@@ -30,7 +30,7 @@
 - Final Exam:
   - on computer
   - test general knowledge of econometrics / machine learning
-  - test *will* be some programming tasks
+  - there *will* be some programming tasks
 
 ---
 
@@ -41,6 +41,6 @@
   - install [VSCode](https://code.visualstudio.com/)
   - make sure python extension is activated and configured in VSCode
 
-- online environment:
-  - use the mybinder link on the course's github
-  - remember that your work is __not__ saved! make backups
+- online environement:
+  - use mybinder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albop/dbe/HEAD?urlpath=lab)
+  - remember: your workspace is __not__ persistent: you need to manually save your work.
