@@ -1,43 +1,4 @@
-# Data-Based Economics
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albop/dbe/HEAD?urlpath=lab)
-
----
-
-## Slides
-
-- [Slides](https://albop.github.io/dbe/)
-  - [Introduction](https://albop.github.io/dbe/slides/index)
-  - [Numeric Python and Data Frames](https://albop.github.io/dbe/slides/2_dataframes)
-  - [Linear Regression](https://albop.github.io/dbe/slides/3_linear_regression)
-  - [Multiple Regression](https://albop.github.io/dbe/slides/4_multiple_regressions)
-  - [Causality](https://albop.github.io/dbe/slides/5_intro_to_causality)
-  - [Panels](https://albop.github.io/dbe/slides/6_panels)
-  - [Machine Learning](https://albop.github.io/dbe/slides/7_machine_learning)
-  - [Machine Learning 2](https://albop.github.io/dbe/slides/8_machine_learning_2)
-  - [Machine Learning 2](https://albop.github.io/dbe/slides/9_text_analysis)
-
-
-
-How to create pdfs?
-- open a set of slides
-- add ?print-pdf to the url (for instance: `https://albop.github.io/dbe/slides/2_dataframes?print-pdf`)
-- print the page as a pdf with your navigator
-
----
-
-## Communication
-
-
-- Main website: [https://github.com/albop/dbe](https://github.com/albop/dbe)
-  - contains slides and exercises
-  - you can open github issues if you find typos...
-- Communication about the course in discord
-- Collaboration between students is strongly encouraged
-- Email (personal matter only) : `pwinant@escp.eu`
-
-
----
 
 ## Roadmap
 
@@ -79,4 +40,4 @@ How to create pdfs?
   - make sure python extension is activated and configured in VSCode
 
 - online environement:
-  - use google' [Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)
+  - use mybinder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albop/dbe/HEAD?urlpath=lab)

@@ -1,0 +1,8 @@
+node_modules/*
+archive
+node_modules
+revealjs
+reveal.js
+.ipynb_checkpoints/*
+package-lock.json
+coursework/*
