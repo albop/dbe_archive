@@ -4,7 +4,7 @@
 
 | Session | Date (tbc)          | Content                                                                  |
 | ------- | -------------------  | ----------------------------------------------------------------------- |
-| 1       |  <mark>11/01</mark> | intro, housekeeping,  basic data types and language structure (python)   |
+| 1       |  <mark>11/01</mark> | intro ([slides](https://www.mosphere.fr/dbe/)), python basics              |
 | 2       | 18/01               | databases, visualization (matplotlib, altair)                            |
 | 3       | 25/01               | ordinary least squares (linear regression, multiple regression)          |
 | 4       | 01/02               | regression inference and categorical variables                           |

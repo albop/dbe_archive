@@ -137,7 +137,7 @@ Check [sentiment viz](https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_a
 
 - Programming
 - Econometrics / Machine Learning
-- Discuss some economic subjects
+- Talk about economics
 
 ---
 
