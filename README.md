@@ -4,16 +4,16 @@
 
 | Session | Date          | Content                                                                  |
 | ------- | -------------------  | ----------------------------------------------------------------------- |
-| 1       |  <mark>11/01</mark> | intro ([slides](https://www.mosphere.fr/dbe/)), python basics              |
-| 2       | 18/01               | databases, visualization (matplotlib, altair)                            |
-| 3       | 25/01               | ordinary least squares (linear regression, multiple regression)          |
-| 4       | 01/02               | regression inference and categorical variables                           |
-| 5       | 8/02               | instrumental variables                                                   |
-| 6       | 16/02               | panel data                                                               |
-| 7       | 22/02               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
-| 8       | 9/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
-| 9       | 15/03               | natural language processing, mock exam                                   |
-| 10      | 22/03               | quick recap, Q&A                                                         |
+| 1       |  11/01 | intro ([slides](https://www.mosphere.fr/dbe/)), python basics            |
+| 2       | <mark>25/01</mark>               | numerical python (notebook), plots, databases ([slides](https://www.mosphere.fr/dbe/session_2/))        |
+| 3       | 01/02               | ordinary least squares (linear regression, multiple regression)          |
+| 4       | 08/02               | regression inference and categorical variables                           |
+| 5       | 16/02               | instrumental variables                                                   |
+| 6       | 22/02               | panel data                                                               |
+| 7       | 9/03               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 8       | 15/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
+| 9       | 22/03               | natural language processing, mock exam                                   |
+| 10      | 23/03               | quick recap, Q&A                                                         |
 
 ---
 
@@ -44,3 +44,14 @@
 - online environement:
   - use mybinder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albop/dbe/HEAD?urlpath=lab)
   - remember: your workspace is __not__ persistent: you need to manually save your work.
+
+---
+
+## Additional resources
+
+Plenty of online resources to learn python/econometrics/machine learning
+
+- [learnpython](learnpython.org) sponsored by [datacamp](https://www.datacamp.com/)
+- [quantecon](https://datascience.quantecon.org/): designed for economists, good examples of projects
+- [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/): by Jake Van der Plas, very complete. Online free version.
+- [Introduction to Econometrics with R](https://scpoecon.github.io/ScPoEconometrics/), in R but very clear
