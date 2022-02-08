@@ -265,7 +265,7 @@ $$L(\alpha,\beta) = \sum_{i=1}^N (e_i)^2$$
 
 - Solution is given by the explicit formula:
 $$\hat{\alpha} = \overline{y} - \hat{\beta} \overline{x}$$
-$$\hat{\beta} = \frac{Cov({x,y})}{Var(y)} = Cor(x,y) \frac{\sigma(y)}{\sigma({x})}$$
+$$\hat{\beta} = \frac{Cov({x,y})}{Var(x)} = Cor(x,y) \frac{\sigma(y)}{\sigma({x})}$$
 
 - $\hat{\alpha}$ and $\hat{\beta}$ are *estimators*.
   - Hence the hats.
