@@ -5,8 +5,8 @@
 | Session | Date          | Content                                                                  |
 | ------- | -------------------  | ----------------------------------------------------------------------- |
 | 1       |  11/01 | intro ([slides](https://www.mosphere.fr/dbe/)), python basics            |
-| 2       | <mark>25/01</mark>               | numerical python (notebook), plots, databases ([slides](https://www.mosphere.fr/dbe/session_2/))        |
-| 3       | 01/02               | ordinary least squares (linear regression, multiple regression)          |
+| 2       | 25/01               | numerical python (notebook), plots, databases ([slides](https://www.mosphere.fr/dbe/session_2/))        |
+| 3       | <mark>01/02</mark>               | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))          |
 | 4       | 08/02               | regression inference and categorical variables                           |
 | 5       | 16/02               | instrumental variables                                                   |
 | 6       | 22/02               | panel data                                                               |
