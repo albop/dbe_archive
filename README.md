@@ -5,15 +5,15 @@
 | Session | Date          | Content                                                                  |
 | ------- | -------------------  | ----------------------------------------------------------------------- |
 | 1       |  11/01 | intro ([slides](https://www.mosphere.fr/dbe/)), python basics            |
-| 2       | 25/01               | numerical python (notebook), plots, databases ([slides](https://www.mosphere.fr/dbe/session_2/))        |
-| 3       | <mark>01/02</mark>               | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))          |
-| 4       | 08/02               | regression inference and categorical variables                           |
-| 5       | 16/02               | instrumental variables                                                   |
-| 6       | 22/02               | panel data                                                               |
-| 7       | 9/03               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
-| 8       | 15/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
-| 9       | 22/03               | natural language processing, mock exam                                   |
-| 10      | 23/03               | quick recap, Q&A                                                         |
+| 2       | 25/01               | numerical python (notebook), plots,        |
+| 3       | 01/02               | databases ([slides](https://www.mosphere.fr/dbe/session_2/))          |
+| 4       | 08/02  | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))     |
+| 5       | <mark>16/02</mark>               |  multiple regression ([slides]) and categorical variables                   |
+| 6       | 22/02               | instrumental variables    | 
+| 7       | 9/03               | panel data |
+| 8       | 15/03               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 9       | 22/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
+| 10       | 23/03               | quick recap, mock exam, Q&A                                   |
 
 ---
 
