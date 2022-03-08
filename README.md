@@ -2,18 +2,18 @@
 
 ## Roadmap
 
-| Session | Date          | Content                                                                  |
-| ------- | -------------------  | ----------------------------------------------------------------------- |
-| 1       |  11/01 | intro ([slides](https://www.mosphere.fr/dbe/)), python basics            |
+| Session | Date                | Content                                                                  |
+| ------- | ------------------- | ----------------------------------------------------------------------- |
+| 1       |  11/01              | intro ([slides](https://www.mosphere.fr/dbe/)), python basics            |
 | 2       | 25/01               | numerical python (notebook), plots ([slides](https://www.mosphere.fr/dbe/session_2/))        |
 | 3       | 01/02               | databases           |
-| 4       | 08/02  | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))     |
-| 5       | <mark>16/02</mark>               |  multiple regression ([slides](https://www.mosphere.fr/dbe/session_5)) and categorical variables                   |
-| 6       | 22/02               | instrumental variables    | 
-| 7       | 9/03               | panel data |
-| 8       | 15/03               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 4       | 08/02               | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))     |
+| 5       | 16/02               |  multiple regression ([slides](https://www.mosphere.fr/dbe/session_5)) and categorical variables                   |
+| 6       | <mark>9/03</mark>   | instrumental variables    | 
+| 7       | 15/03                | panel data |
+| 8       | 16/03               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
 | 9       | 22/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
-| 10       | 23/03               | quick recap, mock exam, Q&A                                   |
+| 10      | 29/03               | quick recap, mock exam, Q&A                                   |
 
 ---
 
