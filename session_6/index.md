@@ -38,12 +38,11 @@ $$y_\text{salary} = \alpha + \beta x_{\text{gonetowar}}$$
 ----
 
 ### Categorical variable 
-
 - Look at the model:
 $$y_{\text{CO2 emission}} = \alpha + \beta x_{\text{yellow vest support}} $$
 - Where $y_{\text{CO2 emission}}$ is an individual's CO2 emissions and $x_{\text{yellow vest support}}$ is the response the the question *Are you in agreement with the yellow vests demands?*.
 
-- Response is coded up as: (in this case it is hierachical)
+- Response is coded up as:
   - 0: Strongly disagree
   - 1: Disagree
   - 2: Neutral
@@ -51,15 +50,15 @@ $$y_{\text{CO2 emission}} = \alpha + \beta x_{\text{yellow vest support}} $$
   - 4: Strongly agree
 
 - If the variable was used directly, how would you intepret the coefficient $\beta$ ?
-  - index is (partly) hierarchical
-  - but the distance between 1 and 2 or 2 and 3 are not comparable...
+  - index is hierarchical
+  - but the distances between 1 and 2 or 2 and 3 are not comparable...
 
 ----
 
 ### Hierarchical index (2):
 
 - We use one __dummy variable__ per possible answer.
-| $D_{Strongly Disagree}$ | $D_{Disagree}$ | $D_{\text{Neutral}}$ | $D_{Agree}$ | $D_{Strongly Agree}$ |
+| $D_{\text{Strongly Disagree}}$ | $D_{\text{Disagree}}$ | $D_{\text{Neutral}}$ | $D_{\text{Agree}}$ | $D_{\text{Strongly Agree}}$ |
 | ----------------------- | -------------- | -------------------- | ----------- | -------------------- |
 | 1                       | 0              | 0                    | 0           | 0                    |
 | 0                       | 1              | 0                    | 0           | 0                    |
@@ -71,7 +70,7 @@ $$y_{\text{CO2 emission}} = \alpha + \beta x_{\text{yellow vest support}} $$
     - for linear regressions, we can ignore its implications
   - it must be frequent enough in the data
   - __effects__ coding: reference group takes -1 instead of 0
-- Note that hierarchy is lost. The same treatment can be applied to non-hierchical variables
+- Note that hierarchy is lost. The same treatment can be applied to non-hierachical variables
 - Now our variables are perfectly __colinear__:
   - we can deduce one from all the others
   - we drop one from the regression: the reference group
@@ -154,7 +153,7 @@ salary ~ C(activity)
 
 ### Spurious correlation
 
-![](spurious.png)
+<img src=spurious.png width=60%>
 
 - We have seen spurious correlation before
 
@@ -175,9 +174,10 @@ $$\forall \omega, A(\omega) \implies B(\omega)$$
 - But causality in the *real* world is problematic?
   - Usually, we observe $A(\omega)$ only once...
     - Example: 
-      - state of the world: big financial crisis
+      - state of the world $\omega$: 2008, big financial crisis, ...
       - A: Ben Bernanke chairman of the Fed
       - B: successful economic interventions
+      - Was Ben Bernanke a good central banker? Impossible to say.
   - Then there is the uncertain concept of time... let's take it as granted.
 
 ----  
@@ -331,8 +331,8 @@ $$\forall \omega, A(\omega) \implies B(\omega)$$
 (jean-pierre eymeoud, paul vertier)
   - [link](https://spire.sciencespo.fr/hdl:/2441/3k0m7r593p8gs9njjtpupmlknu/resources/wp-78-eymeoud-vertier.pdf)
   - are women discriminated against in local elections?
-- Result: yes, they get 1.5% less votes by right-wing voters
-- How can we be so sure that no other explanation is true?
+- <!-- .element class="fragment" -->Result: yes, they get 1.5% less votes by right-wing voters
+- <!-- .element class="fragment" -->How can we be so sure that no other explanation is true?
 
 ---
 
@@ -407,17 +407,27 @@ $$y = \alpha + 0 +  z_{T=0} + \epsilon$$
 
 ### Two stage regression
 
+<div class="container">
+
+<div class="col">
+
 - We would like to redo the treatment groups in a way that is independent from $z$ (and everything contained in $\epsilon$)
   - $q$ is a binary variable: drafted or not
-- First stage: regress group assignment on the instrument: $$x = \alpha_0 + \beta_0 q + \eta$$
+- <!-- .element class="fragment" --> First stage: regress group assignment on the instrument: $$x = \alpha_0 + \beta_0 q + \eta$$
   - we can now predict group assignment in a way that is independent from $z$ (and everything in $\epsilon$) $$\tilde{x} = \alpha_0 + \beta_0 q$$
-- Second stage: use the predicted value instead of the original one
+- <!-- .element class="fragment" --> Second stage: use the predicted value instead of the original one
 $$y = \alpha + \beta_1 \tilde{x} + z + \epsilon$$
-- Result:
+
+</div>
+<div class="col">
+
+- <!-- .element class="fragment" --> Result:
   - If $\beta$ is significantly nonzero, there is a causal effect between $x$ and $y$.
   - Note that $\tilde{x}$ is imperfectly correlated with the treatment: $\beta$ can't be interpreted directly
   - The actual effect will be $\frac{\beta_1}{\beta_0}$ (in 1d)
-- We say that we instrument $x$ by $q$.
+- <!-- .element class="fragment" -->We say that we <strong>instrument</strong> $x$ by $q$.
+
+</div>
 
 ----
 
