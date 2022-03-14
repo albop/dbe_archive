@@ -8,8 +8,8 @@
 | 2       | 25/01               | numerical python (notebook), plots ([slides](https://www.mosphere.fr/dbe/session_2/))        |
 | 3       | 01/02               | databases           |
 | 4       | 08/02               | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))     |
-| 5       | 16/02               |  multiple regression ([slides](https://www.mosphere.fr/dbe/session_5))  |
-| 6       | <mark>9/03</mark>   | categorical variables,  instrumental variables ([slides](https://www.mosphere.fr/dbe/session_6))   | 
+| 5       | 16/02               |  multiple regression ([slides](https://www.mosphere.fr/dbe/session_5)) and categorical variables                   |
+| 6       | <mark>9/03</mark>   | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))  | 
 | 7       | 15/03                | panel data |
 | 8       | 16/03               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
 | 9       | 22/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
