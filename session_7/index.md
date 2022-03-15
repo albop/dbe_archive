@@ -119,7 +119,6 @@ Dates: time-series
 - <!-- .element class="fragment" -->Not very good:
   - can limit a lot the size of the sample
   - can induce a "selection bias"
-    - TODO: explain
 - <!-- .element class="fragment" -->Real gurus know how to deal with missing values
   - many algorithms can be adapted
 </div>
