@@ -9,9 +9,9 @@
 | 3       | 01/02               | databases           |
 | 4       | 08/02               | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))     |
 | 5       | 16/02               |  multiple regression ([slides](https://www.mosphere.fr/dbe/session_5)) and categorical variables                   |
-| 6       | 9/03   | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))  | 
-| 7       |  <mark>15/03</mark>                | panel data ([slides](https://www.mosphere.fr/dbe/session_7)) |
-| 8       | 16/03               | machine learning approach (regression/classification/clustering, training sets validation set, ...) |
+| 6       | 9/03                | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))  | 
+| 7       |  15/03 | panel data ([slides](https://www.mosphere.fr/dbe/session_7)) |
+| 8       | <mark>16/03</mark>               | machine learning approach (regression/classification/clustering, training sets validation set, ...) ([slides](https://www.mosphere.fr/dbe/session_8))  |
 | 9       | 22/03               | regression with sklearn (k-nearest neighbors, SVM, sparse regressions)   |
 | 10      | 29/03               | quick recap, mock exam, Q&A                                   |
 
