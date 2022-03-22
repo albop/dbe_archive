@@ -149,9 +149,9 @@ $y = a + bx$
 - <!-- .element: class="fragment" data-fragment-index="4" -->We then add the $\delta$ dummy variable to the regression: $y = a + bx + c \delta$
   - we find $ y = -0.04 + \color{red}{0.2} x - 0.98 \delta$
 - <!-- .element: class="fragment" -->Note that adding the indicator
-  - <!-- .element: class="fragment" data-fragment-index -->improved the fit  ($R^2$ is 0.623 instead of 0.306)
-  - <!-- .element: class="fragment" data-fragment-index -->corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)
-  - <!-- .element: class="fragment" data-fragment-index -->provided an estimate for the effect of variable gender
+  - <!-- .element: class="fragment" data-fragment-index="5" -->improved the fit  ($R^2$ is 0.623 instead of 0.306)
+  - <!-- .element: class="fragment" data-fragment-index="6" -->corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)
+  - <!-- .element: class="fragment" data-fragment-index="7" -->provided an estimate for the effect of variable gender
 
 </div>
 
@@ -197,8 +197,8 @@ $y = a + bx$
 - <!-- .element: class="fragment" data-fragment-index="5" -->Run the regression $y_{i,n} = a_i + b x_{i,n} $
   - we find $ y_{i,n} = a_i + \color{red}{0.18} x_{i,n} $
 - <!-- .element: class="fragment" -->Note that adding the indicator
-  - <!-- .element: class="fragment" data-fragment-index -->improved the fit  ($R^2$ is 0.631 instead of 0.278)
-  - <!-- .element: class="fragment" data-fragment-index -->corrected for the <strong>unobserved heterogeneity bias</strong> (true value of b is actually 0.2)
+  - <!-- .element: class="fragment" data-fragment-index="6" -->improved the fit  ($R^2$ is 0.631 instead of 0.278)
+  - <!-- .element: class="fragment" data-fragment-index="7" -->corrected for the <strong>unobserved heterogeneity bias</strong> (true value of b is actually 0.2)
 
 </div>
 
