@@ -13,7 +13,7 @@
 | 7       |  15/03 | panel data ([slides](https://www.mosphere.fr/dbe/session_7)) |
 | 8       | <mark>16/03</mark>               | machine learning approach (regression/classification/clustering, training sets validation set, ...) ([slides](https://www.mosphere.fr/dbe/session_8))  |
 | 9       | 22/03               | classification with sklearn (k-nearest neighbors) ([slides](https://www.mosphere.fr/dbe/session_9))   |
-| 10      | 06/04               | quick recap, mock exam, Q&A                                   |
+| 10      | 05/04               | quick recap, mock exam, Q&A                                   |
 
 ---
 
