@@ -161,3 +161,11 @@ Check [sentiment viz](https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_a
 - Talk about economics
 
 ---
+
+## More resources
+
+If you want to learn by yourself, at your pace:
+- quantecon [datascience](https://datascience.quantecon.org/) : clear and geared towards economists
+- https://jakevdp.github.io/PythonDataScienceHandbook/ : very complete, free version based on notebooks
+- [introduction to econometrics with R](https://scpoecon.github.io/ScPoEconometrics/)
+

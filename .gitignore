@@ -3,4 +3,3 @@ archive
 node_modules
 .ipynb_checkpoints/*
 package-lock.json
-coursework/*
