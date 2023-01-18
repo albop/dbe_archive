@@ -17,7 +17,7 @@
 
 - Your instructors:
   - Pablo Winant: `pwinant@escp.eu` (course and tutorials)
-  - Rayane: `rayane.hanifi@edu.escp.eu` (tutorials)
+  - Rayane Hanifi: `rayane.hanifi@edu.escp.eu` (tutorials)
 - Hint: start your mail subject by `[dbe]`
 - All course material on *Nuvolos*
   - a datascience platform
@@ -27,6 +27,8 @@
 ---
 
 ## So what will we do ?
+
+![](vain_diagram.jpg)
 
 - Programming
 - Econometrics / Machine Learning
@@ -38,8 +40,7 @@
 
 - Most economists use data all the time
   - to illustrate facts
-  - for research purposes
-
+  - to test theories
 
 ---
 
@@ -70,32 +71,19 @@ In practice these are the tasks an economist needs to perform:
 
 - An art invented by economists: $$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
 
-- Main hallenge:
+- <!-- .element: class="fragment" -->Main challenge:
   - given dataset $(x_i, y_i)$
   - find $a$ while *controlling* for $b$
   - understand robustness of results
   - predict new values of $y$ for new values of $x$
+- <!-- .element: class="fragment" -->Example 1:
+  - [How happy are you?](http://medialab.github.io/well-being-metrics/app/#/)
+  - What is $x$ ? What is $y$ ?
 
 ---
 
-http://medialab.github.io/well-being-metrics/app/#/
 
----
-
-## Econometricks (2)
-
-$$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
-
-- <!-- .element: class="fragment" --> Example 1:
-  - I want to establish a link between growth and trade openness
-  - <!-- .element: class="fragment" -->but my country has only 10 years of historical data... (within dimension)
-  - <!-- .element: class="fragment" -->... let's take 50 countries at the same time (between dimension)
-  - <!-- .element: class="fragment" -->find a way to analyze both dimensions at the same time
-  - <!-- .element: class="fragment" -->-> panel data
-
----
-
-## Econometricks (3)
+### Econometricks (2)
 
 $$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
 
@@ -105,11 +93,25 @@ $$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explana
   -  <!-- .element: class="fragment" -->... or did they choose to go to war because they were less skilled for college?
   -  <!-- .element: class="fragment" -->find a way to extract *causality*
   -  <!-- .element: class="fragment" -->-> instrumental variables
-  -  <!-- .element: class="fragment" -->This was worth a Nobel Prize! (D. Card, J. Angrist, G.W. Imbens)
+-  <!-- .element: class="fragment" -->This was worth a Nobel Prize! (D. Card, J. Angrist, G.W. Imbens)
 
 ---
 
-## Big Data Era and Machine Learning
+### Econometricks (3)
+
+$$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
+
+- <!-- .element: class="fragment" --> Example 3:
+  - I want to establish a link between growth and trade openness
+  - <!-- .element: class="fragment" -->but my country has only 10 years of historical data... (within dimension)
+  - <!-- .element: class="fragment" -->... let's take 50 countries at the same time (between dimension)
+  - <!-- .element: class="fragment" -->find a way to analyze both dimensions at the same time
+  - <!-- .element: class="fragment" -->-> panel data
+
+---
+
+
+### Big Data Era and Machine Learning
 
 - Data has become very abundant
 - <!-- .element: class="fragment" -->Large amounts of data of all kinds
@@ -127,7 +129,7 @@ $$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explana
 
 ---
 
-## Machine Learning
+### Machine Learning
 
 $$\underbrace{y}\_{\text{predicted variable}} = f( \underbrace{x}\_{\text{feature}} , a)$$
 
@@ -140,15 +142,7 @@ $$\underbrace{y}\_{\text{predicted variable}} = f( \underbrace{x}\_{\text{featur
 
 ---
 
-## Big Data Era and Machine Learning (1)
-
-![](NVIDIA_Portrait_Example.jpeg)
-
-Deep learning: artificial neural nets
-
----
-
-## Big Data Era and Machine Learning (2)
+### Big Data Era and Machine Learning (1)
 
 <img src=sentiment_analysis.png width=60%>
 
@@ -158,9 +152,21 @@ Check [sentiment viz](https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_a
 
 ---
 
-## Why program in Python?
+### Big Data Era and Machine Learning (2)
 
-- Why learn Python?
+![](NVIDIA_Portrait_Example.jpeg)
+
+Deep learning: artificial neural nets
+
+---
+
+## Programming
+
+---
+
+### Why program in Python?
+
+- Why learn and use Python?
 - And not <!-- .element: class="fragment" -->
   - R
   - SPSS
@@ -169,25 +175,30 @@ Check [sentiment viz](https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_a
   - C
   - Javascript
   - SQL
+  - ...
 
 ---
 
-## Because
+### Because
 
 Python is:
 
 <div class="r-stack">
   <div class="fragment current-visible">
-    <img src="python_kids.jpg" width=800px><br>Easy
+    <img src="python_kids.jpg" width=800><br>Easy
   </div>
   <div class="fragment current-visible">
-    <img src="download_python.png"><br>Free
+    <img src="download_python.png" width=1200><br>Free
   </div>
   <div class="fragment current-visible">
   
   <img src="tiobe.png"><br>
 
   Popular ([TIOBE Index](https://www.tiobe.com/tiobe-index/))
+  - lively community
+  - lots of online ressources
+  - libraries for virtually anything
+
   </div>
 
   <div class="fragment current-visible">
@@ -198,7 +209,7 @@ Python is:
 
   
   - The lingua Franca of Machine learning
-    - All major machine learning are written or interface with Python
+    - All major machine learning softwares are written or interface with Python
 
   </div>
 
@@ -227,6 +238,7 @@ Python is:
 
 ## Programming
 
+---
 
 
 ## How good should you program ?
@@ -236,11 +248,11 @@ Python is:
 <div class="col">
 
   <div class="r-stack">
-    <div class="fragment current-visible" data-fragment-index=1>  A  </div>
-    <div class="fragment current-visible" data-fragment-index=2>  B  </div>
-    <div class="fragment current-visible" data-fragment-index=3>  C  </div>
-    <div class="fragment current-visible" data-fragment-index=4>  D  </div>
-    <div class="fragment current-visible" data-fragment-index=5>  E  </div>
+    <div class="fragment current-visible" data-fragment-index=1>   <img src="anxious.jpg"> </div>
+    <div class="fragment current-visible" data-fragment-index=2>   <img src="furious.webp">  </div>
+    <div class="fragment current-visible" data-fragment-index=3>  <img src="relieved.jpg"> </div>
+    <div class="fragment current-visible" data-fragment-index=4>  <img src="googleit.avif">  </div>
+    <div class="fragment current-visible" data-fragment-index=5>  <img src="happy.jpeg" width=600>  </div>
 
   </div>
 
@@ -302,7 +314,4 @@ Plenty of online resources to learn python/econometrics/machine learning
 - __Quantecon__: free online [lectures](https://quantecon.org/lectures/) to learn python programming and (advanced) economics
   - now with a section on [datascience](https://datascience.quantecon.org/)
   - it is excellent!
-
----
-
-## Litterate Programming
+  - we will use some of it today
