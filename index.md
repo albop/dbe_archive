@@ -304,3 +304,5 @@ Plenty of online resources to learn python/econometrics/machine learning
   - it is excellent!
 
 ---
+
+## Litterate Programming

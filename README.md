@@ -1,21 +1,7 @@
 
+## Schedule
 
-## Roadmap
-
-| Session | Date               | Content                                                                                                                                               |
-| ------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1       | 18/01              | intro ([slides](https://www.mosphere.fr/dbe/)), python basics                                                                                         |
-| 2       | 25/01              | plots ([slides](https://www.mosphere.fr/dbe/session_2/)),  databases                                                                                  |
-| 3       | 01/02              |                                                                                                                                                       |
-| 4       | 08/02              | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))                                                                                   |
-| 5       | 15/02              | multiple regression ([slides](https://www.mosphere.fr/dbe/session_5)) and categorical variables                                                       |
-| 6       | 22/02              | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))                                                                             |
-| 7       | 01/02              | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))                                                                             |
-| 6       | 07/03              | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))                                                                             |
-| 7       | 21/03              | panel data ([slides](https://www.mosphere.fr/dbe/session_7))                                                                                          |
-| 10      | 04/04              | quick recap, mock exam, Q&A                                                                                                                           |
-
----
+TODO
 
 ## Evaluation & Final Examination
 
@@ -39,8 +25,9 @@
 
 ## Work Environment
 
-- We will use Nuvolos
+- We will use Nuvolos: online datascience platform with Jupyterlab
 
+- You *should* have received an invitation by then.
 
 ---
 
