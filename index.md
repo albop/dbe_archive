@@ -13,60 +13,72 @@
 
 ---
 
-## Communication
+### General
 
-- Main website: [https://github.com/albop/dbe](https://github.com/albop/dbe)
-  - contains slides and exercises
-  - you can open github issues if you find typos...
-- Slides are also accessible from my [website](https://www.mosphere.fr/dbe)
-- Communication about the course in discord
+- Your instructors:
+  - Pablo Winant: `pwinant@escp.eu` (course and tutorials)
+  - Rayane: `rayane.hanifi@edu.escp.eu` (tutorials)
+- Hint: start your mail subject by `[dbe]`
+- All course material on *Nuvolos*
+  - a datascience platform
+  - you'll be able to keep a full backup afterwards
 - Collaboration between students is strongly encouraged
-- Email: `pwinant@escp.eu`
-  - hint: start your mail subject by `[dbe]`
 
 ---
 
-## About myself
+## So what will we do ?
 
-
-<div class="container">
-
-<div class="col">
-
-<img src="pablo_winant.png">
-
-</div>
-<div>
-
-- professor at ESCP and Ecole Polytechnique since 2019
-- formerly at IMF and Bank of England
-- computational economist
-- involved in various opensource projects including [QuantEcon](https://quantecon.org/)
-
-</div>
+- Programming
+- Econometrics / Machine Learning
+- Talk about economics
 
 ---
 
-## Data-based economics
+### Data-based economics (1)
 
 - Most economists use data all the time
   - to illustrate facts
   - for research purposes
 
-- You need to know how to
-  - import data, clean it
-  - explore it, perform basic data description tasks
-  - run regressions
 
 ---
 
-## Econometricks
+### Data-based economics
+
+In practice these are the tasks an economist needs to perform:
+
+- <!-- .element: class="fragment" -->import data
+- <!-- .element: class="fragment" -->clean the data
+  - deal with heterogenous sources, missing data, abnormal observerations
+  - super time consuming
+  - we'll make this part easy for you
+- <!-- .element: class="fragment" -->describe the data (statistics), visualize it
+- <!-- .element: class="fragment" -->interpret it using a model
+- <!-- .element: class="fragment" -->present results
+
+---
+
+![](data_story.png)
+
+---
+
+## Econometrics
+
+---
+
+### Econometricks
 
 - An art invented by economists: $$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explanatory variable}} + b$$
 
-- Challenge:
-  - find $a$
-  - control $b$
+- Main hallenge:
+  - given dataset $(x_i, y_i)$
+  - find $a$ while *controlling* for $b$
+  - understand robustness of results
+  - predict new values of $y$ for new values of $x$
+
+---
+
+http://medialab.github.io/well-being-metrics/app/#/
 
 ---
 
@@ -115,6 +127,19 @@ $$\underbrace{y}\_{\text{dependent variable}} = a \underbrace{x}\_{\text{explana
 
 ---
 
+## Machine Learning
+
+$$\underbrace{y}\_{\text{predicted variable}} = f( \underbrace{x}\_{\text{feature}} , a)$$
+
+- Challenge:
+  - given dataset $(x_i, y_i)$
+  - find $a$, that is find a nonlinear relationship between $a$ and $b$
+  - predict new values of $y$ given new values of $x$
+
+- What are the difference with econometrics?
+
+---
+
 ## Big Data Era and Machine Learning (1)
 
 ![](NVIDIA_Portrait_Example.jpeg)
@@ -133,39 +158,149 @@ Check [sentiment viz](https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_a
 
 ---
 
-## Programming in Python
+## Why program in Python?
 
-- Easy, clean, widespread programming language
-  - free
-  - libraries for virtually any task
-- <!-- .element: class="fragment" -->Lingua franca of machine learning community
-- <!-- .element: class="fragment" -->Data analysts/Statisticians/Researchers spend most of their time...
+- Why learn Python?
+- And not <!-- .element: class="fragment" -->
+  - R
+  - SPSS
+  - Stata
+  - Matlab
+  - C
+  - Javascript
+  - SQL
+
+---
+
+## Because
+
+Python is:
+
+<div class="r-stack">
+  <div class="fragment current-visible">
+    <img src="python_kids.jpg" width=800px><br>Easy
+  </div>
+  <div class="fragment current-visible">
+    <img src="download_python.png"><br>Free
+  </div>
+  <div class="fragment current-visible">
+  
+  <img src="tiobe.png"><br>
+
+  Popular ([TIOBE Index](https://www.tiobe.com/tiobe-index/))
+  </div>
+
+  <div class="fragment current-visible">
+  <img src="jax.png" width=200> 
+  <img src="sklearn.png" width=200>
+  <img src="openai.png" width=200>
+  <img src="pytorch.png" width=200>
+
+  
+  - The lingua Franca of Machine learning
+    - All major machine learning are written or interface with Python
+
+  </div>
+
+</div>
+
+---
+
+<img src="python.png" height="1000">
+
+---
+
+## Why Should you learn programming ?
+
+- <!-- .element: class="fragment" -->Researchers (econometricians or data scientists) spend 80% of their time writing code.
+- <!-- .element: class="fragment" -->Presentation (plots, interactive apps) is key and relies on
   - ... programming
-- <!-- .element: class="fragment" -->Presentation (plots, interactive apps) is super important and relies on ...
-  - ... programming
+-  <!-- .element: class="fragment" -->Interaction with code becomes unavoidable in business environment
+  - fixing the website
+  - querying the database
+  - ...
 - <!-- .element: class="fragment" -->Worth investing a  bit of time to learn it
-  - you can easily become an expert
+  - you can easily become an __expert__
 - <!-- .element: class="fragment" -->Plus it's fun
-- <!-- .element: class="fragment" -->In this course we'll be using python, mostly, as a scripting langage
 
 ---
 
-![](python.png)
+## Programming
+
+
+
+## How good should you program ?
+
+
+<div class="container">
+<div class="col">
+
+  <div class="r-stack">
+    <div class="fragment current-visible" data-fragment-index=1>  A  </div>
+    <div class="fragment current-visible" data-fragment-index=2>  B  </div>
+    <div class="fragment current-visible" data-fragment-index=3>  C  </div>
+    <div class="fragment current-visible" data-fragment-index=4>  D  </div>
+    <div class="fragment current-visible" data-fragment-index=5>  E  </div>
+
+  </div>
+
+  </div>
+
+  <div class="col">
+
+  - <!-- .element: class="fragment" data-fragment-index="1" -->We will "assume" everybody as some prior experience with Python
+  - <!-- .element: class="fragment" data-fragment-index="2"-->Even though some of you have possibly never touched it
+  - <!-- .element: class="fragment" data-fragment-index="3"-->We'll do some catchup today
+  - <!-- .element: class="fragment" data-fragment-index="4"-->And count on you to find the resources to learn what you need when you need it
+  - <!-- .element: class="fragment" data-fragment-index="5" -->Of course you can always ask questions
+
+  </div>
+
+</div>
 
 ---
 
-## So what will we do ?
 
-- Programming
-- Econometrics / Machine Learning
-- Talk about economics
+## Additional resources
+
+Plenty of online resources to learn python/econometrics/machine learning
+
+- [learnpython](learnpython.org) sponsored by [datacamp](https://www.datacamp.com/)
+- [quantecon](https://datascience.quantecon.org/): designed for economists, good examples of projects
+- [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/): by Jake Van der Plas, very complete. Online free version.
+- [Introduction to Econometrics with R](https://scpoecon.github.io/ScPoEconometrics/), in R but very clear (beginner and advanced versions)
 
 ---
 
-## More resources
+## Quantecon
 
-If you want to learn by yourself, at your pace:
-- quantecon [datascience](https://datascience.quantecon.org/) : clear and geared towards economists
-- https://jakevdp.github.io/PythonDataScienceHandbook/ : very complete, free version based on notebooks
-- [introduction to econometrics with R](https://scpoecon.github.io/ScPoEconometrics/)
+![](qe-logo-large.png)
 
+
+
+<div class="r-stack">
+  <div class="fragment current-visible" data-index-order=1>
+  <div class="container">
+    <div class="col" >
+    <img src="tom_sargent.jpg" ><br>
+    Tom Sargent
+    </div>
+    <div class="col">
+    <img src="john_stachurski.jpg" width=50%><br>
+    John Stachurski
+    </div>
+  </div>
+  </div>
+  <div class="fragment current-visible"  data-index-order=2 >
+    Tom Sargent @ ESCP <br>
+    <img  src="t3m_escp.jpg">
+  </div>
+</div>
+
+<br>
+
+- __Quantecon__: free online [lectures](https://quantecon.org/lectures/) to learn python programming and (advanced) economics
+  - now with a section on [datascience](https://datascience.quantecon.org/)
+  - it is excellent!
+
+---

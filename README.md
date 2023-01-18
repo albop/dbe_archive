@@ -2,33 +2,36 @@
 
 ## Roadmap
 
-| Session | Date                | Content                                                                  |
-| ------- | ------------------- | ----------------------------------------------------------------------- |
-| 1       |  11/01              | intro ([slides](https://www.mosphere.fr/dbe/)), python basics            |
-| 2       | 25/01               | numerical python (notebook), plots ([slides](https://www.mosphere.fr/dbe/session_2/))        |
-| 3       | 01/02               | databases           |
-| 4       | 08/02               | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))     |
-| 5       | 16/02               |  multiple regression ([slides](https://www.mosphere.fr/dbe/session_5)) and categorical variables                   |
-| 6       | 9/03                | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))  | 
-| 7       |  15/03 | panel data ([slides](https://www.mosphere.fr/dbe/session_7)) |
-| 8       | <mark>16/03</mark>               | machine learning approach (regression/classification/clustering, training sets validation set, ...) ([slides](https://www.mosphere.fr/dbe/session_8))  |
-| 9       | 22/03               | classification with sklearn (k-nearest neighbors) ([slides](https://www.mosphere.fr/dbe/session_9))   |
-| 10      | 05/04               | quick recap, mock exam, Q&A                                   |
+| Session | Date               | Content                                                                                                                                               |
+| ------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1       | 18/01              | intro ([slides](https://www.mosphere.fr/dbe/)), python basics                                                                                         |
+| 2       | 25/01              | plots ([slides](https://www.mosphere.fr/dbe/session_2/)),  databases                                                                                  |
+| 3       | 01/02              |                                                                                                                                                       |
+| 4       | 08/02              | linear regression ([slides](https://www.mosphere.fr/dbe/session_4))                                                                                   |
+| 5       | 15/02              | multiple regression ([slides](https://www.mosphere.fr/dbe/session_5)) and categorical variables                                                       |
+| 6       | 22/02              | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))                                                                             |
+| 7       | 01/02              | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))                                                                             |
+| 6       | 07/03              | instrumental variables  ([slides](https://www.mosphere.fr/dbe/session_6))                                                                             |
+| 7       | 21/03              | panel data ([slides](https://www.mosphere.fr/dbe/session_7))                                                                                          |
+| 10      | 04/04              | quick recap, mock exam, Q&A                                                                                                                           |
 
 ---
 
 ## Evaluation & Final Examination
 
-- Data Projects (x2)
+- Pushups
+  - individual
+  - on a regular basis
+  - you are *encouraged* to collaborate
+  - to be sent via Nuvolos platform
+- Data Projects (x2) (50%)
   - group work
   - goals:
     - import some data
     - perform/replicate some econometric work
     - present results with nice plots
-  - handled as a Jupyter Notebook (mixes text and code)
-  - subjects proposed by myself and other professors
-- Final Exam:
-  - on computer
+- Final Exam: (50%)
+  - 60 min during last session
   - test general knowledge of econometrics / machine learning
   - there *will* be some programming tasks
 
@@ -36,14 +39,8 @@
 
 ## Work Environment
 
-- local programming environment:
-  - install [Anaconda Python](https://www.anaconda.com/products/individual) for your computer
-  - install [VSCode](https://code.visualstudio.com/)
-  - make sure python extension is activated and configured in VSCode
+- We will use Nuvolos
 
-- online environement:
-  - use mybinder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/albop/dbe/HEAD?urlpath=lab)
-  - remember: your workspace is __not__ persistent: you need to manually save your work.
 
 ---
 
