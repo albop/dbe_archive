@@ -8,11 +8,27 @@
 
 ### DataFrame
 
-- A __DataFrame__ (aka a table) is a 2-D labeled data structure with columns of potentially different types.
-    - types: quantitative, qualitative (ordered, non-ordered, ...)
+
+<div class="container">
+
+<div class="col">
+
+- A __DataFrame__ (aka a table) is a 2-D labeled data structure with columns 
+  - each column has a specific type and a column name
+  - types: quantitative, qualitative (ordered, non-ordered, ...)
 - First column is special: the __index__
+- first goal of an econometrician: constitute a good dataframe
+    - aka "cleaning the data"
+
+</div>
+<div class="col">
 
 ![](dataframe.png)
+
+
+
+</div>
+</div>
 
 ----
 
@@ -21,21 +37,41 @@
 
 <div class="container">
 
-<div class="col">
+  <div class="col">
 
-- first goal of an econometrician: constitute a good dataframe
-    - "cleaning the data"
-- sometimes data comes from several linked dataframes
+  <div class="r-stack">
+
+  <div class="fragment current-visible">
+
+
+  - sometimes data comes from several linked dataframes
     - relational database
-- dataframes / relational databases are so ubiquitous a language has been developed for them: SQL
+    - can still be seen *conceptually* as one dataframe...
+    - ... through a __join__ operation
 
-</div>
 
-<div class="col">
+  </div>
 
-<img src="relational_database.png" width=30%>
+  <div class="fragment current-visible">
 
-</div>
+- dataframes / relational databases are so ubiquitous a language has been developed for them 
+  - SQL
+  - in the 80s...
+-  probably worth looking at if you have some "data" ambitions
+  -  you will see the shadow of SQL everywhere
+  - plenty of resources to learn:
+
+  </div>
+
+  </div>
+  
+  </div>
+
+  <div class="col">
+
+  <img src="relational_database.png" width=1000%>
+
+  </div>
 
 </div>
 
@@ -43,29 +79,35 @@
 
 ## Pandas
 
-
 ----
 
 ### pandas
 
 
-```python
-import pandas as pd
-```
-
-- pandas = panel + datas
-- created by WesMcKinsey, very optimized
-- many options
-- if in doubt: [minimally sufficient pandas](https://medium.com/dunder-data/minimally-sufficient-pandas-a8e67f2a2428)
-    - small subset of pandas to do everything
+- pandas =  panel + datas
+  - a python library created by WesMcKinney
+  - very optimized
+- essentially a dataframe object
+- many options but if in doubt:
+  - [minimally sufficient pandas](https://medium.com/dunder-data/minimally-sufficient-pandas-a8e67f2a2428) is asmall subset of pandas to do everything
 - tons of online tutorials
-    ex: [doc](https://pandas.pydata.org/docs/getting_started/index.html)
+  - official documenation [doc](https://pandas.pydata.org/)
+  - [quantecon](https://datascience.quantecon.org/pandas/index.html)
+
+TODO: sweet pandas ?
 
 ----
 
 ### creating a dataframe (1)
 
 
+- Import pandas
+  - preferably with standard alias `pd`
+  ```python
+  import pandas as pd
+  ```
+- Import a dataframe
+  - each line a different entry in a dictionary
 ```python
 # from a dictionary
 d = {
@@ -124,16 +166,16 @@ pd.DataFrame(d)
 
 ### creating a dataframe (2)
 
-
+- there are many other ways to create a dataframe
+  - for instance using a numpy matrix (numpy is a linear algebra library)
 ```python
 # from a matrix
 import numpy as np
-M = np.array([
-    [18, 150],
-    [21, 200],
-    [29, 1500]
-])
-    
+M = np.array(
+      [[18, 150],
+       [21, 200],
+       [29, 1500]]
+)   
 df = pd.DataFrame( M, columns=["age", "travel"] )
 df
 ```
@@ -196,12 +238,16 @@ df
     - can be exported easily from Excel or LibreOffice
 - stata files: use `pd.read_dta()`
 - excel files: use `pd.read_excel()` or `xlsreader` if unlucky
+  - note that excel does not store a dataframe (each cell is potentially different)
+  - postprocessing is needed
+
+![](excel.jpg)
 
 ----
 
 ### Comma separated file
 
-
+- one can actually a file from python
 ```python
 txt = """year,country,measure
 2018,"france",950.0
@@ -213,22 +259,11 @@ txt = """year,country,measure
 """
 open('dummy_file.csv','w').write(txt) # we write it to a file
 ```
-
-
-
-
-    136
-
-
-
-
+- and import it
 ```python
 df = pd.read_csv('dummy_file.csv') # what index should we use ?
 df
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -300,9 +335,7 @@ df
 
 - Sometimes, comma-separated files, are not quite comma-separated...
     - inspect the file with a text editor to see what it contains
-    - add options to `pd.read_csv`
-
-
+      - the kind of separator, whether there are quotes...
 ```python
 txt = """year;country;measure
 2018;"france";950.0
@@ -314,15 +347,7 @@ txt = """year;country;measure
 """
 open('annoying_dummy_file.csv','w').write(txt) # we write it to a file
 ```
-
-
-
-
-    136
-
-
-
-
+- add relevant options to `pd.read_csv` and check result
 ```python
 pd.read_csv("annoying_dummy_file.csv", sep=";")
 ```
@@ -400,22 +425,20 @@ pd.read_csv("annoying_dummy_file.csv", sep=";")
 
 - pandas can export to many formats: `df.to_...`
 
-
+- to (standard) CSV
 ```python
 print( df.to_csv() )
 ```
-
-    ,year,country,measure
-    0,2018,france,950.0
-    1,2019,france,960.0
-    2,2020,france,1000.0
-    3,2018,usa,2500.0
-    4,2019,usa,2150.0
-    5,2020,usa,2300.0
-    
-
-
-
+```
+,year,country,measure
+0,2018,france,950.0
+1,2019,france,960.0
+2,2020,france,1000.0
+3,2018,usa,2500.0
+4,2019,usa,2150.0
+5,2020,usa,2300.0
+```    
+- or to stata
 ```python
 df.to_stata('dummy_example.dta')
 ```
@@ -428,7 +451,12 @@ df.to_stata('dummy_example.dta')
 
 ### Types of Data Sources
 
+<div class="container">
+
+<div class="col">
+
 - Where can we get data from ?
+  - check one of the databases lists [kaggle](https://www.kaggle.com/), [econ network](https://www.economicsnetwork.ac.uk/data_sets)
 - Official websites
     - often in csv form
     - unpractical applications
@@ -437,7 +465,15 @@ df.to_stata('dummy_example.dta')
 - Data providers
     - supply an API (i.e. easy to use function)
 
+</div>
+
+<div class="col">
+
 <img src=bloomberg.png width=60%>
+
+
+</div>
+</div>
 
 ----
 
@@ -445,18 +481,11 @@ df.to_stata('dummy_example.dta')
 
 - commercial ones:
     - bloomberg, macrobond, factsets, quandl ...
-- free ones:
+- free ones available as a python library
     - `dbnomics`: many official time-series
     - `qeds`: databases used by quantecon
     - `vega-datasets`: distributed with altair
-    - covid*: lots of datasets...
-- reminder: python packages, can be installed in the notebook with
-    - `!pip install ...`
 
-
-```python
-!pip install vega_datasets
-```
 
 ----
 
@@ -590,14 +619,47 @@ df
 
 ----
 
+<img src=iris.jpeg width=60%>
+
+----
+
+
+### DBnomics example
+
+- [DBnomics](`https://db.nomics.world/`) aggregates time series from various public sources
+- data is organized as provider/database/series
+- try to find the identifer of one or several series
+```python
+import dbnomics
+df = dbnomics.fetch_series('AMECO/ZUTN/EA19.1.0.0.0.ZUTN')
+```
+- tip: in case one python package is missing, it can be installed on the fly as in
+```python
+!pip install dbnomics
+```
+
+---
+
+## Inspect / describe data
+
+----
+
 ### Inspecting data
 
 - once the data is loaded as `df`, we want to look at some basic properties:
+- general
     - `df.head(5)` # 5 first lines
     - `df.tail(5)` # 5 first lines
-    - `df.describe()` # summary
-    - `df.mean()` # averages
+    - `df.describe()` # general summary
+- central tendency
+    - `df.mean()` # average
+    - `df.median()` # median
+- spread
     - `df.std()` # standard deviations
+    - `df.var()` # variance
+    - `df.min()`, `df.max()` # bounds
+- counts (for categorical variable
+    - df.count()
 
 
 ----
@@ -758,21 +820,16 @@ df.describe()
 
 ----
 
-### Columns
+### Changing names of columns
 
-- Columns are defined by attribute `df.columns`
-
+- Columns are defined by property `df.columns`
 ```python
 df.columns
 ```
-
-    Index(['sepalLength', 'sepalWidth', 'petalLength', 'petalWidth', 'species'], dtype='object')
-
-
-
-This attribute can be set
-
-
+```
+Index(['sepalLength', 'sepalWidth', 'petalLength', 'petalWidth', 'species'], dtype='object')
+```
+- This property can be set with a list of the right length
 ```python
 df.columns = ['sLength', 'sWidth', 'pLength', 'pWidth', 'species']
 df.head(2)
@@ -829,52 +886,44 @@ df.head(2)
 
 ### Indexing a column
 
-A column can be extracted using its name as in a dictionary (like `df['sLength']`)
-
+- A column can be extracted using its name as in a dictionary (like `df['sLength']`)
 ```python
 series = df['sWidth'] # note the resulting object: a series
 series
 ```
-
-
-    0      3.5
-    1      3.0
-    2      3.2
-    3      3.1
-    4      3.6
-          ... 
-    145    3.0
-    146    2.5
-    147    3.0
-    148    3.4
-    149    3.0
-    Name: sWidth, Length: 150, dtype: float64
-
-
-
-
-```python
-series.plot()
 ```
+0      3.5
+1      3.0
+      ... 
+148    3.4
+149    3.0
+Name: sWidth, Length: 150, dtype: float64
+```
+- The result is a series object (typed values with a name and an index)
+- It has its own set of methods
+  - try:
+    - `series.mean()`, `series.std()`
+    - `series.plot()`
+    - `series.diff()`
+      - creates $y_t = x_t-x_{t-1}$
+    - `series.pct_change()` 
+      - creates $y_t = \frac{x_t-x_{t-1}}{x_{t-1}}$
 
-
-    <AxesSubplot:>
-
-
-    
-![png](DataFrames_files/DataFrames_41_1.png)
+    <!-- <AxesSubplot:>
+    <!-- ![png](DataFrames_files/DataFrames_41_1.png) -->
     
 ----
 
 ### Creating a new column
 
 
+- It is possible to create a new column by combining existing ones
 ```python
 df['totalLength'] = df['pLength'] + df['sLength']
+# this would also work
+df['totalLength'] = 0.5*df['pLength'] + 0.5*df['sLength']
 df.head(2)
 ```
-
-
 
 
 <div>
@@ -930,14 +979,11 @@ df.head(2)
 
 ### Replacing a column
 
-
+- An existing column can be replaced with the same syntax.
 ```python
 df['totalLength'] = df['pLength'] + df['sLength']*0.5
 df.head(2)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -993,15 +1039,10 @@ df.head(2)
 ### Selecting several columns
 
 - Index with a list of column names
-
-
 ```python
 e = df[ ['pLength', 'sLength'] ]
 e.head(3)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1050,8 +1091,7 @@ e.head(3)
 ### Selecting lines (1)
 
 - use index range
-
-
+  - ☡: in Python the end of a range is *not included* !
 ```python
 df[2:4]
 ```
@@ -1112,31 +1152,27 @@ df[2:4]
 
 ### Selecting lines (2)
 
-- use boolean
-
-
+- let's look at unique species
 ```python
 df['species'].unique()
 ```
-
-
-
-
-    array(['setosa', 'versicolor', 'virginica'], dtype=object)
-
-
-
-
+```
+array(['setosa', 'versicolor', 'virginica'], dtype=object)
+```
+- we would like to keep only the lines with `virginica`
 ```python
 bool_ind = df['species'] == 'virginica' # this is a boolean serie
 ```
-
-
+- the result is a boolean series, where each element tells whether a line should be kept or not
 ```python
 e = df[ bool_ind ]
 e.head(4)
 ```
-
+- if you want you can keep the recipe: 
+```
+df[df['species'] == 'virginica']
+```
+  - to keep lines where `species` is equal to `virginica`
 
 
 
@@ -1233,9 +1269,9 @@ df.loc[0:4, 'species']
 
 ### Combine everything
 
-
+- Here is an example combiing serveral techniques
+  - Let's change the way totalLength is computed, but only for 'virginica'
 ```python
-# Let's change the way totalLength is computed, only for 'virginica'
 index = (df['species']=='virginica')
 df.loc[index,'totalLength'] = df.loc[index,'sLength'] + 1.5*df[index]['pLength']
 ```
@@ -1429,7 +1465,7 @@ df_long
 ### Wide vs Long format (2)
 
 - in long format: each line is an independent observation
-    - two lines mayb belong to the same category (year, or country)
+    - two lines may belong to the same category (year, or country)
     - all values are given in the same column
     - their types/categories are given in another column
 - in wide format: some observations are grouped
@@ -1646,11 +1682,11 @@ df_
 
 ### groupby
 
-`groupby` is a very powerful function which can be used to work directly on data in the long format.
-
+- `groupby` is a very powerful function which can be used to work directly on data in the long format.
+  - for instance to compute averages per country
 
 ```python
-df_long.groupby("country").apply(lambda df: df.mean())
+df_long.groupby("country").mean()
 ```
 
 
