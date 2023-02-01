@@ -1,5 +1,14 @@
 # DataFrames
 
+<style>
+.container{
+    display: flex;
+}
+.col{
+    flex: 1;
+}
+</style>
+
 ---
 
 ## Tabular Data
@@ -473,6 +482,7 @@ df.to_stata('dummy_example.dta')
 
 
 </div>
+
 </div>
 
 ----
@@ -1330,15 +1340,16 @@ df_wide = pd.read_csv("dummy_file_wide.csv")
 
 ### Wide vs Long format (1)
 
-- compare the following tables
+Compare the following tables
+
+<div class="container">
+
+<div class="col">
 
 
 ```python
 df_wide
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1386,15 +1397,14 @@ df_wide
 </table>
 </div>
 
+</div>
 
+<div class="col">
 
 
 ```python
 df_long
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1460,6 +1470,10 @@ df_long
 </table>
 </div>
 
+</div>
+
+</div>
+
 ----
 
 ### Wide vs Long format (2)
@@ -1473,6 +1487,10 @@ df_long
     - values of different kinds are in different columns
     - the types/categories are stored as column names
 - both representations are useful
+- tidy data:
+    - every column is a variable.
+    - every row is an observation.
+    - every cell is a single value.
 
 ----
 
@@ -1684,13 +1702,9 @@ df_
 
 - `groupby` is a very powerful function which can be used to work directly on data in the long format.
   - for instance to compute averages per country
-
 ```python
 df_long.groupby("country").mean()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1734,8 +1748,11 @@ df_long.groupby("country").mean()
 </table>
 </div>
 
-- Note that `.apply` applies a function of one argument to each group.
-- This function must operate on one argument (a dataframe).
+
+- You can perform several aggregations at the same time:
+```python
+df_long.groupby("country").agg(['mean','std'])
+```
 
 ---
 
@@ -1748,7 +1765,7 @@ df_long.groupby("country").mean()
 - Suppose we have two dataframes, with related observations
 - How can we construct one single database with all informations?
 - Answer:
-    - `concatenate` if long format
+    - `concat` if long format
     - `merge` databases if wide format
 - Lots of subtleties when data gets complicated
     - we'll see them in due time
