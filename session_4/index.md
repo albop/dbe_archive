@@ -131,6 +131,9 @@ $$X = \begin{bmatrix}
 
 ---
 
+# Explained Variance
+
+----
 
 ## Explained Variance
 
@@ -203,18 +206,13 @@ import statsmodels.formula.api as smf
 
 ### Performing a regression
 
-
-Running a regression with `statsmodels`
+- Running a regression with `statsmodels`
 ```
 model = smf.ols('income ~ education',  df)  # model
 res = model.fit()  # perform the regression
 res.describe()
 ```
-
 - 'income ~ education' is the model *formula*
-
-Result:
-
 ```
                             OLS Regression Results                            
 ==============================================================================

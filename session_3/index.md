@@ -478,7 +478,7 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 ----
 
-### Main takeaway
+### First estimates
 
 - <!-- .element class="fragment" --> Given the true model, <strong>all estimators are random variables</strong> of the data generating process
 
@@ -501,16 +501,35 @@ $$\epsilon\_i  \sim \mathcal{N}\left({0,\sigma^{2}}\right)$$
 
 <div class="col">
 
+<div class="r-stack">
+
+<div class="fragment current-visible">
+
 - Test
   - Hypothesis H0: $α=β=0$ (model explains nothing)
   - Hypothesis H1: (model explains something)
-  - Fisher Statistics: $F=\frac{Explained Variance}{Unexplained Variance}$
-- <!-- .element class="fragment"  data-fragment-index="2" --> Distribution of $F$ is known theoretically. 
+  - Fisher Statistics: $\boxed{F=\frac{Explained Variance}{Unexplained Variance}}$
+
+
+</div>
+<div class="fragment current-visible">
+
+- Distribution of $F$ is known theoretically.
+  - Assuming the model is actually linear and the shocks normal.
   - It depends on the number of degrees of Freedom. (Here $N-2=18$)
-- <!-- .element class="fragment" --> In our case, $Fstat=40.48$. What was the probability it was that big if $H0$ is true ? 
-    - <!-- .element class="fragment" --> extremely small: $Prob(F>Fstat|H0)=5.41e-6$
-    - <!-- .element class="fragment" --> we can reject $H0$ with $p-value=5e-6$
-- <!-- .element class="fragment" --> In social science, typical required p-value is 5%.
+  - Not on the actual parameters of the model.
+
+</div>
+<div class="fragment current-visible">
+
+- In our case, $Fstat=40.48$. What was the probability it was that big, under the $H0$ hypothesis? 
+  - extremely small: $Prob(F>Fstat|H0)=5.41e-6$
+  - we can reject $H0$ with $p-value=5e-6$
+- In social science, typical required p-value is 5%.
+
+</div>
+
+</div>
 
 </div>
 
