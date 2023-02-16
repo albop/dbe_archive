@@ -1,0 +1,5 @@
+---
+title: "Advanced Macro: Numerical Methods"
+---
+
+{{< include README.md >}}

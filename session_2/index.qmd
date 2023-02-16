@@ -1,0 +1,1901 @@
+---
+title: Dataframes
+subtitle: Data-Based Economics
+author: Year 2022-2023
+format:
+  revealjs:
+    navigation: grid
+    width: 1920
+    height: 1080
+aspectratio: 169
+---
+
+<style>
+.container{
+    display: flex;
+}
+.col{
+    flex: 1;
+}
+</style>
+
+---
+
+## Tabular Data
+
+----
+
+### DataFrame
+
+
+<div class="container">
+
+<div class="col">
+
+- A __DataFrame__ (aka a table) is a 2-D labeled data structure with columns 
+  - each column has a specific type and a column name
+  - types: quantitative, qualitative (ordered, non-ordered, ...)
+- First column is special: the __index__
+- first goal of an econometrician: constitute a good dataframe
+    - aka "cleaning the data"
+
+</div>
+<div class="col">
+
+![](dataframe.png)
+
+
+
+</div>
+</div>
+
+----
+
+### DataFrames are everywhere
+
+
+<div class="container">
+
+  <div class="col">
+
+  <div class="r-stack">
+
+  <div class="fragment current-visible">
+
+
+  - sometimes data comes from several linked dataframes
+    - relational database
+    - can still be seen *conceptually* as one dataframe...
+    - ... through a __join__ operation
+
+
+  </div>
+
+  <div class="fragment current-visible">
+
+- dataframes / relational databases are so ubiquitous a language has been developed for them 
+  - SQL
+  - in the 80s...
+-  probably worth looking at if you have some "data" ambitions
+  -  you will see the shadow of SQL everywhere
+  - plenty of resources to learn:
+
+  </div>
+
+  </div>
+  
+  </div>
+
+  <div class="col">
+
+  <img src="relational_database.png" width=1000%>
+
+  </div>
+
+</div>
+
+---
+
+## Pandas
+
+----
+
+### pandas
+
+
+- pandas =  panel + datas
+  - a python library created by WesMcKinney
+  - very optimized
+- essentially a dataframe object
+- many options but if in doubt:
+  - [minimally sufficient pandas](https://medium.com/dunder-data/minimally-sufficient-pandas-a8e67f2a2428) is asmall subset of pandas to do everything
+- tons of online tutorials
+  - official documenation [doc](https://pandas.pydata.org/)
+  - [quantecon](https://datascience.quantecon.org/pandas/index.html)
+
+TODO: sweet pandas ?
+
+----
+
+### creating a dataframe (1)
+
+
+- Import pandas
+  - preferably with standard alias `pd`
+  ```python
+  import pandas as pd
+  ```
+- Import a dataframe
+  - each line a different entry in a dictionary
+```python
+# from a dictionary
+d = {
+    "country": ["USA", "UK", "France"],
+    "comics": [13, 10, 12]   
+}
+pd.DataFrame(d)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>comics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>USA</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>UK</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>France</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### creating a dataframe (2)
+
+- there are many other ways to create a dataframe
+  - for instance using a numpy matrix (numpy is a linear algebra library)
+```python
+# from a matrix
+import numpy as np
+M = np.array(
+      [[18, 150],
+       [21, 200],
+       [29, 1500]]
+)   
+df = pd.DataFrame( M, columns=["age", "travel"] )
+df
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>travel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>29</td>
+      <td>1500</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+---
+
+## File Formats
+
+----
+
+### Common file formats
+
+- comma separated files: `csv` file
+    - often distributed online
+    - can be exported easily from Excel or LibreOffice
+- stata files: use `pd.read_dta()`
+- excel files: use `pd.read_excel()` or `xlsreader` if unlucky
+  - note that excel does not store a dataframe (each cell is potentially different)
+  - postprocessing is needed
+
+![](excel.jpg)
+
+----
+
+### Comma separated file
+
+- one can actually a file from python
+```python
+txt = """year,country,measure
+2018,"france",950.0
+2019,"france",960.0
+2020,"france",1000.0
+2018,"usa",2500.0
+2019,"usa",2150.0
+2020,"usa",2300.0
+"""
+open('dummy_file.csv','w').write(txt) # we write it to a file
+```
+- and import it
+```python
+df = pd.read_csv('dummy_file.csv') # what index should we use ?
+df
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>country</th>
+      <th>measure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>france</td>
+      <td>950.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>france</td>
+      <td>960.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>france</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>usa</td>
+      <td>2500.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>usa</td>
+      <td>2150.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020</td>
+      <td>usa</td>
+      <td>2300.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### "Annoying" Comma Separated File
+
+- Sometimes, comma-separated files, are not quite comma-separated...
+    - inspect the file with a text editor to see what it contains
+      - the kind of separator, whether there are quotes...
+```python
+txt = """year;country;measure
+2018;"france";950.0
+2019;"france";960.0
+2020;"france";1000.0
+2018;"usa";2500.0
+2019;"usa";2150.0
+2020;"usa";2300.0
+"""
+open('annoying_dummy_file.csv','w').write(txt) # we write it to a file
+```
+- add relevant options to `pd.read_csv` and check result
+```python
+pd.read_csv("annoying_dummy_file.csv", sep=";")
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>country</th>
+      <th>measure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>france</td>
+      <td>950.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>france</td>
+      <td>960.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>france</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>usa</td>
+      <td>2500.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>usa</td>
+      <td>2150.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020</td>
+      <td>usa</td>
+      <td>2300.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Exporting a DataFrame
+
+- pandas can export to many formats: `df.to_...`
+
+- to (standard) CSV
+```python
+print( df.to_csv() )
+```
+```
+,year,country,measure
+0,2018,france,950.0
+1,2019,france,960.0
+2,2020,france,1000.0
+3,2018,usa,2500.0
+4,2019,usa,2150.0
+5,2020,usa,2300.0
+```    
+- or to stata
+```python
+df.to_stata('dummy_example.dta')
+```
+
+---
+
+## Data Sources
+
+----
+
+### Types of Data Sources
+
+<div class="container">
+
+<div class="col">
+
+- Where can we get data from ?
+  - check one of the databases lists [kaggle](https://www.kaggle.com/), [econ network](https://www.economicsnetwork.ac.uk/data_sets)
+- Official websites
+    - often in csv form
+    - unpractical applications
+    - sometimes unavoidable
+    - open data trend: more unstructured data
+- Data providers
+    - supply an API (i.e. easy to use function)
+
+</div>
+
+<div class="col">
+
+<img src=bloomberg.png width=60%>
+
+
+</div>
+
+</div>
+
+----
+
+### Data providers
+
+- commercial ones:
+    - bloomberg, macrobond, factsets, quandl ...
+- free ones available as a python library
+    - `dbnomics`: many official time-series
+    - `qeds`: databases used by quantecon
+    - `vega-datasets`: distributed with altair
+
+
+----
+
+```python
+import vega_datasets
+df = vega_datasets.data('iris')
+df
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepalLength</th>
+      <th>sepalWidth</th>
+      <th>petalLength</th>
+      <th>petalWidth</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div>
+
+----
+
+<img src=iris.jpeg width=60%>
+
+----
+
+
+### DBnomics example
+
+- [DBnomics](`https://db.nomics.world/`) aggregates time series from various public sources
+- data is organized as provider/database/series
+- try to find the identifer of one or several series
+```python
+import dbnomics
+df = dbnomics.fetch_series('AMECO/ZUTN/EA19.1.0.0.0.ZUTN')
+```
+- tip: in case one python package is missing, it can be installed on the fly as in
+```python
+!pip install dbnomics
+```
+
+---
+
+## Inspect / describe data
+
+----
+
+### Inspecting data
+
+- once the data is loaded as `df`, we want to look at some basic properties:
+- general
+    - `df.head(5)` # 5 first lines
+    - `df.tail(5)` # 5 first lines
+    - `df.describe()` # general summary
+- central tendency
+    - `df.mean()` # average
+    - `df.median()` # median
+- spread
+    - `df.std()` # standard deviations
+    - `df.var()` # variance
+    - `df.min()`, `df.max()` # bounds
+- counts (for categorical variable
+    - df.count()
+
+
+----
+
+```python
+df.head(2)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepalLength</th>
+      <th>sepalWidth</th>
+      <th>petalLength</th>
+      <th>petalWidth</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+df.describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepalLength</th>
+      <th>sepalWidth</th>
+      <th>petalLength</th>
+      <th>petalWidth</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.843333</td>
+      <td>3.057333</td>
+      <td>3.758000</td>
+      <td>1.199333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.828066</td>
+      <td>0.435866</td>
+      <td>1.765298</td>
+      <td>0.762238</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.300000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>0.100000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.100000</td>
+      <td>2.800000</td>
+      <td>1.600000</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.800000</td>
+      <td>3.000000</td>
+      <td>4.350000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.400000</td>
+      <td>3.300000</td>
+      <td>5.100000</td>
+      <td>1.800000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.900000</td>
+      <td>4.400000</td>
+      <td>6.900000</td>
+      <td>2.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+---
+
+## Manipulating DataFrames
+
+----
+
+### Changing names of columns
+
+- Columns are defined by property `df.columns`
+```python
+df.columns
+```
+```
+Index(['sepalLength', 'sepalWidth', 'petalLength', 'petalWidth', 'species'], dtype='object')
+```
+- This property can be set with a list of the right length
+```python
+df.columns = ['sLength', 'sWidth', 'pLength', 'pWidth', 'species']
+df.head(2)
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sLength</th>
+      <th>sWidth</th>
+      <th>pLength</th>
+      <th>pWidth</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Indexing a column
+
+- A column can be extracted using its name as in a dictionary (like `df['sLength']`)
+```python
+series = df['sWidth'] # note the resulting object: a series
+series
+```
+```
+0      3.5
+1      3.0
+      ... 
+148    3.4
+149    3.0
+Name: sWidth, Length: 150, dtype: float64
+```
+- The result is a series object (typed values with a name and an index)
+- It has its own set of methods
+  - try:
+    - `series.mean()`, `series.std()`
+    - `series.plot()`
+    - `series.diff()`
+      - creates $y_t = x_t-x_{t-1}$
+    - `series.pct_change()` 
+      - creates $y_t = \frac{x_t-x_{t-1}}{x_{t-1}}$
+
+    <!-- <AxesSubplot:>
+    <!-- ![png](DataFrames_files/DataFrames_41_1.png) -->
+    
+----
+
+### Creating a new column
+
+
+- It is possible to create a new column by combining existing ones
+```python
+df['totalLength'] = df['pLength'] + df['sLength']
+# this would also work
+df['totalLength'] = 0.5*df['pLength'] + 0.5*df['sLength']
+df.head(2)
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sLength</th>
+      <th>sWidth</th>
+      <th>pLength</th>
+      <th>pWidth</th>
+      <th>species</th>
+      <th>totalLength</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6.3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Replacing a column
+
+- An existing column can be replaced with the same syntax.
+```python
+df['totalLength'] = df['pLength'] + df['sLength']*0.5
+df.head(2)
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sLength</th>
+      <th>sWidth</th>
+      <th>pLength</th>
+      <th>pWidth</th>
+      <th>species</th>
+      <th>totalLength</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>3.95</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>3.85</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Selecting several columns
+
+- Index with a list of column names
+```python
+e = df[ ['pLength', 'sLength'] ]
+e.head(3)
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pLength</th>
+      <th>sLength</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.4</td>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.4</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.3</td>
+      <td>4.7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Selecting lines (1)
+
+- use index range
+  - ☡: in Python the end of a range is *not included* !
+```python
+df[2:4]
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sLength</th>
+      <th>sWidth</th>
+      <th>pLength</th>
+      <th>pWidth</th>
+      <th>species</th>
+      <th>totalLength</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>3.65</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>3.80</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Selecting lines (2)
+
+- let's look at unique species
+```python
+df['species'].unique()
+```
+```
+array(['setosa', 'versicolor', 'virginica'], dtype=object)
+```
+- we would like to keep only the lines with `virginica`
+```python
+bool_ind = df['species'] == 'virginica' # this is a boolean serie
+```
+- the result is a boolean series, where each element tells whether a line should be kept or not
+```python
+e = df[ bool_ind ]
+e.head(4)
+```
+- if you want you can keep the recipe: 
+```
+df[df['species'] == 'virginica']
+```
+  - to keep lines where `species` is equal to `virginica`
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sLength</th>
+      <th>sWidth</th>
+      <th>pLength</th>
+      <th>pWidth</th>
+      <th>species</th>
+      <th>totalLength</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100</th>
+      <td>6.3</td>
+      <td>3.3</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>virginica</td>
+      <td>9.15</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>5.8</td>
+      <td>2.7</td>
+      <td>5.1</td>
+      <td>1.9</td>
+      <td>virginica</td>
+      <td>8.00</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>7.1</td>
+      <td>3.0</td>
+      <td>5.9</td>
+      <td>2.1</td>
+      <td>virginica</td>
+      <td>9.45</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>6.3</td>
+      <td>2.9</td>
+      <td>5.6</td>
+      <td>1.8</td>
+      <td>virginica</td>
+      <td>8.75</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Selecting lines and columns
+
+- sometimes, one wants finer control about which lines *and* columns to select:
+    - use `df.loc[...]` which can be indexed as a matrix
+
+
+```python
+df.loc[0:4, 'species']
+```
+
+
+
+
+    0    setosa
+    1    setosa
+    2    setosa
+    3    setosa
+    4    setosa
+    Name: species, dtype: object
+
+----
+
+### Combine everything
+
+- Here is an example combiing serveral techniques
+  - Let's change the way totalLength is computed, but only for 'virginica'
+```python
+index = (df['species']=='virginica')
+df.loc[index,'totalLength'] = df.loc[index,'sLength'] + 1.5*df[index]['pLength']
+```
+
+---
+
+## Reshaping DataFrames
+
+----
+
+The following code creates two example databases.
+
+```python
+txt_wide = """year,france,usa
+2018,950.0,2500.0
+2019,960.0,2150.0
+2020,1000.0,2300.0
+"""
+open('dummy_file_wide.csv','w').write(txt_wide) # we write it to a file
+```
+
+
+
+
+    71
+
+
+
+
+```python
+txt_long = """year,country,measure
+2018,"france",950.0
+2019,"france",960.0
+2020,"france",1000.0
+2018,"usa",2500.0
+2019,"usa",2150.0
+2020,"usa",2300.0
+"""
+open('dummy_file_long.csv','w').write(txt_long) # we write it to a file
+```
+
+
+
+
+    136
+
+
+
+
+```python
+df_long = pd.read_csv("dummy_file_long.csv")
+df_wide = pd.read_csv("dummy_file_wide.csv")
+```
+
+----
+
+### Wide vs Long format (1)
+
+Compare the following tables
+
+<div class="container">
+
+<div class="col">
+
+
+```python
+df_wide
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>france</th>
+      <th>usa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>950.0</td>
+      <td>2500.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>960.0</td>
+      <td>2150.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>1000.0</td>
+      <td>2300.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="col">
+
+
+```python
+df_long
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>country</th>
+      <th>measure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>france</td>
+      <td>950.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>france</td>
+      <td>960.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>france</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>usa</td>
+      <td>2500.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>usa</td>
+      <td>2150.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020</td>
+      <td>usa</td>
+      <td>2300.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+----
+
+### Wide vs Long format (2)
+
+- in long format: each line is an independent observation
+    - two lines may belong to the same category (year, or country)
+    - all values are given in the same column
+    - their types/categories are given in another column
+- in wide format: some observations are grouped
+    - in the example it is grouped by year
+    - values of different kinds are in different columns
+    - the types/categories are stored as column names
+- both representations are useful
+- tidy data:
+    - every column is a variable.
+    - every row is an observation.
+    - every cell is a single value.
+
+----
+
+### Converting from Wide to Long
+
+
+```python
+df_wide.melt(id_vars='year')
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>france</td>
+      <td>950.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>france</td>
+      <td>960.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>france</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>usa</td>
+      <td>2500.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>usa</td>
+      <td>2150.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020</td>
+      <td>usa</td>
+      <td>2300.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### Converting from Long to Wide
+
+
+```python
+df_ = df_long.pivot(index='year', columns='country')
+df_
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">measure</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th>france</th>
+      <th>usa</th>
+    </tr>
+    <tr>
+      <th>year</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018</th>
+      <td>950.0</td>
+      <td>2500.0</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>960.0</td>
+      <td>2150.0</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>1000.0</td>
+      <td>2300.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# the result of pivot has a "hierarchical index"
+# let's change columns names
+df_.columns = df_.columns.get_level_values(1)
+df_
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>country</th>
+      <th>france</th>
+      <th>usa</th>
+    </tr>
+    <tr>
+      <th>year</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018</th>
+      <td>950.0</td>
+      <td>2500.0</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>960.0</td>
+      <td>2150.0</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>1000.0</td>
+      <td>2300.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+----
+
+### groupby
+
+- `groupby` is a very powerful function which can be used to work directly on data in the long format.
+  - for instance to compute averages per country
+```python
+df_long.groupby("country").mean()
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>measure</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>france</th>
+      <td>2019.0</td>
+      <td>970.000000</td>
+    </tr>
+    <tr>
+      <th>usa</th>
+      <td>2019.0</td>
+      <td>2316.666667</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+- You can perform several aggregations at the same time:
+```python
+df_long.groupby("country").agg(['mean','std'])
+```
+
+---
+
+## Merging
+
+----
+
+### Merging two dataframes
+
+- Suppose we have two dataframes, with related observations
+- How can we construct one single database with all informations?
+- Answer:
+    - `concat` if long format
+    - `merge` databases if wide format
+- Lots of subtleties when data gets complicated
+    - we'll see them in due time
+
+----
+
+```python
+txt_long_1 = """year,country,measure
+2018,"france",950.0
+2019,"france",960.0
+2020,"france",1000.0
+2018,"usa",2500.0
+2019,"usa",2150.0
+2020,"usa",2300.0
+"""
+open("dummy_long_1.csv",'w').write(txt_long_1)
+```
+
+
+```python
+txt_long_2 = """year,country,recipient
+2018,"france",maxime
+2019,"france",mauricette
+2020,"france",mathilde
+2018,"usa",sherlock
+2019,"usa",watson
+2020,"usa",moriarty
+"""
+open("dummy_long_2.csv",'w').write(txt_long_2)
+```
+
+```python
+df_long_1 = pd.read_csv('dummy_long_1.csv')
+df_long_2 = pd.read_csv('dummy_long_2.csv')
+```
+
+
+
+
+----
+
+## Merging two DataFrames with pandas
+
+
+```python
+df_long_1.merge(df_long_2)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>country</th>
+      <th>measure</th>
+      <th>recipient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>france</td>
+      <td>950.0</td>
+      <td>maxime</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>france</td>
+      <td>960.0</td>
+      <td>mauricette</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020</td>
+      <td>france</td>
+      <td>1000.0</td>
+      <td>mathilde</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>usa</td>
+      <td>2500.0</td>
+      <td>sherlock</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>usa</td>
+      <td>2150.0</td>
+      <td>watson</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020</td>
+      <td>usa</td>
+      <td>2300.0</td>
+      <td>moriarty</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+

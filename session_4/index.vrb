@@ -1,0 +1,59 @@
+\begin{block}{Ordinary Least Square}
+\protect\hypertarget{ordinary-least-square}{}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\[Y = \begin{bmatrix}
+\text{income}_1 \\\\
+\vdots \\\\
+\text{income}_N
+\end{bmatrix}\] \[X = \begin{bmatrix}
+1 & \text{education}_1 & \text{prestige}_1 \\\\
+\vdots & \vdots & \vdots \\\\
+1 &\text{education}_N & \text{prestige}_N
+\end{bmatrix}\]
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\tightlist
+\item
+  Matrix Version (look for
+  \(B = \left( \alpha, \beta_1 , \beta_2 \right)\)): \[Y =  X B + E\]
+\item
+  Note that constant can be interpreted as a ``variable''
+\item
+  Loss function \[L(A,B) = (Y - X B)' (Y - X B)\]
+\item
+  Result of minimization \(\min_{(A,B)} L(A,B)\) :
+  \[\begin{bmatrix}\alpha & \beta_1 & \beta_2 \end{bmatrix} = (X'X)^{-1} X' Y \]
+\end{itemize}
+\end{column}
+\end{columns}
+\end{block}
+
+\begin{block}{Solution}
+\protect\hypertarget{solution}{}
+\begin{itemize}
+\tightlist
+\item
+  Result:
+  \[\text{income} = 10.43  + 0.03 \times \text{education} + 0.62 \times \text{prestige}\]
+\item
+  Questions:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    is it a \emph{better} regression than the other?
+  \item
+    is the coefficient in front of \texttt{education} significant?
+  \item
+    how do we interpret it?
+  \item
+    can we build confidence intervals?
+  \end{itemize}
+\end{itemize}
+
+\textless\textless\textless\textless\textless\textless\textless\textless{}
+HEAD:session\_4/index.qmd \# Explained Variance ========
+\end{block}

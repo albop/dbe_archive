@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data-Based Economics – text_analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Data-Based Economics</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Data-Based Economics</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Slides</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">Dataframes</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">Linear Regression</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intro-to-text-analysis" id="toc-intro-to-text-analysis" class="nav-link active" data-scroll-target="#intro-to-text-analysis">Intro to text analysis</a>
+  <ul class="collapse">
+  <li><a href="#what-can-we-do" id="toc-what-can-we-do" class="nav-link" data-scroll-target="#what-can-we-do">What can we do?</a>
+  <ul class="collapse">
+  <li><a href="#how-to-deal-with-text" id="toc-how-to-deal-with-text" class="nav-link" data-scroll-target="#how-to-deal-with-text">How to deal with text?</a></li>
+  <li><a href="#example-1-fomc-meetings" id="toc-example-1-fomc-meetings" class="nav-link" data-scroll-target="#example-1-fomc-meetings">Example 1: FOMC meetings</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
+  <li><a href="#text-mining-what-can-we-extract-from-texts" id="toc-text-mining-what-can-we-extract-from-texts" class="nav-link" data-scroll-target="#text-mining-what-can-we-extract-from-texts">Text-mining: what can we extract from texts</a></li>
+  <li><a href="#clarification" id="toc-clarification" class="nav-link" data-scroll-target="#clarification">Clarification</a></li>
+  </ul></li>
+  <li><a href="#the-even-less-glamorous-part" id="toc-the-even-less-glamorous-part" class="nav-link" data-scroll-target="#the-even-less-glamorous-part">The even-less glamorous part</a></li>
+  <li><a href="#transforming-the-text" id="toc-transforming-the-text" class="nav-link" data-scroll-target="#transforming-the-text">Transforming the text</a>
+  <ul class="collapse">
+  <li><a href="#processing-steps" id="toc-processing-steps" class="nav-link" data-scroll-target="#processing-steps">Processing steps</a></li>
+  <li><a href="#processing-steps-2" id="toc-processing-steps-2" class="nav-link" data-scroll-target="#processing-steps-2">Processing steps (2)</a></li>
+  <li><a href="#tokenization" id="toc-tokenization" class="nav-link" data-scroll-target="#tokenization">Tokenization</a></li>
+  <li><a href="#part-of-speech-tagging" id="toc-part-of-speech-tagging" class="nav-link" data-scroll-target="#part-of-speech-tagging">Part-of speech tagging</a></li>
+  <li><a href="#simplifying-the-text-1-stopwords" id="toc-simplifying-the-text-1-stopwords" class="nav-link" data-scroll-target="#simplifying-the-text-1-stopwords">Simplifying the text (1): stopwords</a></li>
+  <li><a href="#simplifying-the-text-2-lexicon-normalization" id="toc-simplifying-the-text-2-lexicon-normalization" class="nav-link" data-scroll-target="#simplifying-the-text-2-lexicon-normalization">Simplifying the text (2): lexicon normalization</a></li>
+  </ul></li>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis">Sentiment analysis</a>
+  <ul class="collapse">
+  <li><a href="#sentiment-analysis-1" id="toc-sentiment-analysis-1" class="nav-link" data-scroll-target="#sentiment-analysis-1">Sentiment analysis</a></li>
+  <li><a href="#lexical-analysis" id="toc-lexical-analysis" class="nav-link" data-scroll-target="#lexical-analysis">Lexical analysis</a></li>
+  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine learning</a></li>
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">Comments</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="intro-to-text-analysis" class="level1">
+<h1>Intro to text analysis</h1>
+<hr>
+<section id="what-can-we-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-we-do">What can we do?</h2>
+<hr>
+<section id="how-to-deal-with-text" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-deal-with-text">How to deal with text?</h3>
+<ul>
+<li>Recall: big data contains <em>heterogenous</em> data
+<ul>
+<li><mark>text</mark> / images / sound</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="example-1-fomc-meetings" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-fomc-meetings">Example 1: FOMC meetings</h3>
+<p><em>Taking the Fed at its Word: A New Approach to Estimating Central Bank Objectives using Text Analysis</em> by Adam H. Shapiro and Daniel J. Wilson <a href="https://www.frbsf.org/economic-research/files/wp2019-02.pdf">link</a></p>
+<ul>
+<li>Remember the Taylor rule? We tried to estimate it from the data.</li>
+<li>Generalized version: <span class="math inline">\(i_t = \alpha_\pi (\pi_t-\pi^{\star}) + \alpha_y (y_t-y)\)</span></li>
+<li>Is there a way to measure the preferences of the central bank? (coefficients and inflation target?)</li>
+<li>Shapiro and Wilson: let’s look at the FOMC <a href="https://www.federalreserve.gov/monetarypolicy/fomc_historical.htm">meeting transcripts</a></li>
+<li>Excerpts (there are <em>tons</em> of them: 704,499)</li>
+</ul>
+<div class="r-stack">
+<div class="fragment current-visible">
+<blockquote class="blockquote">
+<p>I had several conversations at Jackson Hole with Wall Street economists and journalists, and they said, quite frankly, that they really do not believe that our effective inflation target is 1 to 2 percent. They believe we have morphed into 1+1/2 to 2+1/2 percent, and no one thought that we were really going to do anything over time to bring it down to 1 to 2.</p>
+</blockquote>
+<p>Sep 2006 <em>St.&nbsp;Louis Federal Reserve President William Poole</em></p>
+</div>
+<div class="fragment current-visible">
+<blockquote class="blockquote">
+<p>Like most of you, I am not at all alarmist about inflation. I think the worst that is likely to happen would be 20 or 30 basis points over the next year. But even that amount is a little disconcerting for me. I think it is very important for us to maintain our credibility on inflation and it would be somewhat expensive to bring that additional inflation back down.</p>
+</blockquote>
+<p>March 2006 <em>Chairman Ben Bernanke</em></p>
+</div>
+<div class="fragment current-visible">
+<blockquote class="blockquote">
+<p>With inflation remaining at such rates, we could begin to lose credibility if markets mistakenly inferred that our comfort zone had drifted higher. When we stop raising rates, we ought to be reasonably confident that policy is restrictive enough to bring inflation back toward the center of our comfort zone, which I believe is 1+1/2 percent…So for today, we should move forward with an increase of 25 basis points…</p>
+</blockquote>
+<p>Jan 2006 <em>Chicago Federal Reserve President Michael Moskow</em></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">Example 2</h3>
+<p><img src="graphs/tweets.jpg" class="img-fluid"></p>
+<ul>
+<li>Suppose you work in the trading floor of a financial instutition</li>
+<li>These kind of tweets have disturbing impact on the markets. You need to react quickly.</li>
+<li>You need a machine to assess the risk in real time.</li>
+<li>More generally, tweeter is a quite unique source of real-time data</li>
+<li>How do you analyse the content of the tweets?</li>
+<li>Comment: actually it’s not only the content of the tweets, but who reads, who retweets: graph analysis</li>
+</ul>
+<hr>
+</section>
+<section id="text-mining-what-can-we-extract-from-texts" class="level3">
+<h3 class="anchored">Text-mining: what can we extract from texts</h3>
+<ul>
+<li>The main branches of text analysis are:
+<ul>
+<li>sentiment analysis
+<ul>
+<li>associate positivity/negativity to a text</li>
+<li>precise meaning of “sentiment” is context dependent<br>
+</li>
+</ul></li>
+<li>topic modeling
+<ul>
+<li>classify texts as belonging to known categories (supervised)</li>
+<li>finding likely texts (unsupervised)</li>
+</ul></li>
+<li>named-entity recognition
+<ul>
+<li>find who gets mentioned in the text</li>
+<li>example: <a href="https://portal.cepr.org/discussion-paper/17941">A Cross-verified Database of Notable People, 3500BC-2018AD</a></li>
+</ul></li>
+<li>event-extraction
+<ul>
+<li>recognize mention of events</li>
+</ul></li>
+<li><h2 id="plus-everything-that-can-be-done-with-a-language-model-like-gpt-3" class="anchored" data-anchor-id="text-mining-what-can-we-extract-from-texts">plus everything that can be done with a language model like GPT-3…</h2></li>
+</ul></li>
+</ul>
+</section>
+<section id="clarification" class="level3">
+<h3 class="anchored" data-anchor-id="clarification">Clarification</h3>
+<ul>
+<li>Text analysis / text mining are somewhat used interchangeably <img src="graphs/processing_text.svg" class="img-fluid"></li>
+<li>In general they consist in quantifying information used in a text…</li>
+<li>… so that it can be incorporated in machine learning analysis</li>
+<li>Recently, <em>deep learning</em> (and <a href="https://gpt3examples.com/#examples">GPT-3</a>) has changed this state of facts:
+<ul>
+<li>some models get trained direcly on text (intermediary phases are not explicited)</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="the-even-less-glamorous-part" class="level2">
+<h2 class="anchored" data-anchor-id="the-even-less-glamorous-part">The even-less glamorous part</h2>
+<ul>
+<li><!-- .element: class="fragment" -->
+before getting started with text analysis, one needs to get hold of the text in the first place</li>
+<li><!-- .element: class="fragment" -->
+how to extract
+<ul>
+<li>webscraping: automate a bot to visit website and download text</li>
+<li>document extraction: for instance extract the text from pdf docs, get rid of everything irrelevant</li>
+</ul></li>
+<li><!-- .element: class="fragment" -->
+how to store it
+<ul>
+<li>what kind of database?</li>
+<li>important problem when database is big</li>
+</ul></li>
+<li><!-- .element: class="fragment" -->
+good news! we won’t do it in this course
+<ul>
+<li>you need a bit more python-fu</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="transforming-the-text" class="level2">
+<h2 class="anchored" data-anchor-id="transforming-the-text">Transforming the text</h2>
+<hr>
+<section id="processing-steps" class="level3">
+<h3 class="anchored" data-anchor-id="processing-steps">Processing steps</h3>
+<ul>
+<li>Let’s briefly see how text gets processed.</li>
+<li>Goal is to transform the text into a numerical vector of <em>features</em>
+<ul>
+<li>Stupid approach: “abc”-&gt;[1,2,3]</li>
+<li>we need to capture some form of language structure</li>
+</ul></li>
+<li>All the steps can be done fairly easily with <a href="https://www.nltk.org/">nltk</a>
+<ul>
+<li>nltk is comparable to sklearn in terms of widespread adoption</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="processing-steps-2" class="level3">
+<h3 class="anchored" data-anchor-id="processing-steps-2">Processing steps (2)</h3>
+<ul>
+<li>Steps:
+<ul>
+<li>tokenization</li>
+<li>stopwords</li>
+<li>lexicon normalization
+<ul>
+<li>stemming</li>
+<li>lemmatization</li>
+</ul></li>
+<li>POS tagging</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="tokenization" class="level3">
+<h3 class="anchored" data-anchor-id="tokenization">Tokenization</h3>
+<div class="container">
+<div class="col">
+<ul>
+<li>Tokenization: split input into atomic elements.</li>
+<li><!-- .element: class="fragment" data-fragment-index="2" -->
+We can recognize sentences.</li>
+<li><!-- .element: class="fragment" data-fragment-index="3" -->
+Or words.</li>
+<li><!-- .element: class="fragment" data-fragment-index="4" -->
+It is enough for some basic analysis:</li>
+</ul>
+<div class="fragment" data-fragment-index="4">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.probability <span class="im">import</span> FreqDist</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fdist <span class="op">=</span> FreqDist(words)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fdist.most_common(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>[('It', 1), ("'s", 1)]</code></pre>
+</div>
+</div>
+<div class="col">
+<div class="r-stack">
+<div class="fragment" data-fragment-index="2">
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> sent_tokenize</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>txt <span class="op">=</span> <span class="st">"""Animal Farm is a short novel by George Orwell. It was</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">written during World War II and published in 1945. It is about </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">a group of farm animals who rebel against their farmer. They </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">hope to create a place where the animals can be equal, free,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st"> and happy."""</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sentences  <span class="op">=</span> sent_tokenize(txt)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sentences)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>['Animal Farm is a short novel by George Orwell.',
+ 'It was\nwritten during World War II and published in 1945.', 
+ 'It is about \na group of farm animals who rebel against their farmer.', 
+ 'They \nhope to create a place where the animals can be equal, free,\n and happy.']</code></pre>
+</div>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>txt <span class="op">=</span> <span class="st">"It's a beautiful thing, the destruction of words."</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>words  <span class="op">=</span> word_tokenize(txt)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>['It', "'s", 'a', 'beautiful', 'thing', ',', 'the', 'destruction', 'of', 'words', '.']</code></pre>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="part-of-speech-tagging" class="level3">
+<h3 class="anchored" data-anchor-id="part-of-speech-tagging">Part-of speech tagging</h3>
+<div class="container">
+<div class="col">
+<ul>
+<li>Sometimes we need information about the kind of tokens that we have</li>
+<li><!-- .element: class="fragment" data-fragment-index="2" -->
+We can perform part-of-speech tagging (aka grammatical tagging)</li>
+<li><!-- .element: class="fragment" data-fragment-index="3" -->
+This is useful to refine interpretation of some words
+<ul>
+<li>“it’s not a beautiful thing”</li>
+<li>vs “it’s a beautiful thing”</li>
+<li><em>connotation</em> of beautiful changes</li>
+</ul></li>
+</ul>
+</div>
+<div class="col">
+<div class="fragment" data-fragment-index="2">
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tagged <span class="op">=</span> nltk.pos_tag(words)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tagged</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>[('It', 'PRP'),
+ ("'s", 'VBZ'),
+ ('a', 'DT'),
+ ('beautiful', 'JJ'),
+ ('thing', 'NN'),
+ (',', ','),
+ ('the', 'DT'),
+ ('destruction', 'NN'),
+ ('of', 'IN'),
+ ('words', 'NNS'),
+ ('.', '.')]</code></pre>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="simplifying-the-text-1-stopwords" class="level3">
+<h3 class="anchored" data-anchor-id="simplifying-the-text-1-stopwords">Simplifying the text (1): stopwords</h3>
+<div class="container">
+<div class="col">
+<ul>
+<li>Some words are very frequent and carry no useful meaning
+<ul>
+<li><!-- .element: class="fragment" data-fragment-index="2" -->
+They are called <em>stopwords</em></li>
+</ul></li>
+<li><!-- .element: class="fragment" data-fragment-index="3" -->
+We typically remove them from our word list</li>
+</ul>
+</div>
+<div class="col">
+<div class="fragment" data-fragment-index="2">
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>stop_words<span class="op">=</span><span class="bu">set</span>(stopwords.words(<span class="st">"english"</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stop_words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>{'their', 'then', 'not', 'ma', 'here', ...}
+</code></pre>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>filtered_words <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> words <span class="cf">if</span> w <span class="kw">not</span> <span class="kw">in</span> stop_words]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>filtered_words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>['beautiful', 'thing' 'destruction', 'words']</code></pre>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="simplifying-the-text-2-lexicon-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="simplifying-the-text-2-lexicon-normalization">Simplifying the text (2): lexicon normalization</h3>
+<div class="container">
+
+<div class="col">
+<ul>
+<li>Sometimes, there are several variants of a given word
+<ul>
+<li>tight, tightening, tighten</li>
+</ul></li>
+<li><!-- .element: class="fragment" data-fragment-index="2" -->
+Stemming: keeping the word root</li>
+<li><!-- .element: class="fragment" data-fragment-index="3" -->
+Lemmatization: keeps the word base
+<ul>
+<li>linguistically correct contrary to stemming</li>
+</ul></li>
+</ul>
+</div>
+<div class="col">
+<div class="fragment" data-fragment-index="2">
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> PorterStemmer</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ps <span class="op">=</span> PorterStemmer()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span>  [<span class="st">"tight"</span>, <span class="st">"tightening"</span>, <span class="st">"tighten"</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>stemmed_words<span class="op">=</span>[ps.stem(w) <span class="cf">for</span> w <span class="kw">in</span> words]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>['tight', 'tighten', 'tighten']</code></pre>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem.wordnet <span class="im">import</span> WordNetLemmatizer</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>lem <span class="op">=</span> WordNetLemmatizer()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span>  [<span class="st">"flying"</span>, <span class="st">"flyer"</span>, <span class="st">"fly"</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>stemmed_words<span class="op">=</span>[ps.stem(w) <span class="cf">for</span> w <span class="kw">in</span> words]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>lemmatized_words<span class="op">=</span>[ps.stem(w) <span class="cf">for</span> w <span class="kw">in</span> words]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>``` # lemmatized [‘flying’, ‘flyer’, ‘fly’] # stemmed [‘fli’, ‘flyer’, ‘fli’]</p>
+</div>
+</div>
+<hr>
+</div></section>
+</section>
+<section id="sentiment-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="sentiment-analysis">Sentiment analysis</h2>
+<hr>
+<section id="sentiment-analysis-1" class="level3">
+<h3 class="anchored" data-anchor-id="sentiment-analysis-1">Sentiment analysis</h3>
+<ul>
+<li>What do we do now that we have reduced a text to a series of word occurrences?</li>
+<li>Two main approaches:
+<ol type="1">
+<li>lexical analysis</li>
+<li>machine learning</li>
+</ol></li>
+</ul>
+<hr>
+</section>
+<section id="lexical-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="lexical-analysis">Lexical analysis</h3>
+<ul>
+<li><p>Use a “sentiment dictionary” to provide a value (positive or negative) for each word</p>
+<ul>
+<li>sum the weights to get positive or negative sentiment</li>
+</ul></li>
+<li><!-- .element: class="fragment" -->
+<p>Example: <span class="math display">\[\underbrace{\text{Sadly}}\_{-}\text{, there wasn't a glimpse of }\underbrace{\text{light}}\_{+} \text{ in his } \text{world } \text{ of intense }\underbrace{\text{suffering.}}\_{-}\]</span></p></li>
+<li><!-- .element: class="fragment" -->
+<p>Total:</p>
+<ul>
+<li>-1+1-1. Sentiment is negative.</li>
+</ul></li>
+<li><!-- .element: class="fragment" -->
+<p>Problems:</p>
+<ul>
+<li>here, taking grammar into account would change everything</li>
+<li>doesn’t capture irony</li>
+<li>our dictionary doesn’t have weights for what matters to us <span class="math display">\[ \text{the central bank forecasts increased }\underbrace{\text{inflation}}\_{?}\]</span></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="machine-learning" class="level3">
+<h3 class="anchored" data-anchor-id="machine-learning">Machine learning</h3>
+<ul>
+<li><p>Idea: we would like the weights to be endogenously determined</p>
+<div>
+<!-- .element: class="fragment" -->
+<p><span class="math display">\[ \underbrace{\text{the}}_{x_1} \underbrace{\text{ central}}_{x_2} \underbrace{\text{ bank}}_{x_3} \underbrace{\text{ forecasts}}_{x_4} \underbrace{\text{ increased} }_{x_5} \underbrace{\text{ inflation}}_{x_6}\]</span></p></div></li>
+<li><!-- .element: class="fragment" -->
+<p>Suppose we had several texts: we can generate features by counting words in each of them | | the | central | bank | forecasts | increased | inflation | economy | exchange rate | crisis | <mark>sentiment</mark> | | —– | — | ——- | —- | ——— | ——— | ——— | ——- | ————- | —— | ———————- | | text1 | 1 | 1 | 2 | 1 | 1 | 2 | | | | -1 | | | text2 | 3 | | | | | 1 | 1 | 2 | | +1 | | | text3 | 4 | | 1 | | | 1 | | 1 | 1 | -1 | | |</p></li>
+<li><!-- .element: class="fragment" -->
+<p>We can the train the model: <span class="math inline">\(y = x_1 f(w_1) + \cdots x_K f(w_K)\)</span> where <span class="math inline">\(y\)</span> is the sentiment and <span class="math inline">\(w_i\)</span> is wordcount of word <span class="math inline">\(w_i\)</span></p>
+<ul>
+<li>of course, we need a similar procedure as before (split the training set and evaluation set, …)</li>
+<li>we can use any model (like naive bayesian updating)</li>
+</ul></li>
+<li><!-- .element: class="fragment" -->
+<p>This approach is called <em>Bag of Words</em> (BOW)</p></li>
+</ul>
+<hr>
+</section>
+<section id="comments" class="level3">
+<h3 class="anchored" data-anchor-id="comments">Comments</h3>
+<ul>
+<li>Bag of words has a few pitfalls:
+<ul>
+<li>it requires a big training set with labels</li>
+<li>it overweights long documents</li>
+<li>there is noise due to the very frequent words that don’t affect sentiment</li>
+</ul></li>
+<li>Improvement: TF-IDF
+<ul>
+<li>stands for Term-Frequency*Inverse-Distribution-Frequency</li>
+<li>replace word frequency <span class="math inline">\(f(w)\)</span> by <span class="math display">\[\text{tf-idf} = f(w)\frac{\text{number of documents}}{\text{number of documents containing $w$}}\]</span></li>
+</ul></li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

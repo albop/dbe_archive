@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data-Based Economics – introduction</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Data-Based Economics</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Data-Based Economics</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Slides</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../session_1/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../session_2/index.html" class="sidebar-item-text sidebar-link">Dataframes</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../session_3/index.html" class="sidebar-item-text sidebar-link">Linear Regression</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../session_4/index.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#modern-scientific-programming" id="toc-modern-scientific-programming" class="nav-link active" data-scroll-target="#modern-scientific-programming">Modern Scientific Programming</a>
+  <ul class="collapse">
+  <li><a href="#about-myself" id="toc-about-myself" class="nav-link" data-scroll-target="#about-myself">About Myself</a></li>
+  <li><a href="#what-is-modern-scientific-programming" id="toc-what-is-modern-scientific-programming" class="nav-link" data-scroll-target="#what-is-modern-scientific-programming">What is Modern Scientific Programming?</a></li>
+  <li><a href="#versioned-open-source" id="toc-versioned-open-source" class="nav-link" data-scroll-target="#versioned-open-source">Versioned, open source</a>
+  <ul class="collapse">
+  <li><a href="#graph-about-adoption-of-software-since-the-introduction-of-github" id="toc-graph-about-adoption-of-software-since-the-introduction-of-github" class="nav-link" data-scroll-target="#graph-about-adoption-of-software-since-the-introduction-of-github">graph about adoption of software since the introduction of Github</a></li>
+  </ul></li>
+  <li><a href="#reproducible-and-interactive" id="toc-reproducible-and-interactive" class="nav-link" data-scroll-target="#reproducible-and-interactive">Reproducible and interactive</a></li>
+  <li><a href="#multilanguage" id="toc-multilanguage" class="nav-link" data-scroll-target="#multilanguage">Multilanguage</a></li>
+  <li><a href="#multiplatforms" id="toc-multiplatforms" class="nav-link" data-scroll-target="#multiplatforms">Multiplatforms</a></li>
+  <li><a href="#why-should-you-learn-to-program" id="toc-why-should-you-learn-to-program" class="nav-link" data-scroll-target="#why-should-you-learn-to-program">Why should you learn to program ?</a></li>
+  <li><a href="#now-is-the-right-time" id="toc-now-is-the-right-time" class="nav-link" data-scroll-target="#now-is-the-right-time">Now <em>is</em> the right time !</a></li>
+  <li><a href="#do-it-in-the-open-2" id="toc-do-it-in-the-open-2" class="nav-link" data-scroll-target="#do-it-in-the-open-2">Do it in the open ! (2)</a></li>
+  <li><a href="#mental-break-even-toddlers-can-learn-to-program" id="toc-mental-break-even-toddlers-can-learn-to-program" class="nav-link" data-scroll-target="#mental-break-even-toddlers-can-learn-to-program">Mental Break: even toddlers can learn to program</a></li>
+  <li><a href="#for-next-time" id="toc-for-next-time" class="nav-link" data-scroll-target="#for-next-time">For next time</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="modern-scientific-programming" class="level1">
+<h1>Modern Scientific Programming</h1>
+<p>PSE, 2019</p>
+<p>Pablo Winant</p>
+<section id="about-myself" class="level2">
+<h2 class="anchored" data-anchor-id="about-myself">About Myself</h2>
+<ul>
+<li>(computational) economist</li>
+<li>worked at IMF and Bank of England
+<ul>
+<li>DSGE modeling</li>
+<li>various technological projects</li>
+</ul></li>
+<li>involved in several opensource projects
+<ul>
+<li>quantecon (Tom Sargent and John Stachurski)</li>
+<li>ARK (Chris Carrol)</li>
+<li>dolo/dolark/bttt</li>
+<li>…</li>
+</ul></li>
+<li>research
+<ul>
+<li>macro stuff (international finance, inequalities, optimal policies)</li>
+<li>machine learning (especially neural networks)</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-is-modern-scientific-programming" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-modern-scientific-programming">What is Modern Scientific Programming?</h2>
+<ul>
+<li>scientific programming
+<ul>
+<li>algorithm</li>
+<li>speed, memory efficiency, accuracy</li>
+<li>= numerical methods (judd) + Fortran</li>
+</ul></li>
+<li>modern?
+<ul>
+<li>versioned</li>
+<li>opensource, free</li>
+<li>reproducible</li>
+<li>multilanguage</li>
+<li>multiplatform</li>
+</ul></li>
+</ul>
+</section>
+<section id="versioned-open-source" class="level2">
+<h2 class="anchored" data-anchor-id="versioned-open-source">Versioned, open source</h2>
+<ul>
+<li>git is a decentralized, versioning system</li>
+<li>github adds online collaborative tools</li>
+<li>it has fostered, the development of many softwares, libraries (linux, python, Julia, R, etc.)</li>
+<li>industry and community have converged on the same tools</li>
+</ul>
+<section id="graph-about-adoption-of-software-since-the-introduction-of-github" class="level3">
+<h3 class="anchored" data-anchor-id="graph-about-adoption-of-software-since-the-introduction-of-github">graph about adoption of software since the introduction of Github</h3>
+<p><img src="gh.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="reproducible-and-interactive" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-and-interactive">Reproducible and interactive</h2>
+<ul>
+<li>Use open data</li>
+<li>Being able to reproduce the exact environment used for data processing and computations</li>
+<li>Provide interactive views of the results</li>
+</ul>
+</section>
+<section id="multilanguage" class="level2">
+<h2 class="anchored" data-anchor-id="multilanguage">Multilanguage</h2>
+<p>Several programming languages, with different strengths - C/Fortran: low-level speed - Python: easy, readable, many scientific libraries, glue language - Julia: low-level speed, high-level features</p>
+<p>can interact…</p>
+<p>Lots of specialized language are useful too (for research) - html/javascript - vega/ggog - yaml/json - database (sql) - tensorflow (deep learning)</p>
+</section>
+<section id="multiplatforms" class="level2">
+<h2 class="anchored" data-anchor-id="multiplatforms">Multiplatforms</h2>
+<p>Calculations can (must be run) on a variety of different platforms:</p>
+<ul>
+<li>laptop</li>
+<li>server</li>
+<li>virtual machine / container</li>
+<li>farm of computers</li>
+<li>specialized hardware (e.g.&nbsp;GPU, TPU)</li>
+</ul>
+</section>
+<section id="why-should-you-learn-to-program" class="level2">
+<h2 class="anchored" data-anchor-id="why-should-you-learn-to-program">Why should you learn to program ?</h2>
+<ul>
+<li>Econometricians, modellers, data scientists, spend a lot of time writing code
+<ul>
+<li>and do it inefficiently…</li>
+</ul></li>
+<li>Programming efficiently requires awareness of
+<ul>
+<li>certain basic concepts: (types, control flow, functions, objects)</li>
+<li>some tools (programming language, code versioning, command line)</li>
+<li>which are never taught…</li>
+</ul></li>
+<li>And yet they are very easy to learn
+<ul>
+<li>anyone can become an expert !</li>
+</ul></li>
+</ul>
+</section>
+<section id="now-is-the-right-time" class="level2">
+<h2 class="anchored" data-anchor-id="now-is-the-right-time">Now <em>is</em> the right time !</h2>
+<ul>
+<li><p>A lot of demand everywhere for skilled programmers.</p></li>
+<li><p>Many faculties are introducing formal programming courses (for economists)</p>
+<ul>
+<li>MIT, NYU, Penn, …</li>
+<li>Summer Bootcamps</li>
+</ul></li>
+<li><p>New applications are even more code-intensive than before:</p>
+<ul>
+<li>data science</li>
+<li>machine learning</li>
+<li>modeling</li>
+</ul></li>
+</ul>
+</section>
+<section id="do-it-in-the-open-2" class="level2">
+<h2 class="anchored" data-anchor-id="do-it-in-the-open-2">Do it in the open ! (2)</h2>
+<ul>
+<li><p>Many excellent online resources:</p>
+<ul>
+<li><a href="https://software-carpentry.org/">Software Carpentry</a></li>
+<li><a href="https://quantecon.org/news-item/need-for-speed-in-julia">QuantEcon</a> from Tom Sargent and John Stachurski</li>
+</ul></li>
+<li><p>Opensource community is very welcoming:</p>
+<ul>
+<li>ask on mailing lists or online chats (Julia users, quantecon, dynare, …)</li>
+<li>open issues (for instance against Dolo (https://github.com/EconForge/Dolo.jl/issues)[https://github.com/EconForge/Dolo.jl/issues]</li>
+<li>participating is also a great occasion to learn</li>
+</ul></li>
+</ul>
+</section>
+<section id="mental-break-even-toddlers-can-learn-to-program" class="level2">
+<h2 class="anchored" data-anchor-id="mental-break-even-toddlers-can-learn-to-program">Mental Break: even toddlers can learn to program</h2>
+<p>https://www.youtube.com/watch?v=4gN9nPB7LIw</p>
+<p>https://www.kickstarter.com/projects/primotoys/cubetto-hands-on-coding-for-girls-and-boys-aged-3</p>
+</section>
+<section id="for-next-time" class="level2">
+<h2 class="anchored" data-anchor-id="for-next-time">For next time</h2>
+<ul>
+<li>Register on zulip if not done already.</li>
+<li>Install Anaconda Python 3.7 (user-wide so that packages can be installed without admin rights</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
