@@ -121,15 +121,7 @@ $$X = \begin{bmatrix}
   - how do we interpret it?
   - can we build confidence intervals?
 
-<<<<<<<< HEAD:session_4/index.qmd
 # Explained Variance
-========
----
-
-# Explained Variance
-
-----
->>>>>>>> f769a93bfa6a7cf861396754a3715ef9ed4a78a2:session_4/index.md
 
 ## Explained Variance
 

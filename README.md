@@ -1,11 +1,11 @@
-### Schedule
+## Schedule
 
 | Session | Date | Content | Tutorial | Homework |
 | ------- | ---- | ------- | -------- | -------- |
-| 1 | 18/01 | [intro](https://www.mosphere.fr) | python essentials | push-ups (1) |
-| 2 | 25/01 | dataframes, descriptive statistics | data exploration, visualization | push-ups (2) |
-| 3 | 01/02 | linear regression |  |  |
-| 4 | 08/02 | multiple regression |  |  |
+| 1 | 18/01 | [intro](https://www.mosphere.fr/dbe) | python essentials | push-ups (1) |
+| 2 | 25/01 | [dataframes](https://www.mosphere.fr/dbe/session_2), descriptive statistics | python essentials (2) | push-ups (2) |
+| 3 | 01/02 | [linear regression](https://www.mosphere.fr/dbe/session_3) | data exploration, visualization | push-ups (3) |
+| 4 | 08/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  | coursework (1) |
 | 5 | 15/02 | instrumental variables |  |  |
 | 6 | 22/02 | panel data |  |  |
 | 7 | 01/02 | machine learning introduction (1) |  |  |
@@ -13,28 +13,26 @@
 | 7 | 21/03 | text analysis |  |  |
 | 10 | 04/04 | final exam |  |
 
----
+## About pushups
 
-### Evaluation & Final Examination
+* Pushups
+    * individual
+    * to do after every course, before next session
+    * you are *encouraged* to collaborate
+    * send via Nuvolos platform
 
-- Pushups
-  - individual
-  - every week
-  - you are *encouraged* to collaborate
-  - to be sent via Nuvolos platform
-- <!-- .element: class="fragment"  -->Data Projects (x2) (50%)
-  - group work
-  - goals:
-    - import some data
-    - perform/replicate some econometric work
-    - present results with nice plots
-- <!-- .element: class="fragment"  -->Final Exam: (50%)
-  - 60 min during last session
-  - test general knowledge of econometrics / machine learning
-  - there *will* be some programming tasks
-- <!-- .element: class="fragment" -->Participation Bonus (+/- 10%)
+## Evaluation & Final Examination
 
----
+* Data Projects (x2) (50%)
+    * groupwork (goups smaller than 4)
+        * import some data
+        * perform/replicate some econometric work
+        * present results with nice plots
+* Final Exam (50%)
+    * individual
+    * 90 min during last session
+    * test general knowledge of econometrics / machine learning
+    * there *will* be some programming tasks
 
 ### Work Environment
 
