@@ -684,8 +684,9 @@ A good instrument when trying to explain y by x, is a variable that is correlate
 - Both `statsmodels` and  `linearmodels` support instrumental variables
   - library (look for IV2SLS)
 
-- Library `linearmodels` has a handy formula syntax: `salary ~ [war ~ draft]`
-  - API is similar but not exactly identical to stats models
+- Library `linearmodels` has a handy formula syntax: `salary ~ 1 + [war ~ draft]`
+  - API is similar but not exactly identical to statsmodels
+  - for instance `linearmodels` does not include constants by default
 
 
 - Example from the doc
