@@ -7,7 +7,7 @@
 | 3 | 01/02 | [linear regression](https://www.mosphere.fr/dbe/session_3) | data exploration, visualization | push-ups (3) |
 | 4 | 08/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  |                                           |
 | 5 | 15/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  |  |
-| 6 | 22/02 | [panel data](https://www.mosphere.fr/dbe/session_5) |  | coursework (1) |
+| 6 | 22/02 | [instrumental variables](https://www.mosphere.fr/dbe/session_5) |  | coursework (1) |
 | 7 | 01/02 | machine learning introduction (1) |  |  |
 | 6 | 07/03 | machine learning introduction (2) |  |  |
 | 7 | 21/03 | text analysis |  |  |
