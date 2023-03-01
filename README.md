@@ -2,12 +2,12 @@
 
 | Session | Date | Content | Tutorial | Homework |
 | ------- | ---- | ------- | -------- | -------- |
-| 1 | 18/01 | [intro](https://www.mosphere.fr/dbe) | python essentials | push-ups (1) |
-| 2 | 25/01 | [dataframes](https://www.mosphere.fr/dbe/session_2), descriptive statistics | python essentials (2) | push-ups (2) |
-| 3 | 01/02 | [linear regression](https://www.mosphere.fr/dbe/session_3) | data exploration, visualization | push-ups (3) |
-| 4 | 08/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  |                                           |
-| 5 | 15/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  |  |
-| 6 | 22/02 | [instrumental variables](https://www.mosphere.fr/dbe/session_5) |  | coursework (1) |
+| 1 | 18/01 | [intro](session_1/index.qmd) | python essentials | push-ups (1) |
+| 2 | 25/01 | [dataframes](session_2/index.qmd), descriptive statistics | python essentials (2) | push-ups (2) |
+| 3 | 01/02 | [linear regression](session_3/index.qmd) | data exploration, visualization | push-ups (3) |
+| 4 | 08/02 | [multiple regression](session_4/index.qmd) |  |                                           |
+| 5 | 15/02 | [multiple regression](session_4/index.qmd) |  |  |
+| 6 | 22/02 | [instrumental variables](session_5/index.qmd) |  | coursework (1) |
 | 7 | 01/02 | machine learning introduction (1) |  |  |
 | 6 | 07/03 | machine learning introduction (2) |  |  |
 | 7 | 21/03 | text analysis |  |  |
