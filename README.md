@@ -5,9 +5,9 @@
 | 1 | 18/01 | [intro](https://www.mosphere.fr/dbe) | python essentials | push-ups (1) |
 | 2 | 25/01 | [dataframes](https://www.mosphere.fr/dbe/session_2), descriptive statistics | python essentials (2) | push-ups (2) |
 | 3 | 01/02 | [linear regression](https://www.mosphere.fr/dbe/session_3) | data exploration, visualization | push-ups (3) |
-| 4 | 08/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  | coursework (1) |
-| 5 | 15/02 | instrumental variables |  |  |
-| 6 | 22/02 | panel data |  |  |
+| 4 | 08/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  |                                           |
+| 5 | 15/02 | [multiple regression](https://www.mosphere.fr/dbe/session_4) |  |  |
+| 6 | 22/02 | [panel data](https://www.mosphere.fr/dbe/session_5) |  | coursework (1) |
 | 7 | 01/02 | machine learning introduction (1) |  |  |
 | 6 | 07/03 | machine learning introduction (2) |  |  |
 | 7 | 21/03 | text analysis |  |  |

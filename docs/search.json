@@ -586,5 +586,236 @@
     "title": "Data-Based Economics",
     "section": "",
     "text": "A DataFrame (aka a table) is a 2-D labeled data structure with columns of potentially different types.\n\ntypes: quantitative, qualitative (ordered, non-ordered, …)\n\nFirst column is special: the index\n\n\n\n\n\n\nfirst goal of an econometrician: constitute a good dataframe\n\n“cleaning the data”\n\nsometimes data comes from several linked dataframes\n\nrelational database\n\ndataframes / relational databases are so ubiquitous a language has been developed for them: SQL\n\n\n\n\n\n\n\nimport pandas as pd\n\n\n\n\npandas = panel + datas\ncreated by WesMcKinsey, very optimized\nmany options\nif in doubt: minimally sufficient pandas\n\nsmall subset of pandas to do everything\n\ntons of online tutorials ex: doc\n\n\n\n\n\n# from a dictionary\nd = {\n    \"country\": [\"USA\", \"UK\", \"France\"],\n    \"comics\": [13, 10, 12]   \n}\npd.DataFrame(d)\n\n\n\n\n\n  \n    \n      \n      country\n      comics\n    \n  \n  \n    \n      0\n      USA\n      13\n    \n    \n      1\n      UK\n      10\n    \n    \n      2\n      France\n      12\n    \n  \n\n\n\n\n\n\n\n\n# from a matrix\nimport numpy as np\nM = np.array([\n    [18, 150],\n    [21, 200],\n    [29, 1500]\n])\n    \ndf = pd.DataFrame( M, columns=[\"age\", \"travel\"] )\ndf\n\n\n\n\n\n  \n    \n      \n      age\n      travel\n    \n  \n  \n    \n      0\n      18\n      150\n    \n    \n      1\n      21\n      200\n    \n    \n      2\n      29\n      1500\n    \n  \n\n\n\n\n\n\n\n\n\n\n\ncomma separated files: csv file\n\noften distributed online\ncan be exported easily from Excel or LibreOffice\n\nstata files: use pd.read_dta()\nexcel files: use pd.read_excel() or xlsreader if unlucky\n\n\n\n\n\ntxt = \"\"\"year,country,measure\n2018,\"france\",950.0\n2019,\"france\",960.0\n2020,\"france\",1000.0\n2018,\"usa\",2500.0\n2019,\"usa\",2150.0\n2020,\"usa\",2300.0\n\"\"\"\nopen('dummy_file.csv','w').write(txt) # we write it to a file\n\n136\n\n\n\ndf = pd.read_csv('dummy_file.csv') # what index should we use ?\ndf\n\n\n\n\n\n  \n    \n      \n      year\n      country\n      measure\n    \n  \n  \n    \n      0\n      2018\n      france\n      950.0\n    \n    \n      1\n      2019\n      france\n      960.0\n    \n    \n      2\n      2020\n      france\n      1000.0\n    \n    \n      3\n      2018\n      usa\n      2500.0\n    \n    \n      4\n      2019\n      usa\n      2150.0\n    \n    \n      5\n      2020\n      usa\n      2300.0\n    \n  \n\n\n\n\n\n\n\n\nSometimes, comma-separated files, are not quite comma-separated…\n\ninspect the file with a text editor to see what it contains\nadd options to pd.read_csv\n\n\n\ntxt = \"\"\"year;country;measure\n2018;\"france\";950.0\n2019;\"france\";960.0\n2020;\"france\";1000.0\n2018;\"usa\";2500.0\n2019;\"usa\";2150.0\n2020;\"usa\";2300.0\n\"\"\"\nopen('annoying_dummy_file.csv','w').write(txt) # we write it to a file\n\n136\n\n\n\npd.read_csv(\"annoying_dummy_file.csv\", sep=\";\")\n\n\n\n\n\n  \n    \n      \n      year\n      country\n      measure\n    \n  \n  \n    \n      0\n      2018\n      france\n      950.0\n    \n    \n      1\n      2019\n      france\n      960.0\n    \n    \n      2\n      2020\n      france\n      1000.0\n    \n    \n      3\n      2018\n      usa\n      2500.0\n    \n    \n      4\n      2019\n      usa\n      2150.0\n    \n    \n      5\n      2020\n      usa\n      2300.0\n    \n  \n\n\n\n\n\n\n\n\npandas can export to many formats: df.to_...\n\n\nprint( df.to_csv() )\n\n,year,country,measure\n0,2018,france,950.0\n1,2019,france,960.0\n2,2020,france,1000.0\n3,2018,usa,2500.0\n4,2019,usa,2150.0\n5,2020,usa,2300.0\n\n\n\n\ndf.to_stata('dummy_example.dta')\n\n\n\n\n\n\n\n\nWhere can we get data from ?\nOfficial websites\n\noften in csv form\nunpractical applications\nsometimes unavoidable\nopen data trend: more unstructured data\n\nData providers\n\nsupply an API (i.e. easy to use function)\n\n\n\n\n\n\n\n\ncommercial ones:\n\nbloomberg, macrobond, factsets, quandl …\n\nfree ones:\n\ndbnomics: many official time-series\nqeds: databases used by quantecon\nvega-datasets: distributed with altair\ncovid*: lots of datasets…\n\nreminder: python packages, can be installed in the notebook with\n\n!pip install ...\n\n\n\n!pip install vega_datasets\n\nRequirement already satisfied: vega_datasets in /home/pablo/.local/opt/miniconda3/lib/python3.8/site-packages (0.9.0)\nRequirement already satisfied: pandas in /home/pablo/.local/opt/miniconda3/lib/python3.8/site-packages (from vega_datasets) (1.2.1)\nRequirement already satisfied: python-dateutil>=2.7.3 in /home/pablo/.local/opt/miniconda3/lib/python3.8/site-packages (from pandas->vega_datasets) (2.8.1)\nRequirement already satisfied: pytz>=2017.3 in /home/pablo/.local/opt/miniconda3/lib/python3.8/site-packages (from pandas->vega_datasets) (2020.5)\nRequirement already satisfied: numpy>=1.16.5 in /home/pablo/.local/opt/miniconda3/lib/python3.8/site-packages (from pandas->vega_datasets) (1.19.5)\nRequirement already satisfied: six>=1.5 in /home/pablo/.local/opt/miniconda3/lib/python3.8/site-packages (from python-dateutil>=2.7.3->pandas->vega_datasets) (1.15.0)\n\n\n\nimport vega_datasets\ndf = vega_datasets.data('iris')\ndf\n\n\n\n\n\n  \n    \n      \n      sepalLength\n      sepalWidth\n      petalLength\n      petalWidth\n      species\n    \n  \n  \n    \n      0\n      5.1\n      3.5\n      1.4\n      0.2\n      setosa\n    \n    \n      1\n      4.9\n      3.0\n      1.4\n      0.2\n      setosa\n    \n    \n      2\n      4.7\n      3.2\n      1.3\n      0.2\n      setosa\n    \n    \n      3\n      4.6\n      3.1\n      1.5\n      0.2\n      setosa\n    \n    \n      4\n      5.0\n      3.6\n      1.4\n      0.2\n      setosa\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      145\n      6.7\n      3.0\n      5.2\n      2.3\n      virginica\n    \n    \n      146\n      6.3\n      2.5\n      5.0\n      1.9\n      virginica\n    \n    \n      147\n      6.5\n      3.0\n      5.2\n      2.0\n      virginica\n    \n    \n      148\n      6.2\n      3.4\n      5.4\n      2.3\n      virginica\n    \n    \n      149\n      5.9\n      3.0\n      5.1\n      1.8\n      virginica\n    \n  \n\n150 rows × 5 columns\n\n\n\n\n\n\nonce the data is loaded as df, we want to look at some basic properties:\n\ndf.head(5) # 5 first lines\ndf.tail(5) # 5 first lines\ndf.describe() # summary\ndf.mean() # averages\ndf.std() # standard deviations\n\n\n\ndf.head(2)\n\n\n\n\n\n  \n    \n      \n      sepalLength\n      sepalWidth\n      petalLength\n      petalWidth\n      species\n    \n  \n  \n    \n      0\n      5.1\n      3.5\n      1.4\n      0.2\n      setosa\n    \n    \n      1\n      4.9\n      3.0\n      1.4\n      0.2\n      setosa\n    \n  \n\n\n\n\n\ndf.describe()\n\n\n\n\n\n  \n    \n      \n      sepalLength\n      sepalWidth\n      petalLength\n      petalWidth\n    \n  \n  \n    \n      count\n      150.000000\n      150.000000\n      150.000000\n      150.000000\n    \n    \n      mean\n      5.843333\n      3.057333\n      3.758000\n      1.199333\n    \n    \n      std\n      0.828066\n      0.435866\n      1.765298\n      0.762238\n    \n    \n      min\n      4.300000\n      2.000000\n      1.000000\n      0.100000\n    \n    \n      25%\n      5.100000\n      2.800000\n      1.600000\n      0.300000\n    \n    \n      50%\n      5.800000\n      3.000000\n      4.350000\n      1.300000\n    \n    \n      75%\n      6.400000\n      3.300000\n      5.100000\n      1.800000\n    \n    \n      max\n      7.900000\n      4.400000\n      6.900000\n      2.500000\n    \n  \n\n\n\n\n\ndf.describe()\n\n\n\n\n\n  \n    \n      \n      sepalLength\n      sepalWidth\n      petalLength\n      petalWidth\n    \n  \n  \n    \n      count\n      150.000000\n      150.000000\n      150.000000\n      150.000000\n    \n    \n      mean\n      5.843333\n      3.057333\n      3.758000\n      1.199333\n    \n    \n      std\n      0.828066\n      0.435866\n      1.765298\n      0.762238\n    \n    \n      min\n      4.300000\n      2.000000\n      1.000000\n      0.100000\n    \n    \n      25%\n      5.100000\n      2.800000\n      1.600000\n      0.300000\n    \n    \n      50%\n      5.800000\n      3.000000\n      4.350000\n      1.300000\n    \n    \n      75%\n      6.400000\n      3.300000\n      5.100000\n      1.800000\n    \n    \n      max\n      7.900000\n      4.400000\n      6.900000\n      2.500000\n    \n  \n\n\n\n\n\ndf.describe()\n\n\n\n\n\n  \n    \n      \n      sepalLength\n      sepalWidth\n      petalLength\n      petalWidth\n    \n  \n  \n    \n      count\n      150.000000\n      150.000000\n      150.000000\n      150.000000\n    \n    \n      mean\n      5.843333\n      3.057333\n      3.758000\n      1.199333\n    \n    \n      std\n      0.828066\n      0.435866\n      1.765298\n      0.762238\n    \n    \n      min\n      4.300000\n      2.000000\n      1.000000\n      0.100000\n    \n    \n      25%\n      5.100000\n      2.800000\n      1.600000\n      0.300000\n    \n    \n      50%\n      5.800000\n      3.000000\n      4.350000\n      1.300000\n    \n    \n      75%\n      6.400000\n      3.300000\n      5.100000\n      1.800000\n    \n    \n      max\n      7.900000\n      4.400000\n      6.900000\n      2.500000\n    \n  \n\n\n\n\n\n\n\n\n\n\nColumns are defined by attribute df.columns\n\ndf.columns\n\nIndex(['sepalLength', 'sepalWidth', 'petalLength', 'petalWidth', 'species'], dtype='object')\n\n\nThis attribute can be set\n\ndf.columns = ['sLength', 'sWidth', 'pLength', 'pWidth', 'species']\ndf.head(2)\n\n\n\n\n\n  \n    \n      \n      sLength\n      sWidth\n      pLength\n      pWidth\n      species\n    \n  \n  \n    \n      0\n      5.1\n      3.5\n      1.4\n      0.2\n      setosa\n    \n    \n      1\n      4.9\n      3.0\n      1.4\n      0.2\n      setosa\n    \n  \n\n\n\n\n\n\n\nA column can be extracted using its name as in a dictionary (like df['sLength'])\n\nseries = df['sWidth'] # note the resulting object: a series\nseries\n\n0      3.5\n1      3.0\n2      3.2\n3      3.1\n4      3.6\n      ... \n145    3.0\n146    2.5\n147    3.0\n148    3.4\n149    3.0\nName: sWidth, Length: 150, dtype: float64\n\n\n\nseries.plot()\n\n<AxesSubplot:>\n\n\n\n\n\n\n\n\n\ndf['totalLength'] = df['pLength'] + df['sLength']\ndf.head(2)\n\n\n\n\n\n  \n    \n      \n      sLength\n      sWidth\n      pLength\n      pWidth\n      species\n      totalLength\n    \n  \n  \n    \n      0\n      5.1\n      3.5\n      1.4\n      0.2\n      setosa\n      6.5\n    \n    \n      1\n      4.9\n      3.0\n      1.4\n      0.2\n      setosa\n      6.3\n    \n  \n\n\n\n\n\n\n\n\ndf['totalLength'] = df['pLength'] + df['sLength']*0.5\ndf.head(2)\n\n\n\n\n\n  \n    \n      \n      sLength\n      sWidth\n      pLength\n      pWidth\n      species\n      totalLength\n    \n  \n  \n    \n      0\n      5.1\n      3.5\n      1.4\n      0.2\n      setosa\n      3.95\n    \n    \n      1\n      4.9\n      3.0\n      1.4\n      0.2\n      setosa\n      3.85\n    \n  \n\n\n\n\n\n\n\n\nIndex with a list of column names\n\n\ne = df[ ['pLength', 'sLength'] ]\ne.head(3)\n\n\n\n\n\n  \n    \n      \n      pLength\n      sLength\n    \n  \n  \n    \n      0\n      1.4\n      5.1\n    \n    \n      1\n      1.4\n      4.9\n    \n    \n      2\n      1.3\n      4.7\n    \n  \n\n\n\n\n\n\n\n\nuse index range\n\n\ndf[2:4]\n\n\n\n\n\n  \n    \n      \n      sLength\n      sWidth\n      pLength\n      pWidth\n      species\n      totalLength\n    \n  \n  \n    \n      2\n      4.7\n      3.2\n      1.3\n      0.2\n      setosa\n      3.65\n    \n    \n      3\n      4.6\n      3.1\n      1.5\n      0.2\n      setosa\n      3.80\n    \n  \n\n\n\n\n\n\n\n\nuse boolean\n\n\ndf['species'].unique()\n\narray(['setosa', 'versicolor', 'virginica'], dtype=object)\n\n\n\nbool_ind = df['species'] == 'virginica' # this is a boolean serie\n\n\ne = df[ bool_ind ]\ne.head(4)\n\n\n\n\n\n  \n    \n      \n      sLength\n      sWidth\n      pLength\n      pWidth\n      species\n      totalLength\n    \n  \n  \n    \n      100\n      6.3\n      3.3\n      6.0\n      2.5\n      virginica\n      9.15\n    \n    \n      101\n      5.8\n      2.7\n      5.1\n      1.9\n      virginica\n      8.00\n    \n    \n      102\n      7.1\n      3.0\n      5.9\n      2.1\n      virginica\n      9.45\n    \n    \n      103\n      6.3\n      2.9\n      5.6\n      1.8\n      virginica\n      8.75\n    \n  \n\n\n\n\n\n\n\n\nsometimes, one wants finer control about which lines and columns to select:\n\nuse df.loc[...] which can be indexed as a matrix\n\n\n\ndf.loc[0:4, 'species']\n\n0    setosa\n1    setosa\n2    setosa\n3    setosa\n4    setosa\nName: species, dtype: object\n\n\n\n\n\n\n# Let's change the way totalLength is computed, only for 'virginica'\nindex = (df['species']=='virginica')\ndf.loc[index,'totalLength'] = df.loc[index,'sLength'] + 1.5*df[index]['pLength']\n\n\n\n\n\n\ntxt_wide = \"\"\"year,france,usa\n2018,950.0,2500.0\n2019,960.0,2150.0\n2020,1000.0,2300.0\n\"\"\"\nopen('dummy_file_wide.csv','w').write(txt_wide) # we write it to a file\n\n71\n\n\n\ntxt_long = \"\"\"year,country,measure\n2018,\"france\",950.0\n2019,\"france\",960.0\n2020,\"france\",1000.0\n2018,\"usa\",2500.0\n2019,\"usa\",2150.0\n2020,\"usa\",2300.0\n\"\"\"\nopen('dummy_file_long.csv','w').write(txt_long) # we write it to a file\n\n136\n\n\n\ndf_long = pd.read_csv(\"dummy_file_long.csv\")\ndf_wide = pd.read_csv(\"dummy_file_wide.csv\")\n\n\n\n\ncompare the following tables\n\n\ndf_wide\n\n\n\n\n\n  \n    \n      \n      year\n      france\n      usa\n    \n  \n  \n    \n      0\n      2018\n      950.0\n      2500.0\n    \n    \n      1\n      2019\n      960.0\n      2150.0\n    \n    \n      2\n      2020\n      1000.0\n      2300.0\n    \n  \n\n\n\n\n\ndf_long\n\n\n\n\n\n  \n    \n      \n      year\n      country\n      measure\n    \n  \n  \n    \n      0\n      2018\n      france\n      950.0\n    \n    \n      1\n      2019\n      france\n      960.0\n    \n    \n      2\n      2020\n      france\n      1000.0\n    \n    \n      3\n      2018\n      usa\n      2500.0\n    \n    \n      4\n      2019\n      usa\n      2150.0\n    \n    \n      5\n      2020\n      usa\n      2300.0\n    \n  \n\n\n\n\n\n\n\n\nin long format: each line is an independent observation\n\ntwo lines mayb belong to the same category (year, or country)\n\nin wide format: some observations are grouped\n\nin the example it is grouped by year\n\nboth representations are useful\n\n\n\n\n\ndf_wide.melt(id_vars='year')\n\n\n\n\n\n  \n    \n      \n      year\n      variable\n      value\n    \n  \n  \n    \n      0\n      2018\n      france\n      950.0\n    \n    \n      1\n      2019\n      france\n      960.0\n    \n    \n      2\n      2020\n      france\n      1000.0\n    \n    \n      3\n      2018\n      usa\n      2500.0\n    \n    \n      4\n      2019\n      usa\n      2150.0\n    \n    \n      5\n      2020\n      usa\n      2300.0\n    \n  \n\n\n\n\n\n\n\n\ndf_ = df_long.pivot(index='year', columns='country')\ndf_\n\n\n\n\n\n  \n    \n      \n      measure\n    \n    \n      country\n      france\n      usa\n    \n    \n      year\n      \n      \n    \n  \n  \n    \n      2018\n      950.0\n      2500.0\n    \n    \n      2019\n      960.0\n      2150.0\n    \n    \n      2020\n      1000.0\n      2300.0\n    \n  \n\n\n\n\n\n# the result of pivot has a \"hierarchical index\"\n# let's change columns names\ndf_.columns = df_.columns.get_level_values(1)\ndf_\n\n\n\n\n\n  \n    \n      country\n      france\n      usa\n    \n    \n      year\n      \n      \n    \n  \n  \n    \n      2018\n      950.0\n      2500.0\n    \n    \n      2019\n      960.0\n      2150.0\n    \n    \n      2020\n      1000.0\n      2300.0\n    \n  \n\n\n\n\n\n\n\ngroupby is a very powerful function which can be used to work directly on data in the long format.\n\ndf_long.groupby(\"country\").agg('mean')\n\nNameError: name 'df_long' is not defined\n\n\n\n\n\n\n\n\n\nSuppose we have two dataframes, with related observations\nHow can we construct one single database with all informations?\nAnswer:\n\nconcatenate if long format\nmerge databases if wide format\n\nLots of subtleties when data gets complicated\n\nwe’ll see them in due time\n\n\n\ntxt_long_1 = \"\"\"year,country,measure\n2018,\"france\",950.0\n2019,\"france\",960.0\n2020,\"france\",1000.0\n2018,\"usa\",2500.0\n2019,\"usa\",2150.0\n2020,\"usa\",2300.0\n\"\"\"\nopen(\"dummy_long_1.csv\",'w').write(txt_long_1)\n\n136\n\n\n\ntxt_long_2 = \"\"\"year,country,recipient\n2018,\"france\",maxime\n2019,\"france\",mauricette\n2020,\"france\",mathilde\n2018,\"usa\",sherlock\n2019,\"usa\",watson\n2020,\"usa\",moriarty\n\"\"\"\nopen(\"dummy_long_2.csv\",'w').write(txt_long_2)\n\n150\n\n\n\ndf_long_1 = pd.read_csv('dummy_long_1.csv')\ndf_long_2 = pd.read_csv('dummy_long_2.csv')\n\n\n\n\n\ndf_long_1.merge(df_long_2)\n\nNameError: name 'df_long_1' is not defined"
+  },
+  {
+    "objectID": "session_6/index.html#data",
+    "href": "session_6/index.html#data",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Data",
+    "text": "Data\n\nOur multilinear regression: \\[y = \\alpha + \\beta x_1 + \\cdots + \\beta x_n\\]\nSo far, we have only considered real variables: (\\(x_i \\in \\mathbb{R}\\)).\n\nex: \\(x_{\\text{gdp}} = \\alpha + \\beta_1 x_{\\text{unemployment}} + \\beta_2 x_{\\text{inflation}}\\)\n\nHow do we deal with the following cases?\n\nbinary variable: \\(x\\in \\{0,1\\}\\) (or \\(\\{True, False}\\))\n\nex: \\(\\text{gonetowar}\\), \\(\\text{hasdegree}\\)\n\ncategorical variable:\n\nex: survey result (0: I don’t know, 1: I strongly disagree, 2: I disagree, 3: I agree, 4: I strongly agree)\nthere is no ranking of answers\nwhen there is ranking: hierarchical index\n\nnonnumerical variables:\n\nex: (flower type: \\(x\\in \\text{myosotis}, \\text{rose}, ...\\))"
+  },
+  {
+    "objectID": "session_6/index.html#binary-variable",
+    "href": "session_6/index.html#binary-variable",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Binary variable",
+    "text": "Binary variable\n\nNothing to be done: just make sure variables take values 0 or 1. \\[y_\\text{salary} = \\alpha + \\beta x_{\\text{gonetowar}}\\]\nInterpretation:\n\nhaving gone to war is associated with a \\(\\beta\\) increase (or decrease?) in salary (still no causality)"
+  },
+  {
+    "objectID": "session_6/index.html#categorical-variable",
+    "href": "session_6/index.html#categorical-variable",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Categorical variable",
+    "text": "Categorical variable\n\nLook at the model: \\[y_{\\text{CO2 emission}} = \\alpha + \\beta x_{\\text{yellow vest support}} \\]\nWhere \\(y_{\\text{CO2 emission}}\\) is an individual’s CO2 emissions and \\(x_{\\text{yellow vest support}}\\) is the response the the question Are you in agreement with the yellow vests demands?.\nResponse is coded up as:\n\n0: Strongly disagree\n1: Disagree\n2: Neutral\n3: Agree\n4: Strongly agree\n\nIf the variable was used directly, how would you intepret the coefficient \\(\\beta\\) ?\n\nindex is hierarchical\nbut the distances between 1 and 2 or 2 and 3 are not comparable…"
+  },
+  {
+    "objectID": "session_6/index.html#hierarchical-index-2",
+    "href": "session_6/index.html#hierarchical-index-2",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Hierarchical index (2):",
+    "text": "Hierarchical index (2):\n\nWe use one dummy variable per possible answer.\n\n\n\n\n\n\n\n\n\n\n\n\\(D_{\\text{Strongly Disagree}}\\)\n\\(D_{\\text{Disagree}}\\)\n\\(D_{\\text{Neutral}}\\)\n\\(D_{\\text{Agree}}\\)\n\\(D_{\\text{Strongly Agree}}\\)\n\n\n\n\n1\n0\n0\n0\n0\n\n\n0\n1\n0\n0\n0\n\n\n0\n0\n0\n0\n0\n\n\n0\n0\n0\n1\n0\n\n\n0\n0\n0\n0\n1\n\n\n\n\nValues are linked by the specific dummy coding.\n\nthe choice of the reference group (with 0) is not completely neutral\n\nfor linear regressions, we can ignore its implications\n\nit must be frequent enough in the data\neffects coding: reference group takes -1 instead of 0\n\nNote that hierarchy is lost. The same treatment can be applied to non-hierachical variables\nNow our variables are perfectly colinear:\n\nwe can deduce one from all the others\nwe drop one from the regression: the reference group TODO"
+  },
+  {
+    "objectID": "session_6/index.html#hierarchical-index-3",
+    "href": "session_6/index.html#hierarchical-index-3",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Hierarchical index (3)",
+    "text": "Hierarchical index (3)\n\\[y_{\\text{CO2 emission}} = \\alpha + \\beta_1 x_{\\text{strdis}} + \\beta_2 x_{\\text{dis}} + \\beta_3 x_{\\text{agr}} + \\beta_4 x_{\\text{stragr}}\\]\n\nInterpretation:\n\nbeing in the group which strongly agrees to the yellow vest’s claim is associated with an additional \\(\\beta_4\\) increase in CO2 consumption compared with members of the neutral group"
+  },
+  {
+    "objectID": "session_6/index.html#nonnumerical-variables",
+    "href": "session_6/index.html#nonnumerical-variables",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Nonnumerical variables",
+    "text": "Nonnumerical variables\n\n\n\n\nWhat about nonnumerical variables?\n\nWhen variables take nonnumerical variables, we convert them to numerical variables.\n\nExample:\n\n\n\n\nactivity\ncode\n\n\n\n\nmassage therapist\n1\n\n\nmortician\n2\n\n\narcheologist\n3\n\n\nfinancial clerks\n4\n\n\n\n\n\n\nThen we convert to dummy variables exactly like hierarchical indices\n\nhere \\(\\text{massage therapist}\\) is taken as reference\n\n\n\n\n\n\n\n\n\n\n\\(D_{\\text{mortician}}\\)\n\\(D_{\\text{archeologist}}\\)\n\\(D_{\\text{financial clerks}}\\)\n\n\n\n\n1\n0\n0\n\n\n0\n1\n0\n\n\n0\n0\n1"
+  },
+  {
+    "objectID": "session_6/index.html#hands-on",
+    "href": "session_6/index.html#hands-on",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Hands-on",
+    "text": "Hands-on\nUse statsmodels to create dummy variables with formula API.\n\nReplace\n\nsalary ~ activity\n\nby:\n\nsalary ~ C(activity)\nThere is an options to choose the reference group\nsalary ~ C(activity, Treatment(reference=\"archeologist\"))"
+  },
+  {
+    "objectID": "session_6/index.html#spurious-correlation",
+    "href": "session_6/index.html#spurious-correlation",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Spurious correlation",
+    "text": "Spurious correlation\n\nSpurious Correlation\nWe have seen spurious correlation before\n\nit happens when two series comove without being actually correlated\n\nAlso, two series might be correlated without one causing the other\n\nex: countries eating more chocolate have more nobel prices…"
+  },
+  {
+    "objectID": "session_6/index.html#how-do-we-define-causality",
+    "href": "session_6/index.html#how-do-we-define-causality",
+    "title": "Introduction to Instrumental Variables",
+    "section": "How do we define causality",
+    "text": "How do we define causality\n\nIn math, we have implication: \\(A \\implies B\\)\n\napplies to statements that can be either true or false\ngiven \\(A\\) and \\(B\\), \\(A\\) implies \\(B\\) unless \\(A\\) is true and \\(B\\) is false\nparadox of the drinker: at any time, there exists a person such that: if this person drinks, then everybody drinks\n\nIn a mathematical universe taking values \\(\\omega\\), we can define causality between statement \\(A(\\omega)\\) and \\(B(\\omega)\\) as : \\[\\forall \\omega, A(\\omega) \\implies B(\\omega)\\]\nBut causality in the real world is problematic?\n\nUsually, we observe \\(A(\\omega)\\) only once…\n\nExample:\n\nstate of the world \\(\\omega\\): 2008, big financial crisis, …\nA: Ben Bernanke chairman of the Fed\nB: successful economic interventions\nWas Ben Bernanke a good central banker? Impossible to say.\n\n\nThen there is the uncertain concept of time… let’s take it as granted."
+  },
+  {
+    "objectID": "session_6/index.html#causality-in-statistics",
+    "href": "session_6/index.html#causality-in-statistics",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Causality in Statistics",
+    "text": "Causality in Statistics\n\n\n\n\n\n\nStatistical definition of causality\n\n\nVariable \\(A\\) causes \\(B\\) in a statistical sense if - \\(A\\) and \\(B\\) are correlated - \\(A\\) is known before \\(B\\) - correlation between \\(A\\) and \\(B\\) is unaffected by other variables\n\n\n\n\nThere are other related statistical definitions:\n\nlike Granger causality…\n… but not for this course"
+  },
+  {
+    "objectID": "session_6/index.html#experiment",
+    "href": "session_6/index.html#experiment",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Experiment",
+    "text": "Experiment\n\n\n\nExample: cognitive dissonance\n\nExperiment in GATE Lab\nVolunteers play an investment game.\nThey are asked beforehand whether they support OM, PSG, or none.\n\n\n\n\n\nExperiment 1:\n\nBefore the experiment, randomly selected volunteers are given a football shirt of their preferred team (treatment 1)\nOther volunteers receive nothing (treatment 0)\n\nResult:\n\nhaving a football shirt seems to boost investment performance…\n\n\n\n\n\nExperiment 2: subjects are given randomly a shirt of either Olympique de Marseille or PSG.\nResult:\n\nHaving the good shirt improves performance.\nHaving the wrong one deteriorates it badly.\n\n\n\n\n\nHow would you code up this experiment?\nCan we conclude on some form of causality?"
+  },
+  {
+    "objectID": "session_6/index.html#factual-and-counterfactual",
+    "href": "session_6/index.html#factual-and-counterfactual",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Factual and counterfactual",
+    "text": "Factual and counterfactual\n\n\n \n\n\n\n\n\n\n\nSuppose we observe an event A\n\nA: a patient is administered a drug, government closes all schools during Covid\n\nWe observe a another event B\n\nB: the patient recovers, virus circulation decreases\n\n\n\n\n\nTo interpret B as a consequence of A, we would like to consider the counter-factual:\n\na patient is not administered a drug, government doesn’t close schools\npatient does not recover, virus circulation is stable\n\n\n\n\n\n\nAn important task in econometrics is to construct a counter-factual\n\nas the name suggests is it sometimes never observed!"
+  },
+  {
+    "objectID": "session_6/index.html#experiment-1",
+    "href": "session_6/index.html#experiment-1",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Experiment",
+    "text": "Experiment\n\n\n\nExample: cognitive dissonance\n\nExperiment in GATE Lab\nVolunteers play an investment game.\nThey are asked beforehand whether they support OM, PSG, or none.\n\n\n\n\n\nExperiment 1:\n\nBefore the experiment, randomly selected volunteers are given a football shirt of their preferred team (treatment 1)\nOther volunteers receive nothing (treatment 0)\n\nResult:\n\nhaving a football shirt seems to boost investment performance…\n\n\n\n\n\nExperiment 2: subjects are given randomly a shirt of either Olympique de Marseille or PSG.\nResult:\n\nHaving the good shirt improves performance.\nHaving the wrong one deteriorates it badly.\n\n\n\n\n\nHow would you code up this experiment?\nCan we conclude on some form of causality?"
+  },
+  {
+    "objectID": "session_6/index.html#formalisation-of-the-problem",
+    "href": "session_6/index.html#formalisation-of-the-problem",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Formalisation of the problem",
+    "text": "Formalisation of the problem\n\n\n\n\n\n\nCause (A): two groups of people\n\nthose given a shirt (treatment 1)\nthose not given a shirt (treatment 0)\n\nPossible consequence (B): performance\nTake a given agent Alice: she performs well with a PSG shirt.\n\nmaybe she is a good investor?\nor maybe she is playing for her team?\n\nLet’s try to have her play again without the football shirt\n\nnow the experiment has changed: she has gained experience, is more tired, misses the shirt…\nit is impossible to get a perfect counterfactual (i.e. where only A changes)\n\n\n\n\nLet’s take somebody else then? Bob was really bad without a PSG shirt.\n\nhe might be a bad investor? or he didn’t understand the rules?\nsome other variables have changed, not only the treatment\n\nHow to make a perfect experiment?\n\nChoose randomly whether assigning a shirt or not\nby construction the treatment will not be correlated with other variables"
+  },
+  {
+    "objectID": "session_6/index.html#randomized-control-experiment",
+    "href": "session_6/index.html#randomized-control-experiment",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Randomized Control Experiment",
+    "text": "Randomized Control Experiment\n\n\n\n\n\n\nRandomized Control Trial (RCT)\n\n\nThe best way to ensure that treatment is independent from other factors is to randomize it.\n\n\n\nIt becomes a Randomized Control Trial (RCT)\n\nrandomize the treatment\nIn medecine\n\nsome patients receive the treatment (red pill)\nsome other receive the control treatment (blue pill / placebo)\n\nIn economics:\n\nrandomized field experiments\nrandomized phase-ins for new policies\n\nvery useful for policy evaluation\n\n\n\n\n\nIt is common in economics, instead of assigning treatments randomly, we often say that we assign individuals randomly to the treatment and to the control group. It is equivalent."
+  },
+  {
+    "objectID": "session_6/index.html#natural-experiments",
+    "href": "session_6/index.html#natural-experiments",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Natural experiments",
+    "text": "Natural experiments\n\n\n\n\n\n\nNatural Experiment\n\n\nA natural experiment satisfies conditions that treatment is assigned randomly\n\nwithout interference by the econometrician\n\n\n\n\n\nExemple: gender bias in french local elections (jean-pierre eymeoud, paul vertier)\n\nlink\nare women discriminated against in local elections?\n\n\nResult: yes, they get 1.5% less votes by right-wing voters\n\nHow can we be so sure that no other explanation is true?"
+  },
+  {
+    "objectID": "session_6/index.html#example",
+    "href": "session_6/index.html#example",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Example",
+    "text": "Example\nLifetime Earnings and the Vietnam Era Draft Lottery, by JD Angrist\n\n\n\nFact:\n\nveterans of the vietnam war (55-75) earn (in the 80s) an income that is 15% less in average than those who didn’t go to the war.\nWhat can we conclude?\nHard to say: maybe those sent to the war came back with lower productivity (because of PTSD, public stigma, …)? maybe they were not the most productive in the first place (selection bias)?\n\nProblem (for the economist):\n\nwe didn’t sent people to war randomly\n\n\n\n\nGenius idea:\n\nhere is a variable which randomly affected whether people were sent: the Draft\n\n\nbetween 1947, and 1973, a lottery was run to determine who would go to war\n\nthe draft number was determined, based on date of birth, and first letters of name\n\nand was correlated with the probability that a given person would go to war\nand it was so to say random or at least independent from anything relevant to the problem\n\n\n\n\n\nCan we use the Draft to generate randomness ?"
+  },
+  {
+    "objectID": "session_6/index.html#problem",
+    "href": "session_6/index.html#problem",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Problem",
+    "text": "Problem\n\nTake the linear regression: \\[y = \\alpha + \\beta x + \\epsilon\\]\n\n\\(y\\): salary\n\\(x\\): went to war\n\nWe want to establish causality from x to y\n\nwe would like to interpret \\(x\\) as the “treatment”\n\nBut there can be confounding factors:\n\nvariable \\(z\\) which causes both x and y\nexemple: socio-economic background, IQ, …\n\nIf we could identify \\(z\\) we could control for it: \\[y = \\alpha + \\beta_1 x + \\beta_2 z + \\epsilon\\]\n\nwe would get a better predictor of \\(y\\) but more uncertainty about \\(\\beta_1\\) (\\(x\\) and \\(z\\) are correlated)"
+  },
+  {
+    "objectID": "session_6/index.html#reformulate-the-problem",
+    "href": "session_6/index.html#reformulate-the-problem",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Reformulate the problem",
+    "text": "Reformulate the problem\n\n\n\nLet’s assume treatment \\(x\\) is a binary variable \\(\\in{0,1}\\)\nWe want to estimate \\[y = \\alpha + \\beta x + z + \\epsilon\\] where \\(z\\) is potentially correlated to \\(x\\) and \\(y\\)\nThere are two groups:\n\nthose who receive the treatment \\[y = \\alpha + \\beta + z_{T=1} + \\epsilon\\]\nthe others \\[y = \\alpha + 0 +  z_{T=0} + \\epsilon\\]\n\n\n\n\nProblem:\n\nif \\(z\\) is higher in the treatment group, its effect can’t be separated from the treatment effect.\n\nIntuition: what if we make groups differently?\n\ncompletely independent from \\(z\\) (and \\(\\epsilon\\))\nnot independently from \\(x\\) so that one group will receive more treatment than the other\n\nTo make this group we need a new variable \\(q\\) that is:\n\ncorrelated with \\(x\\) so that it will correspond to some treatment effect\nuncorrelated to \\(z\\) or \\(\\epsilon\\) (exogenous)"
+  },
+  {
+    "objectID": "session_6/index.html#two-stage-regression",
+    "href": "session_6/index.html#two-stage-regression",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Two stage regression",
+    "text": "Two stage regression\n\n\n\nWe would like to redo the treatment groups in a way that is independent from \\(z\\) (and everything contained in \\(\\epsilon\\))\n\n\\(q\\) is a binary variable: drafted or not\n\n\nFirst stage: regress group assignment on the instrument: \\[x = \\alpha_0 + \\beta_0 q + \\eta\\]\n\nwe can now predict group assignment in a way that is independent from \\(z\\) (and everything in \\(\\epsilon\\)) \\[\\tilde{x} = \\alpha_0 + \\beta_0 q\\]\n\n\nSecond stage: use the predicted value instead of the original one \\[y = \\alpha + \\beta_1 \\tilde{x} + z + \\epsilon\\]\n\n\n\n\nResult:\n\nIf \\(\\beta_1\\) is significantly nonzero, there is a causal effect between \\(x\\) and \\(y\\).\nNote that \\(\\tilde{x}\\) is imperfectly correlated with the treatment: \\(\\beta_1\\) can’t be interpreted directly\nThe actual effect will be \\(\\frac{\\beta_1}{\\beta_0}\\) (in 1d)\n\n\nWe say that we instrument \\(x\\) by \\(q\\)."
+  },
+  {
+    "objectID": "session_6/index.html#in-practice",
+    "href": "session_6/index.html#in-practice",
+    "title": "Introduction to Instrumental Variables",
+    "section": "In practice",
+    "text": "In practice\n\nBoth statsmodels and linearmodels support instrumental variables\n\nlibrary (look for IV2SLS)\n\nLibrary linearmodels has a handy formula syntax: salary ~ [war ~ draft]\n\nAPI is similar but not exactly identical to stats models\n\nExample from the doc\n\nformula = (\n    \"np.log(drugexp) ~ 1 + totchr + age + linc + blhisp + [hi_empunion ~ ssiratio]\"\n)\nols = IV2SLS.from_formula(formula, data)\nols_res = ols.fit(cov_type=\"robust\")\nprint(ols_res)"
+  },
+  {
+    "objectID": "session_6/index.html#section",
+    "href": "session_6/index.html#section",
+    "title": "Introduction to Instrumental Variables",
+    "section": ";::",
+    "text": ";::"
+  },
+  {
+    "objectID": "session_6/index.html#todo",
+    "href": "session_6/index.html#todo",
+    "title": "Introduction to Instrumental Variables",
+    "section": "TODO",
+    "text": "TODO\nCan I test whether students understood ?"
+  },
+  {
+    "objectID": "session_6/index.html#what-is-causality",
+    "href": "session_6/index.html#what-is-causality",
+    "title": "Introduction to Instrumental Variables",
+    "section": "What is causality?",
+    "text": "What is causality?\n\n\n\n\nGroucho Marx\n\n\nClear? Huh! Why a four-year-old child could understand this report! Run out and find me a four-year-old child, I can’t make head or tail of it."
+  },
+  {
+    "objectID": "session_6/index.html#definitions",
+    "href": "session_6/index.html#definitions",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Definitions?",
+    "text": "Definitions?\nBut how do we define\n\ncorrelation\ncausality\n\n?\nBoth concepts are actually hard to define:\n\nin statistics (and econometrices) they refer to the generating process\nif the data was generated again, would you observe the same relations?\n\nFor instance correlation between \\(X\\) and \\(Y\\) is just the average correlation taken over many draws \\(\\omega\\) of the data: \\[E_{\\omega}\\left[ (X-E[X])(Y-E[Y])\\right]\\]"
+  },
+  {
+    "objectID": "session_6/index.html#how-do-we-define-causality-1",
+    "href": "session_6/index.html#how-do-we-define-causality-1",
+    "title": "Introduction to Instrumental Variables",
+    "section": "How do we define causality (1)",
+    "text": "How do we define causality (1)\n\nIn math, we have implication: \\(A \\implies B\\)\n\napplies to statements that can be either true or false\ngiven \\(A\\) and \\(B\\), \\(A\\) implies \\(B\\) unless \\(A\\) is true and \\(B\\) is false\nparadox of the drinker: at any time, there exists a person such that: if this person drinks, then everybody drinks\n\nIn a mathematical universe taking values \\(\\omega\\), we can define causality between statement \\(A(\\omega)\\) and \\(B(\\omega)\\) as : \\[\\forall \\omega, A(\\omega) \\implies B(\\omega)\\]"
+  },
+  {
+    "objectID": "session_6/index.html#how-do-we-define-causality-2",
+    "href": "session_6/index.html#how-do-we-define-causality-2",
+    "title": "Introduction to Instrumental Variables",
+    "section": "How do we define causality (2)",
+    "text": "How do we define causality (2)\nBut causality in the real world is problematic\nUsually, we observe \\(A(\\omega)\\) only once…\n\n\n\nExample:\n\nstate of the world \\(\\omega\\): 2008, big financial crisis, …\nA: Ben Bernanke chairman of the Fed\nB: successful economic interventions\nWas Ben Bernanke a good central banker?\nImpossible to say.\n\n\n\n\n\n\n\n\nThen there is the uncertain concept of time… But let’s take it as granted to not overcomplicate…"
+  },
+  {
+    "objectID": "session_6/index.html#scientific-experiment",
+    "href": "session_6/index.html#scientific-experiment",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Scientific Experiment",
+    "text": "Scientific Experiment\n\n \nIn science we establish causality by performing experiments\n\nand create the counterfactual\n\nA good experiment is reproducible\n\nsame variables\nsame state of the world (other variables)\nreproduce several times (in case output is noisy or random)\n\nChange one factor at a time\n\nto create a counter-factual"
+  },
+  {
+    "objectID": "session_6/index.html#measuring-effect-of-treatment",
+    "href": "session_6/index.html#measuring-effect-of-treatment",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Measuring effect of treatment",
+    "text": "Measuring effect of treatment\n\n\n\n\n\n\n\n\n\n\n\nAssume we have discovered two medications: R and B\n\n\n\n\nGive one of them (R) to a patient and observe the outcome\n\n\n\n\nWould would have been the effect of (B) on the same patient?\n\n????\n\n\n\n\n\nWhat if we had many patients and let them choose the medication?\n\n\n\n\n\nMaybe the effect would be the consequence of the choice of patients rather than of the medication?"
+  },
+  {
+    "objectID": "session_6/index.html#randomized-control-trial",
+    "href": "session_6/index.html#randomized-control-trial",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Randomized Control Trial",
+    "text": "Randomized Control Trial\n\n\n\n\n\n\nRandomized Control Trial (RCT)\n\n\nThe best way to ensure that treatment is independent from other factors is to randomize it.\n\n\n\n\n\n\nIn medecine\n\nsome patients receive the treatment (red pill)\nsome other receive the control treatment (blue pill / placebo)\n\nIn economics:\n\nrandomized field experiments\nrandomized phase-ins for new policies\n\nvery useful for policy evaluation\n\n\n\n\n\n\n\nEsther Duflo\n\n\n\n\n\n\nIt is common in economics, instead of assigning treatments randomly, we often say that we assign individuals randomly to the treatment and to the control group. It is equivalent."
+  },
+  {
+    "objectID": "session_6/index.html#natural-experiment",
+    "href": "session_6/index.html#natural-experiment",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Natural experiment",
+    "text": "Natural experiment\n\n\n\n\n\n\nNatural Experiment\n\n\nA natural experiment satisfies conditions that treatment is assigned randomly\n\nwithout interference by the econometrician\n\n\n\n\n\nAn exemple of a Natural Experiment:\n\ngender bias in french local elections (jean-pierre eymeoud, paul vertier) link\nare women discriminated against by voters in local elections?\n\n\n\n\nResult: yes, they get 1.5% less votes by right-wing voters\n\n\n\n\nWhat was the natural experiment"
+  },
+  {
+    "objectID": "session_6/index.html#choosing-a-good-instrument",
+    "href": "session_6/index.html#choosing-a-good-instrument",
+    "title": "Introduction to Instrumental Variables",
+    "section": "Choosing a good instrument",
+    "text": "Choosing a good instrument\n\n\n\n\n\n\n\nChoosing an instrumental variable\n\n\nA good instrument when trying to explain y by x, is a variable that is correlated to the treatment (x) but does not have any effect on the outcome of interest (y), appart from its effect through x."
+  },
+  {
+    "objectID": "session_6/index.html#an-exmple-from-behavioural-economics",
+    "href": "session_6/index.html#an-exmple-from-behavioural-economics",
+    "title": "Introduction to Instrumental Variables",
+    "section": "An exmple from behavioural economics",
+    "text": "An exmple from behavioural economics\n\n\n\nExample: cognitive dissonance\n\nExperiment in GATE Lab\nVolunteers play an investment game.\nThey are asked beforehand whether they support OM, PSG, or none.\n\n\n\n\n\nExperiment 1:\n\nBefore the experiment, randomly selected volunteers are given a football shirt of their preferred team (treatment 1)\nOther volunteers receive nothing (treatment 0)\n\nResult:\n\nhaving a football shirt seems to boost investment performance…\n\n\n\n\n\nExperiment 2: subjects are given randomly a shirt of either Olympique de Marseille or PSG.\nResult:\n\nHaving the good shirt improves performance.\nHaving the wrong one deteriorates it badly.\n\n\n\n\n\nHow would you code up this experiment?\nCan we conclude on some form of causality?"
   }
 ]
