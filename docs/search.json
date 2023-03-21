@@ -1286,5 +1286,89 @@
     "title": "Introduction to Machine Learning (2)",
     "section": "All these algorithms are super easy to use!",
     "text": "All these algorithms are super easy to use!\nfrom sklearn.tree import DecisionTreeClassifier\nclf = DecisionTreeClassifier(random_state=0)\n…\nfrom sklearn.svm import SVC\nclf = SVC(random_state=0)\n…\nfrom sklearn.linear_model import Ridge\nclf = Ridge(random_state=0)"
+  },
+  {
+    "objectID": "session_6/index.html#classification-problem",
+    "href": "session_6/index.html#classification-problem",
+    "title": "Introduction to Machine Learning",
+    "section": "Classification problem",
+    "text": "Classification problem\n\nBinary Classification\n\nGoal is to make a prediction \\(c_n = f(x_{1,1}, ... x_{k,n})\\) …\n…where \\(c_i\\) is a binary variable (\\(\\in\\{0,1\\}\\))\n… and \\((x_{i,n})_k\\), \\(k\\) different features to predict \\(c_n\\)\n\nMulticategory Classification\n\nThe variable to predict takes values in a non ordered set with \\(p\\) different values"
+  },
+  {
+    "objectID": "session_6/index.html#logistic-regression",
+    "href": "session_6/index.html#logistic-regression",
+    "title": "Introduction to Machine Learning",
+    "section": "Logistic regression",
+    "text": "Logistic regression\n\n\n\nGiven a regression model (a linear predictor)\n\n\\[ a_0 + a_1 x_1 + a_2 x_2 + \\cdots a_n x_n \\]\n\none can build a classification model: \\[ f(x_1, ..., x_n) = \\sigma( a_0 + a_1 x_1 + a_2 x_2 + \\cdots a_n x_n )\\] where \\(\\sigma(x)=\\frac{1}{1+\\exp(-x)}\\) is the logistic function a.k.a. sigmoid\nThe loss function to minimize is: \\[L() = \\sum_n (c_n - \\sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \\cdots a_k x_{k,n} ) )^2\\]\nThis works for any regression model (LASSO, RIDGE, nonlinear…)"
+  },
+  {
+    "objectID": "session_6/index.html#logistic-regression-1",
+    "href": "session_6/index.html#logistic-regression-1",
+    "title": "Introduction to Machine Learning",
+    "section": "Logistic regression",
+    "text": "Logistic regression\n\nThe linear model predicts an intensity/score (not a category) \\[ f(x_1, ..., x_n) = \\sigma( \\underbrace{a_0 + a_1 x_1 + a_2 x_2 + \\cdots a_n x_n }_{\\text{score}})\\]\nTo make a prediction: round to 0 or 1."
+  },
+  {
+    "objectID": "session_6/index.html#multinomial-regression",
+    "href": "session_6/index.html#multinomial-regression",
+    "title": "Introduction to Machine Learning",
+    "section": "Multinomial regression",
+    "text": "Multinomial regression\n\nIf there are \\(P\\) categories to predict:\n\nbuild a linear predictor \\(f_p\\) for each category \\(p\\)\nlinear predictor is also called score\n\nTo predict:\n\nevaluate the score of all categories\nchoose the one with highest score\n\nTo train the model:\n\ntrain separately all scores (works for any predictor, not just linear)\n… there are more subtle approaches (not here)"
+  },
+  {
+    "objectID": "session_6/index.html#common-classification-algorithms",
+    "href": "session_6/index.html#common-classification-algorithms",
+    "title": "Introduction to Machine Learning",
+    "section": "Common classification algorithms",
+    "text": "Common classification algorithms\nThere are many:\n\nLogistic Regression\nNaive Bayes Classifier\nNearest Distance\nneural networks (replace score in sigmoid by n.n.)\nDecision Trees\nSupport Vector Machines"
+  },
+  {
+    "objectID": "session_6/index.html#nearest-distance",
+    "href": "session_6/index.html#nearest-distance",
+    "title": "Introduction to Machine Learning",
+    "section": "Nearest distance",
+    "text": "Nearest distance\n\n\n\nIdea:\n\nin order to predict category \\(c\\) corresponding to \\(x\\) find the closest point \\(x_0\\) in the training set\nAssign to \\(x\\) the same category as \\(x_0\\)\n\nBut this would be very susceptible to noise\n\n\n\nAmended idea: \\(k-nearest\\) neighbours\n\nlook for the \\(k\\) points closest to \\(x\\)\nlabel \\(x\\) with the same category as the majority of them\n\nRemark: this algorithm uses Euclidean distance. This is why it is important to normalize the dataset."
+  },
+  {
+    "objectID": "session_6/index.html#decision-tree-random-forests",
+    "href": "session_6/index.html#decision-tree-random-forests",
+    "title": "Introduction to Machine Learning",
+    "section": "Decision Tree / Random Forests",
+    "text": "Decision Tree / Random Forests\n\n\n\n\nDecision Tree\n\nrecursively find simple criteria to subdivide dataset\n\nProblems:\n\nGreedy: algorithm does not simplify branches\neasily overfits\n\nExtension : random tree forest\n\nuses several (randomly generated) trees to generate a prediction\nsolves the overfitting problem"
+  },
+  {
+    "objectID": "session_6/index.html#support-vector-classification",
+    "href": "session_6/index.html#support-vector-classification",
+    "title": "Introduction to Machine Learning",
+    "section": "Support Vector Classification",
+    "text": "Support Vector Classification\n\n\n\n\nSeparates data by one line (hyperplane).\n\nChooses the largest margin according to support vectors\n\nCan use a nonlinear kernel.\n\n\n\n\n\n\nF\n\n\n\n\n\nF\n\n\n\n\n\nF"
+  },
+  {
+    "objectID": "session_6/index.html#all-these-algorithms-are-super-easy-to-use",
+    "href": "session_6/index.html#all-these-algorithms-are-super-easy-to-use",
+    "title": "Introduction to Machine Learning",
+    "section": "All these algorithms are super easy to use!",
+    "text": "All these algorithms are super easy to use!\n\nDecision Tree:\n\nfrom sklearn.tree import DecisionTreeClassifier\nclf = DecisionTreeClassifier(random_state=0)\n\n\nSupport Vector Machine\n\nfrom sklearn.svm import SVC\nclf = SVC(random_state=0)\n\n\n\nRidge Regression:\n\nfrom sklearn.linear_model import Ridge\nclf = Ridge(random_state=0)"
+  },
+  {
+    "objectID": "session_6/index.html#validity-of-a-classification-algorithm",
+    "href": "session_6/index.html#validity-of-a-classification-algorithm",
+    "title": "Introduction to Machine Learning",
+    "section": "Validity of a classification algorithm",
+    "text": "Validity of a classification algorithm\n\nIndependently of how the classification is made, its validity can be assessed with a similar procedure as in the regression.\nSeparate training set and test set\n\ndo not touch test set at all during the training\n\nCompute score: number of correctly identified categories\n\nnote that it is different from loss function minimized during the training"
+  },
+  {
+    "objectID": "session_6/index.html#classification-matrix",
+    "href": "session_6/index.html#classification-matrix",
+    "title": "Introduction to Machine Learning",
+    "section": "Classification matrix",
+    "text": "Classification matrix\n\nFor binary classification, we focus on the classification matrix or confusion matrix.\n\n\n\n\nPredicted\n(0) Actual\n(1) Actual\n\n\n\n\n0\ntrue negatives (TN)\nfalse negatives (FN)\n\n\n1\nfalse positives (FP)\ntrue positives (TP)\n\n\n\n\n\n\nOverall accuracy: \\(\\frac{\\text{TN}+\\text{TP}}{\\text{total}}\\)\nSensitivity: \\(\\frac{TP}{FP+TP}\\)\nFalse Positive Rate (FPR): \\(\\frac{FP}{TN+FP}\\)\n\nThe relevant statistics depends on the application.\n\n\n\nExample:\n\nfacial recognition by London police: 2% accuracy\nfacial recognition by South Wales police: 9% accuracy\na success?"
+  },
+  {
+    "objectID": "session_6/index.html#confusion-matrix-with-sklearn",
+    "href": "session_6/index.html#confusion-matrix-with-sklearn",
+    "title": "Introduction to Machine Learning",
+    "section": "Confusion matrix with sklearn",
+    "text": "Confusion matrix with sklearn\n\nPredict on the test set:\n\ny_pred = model.predict(x_test)\n\nCompute confusion matrix:\n\nfrom sklearn.metrics import confusion_matrix\ncm = confusion_matrix(y_test, y_pred)"
   }
 ]

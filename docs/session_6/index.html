@@ -411,11 +411,11 @@ Year 2022-2023
 <li><a href="#/nonlinear-regression" id="/toc-nonlinear-regression">Nonlinear Regression</a></li>
 <li><a href="#/model-validation" id="/toc-model-validation">Model validation</a></li>
 <li><a href="#/how-to-use-sklearn-for-regressions" id="/toc-how-to-use-sklearn-for-regressions">How to use sklearn for regressions</a></li>
+<li><a href="#/classification-problems" id="/toc-classification-problems">Classification Problems</a></li>
+<li><a href="#/other-classifiers" id="/toc-other-classifiers">Other Classifiers</a></li>
+<li><a href="#/validation" id="/toc-validation">Validation</a></li>
 </ul>
 </nav>
-</section>
-<section id="regressions" class="slide level2">
-<h2>Regressions</h2>
 </section>
 <section>
 <section id="what-is-machine-learning" class="title-slide slide level1 center">
@@ -1293,6 +1293,282 @@ Explorer
 <span id="cb2-7"><a href="#cb2-7"></a></span>
 <span id="cb2-8"><a href="#cb2-8"></a>   <span class="co">## train a model in X_train, y_train</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a>   <span class="co">## test it on X_test, y_test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="classification-problems" class="title-slide slide level1 center">
+<h1>Classification Problems</h1>
+
+</section>
+<section id="classification-problem" class="slide level2">
+<h2>Classification problem</h2>
+<ul>
+<li>Binary Classification
+<ul>
+<li>Goal is to make a <em>prediction</em> <span class="math inline">\(c_n = f(x_{1,1}, ... x_{k,n})\)</span> …</li>
+<li>…where <span class="math inline">\(c_i\)</span> is a binary variable (<span class="math inline">\(\in\{0,1\}\)</span>)</li>
+<li>… and <span class="math inline">\((x_{i,n})_k\)</span>, <span class="math inline">\(k\)</span> different features to predict <span class="math inline">\(c_n\)</span></li>
+</ul></li>
+<li>Multicategory Classification
+<ul>
+<li>The variable to predict takes values in a non ordered set with <span class="math inline">\(p\)</span> different values</li>
+</ul></li>
+</ul>
+</section>
+<section id="logistic-regression" class="slide level2">
+<h2>Logistic regression</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Given a regression model (a linear predictor)</li>
+</ul>
+<p><span class="math display">\[ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n \]</span></p>
+<ul>
+<li><p>one can build a classification model: <span class="math display">\[ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )\]</span> where <span class="math inline">\(\sigma(x)=\frac{1}{1+\exp(-x)}\)</span> is the logistic function a.k.a. sigmoid</p></li>
+<li><p>The loss function to minimize is: <span class="math display">\[L() = \sum_n (c_n - \sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \cdots a_k x_{k,n} ) )^2\]</span></p></li>
+<li><p>This works for any regression model (LASSO, RIDGE, nonlinear…)</p></li>
+</ul>
+</div><div class="column">
+<p><img data-src="graphs/sigmoid.png"></p>
+</div>
+</div>
+</section>
+<section id="logistic-regression-1" class="slide level2">
+<h2>Logistic regression</h2>
+<ul>
+<li>The linear model predicts an intensity/score (not a category) <span class="math display">\[ f(x_1, ..., x_n) = \sigma( \underbrace{a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n }_{\text{score}})\]</span></li>
+<li>To make a prediction: round to 0 or 1.</li>
+</ul>
+
+<img src="graphs/datacamp.jpeg" width="60%" class="r-stretch"></section>
+<section id="multinomial-regression" class="slide level2">
+<h2>Multinomial regression</h2>
+<ul>
+<li>If there are <span class="math inline">\(P\)</span> categories to predict:
+<ul>
+<li>build a linear predictor <span class="math inline">\(f_p\)</span> for each category <span class="math inline">\(p\)</span></li>
+<li>linear predictor is also called score</li>
+</ul></li>
+<li>To predict:
+<ul>
+<li>evaluate the score of all categories</li>
+<li>choose the one with highest score</li>
+</ul></li>
+<li>To train the model:
+<ul>
+<li>train separately all scores (works for any predictor, not just linear)</li>
+<li>… there are more subtle approaches (not here)</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="other-classifiers" class="title-slide slide level1 center">
+<h1>Other Classifiers</h1>
+
+</section>
+<section id="common-classification-algorithms" class="slide level2">
+<h2>Common classification algorithms</h2>
+<p>There are many:</p>
+<ul>
+<li>Logistic Regression</li>
+<li>Naive Bayes Classifier</li>
+<li>Nearest Distance</li>
+<li>neural networks (replace score in sigmoid by n.n.)</li>
+<li>Decision Trees</li>
+<li>Support Vector Machines</li>
+</ul>
+</section>
+<section id="nearest-distance" class="slide level2">
+<h2>Nearest distance</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Idea:
+<ul>
+<li>in order to predict category <span class="math inline">\(c\)</span> corresponding to <span class="math inline">\(x\)</span> find the closest point <span class="math inline">\(x_0\)</span> in the training set</li>
+<li>Assign to <span class="math inline">\(x\)</span> the same category as <span class="math inline">\(x_0\)</span></li>
+</ul></li>
+<li>But this would be very susceptible to noise</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Amended idea: <span class="math inline">\(k-nearest\)</span> neighbours
+<ul>
+<li>look for the <span class="math inline">\(k\)</span> points closest to <span class="math inline">\(x\)</span></li>
+<li>label <span class="math inline">\(x\)</span> with the same category as the majority of them</li>
+</ul></li>
+<li>Remark: this algorithm uses Euclidean distance. This is why it is important to normalize the dataset.</li>
+</ul>
+</div>
+</div><div class="column">
+<p><img data-src="graphs/k-nearest.png"></p>
+</div>
+</div>
+</section>
+<section id="decision-tree-random-forests" class="slide level2">
+<h2>Decision Tree / Random Forests</h2>
+<div class="columns">
+<div class="column">
+<div>
+<ul>
+<li class="fragment">Decision Tree
+<ul>
+<li class="fragment">recursively find simple criteria to subdivide dataset</li>
+</ul></li>
+<li class="fragment">Problems:
+<ul>
+<li class="fragment">Greedy: algorithm does not simplify branches</li>
+<li class="fragment">easily overfits</li>
+</ul></li>
+<li class="fragment">Extension : random tree forest
+<ul>
+<li class="fragment">uses several (randomly generated) trees to generate a prediction</li>
+<li class="fragment">solves the overfitting problem</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column">
+<p><img data-src="graphs/decision_tree.png"></p>
+</div>
+</div>
+</section>
+<section id="support-vector-classification" class="slide level2">
+<h2>Support Vector Classification</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li><!-- .element: class="fragment" data-fragment-index="1" -->
+Separates data by one line (hyperplane).</li>
+<li><!-- .element: class="fragment" data-fragment-index="2" -->
+Chooses the largest margin according to <emph>support vectors</emph></li>
+<li><!-- .element: class="fragment" data-fragment-index="3" -->
+Can use a nonlinear kernel.</li>
+</ul>
+</div><div class="column">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="graphs/hyperplanes.png" class="fragment current-visible"></p>
+<p></p><figcaption>F</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="graphs/margin.jpg" class="fragment current-visible"></p>
+<p></p><figcaption>F</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="graphs/nonlinear_svm.png" class="fragment current-visible"></p>
+<p></p><figcaption>F</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="all-these-algorithms-are-super-easy-to-use" class="slide level2">
+<h2>All these algorithms are super easy to use!</h2>
+<ul>
+<li>Decision Tree:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb3-2"><a href="#cb3-2"></a>clf <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<ul>
+<li>Support Vector Machine</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb4-2"><a href="#cb4-2"></a>clf <span class="op">=</span> SVC(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<ul>
+<li>Ridge Regression:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
+<span id="cb5-2"><a href="#cb5-2"></a>clf <span class="op">=</span> Ridge(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="validation" class="title-slide slide level1 center">
+<h1>Validation</h1>
+
+</section>
+<section id="validity-of-a-classification-algorithm" class="slide level2">
+<h2>Validity of a classification algorithm</h2>
+<ul>
+<li><p>Independently of how the classification is made, its validity can be assessed with a similar procedure as in the regression.</p></li>
+<li><p>Separate training set and test set</p>
+<ul>
+<li>do not touch test set at all during the training</li>
+</ul></li>
+<li><p>Compute score: number of correctly identified categories</p>
+<ul>
+<li>note that it is different from loss function minimized during the training</li>
+</ul></li>
+</ul>
+</section>
+<section id="classification-matrix" class="slide level2">
+<h2>Classification matrix</h2>
+<ul>
+<li>For binary classification, we focus on the <em>classification matrix</em> or <em>confusion matrix</em>.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Predicted</th>
+<th>(0) Actual</th>
+<th>(1) Actual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>true negatives (TN)</td>
+<td>false negatives (FN)</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>false positives (FP)</td>
+<td>true positives (TP)</td>
+</tr>
+</tbody>
+</table>
+<div class="r-stack">
+<div class="fragment current-visible">
+<ul>
+<li>Overall accuracy: <span class="math inline">\(\frac{\text{TN}+\text{TP}}{\text{total}}\)</span></li>
+<li>Sensitivity: <span class="math inline">\(\frac{TP}{FP+TP}\)</span></li>
+<li>False Positive Rate (FPR): <span class="math inline">\(\frac{FP}{TN+FP}\)</span></li>
+</ul>
+<p>The relevant statistics depends on the application.</p>
+</div>
+<div class="fragment current-visible">
+<ul>
+<li>Example:
+<ul>
+<li>facial recognition by London police: 2% accuracy</li>
+<li>facial recognition by South Wales police: 9% accuracy</li>
+<li>a success?</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="confusion-matrix-with-sklearn" class="slide level2">
+<h2>Confusion matrix with sklearn</h2>
+<ul>
+<li>Predict on the test set:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>y_pred <span class="op">=</span> model.predict(x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Compute confusion matrix:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb7-2"><a href="#cb7-2"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
 
 <div class="footer footer-default">
 
