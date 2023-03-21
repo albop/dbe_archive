@@ -1257,7 +1257,7 @@
     "href": "session_7/index.html#classification-matrix",
     "title": "Introduction to Machine Learning (2)",
     "section": "Classification matrix",
-    "text": "Classification matrix\n\nFor binary classification, we focus on the classification matrix or confusion matrix. | Predicted | (0) Actual | (1) Actual | | ——— | ————— | ————— | | 0 | true negatives (TN) | false negatives (FN) | | 1 | false positives (FP) | true positives (TP) |\nOverall accuracy: \\(\\frac{\\text{TN}+\\text{TP}}{\\text{total}}\\)\nSensitivity: \\(\\frac{TP}{FP+TP}\\)\nFalse Positive Rate (FPR): \\(\\frac{FP}{TN+FP}\\)\nIn some cases, sensitivity is the actual objective, at the expense of lower FPR\n\nexample: fraud detection\n\nExample:\n\nfacial recognition by London police: 2% accuracy\nfacial recognition by South Wales police: 9% accuracy\na success?"
+    "text": "Classification matrix\n\nFor binary classification, we focus on the classification matrix or confusion matrix.\n\n\n\n\nPredicted\n(0) Actual\n(1) Actual\n\n\n\n\n0\ntrue negatives (TN)\nfalse negatives (FN)\n\n\n1\nfalse positives (FP)\ntrue positives (TP)\n\n\n\n\nOverall accuracy: \\(\\frac{\\text{TN}+\\text{TP}}{\\text{total}}\\)\nSensitivity: \\(\\frac{TP}{FP+TP}\\)\nFalse Positive Rate (FPR): \\(\\frac{FP}{TN+FP}\\)\nIn some cases, sensitivity is the actual objective, at the expense of lower FPR\n\nexample: fraud detection\n\nExample:\n\nfacial recognition by London police: 2% accuracy\nfacial recognition by South Wales police: 9% accuracy\na success?"
   },
   {
     "objectID": "session_7/index.html#confusion-matrix-with-sklearn",

@@ -590,7 +590,30 @@ Can use a nonlinear kernel.</li>
 <section id="classification-matrix" class="slide level2">
 <h2>Classification matrix</h2>
 <ul>
-<li><p>For binary classification, we focus on the <em>classification matrix</em> or <em>confusion matrix</em>. | Predicted | (0) Actual | (1) Actual | | ——— | ————— | ————— | | 0 | true negatives (TN) | false negatives (FN) | | 1 | false positives (FP) | true positives (TP) |</p></li>
+<li>For binary classification, we focus on the <em>classification matrix</em> or <em>confusion matrix</em>.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Predicted</th>
+<th>(0) Actual</th>
+<th>(1) Actual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>true negatives (TN)</td>
+<td>false negatives (FN)</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>false positives (FP)</td>
+<td>true positives (TP)</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li><p>Overall accuracy: <span class="math inline">\(\frac{\text{TN}+\text{TP}}{\text{total}}\)</span></p></li>
 <li><p>Sensitivity: <span class="math inline">\(\frac{TP}{FP+TP}\)</span></p></li>
 <li><p>False Positive Rate (FPR): <span class="math inline">\(\frac{FP}{TN+FP}\)</span></p></li>
@@ -618,47 +641,8 @@ Can use a nonlinear kernel.</li>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
 <span id="cb5-2"><a href="#cb5-2"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="how-to-choose-the-validation-set" class="slide level2">
-<h2>How to choose the validation set?</h2>
-<ul>
-<li>Holdout validation approach: keeps x% of the data for the training, (100-x)% for the test
-<ul>
-<li>small dataset: 90-10</li>
-<li>big data set: 70-30 (we can afford to waste more training data for the test)</li>
-</ul></li>
-<li>Problem: are we sure the validation size is correct? Are the results determined by an (un-) lucky draw ?</li>
-</ul>
-<div class="container">
-<div class="col">
-<ul>
-<li>Solution: <span class="math inline">\(k\)</span>-fold validation
-<ul>
-<li>split dataset randomly in <span class="math inline">\(K\)</span> subsets of equal size <span class="math inline">\(S_1, ... S_K\)</span></li>
-<li>use subset <span class="math inline">\(S_i\)</span> as test set, the rest as training set, compute the score</li>
-<li>compare the scores obtained for all <span class="math inline">\(i\in[1,K]\)</span>
-<ul>
-<li>average them</li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-<div class="col">
-<p><img data-src="graphs/k-fold.gif"></p>
-</div>
-</div>
-</section>
-<section id="how-to-implement-k-fold-validation-with-sklearn" class="slide level2">
-<h2>How to implement <span class="math inline">\(k\)</span>-fold validation with sklearn</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
-<span id="cb6-3"><a href="#cb6-3"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="cf">for</span> train_index, test_index <span class="kw">in</span> kf.split(X):</span>
-<span id="cb6-6"><a href="#cb6-6"></a>   X_train, X_test <span class="op">=</span> X[train_index], X[test_index]</span>
-<span id="cb6-7"><a href="#cb6-7"></a>   y_train, y_test <span class="op">=</span> y[train_index], y[test_index]</span>
-<span id="cb6-8"><a href="#cb6-8"></a></span>
-<span id="cb6-9"><a href="#cb6-9"></a>   <span class="co">## train a model in X_train, y_train</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>   <span class="co">## test it on X_test, y_test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section class="slide level2">
+
 
 <div class="footer footer-default">
 

@@ -211,6 +211,7 @@ clf = Ridge(random_state=0)
 ## Classification matrix
 
 - For binary classification, we focus on the *classification matrix* or *confusion matrix*.
+
 | Predicted | (0) Actual      | (1) Actual      |
 | --------- | --------------- | --------------- |
 | 0         | true negatives (TN) | false negatives (FN) |
@@ -244,48 +245,3 @@ cm = confusion_matrix(y_test, y_pred)
 ```
 
 ----
-
-## How to choose the validation set?
-
-- Holdout validation approach: keeps x% of the data for the training, (100-x)% for the test
-  - small dataset: 90-10
-  - big data set: 70-30 (we can afford to waste more training data for the test)
-
-- Problem: are we sure the validation size is correct? Are the results determined by an (un-) lucky draw ?
-
-<div class="container">
-<div class="col">
-
-- Solution: $k$-fold validation
-  - split dataset randomly in $K$ subsets of equal size $S_1, ... S_K$
-  - use subset $S_i$ as test set, the rest as training set, compute the score
-  - compare the scores obtained for all $i\in[1,K]$
-    - average them
-
-</div>
-<div class="col">
-
-![](graphs/k-fold.gif)
-
-</div>
-</div>
-
-
-----
-
-## How to implement $k$-fold validation with sklearn
-
-
-```python
-
-from sklearn.model_selection import KFold
-kf = KFold(n_splits=10)
-
-for train_index, test_index in kf.split(X):
-   X_train, X_test = X[train_index], X[test_index]
-   y_train, y_test = y[train_index], y[test_index]
-
-   ## train a model in X_train, y_train
-   ## test it on X_test, y_test
-
-```
