@@ -382,8 +382,8 @@ We need a way to fit a model on a subset of the data at a time.
       - regress them to get new estimate $a$, $b$
       - this minimizes the square of errors
     - update with learning rate $\beta$:
-      -  $a_{n+1} \leftarrow a_n (1-\beta) + \beta_n a$
-      -  $b_{n+1} \leftarrow b_n (1-\beta) + \beta_n b$
+      -  $a_{n+1} \leftarrow a_n (1-\beta_n) + \beta_n a$
+      -  $b_{n+1} \leftarrow b_n (1-\beta_n) + \beta_n b$
     - process is not biased (that is $a$ converges to the true value) as long as one decreases $\beta$ sufficiently fast over time (ex: $\beta_n=\frac{1}{n}$)
 
 :::
@@ -394,7 +394,7 @@ We need a way to fit a model on a subset of the data at a time.
 
 - vector of unknowns: $\theta=(a,b)$
 - dataset $X,Y=(x_i,y_i)_{i=1:N}$
-- for a random draw $\omega = (a_{\sigma(i)}, b_{\sigma(i)})\_{i=[1,B]} \subset (X,Y)$
+- for a random draw $\omega = (a_{\sigma(i)}, b_{\sigma(i)})_{i=[1,N]} \subset (X,Y)$
   - $\omega$ is just a random __batch__ of size $N$
 - define the *empirical* risk (or empirical *cost*)
   $$\xi(\theta, \omega) = \sum_{(x,y) \in \omega} (y - (a x + b))^2$$
@@ -512,7 +512,7 @@ To perform Lasso and ridge regression:
 
 - So far, we have assumed, 
   - $y_i = a + b x_i$
-  - $y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_1 (|a| + |b|)$
+  - $y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_2 (|a| + |b|)$
   - defined $\Xi(a,b)$ and tried to minimize it
 - Same approach works for fully nonlinear models
   - $y_i = a x_i + a^2 x_i^2 + c$

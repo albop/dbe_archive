@@ -937,8 +937,8 @@ Explorer
 </ul></li>
 <li>update with learning rate <span class="math inline">\(\beta\)</span>:
 <ul>
-<li><span class="math inline">\(a_{n+1} \leftarrow a_n (1-\beta) + \beta_n a\)</span></li>
-<li><span class="math inline">\(b_{n+1} \leftarrow b_n (1-\beta) + \beta_n b\)</span></li>
+<li><span class="math inline">\(a_{n+1} \leftarrow a_n (1-\beta_n) + \beta_n a\)</span></li>
+<li><span class="math inline">\(b_{n+1} \leftarrow b_n (1-\beta_n) + \beta_n b\)</span></li>
 </ul></li>
 <li>process is not biased (that is <span class="math inline">\(a\)</span> converges to the true value) as long as one decreases <span class="math inline">\(\beta\)</span> sufficiently fast over time (ex: <span class="math inline">\(\beta_n=\frac{1}{n}\)</span>)</li>
 </ul></li>
@@ -951,7 +951,7 @@ Explorer
 <ul>
 <li>vector of unknowns: <span class="math inline">\(\theta=(a,b)\)</span></li>
 <li>dataset <span class="math inline">\(X,Y=(x_i,y_i)_{i=1:N}\)</span></li>
-<li>for a random draw <span class="math inline">\(\omega = (a_{\sigma(i)}, b_{\sigma(i)})\_{i=[1,B]} \subset (X,Y)\)</span>
+<li>for a random draw <span class="math inline">\(\omega = (a_{\sigma(i)}, b_{\sigma(i)})_{i=[1,N]} \subset (X,Y)\)</span>
 <ul>
 <li><span class="math inline">\(\omega\)</span> is just a random <strong>batch</strong> of size <span class="math inline">\(N\)</span></li>
 </ul></li>
@@ -1086,7 +1086,7 @@ Explorer
 <li>So far, we have assumed,
 <ul>
 <li><span class="math inline">\(y_i = a + b x_i\)</span></li>
-<li><span class="math inline">\(y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_1 (|a| + |b|)\)</span></li>
+<li><span class="math inline">\(y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_2 (|a| + |b|)\)</span></li>
 <li>defined <span class="math inline">\(\Xi(a,b)\)</span> and tried to minimize it</li>
 </ul></li>
 <li>Same approach works for fully nonlinear models
