@@ -1,5 +1,5 @@
 ---
-title: Introduction to Machine Learning (2)
+title: Introduction to Machine Learning
 subtitle: Data-Based Economics
 author: Year 2022-2023
 format:
@@ -13,235 +13,690 @@ format:
 aspectratio: 169
 ---
 
-# Classification Problems 
+## Regressions
 
-## Classification problem
 
-- Binary Classification 
-  - Goal is to make a *prediction* $c_n = f(x_{1,1}, ... x_{k,n})$ ...
-  - ...where $c_i$ is a binary variable ($\in\{0,1\}$)
-  - ... and $(x_{i,n})_k$, $k$ different features to predict $c_n$
-- Multicategory Classification
-  - The variable to predict takes values in a non ordered set with $p$ different values
+# What is machine learning?
 
-## Logistic regression
+
+## What is Machine learning?
+
+Definition Candidates:
+
+Arthur Samuel: *Field of study that gives computers the ability to learn without being explicitly programmed*
+
+Tom Mitchell: *A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experience E.*
+
+
+## What about artificial intelligence ?
 
 ::: columns
 
 :::: column
 
-- Given a regression model (a linear predictor)
+- AIs
+  - think and learn
+  - mimmic human cognition
 
-$$ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n $$
-- one can build a classification model:
-$$ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )$$
-where $\sigma(x)=\frac{1}{1+\exp(-x)}$ is the logistic function a.k.a. sigmoid 
-- The loss function to minimize is:
-$$L() = \sum_n (c_n - \sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \cdots a_k x_{k,n} ) )^2$$
-- This works for any regression model (LASSO, RIDGE, nonlinear...)
+::::
+:::: column
+
+![](ml_graphs/AI_ML.png)
+
+::::
+:::
+
+
+## Econometrics vs Machine Learning
+
+- Econometrics is essentially a subfield of machine learning with a different jargon and a focus on:
+  - studying properties and validity of results
+      - data is scarce
+      - inference
+  - singling out effects of specific explanatory variables
+  - establishing causality
+
+- Machine learning:
+  - structure data
+  - make predictions (interpolate data)
+
+
+# Big Data
+
+
+## Data types
+
+- structured:
+    - tabular
+      - long
+      - wide
+- unstructured:
+    - files
+    - networks
+    - text, mails
+    - images, sound
+
+----
+
+## Tabular Data
+
+![tabular data](ml_graphs/tabular.png)
+
+
+## Networks
+
+- Banking networks
+- Production network
+
+![](ml_graphs/StarWarsSocialNetwork1.png)
+
+
+
+## Big Data
+
+- __Big__ data:
+  - wide data (K>>N)
+  - long data (N>>K)
+  - heterogenous, unstructured data
+- Might not even fit in memory
+  - out of core computations
+  - learn from a subset of the data
+
+
+
+# Machine Learning Tasks
+
+
+## Big Subfields of Machine Learning
+
+::: columns
+
+:::: column
+
+- Traditional classification
+    - supervised (labelled data)
+        - regression: predict quantity
+        - classification: predict index (categorical variable)
+    - unsupervised (no labels)
+        - dimension reduction
+        - clustering
+    - semi-supervised / self-supervised
+    - reinforcement learning
+- Bazillions of different algorithms: https://scikit-learn.org/stable/user_guide.html
 
 ::::
 
 :::: column
 
-![](graphs/sigmoid.png)
+::::: r-stack
+
+:::::: {.fragment .current-visible fragment-index=1}
+
+- __regression__:
+  - Predict: $y = f(x; \theta)$
+
+![supervised: regression](ml_graphs/regression.png)
+
+<table>
+<tr>
+<th>Age</th>
+<th>Activity</th>
+<th><mark>Salary</mark></th>
+</tr>
+<tr>
+<td>23</td>
+<td>Explorer</td>
+<td>1200</td>
+</tr>
+<tr>
+<td>40</td>
+<td>Mortician</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>45</td>
+<td>Mortician</td>
+<td>2500</td>
+</tr>
+<tr>
+<td>33</td>
+<td>Movie Star</td>
+<td>3000</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Explorer</td>
+<td>???</td>
+</tr>
+</table>
+
+
+
+
+
+::::::
+
+:::::: {.fragment .current-visible}
+ 
+- __supervised: classification__
+  - Output is discrete
+  - Regular trick: $\sigma(f(x; \theta))$ where $\sigma(x)=\frac{1}{1-e^{-x}}$
+
+
+![classification](ml_graphs/classification.png)
+
+
+<table>
+<tr>
+<th>Age</th>
+<th>Salary</th>
+<th><mark>Activity</mark></th>
+</tr>
+<tr>
+<td>23</td>
+<td>1200</td>
+<td>Explorer</td>
+</tr>
+<tr>
+<td>40</td>
+<td>2000</td>
+<td>Mortician</td>
+</tr>
+<tr>
+<td>45</td>
+<td>2500</td>
+<td>Mortician</td>
+</tr>
+<tr>
+<td>33</td>
+<td>3000</td>
+<td>Movie Star</td>
+</tr>
+<tr>
+<td>35</td>
+<td>3000</td>
+<td>???</td>
+</tr>
+</table>
+
+
+
+:::::
+
+
+:::::: {.fragment .current-visible}
+
+
+__unsupervised__
+
+- organize data without labels
+    - dimension reduction: describe data with less parameters
+    - clustering: sort data into "similar groups" ([exemple](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html))
+
+<table>
+<tr>
+<th>Age</th>
+<th>Salary</th>
+<th>Activity</th>
+</tr>
+<tr>
+<td>23</td>
+<td>1200</td>
+<td>Explorer</td>
+</tr>
+<tr>
+<td>40</td>
+<td>2000</td>
+<td>Mortician</td>
+</tr>
+<tr>
+<td>45</td>
+<td>2500</td>
+<td>Mortician</td>
+</tr>
+<tr>
+<td>33</td>
+<td>3000</td>
+<td>Movie Star</td>
+</tr>
+<tr>
+<td>35</td>
+<td>3000</td>
+<td>Explorer</td>
+</tr>
+</table>
+
+:::::
+
+
+:::::: {.fragment .current-visible}
+
+
+__unsupervised: clustering__
+
+
+![kmeansclustering](ml_graphs/kmeansclustering.gif)
+
+::::::
+
+:::::: {.fragment .current-visible}
+
+__unsupervised: clustering__
+
+Women buying dresses during the year:
+
+![](ml_graphs/clustering_dress.png)
+
+::::::
+
+:::::
 
 ::::
 
 :::
 
 
-## Logistic regression
+## Difference with traditional regression {auto-animate="true"}
 
-- The linear model predicts an intensity/score (not a category)
-$$ f(x_1, ..., x_n) = \sigma( \underbrace{a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n }_{\text{score}})$$
-- To make a prediction: round to 0 or 1.
+$$\underbrace{y}_{\text{explained variable}} = a \underbrace{x}_{\text{explanatory variable}} + b$$
 
-<img src=graphs/datacamp.jpeg width=60%>
+## Difference with traditional regression {auto-animate="true"}
 
+$$\underbrace{y}_{\text{labels}} = a \underbrace{x}_{\text{features}} + b$$
 
-## Multinomial regression
+. . .
 
-- If there are $P$ categories to predict:
-  - build a linear predictor $f_p$ for each category $p$
-  - linear predictor is also called score
-
-- To predict:
-  - evaluate the score of all categories
-  - choose the one with highest score
-
-- To train the model:
-  - train separately all scores (works for any predictor, not just linear)
-  - ... there are more subtle approaches (not here)
+| Econometrics                       |  Machine learning  | 
+|------------------------------------|--------------------|
+| Regressand / independent variable / explanatory variable  |  Features          | 
+| Regressor / dependent variable / explained variable    |  Labels            |
+| Regression                         |  Model Training    |
 
 
-# Other Classifiers
+
+## Difference with traditional regression
 
 
-## Common classification algorithms
+- Big data requires other means to process the data:
+    - data is long: so many observations $x$ doesn't fit in the memory
+        - need to use incremental training method to use only a subsample at a time
+    - data is wide: so many features, the model is crudely overspecified
+        - need to build dimension reduction into the objective
+    - data is nonlinear: 
+        - use nonlinear model (and nonlinear training)
+    - data is not a simple vector...
+        - same as nonlinear
 
-There are many:
 
-- Logistic Regression
-- Naive Bayes Classifier 
-- Nearest Distance
-- neural networks (replace score in sigmoid by n.n.)
-- Decision Trees
-- Support Vector Machines
+# Regression with long data
+
+
+## Long data
+
+::: {.callout-block}
+
+## Long data
+
+Long data is characterized by a high number of observations.
+
+:::
+
+::: r-stack
+
+[![Big Data](assets/long_data.png)]{.fragment .current-visible  fragment-index=1}
+
+[![Big Data](assets/long_data_subset.png)]{.fragment .current-visible fragment-index=2}
+
+:::
+
+- Modern society is gathering *a lot* of data.
+  - in doesn't fit in the computer memory so we can't run a basic regression
+- In some cases we would also like to update our model continuously:
+  - incremental regression
+
+::: {.fragment .current-visible fragment-index=2} 
+We need a way to fit a model on a subset of the data at a time.
+:::
 
 ----
 
-## Nearest distance
+## Long data 
+    
+
+::: r-stack
+
+::: {.fragment .current-visible}
+
+- Traditional regression:
+    - full sample $X,Y=(x_i,y_i)_{i=1:N}$
+    - OLS: $\min_{a,b} \sum_{i=1}^N (a x_i + b - y_i)^2$
+    - closed-form solution: $a = X^{\prime}X Y$ and $b= ...$
+    - hard to compute if $X$ is very big
+
+:::
+::: {.fragment .current-visible}
+
+- Incremental learning:
+    - given initial $a_n$, $b_n$
+    - pick $N$ random observations (the batch)
+      - regress them to get new estimate $a$, $b$
+      - this minimizes the square of errors
+    - update with learning rate $\beta$:
+      -  $a_{n+1} \leftarrow a_n (1-\beta_n) + \beta_n a$
+      -  $b_{n+1} \leftarrow b_n (1-\beta_n) + \beta_n b$
+    - process is not biased (that is $a$ converges to the true value) as long as one decreases $\beta$ sufficiently fast over time (ex: $\beta_n=\frac{1}{n}$)
+
+:::
+:::
+
+
+## Formalisation: a typical machine learning task
+
+- vector of unknowns: $\theta=(a,b)$
+- dataset $X,Y=(x_i,y_i)_{i=1:N}$
+- for a random draw $\omega = (a_{\sigma(i)}, b_{\sigma(i)})_{i=[1,N]} \subset (X,Y)$
+  - $\omega$ is just a random __batch__ of size $N$
+- define the *empirical* risk (or empirical *cost*)
+  $$\xi(\theta, \omega) = \sum_{(x,y) \in \omega} (y - (a x + b))^2$$
+- we want to minimize *theoretical risk*:
+  $$\Xi(\theta) = \mathbb{E} \left[ \xi(\theta, \omega)\right]$$
+
+
+## Training: Gradient Descent
 
 ::: columns
 
 :::: column
 
-- Idea: 
-  - in order to predict category $c$ corresponding to $x$ find the closest point $x_0$ in the training set 
-  - Assign to $x$ the same category as $x_0$
-- But this would be very susceptible to noise
-- Amended idea: $k-nearest$ neighbours
-  - look for the $k$ points closest to $x$
-  - label $x$ with the same category as the majority of them
-- Remark: this algorithm uses Euclidean distance. This is why it is important to normalize the dataset.
+- How do we minimize a function $f(a,b)$?
+
+- Gradient descent:
+  - $a_k, b_k$ given
+  - compute the gradient (slope) $\nabla_{a,b} f = \begin{bmatrix} \frac{\partial f}{\partial a} \\\\ \frac{\partial f}{\partial b}\end{bmatrix}$
+  - follow the steepest slope: (Newton Algorithm)
+    - $$ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} - \nabla_{a,b} f$$
+  - but not too fast: use learning rate $\lambda$:
+   $$ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  (1-\lambda) \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} + \lambda (- \nabla_{a,b} f )$$
+
 
 ::::
 :::: column
-
-![](graphs/k-nearest.png)
+ 
+![](ml_graphs/training.gif)
 
 ::::
 :::
 
 
-## Decision Tree / Random Forests
+## Not everything goes wrong all the time
+
+![](ml_graphs/contours_evaluation_optimizers.gif)
+![](ml_graphs/saddle_point_evaluation_optimizers.gif)
+
+- In practice, choosing the right learning rate $\lambda$ is crucial
+- $\lambda$ is a __metaparameter__ of the model training.
+
+
+<!-- ## Stochastic Gradient Descent
+
+- Stochastic gradient descent
+  - As long as the batch is taken randomly
+  - As long as the learning rate is small enough
+  - Or the batch size big enough
+  - The gradient is *unbiased* (i.e. $\mathbb{E}\left[ \nabla \xi(\omega, \theta) \right] = \nabla \Xi(\theta)$)
+- We don't need the whole dataset.
+ -->
+
+# Regression with wide data
+
+
+## Wide data
+
+::: {.callout-block}
+
+Wide Data is characterized by a high number of features compared to the number of observations.
+
+:::
+
+. . .
+
+
+Problem: 
+- with many independent variables $x_1, ... x_K$, $K>>N$ and one dependent variable $y$
+the regression
+  $$y = a_1 x_1 + a_2 x_2 + \cdots + a_N x_N + b$$ is grossly __overidentified__.
+
+
+
+## Wide data regression
+
+- Main Idea: penalize non-zero coefficients to encourage scarcity
+  - Ridge: $$\Xi(a,b) = \min_{a,b} \sum_{i=1}^N ( \sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|^2$$
+    - shrinks parameters towards zero
+    - closed form
+  - Lasso: $$\Xi(a,b) = \min_{a,b} \sum_{i=1}^N (\sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|$$
+    - eliminates zero coefficients
+  - Elastic: Ridge + Lasso
+
+- Remarks:
+  - $\mu$ is called a regularization term.
+  - it is a hyperparameter
+  - $\mu \uparrow$, bias increases, variance decreases
+
+
+## Training
+
+To perform Lasso and ridge regression:
+
+- AI approach:
+  - minimize objective $\Xi(a,b)$ directly.
+  - approach is known as (stochastic) Gradient Descent
+
+- Use special algorithms
+
+
+## Example: IMF challenge
+
+- An internal IMF challenge to predict crises in countries
+- Lots of different approaches
+- Lots of data:
+  - which one is relevant
+  - machine must select relevant informations
+- Example: [*Lasso Regressions and Forecasting Models in Applied Stress Testing*](https://www.imf.org/en/Publications/WP/Issues/2017/05/05/Lasso-Regressions-and-Forecasting-Models-in-Applied-Stress-Testing-44887) by Jorge A. Chan-Lau
+  - in a given developing country
+  - tries to predict probability of default in various sectors
+
+# Nonlinear Regression
+
+## Nonlinear Regression
+
+- So far, we have assumed, 
+  - $y_i = a + b x_i$
+  - $y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_2 (|a| + |b|)$
+  - defined $\Xi(a,b)$ and tried to minimize it
+- Same approach works for fully nonlinear models
+  - $y_i = a x_i + a^2 x_i^2 + c$
+  - $y_i = \varphi(x; \theta)$ ()
+- Special case: neural network:
+  - primer [tensor playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.85189&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
+
+# Model validation
+
+## how to evaluate the machine learning
+
+In machine learning we can't perform statistical inference easily. How do we assess the validity of a model?
+
+- Basic idea (independent of how complex the algorithm is)
+  - separate data in
+    - training set (in-sample)
+    - test set (out of sample)
+  - train using only the training set
+  - evaluate *performance* on the test set
+
+- Performance can be:
+  - fitness, number of classification errors (false positive, false negative)
+
+## how to evaluate the machine learning
+
+In case the training method depends itself on many parameters (the hyperparameters) we make three samples instead:
+
+- training set (in-sample)
+- validation set (to update hyperparameters)
+- test set (out of sample)
+
+__Golden Rule__:  the test set should not be used to estimate the model, and should not affect the choice *any* training parameter (hyperparameter).
+
+<!-- 
+## How to judge a model validity?
+
+- not easy
+- modeling *asumptions* (specification):
+    - functional space -> fit, variance (econ: $R^2$)
+    - statistical modeling: data generating process -> bias (econ: stdev)
+- There is a very general _tradeoff bias/variance_
+- Many ML methods allow to estimate bias (possibly via bootstrapping) -->
+
+##
+
+![Traintest](ml_graphs/2000px-Traintest.svg.png)
+
+. . .
+
+The test set reveals that orange model is overfitting.
+
+## How to choose the validation set?
+
+- Holdout validation approach:
+  - keeps x% of the data for the training, (100-x)% for the test
+
+- How to choose the sizes of the subsets?
+  - small dataset: 90-10
+  - big data set: 70-30 (we can afford to waste more training data for the test)
+
+. . .
+
+- Problem:
+  - are we sure the validation size is correct? Are the results determined by an (un-) lucky draw?
+  - a problem for smaller datasets
+
+## How to choose the validation set?
+
+A more robust solution: $k$-fold validation
+
 
 ::: columns
+
 :::: column
 
-- Decision Tree
-    - recursively find simple criteria to subdivide dataset
 
-- Problems: 
-  - Greedy: algorithm does not simplify branches
-  - easily overfits
-
-- Extension : random tree forest 
-  - uses several (randomly generated) trees to generate a prediction
-  - solves the overfitting problem
+- split dataset randomly in $K$ subsets of equal size $S_1, ... S_K$
+- use subset $S_i$ as test set, the rest as training set, compute the score
+- compare the scores obtained for all $i\in[1,K]$
+  - they should be similar (compute standard deviation)
+- average them
 
 ::::
 :::: column
 
-
-![](graphs/decision_tree.png)
+![](graphs/k-fold.gif)
 
 ::::
 :::
 
+# How to use sklearn for regressions
 
-## Support Vector Classification
+## Wait
+
+- *Another* library to do regression ?
+
+- `statsmodels`: 
+  - explanatory analysis
+  - statistical tests
+  - formula interface for many estimation algorithms
+    - stateless approach (`model.fit()` returns another object)
+
+- `linearmodels`
+  - *extends* `statsmodels` (very similar interface)
+    - (panel models, IV, systems...)
+
+- `sklearn`: 
+  - prediction
+  - faster for big datasets
+  - common interface for several machine learning tasks
+    - stateful approach (model is modified by `.fit` operation)
+  - defacto standard for machine learning
+
+
+## In practice
 
 ::: columns
+
 :::: column
 
-- <!-- .element: class="fragment" data-fragment-index="1" --> Separates data by one line (hyperplane).
-- <!-- .element: class="fragment" data-fragment-index="2" --> Chooses the largest margin according to <emph>support vectors</emph>
-- <!-- .element: class="fragment" data-fragment-index="3" --> Can use a nonlinear kernel.
+
+Basic sklearn workflow:
+
+::::: incremental
+
+- import data
+  - features: a matrix X (2d numpy array)
+  - labels: a vector y (1d numpy array)
+- split the data, between training and test datasets
+  - split needs to be random to avoid any bias
+- normalize the data
+  - most ML algorithm are sensitive to scale
+
+- create a model (independent from data)
+- train the model on training dataset
+- evaluate accuracy on test dataset (here $R^2$)
+- use the model to make predictions
+
+:::::
+
+The workflow is always the same, no matter what the model is
+
+- try  `sklearn.linear_model.Lasso` instead of `LinearRegression`
 
 ::::
 :::: column
 
-<div class="r-stack">
+```python
+from sklearn.datasets import load_diabetes
+dataset = load_diabetes()
+X = dataset['data']
+y = dataset['target']
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.1)
 
-<img class="fragment current-visible" src="graphs/hyperplanes.png" data-fragment-index=1>
-<img class="fragment current-visible" src="graphs/margin.jpg" data-fragment-index=2>
-<img class="fragment current-visible" src="graphs/nonlinear_svm.png" data-fragment-index=3>
+#Feature Scaling
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X_train, y_train)
 
-</div>
+model.score(X_test, y_test)
+model.predict(X_new)
+```
 
 ::::
+
 :::
 
-## All these algorithms are super easy to use!
 
-
-
-```python
-from sklearn.tree import DecisionTreeClassifier
-clf = DecisionTreeClassifier(random_state=0)
-```
-
-...
+## $k$-fold validation with sklearn
 
 ```python
-from sklearn.svm import SVC
-clf = SVC(random_state=0)
+from sklearn.model_selection import KFold
+kf = KFold(n_splits=10)
+
+for train_index, test_index in kf.split(X):
+   X_train, X_test = X[train_index], X[test_index]
+   y_train, y_test = y[train_index], y[test_index]
+
+   ## train a model in X_train, y_train
+   ## test it on X_test, y_test
+
 ```
-
-...
-
-```python
-from sklearn.linear_model import Ridge
-clf = Ridge(random_state=0)
-```
-
-
-
----
-
-# Validation
-
-----
-
-## Validity of a classification algorithm
-
-- Independently of how the classification is made, its validity can be assessed with a similar procedure as in the regression.
-
-- Separate training set and test set
-  - do not touch test set at all during the training
-
-- Compute score: number of correctly identified categories
-  - note that this is not the same as the loss function minimized by the training
-
-
-----
-
-## Classification matrix
-
-- For binary classification, we focus on the *classification matrix* or *confusion matrix*.
-
-| Predicted | (0) Actual      | (1) Actual      |
-| --------- | --------------- | --------------- |
-| 0         | true negatives (TN) | false negatives (FN) |
-| 1         | false positives  (FP) | true positives (TP) |
-
-- Overall accuracy: $\frac{\text{TN}+\text{TP}}{\text{total}}$
-- Sensitivity: $\frac{TP}{FP+TP}$
-- False Positive Rate (FPR): $\frac{FP}{TN+FP}$
-
-- In some cases, sensitivity is the actual objective, at the expense of lower FPR
-  - example: fraud detection
-- Example:
-    -  facial recognition by London police: 2% accuracy
-    -  facial recognition by South Wales police: 9% accuracy
-    -  a success?
-
-----
-
-## Confusion matrix with sklearn
-
-- Predict on the test set:
-
-```python
-y_pred = model.predict(x_test)
-```
-- Compute confusion matrix:
-
-```python
-from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_pred)
-```
-
-----

@@ -1,3 +1,19 @@
+---
+title: Introduction to Machine Learning (2)
+subtitle: Data-Based Economics
+author: Year 2022-2023
+format:
+  revealjs:
+    toc: true
+    toc-depth: 1
+    toc-title: Plan
+    navigation: grid
+    width: 1920
+    height: 1080
+aspectratio: 169
+---
+
+
 # Machine learning (2)
 
 ## Classification

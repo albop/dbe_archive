@@ -1,5 +1,5 @@
 ---
-title: Introduction to Machine Learning
+title: Introduction to Instrumental Variables
 subtitle: Data-Based Economics
 author: Year 2022-2023
 format:
@@ -13,281 +13,276 @@ format:
 aspectratio: 169
 ---
 
-## Regressions
+
+#  Categorical Variables
 
 
-# What is machine learning?
+## Data
+
+- Our multilinear regression: 
+$$y = \alpha + \beta x_1 + \cdots + \beta x_n$$
+
+- So far, we have only considered real variables: ($x_i \in \mathbb{R}$).
+  - ex: $x_{\text{gdp}} = \alpha + \beta_1 x_{\text{unemployment}} + \beta_2 x_{\text{inflation}}$
+
+- How do we deal with the following cases?
+  - __binary variable__: $x\in \{0,1\}$ (or $\{True, False}$)
+    - ex: $\text{gonetowar}$, $\text{hasdegree}$
+  - __categorical variable__: 
+    - ex: survey result (0: I don't know, 1: I strongly disagree, 2: I disagree, 3: I agree, 4: I strongly agree)
+    - there is no ranking of answers
+    - when there is ranking: hierarchical index
+  - __nonnumerical variables__:
+    - ex: (flower type: $x\in \text{myosotis}, \text{rose}, ...$)
 
 
-## What is Machine learning?
 
-Definition Candidates:
-
-Arthur Samuel: *Field of study that gives computers the ability to learn without being explicitly programmed*
-
-Tom Mitchell: *A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experience E.*
+## Binary variable
 
 
-## What about artificial intelligence ?
+- Nothing to be done: just make sure variables take values 0 or 1.
+$$y_\text{salary} = \alpha + \beta x_{\text{gonetowar}}$$
+- Interpretation:
+  - having gone to war is associated with  a $\beta$ increase (or decrease?) in salary (still no causality)
+
+
+## Categorical variable 
+
+- Look at the model:
+$$y_{\text{CO2 emission}} = \alpha + \beta x_{\text{yellow vest support}} $$
+- Where $y_{\text{CO2 emission}}$ is an individual's CO2 emissions and $x_{\text{yellow vest support}}$ is the response the the question *Are you in agreement with the yellow vests demands?*.
+
+- Response is coded up as:
+  - 0: Strongly disagree
+  - 1: Disagree
+  - 2: Neutral
+  - 3: Agree
+  - 4: Strongly agree
+
+- If the variable was used directly, how would you intepret the coefficient $\beta$ ?
+  - index is hierarchical
+  - but the distances between 1 and 2 or 2 and 3 are not comparable...
+
+
+## Hierarchical index (2):
+
+- We use one __dummy variable__ per possible answer.
+
+| $D_{\text{Strongly Disagree}}$ | $D_{\text{Disagree}}$ | $D_{\text{Neutral}}$ | $D_{\text{Agree}}$ | $D_{\text{Strongly Agree}}$ |
+| ------------------------------ | --------------------- | -------------------- | ------------------ | --------------------------- |
+| 1                              | 0                     | 0                    | 0                  | 0                           |
+| 0                              | 1                     | 0                    | 0                  | 0                           |
+| 0                              | 0                     | 0                    | 0                  | 0                           |
+| 0                              | 0                     | 0                    | 1                  | 0                           |
+| 0                              | 0                     | 0                    | 0                  | 1                           |
+
+- Values are linked by the specific __dummy coding__.
+  - the choice of the reference group (with 0) is not completely neutral 
+    - for linear regressions, we can ignore its implications
+  - it must be frequent enough in the data
+  - __effects__ coding: reference group takes -1 instead of 0
+- Note that hierarchy is lost. The same treatment can be applied to non-hierachical variables
+- Now our variables are perfectly __colinear__:
+  - we can deduce one from all the others
+  - we drop one from the regression: the reference group TODO
+
+
+## Hierarchical index (3)
+
+$$y_{\text{CO2 emission}} = \alpha + \beta_1 x_{\text{strdis}} + \beta_2 x_{\text{dis}} + \beta_3 x_{\text{agr}} + \beta_4 x_{\text{stragr}}$$
+
+- Interpretation: 
+  - being in the group which strongly agrees to the yellow vest's claim is associated with an additional $\beta_4$ increase in CO2 consumption compared with members of the neutral group
+
+
+## Nonnumerical variables
 
 ::: columns
 
 :::: column
 
-- AIs
-  - think and learn
-  - mimmic human cognition
+- <!-- .element class="fragment" --> What about nonnumerical variables?
+- <!-- .element class="fragment" -->When variables take nonnumerical variables, we convert them to numerical variables. 
+- <!-- .element class="fragment" -->Example: 
+
+| activity          | code |
+| ----------------- | ---- |
+| massage therapist | 1    |
+| mortician         | 2    |
+| archeologist      | 3    |
+| financial clerks  | 4    |
 
 ::::
 :::: column
 
-![](ml_graphs/AI_ML.png)
+- <!-- .element class="fragment" -->Then we convert to dummy variables exactly like hierarchical indices
+  - here $\text{massage therapist}$ is taken as reference
+
+| $D_{\text{mortician}}$  | $D_{\text{archeologist}}$  | $D_{\text{financial clerks}}$  |
+| ----------------------- | -------------------------- | ------------------------------ |
+|           1             |            0               |              0                 |
+|           0             |            1               |              0                 |
+|           0             |             0              |              1                 |
 
 ::::
 :::
 
 
-## Econometrics vs Machine Learning
+## Hands-on
 
-- Econometrics is essentially a subfield of machine learning with a different jargon and a focus on:
-  - studying properties and validity of results
-      - data is scarce
-      - inference
-  - singling out effects of specific explanatory variables
-  - establishing causality
+Use `statsmodels` to create dummy variables with formula API.
 
-- Machine learning:
-  - structure data
-  - make predictions (interpolate data)
+- Replace
+```python
+salary ~ activity
+```
+- by:
+```python
+salary ~ C(activity)
+```
 
+There is an options to choose the reference group
+```python
+salary ~ C(activity, Treatment(reference="archeologist"))
+```
+ 
+# Causality
 
-# Big Data
+## What is causality?
 
+. . .
 
-## Data types
+![Groucho Marx](assets/groucho_marx.jpg)
 
-- structured:
-    - tabular
-      - long
-      - wide
-- unstructured:
-    - files
-    - networks
-    - text, mails
-    - images, sound
-
-----
-
-## Tabular Data
-
-![tabular data](ml_graphs/tabular.png)
+Clear? Huh! Why a four-year-old child could understand this report! Run out and find me a four-year-old child, I can't make head or tail of it.
 
 
-## Networks
-
-- Banking networks
-- Production network
-
-![](ml_graphs/StarWarsSocialNetwork1.png)
+## Spurious correlation
 
 
+![Spurious Correlation](assets/spurious.png)
 
-## Big Data
+- We have seen spurious correlation before
+  - it happens when two series comove without being actually correlated
 
-- __Big__ data:
-  - wide data (K>>N)
-  - long data (N>>K)
-  - heterogenous, unstructured data
-- Might not even fit in memory
-  - out of core computations
-  - learn from a subset of the data
+- Also, two series might be correlated without one causing the other
+  - ex: countries eating more chocolate have more nobel prices...
+
+## Definitions?
+
+But how do we define
+
+- correlation
+- causality
+
+?
+
+Both concepts are actually hard to define:
+
+- in statistics (and econometrices) they refer to the __generating process__
+- if the data was generated again, would you observe the same relations?
+
+For instance correlation between $X$ and $Y$ is just the average correlation taken over many draws $\omega$ of the data: $$E_{\omega}\left[ (X-E[X])(Y-E[Y])\right]$$
 
 
+## How do we define causality (1)
 
-# Machine Learning Tasks
+- In math, we have implication: $A \implies B$
+  - applies to *statements* that can be either true or false
+  - given $A$ and $B$, $A$ implies $B$ unless $A$ is true and $B$ is false
+  - *paradox of the drinker*: at any time, there exists a person such that:  if this person drinks, then everybody drinks
+- In a *mathematical* universe taking values $\omega$, we can define causality between statement $A(\omega)$ and $B(\omega)$ as :
+$$\forall \omega, A(\omega) \implies B(\omega)$$
 
+## How do we define causality (2)
 
-## Big Subfields of Machine Learning
+But causality in the *real* world is problematic
+
+Usually, we observe $A(\omega)$ only once...
+
+. . .
 
 ::: columns
 
 :::: column
 
-- Traditional classification
-    - supervised (labelled data)
-        - regression: predict quantity
-        - classification: predict index (categorical variable)
-    - unsupervised (no labels)
-        - dimension reduction
-        - clustering
-    - semi-supervised / self-supervised
-    - reinforcement learning
-- Bazillions of different algorithms: https://scikit-learn.org/stable/user_guide.html
+Example: 
+
+- state of the world $\omega$: 2008, big financial crisis, ...
+- A: Ben Bernanke chairman of the Fed
+- B: successful economic interventions
+- Was Ben Bernanke a good central banker?
+- Impossible to say.
 
 ::::
 
 :::: column
+
+![](assets/bernanke.jpg){width=60%}
+
+::::
+
+:::
+
+::: aside
+Then there is the uncertain concept of time... But let's take it as granted to not overcomplicate...
+:::
+
+## Causality in Statistics
+
+::: {.callout-note}
+
+### Statistical definition of causality
+
+Variable $A$ causes $B$ in a statistical sense if
+- $A$ and $B$ are correlated
+- $A$ is known before $B$
+- correlation between $A$ and $B$ is unaffected by other variables
+
+:::
+
+- There are other related statistical definitions:
+  - like Granger causality...
+  - ... but not for this course
+
+
+# Experiments
+
+
+
+## Factual and counterfactual
+
+::: columns
+
+:::: column
+
+\ 
 
 ::::: r-stack
 
-:::::: {.fragment .current-visible fragment-index=1}
+[![](assets/counterfactual_1.png){ width=600}]{.fragment .current-visible fragment-index=1}
 
-- __regression__:
-  - Predict: $y = f(x; \theta)$
-
-![supervised: regression](ml_graphs/regression.png)
-
-<table>
-<tr>
-<th>Age</th>
-<th>Activity</th>
-<th><mark>Salary</mark></th>
-</tr>
-<tr>
-<td>23</td>
-<td>Explorer</td>
-<td>1200</td>
-</tr>
-<tr>
-<td>40</td>
-<td>Mortician</td>
-<td>2000</td>
-</tr>
-<tr>
-<td>45</td>
-<td>Mortician</td>
-<td>2500</td>
-</tr>
-<tr>
-<td>33</td>
-<td>Movie Star</td>
-<td>3000</td>
-</tr>
-<tr>
-<td>35</td>
-<td>Explorer</td>
-<td>???</td>
-</tr>
-</table>
-
-
-
-
-
-::::::
-
-:::::: {.fragment .current-visible}
- 
-- __supervised: classification__
-  - Output is discrete
-  - Regular trick: $\sigma(f(x; \theta))$ where $\sigma(x)=\frac{1}{1-e^{-x}}$
-
-
-![classification](ml_graphs/classification.png)
-
-
-<table>
-<tr>
-<th>Age</th>
-<th>Salary</th>
-<th><mark>Activity</mark></th>
-</tr>
-<tr>
-<td>23</td>
-<td>1200</td>
-<td>Explorer</td>
-</tr>
-<tr>
-<td>40</td>
-<td>2000</td>
-<td>Mortician</td>
-</tr>
-<tr>
-<td>45</td>
-<td>2500</td>
-<td>Mortician</td>
-</tr>
-<tr>
-<td>33</td>
-<td>3000</td>
-<td>Movie Star</td>
-</tr>
-<tr>
-<td>35</td>
-<td>3000</td>
-<td>???</td>
-</tr>
-</table>
-
-
+[![](assets/counterfactual_2.png){ width=600}]{.fragment fragment-index=2}
 
 :::::
 
+::::
 
-:::::: {.fragment .current-visible}
+:::: column
 
+::::: {.fragment fragment-index=1}
 
-__unsupervised__
-
-- organize data without labels
-    - dimension reduction: describe data with less parameters
-    - clustering: sort data into "similar groups" ([exemple](https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html))
-
-<table>
-<tr>
-<th>Age</th>
-<th>Salary</th>
-<th>Activity</th>
-</tr>
-<tr>
-<td>23</td>
-<td>1200</td>
-<td>Explorer</td>
-</tr>
-<tr>
-<td>40</td>
-<td>2000</td>
-<td>Mortician</td>
-</tr>
-<tr>
-<td>45</td>
-<td>2500</td>
-<td>Mortician</td>
-</tr>
-<tr>
-<td>33</td>
-<td>3000</td>
-<td>Movie Star</td>
-</tr>
-<tr>
-<td>35</td>
-<td>3000</td>
-<td>Explorer</td>
-</tr>
-</table>
+- Suppose we observe an event A
+  - A: a patient is administered a drug, government closes all schools during Covid
+- We observe a another event B
+  - B: the patient recovers, virus circulation decreases
 
 :::::
+::::: {.fragment fragment-index=2}
 
-
-:::::: {.fragment .current-visible}
-
-
-__unsupervised: clustering__
-
-
-![kmeansclustering](ml_graphs/kmeansclustering.gif)
-
-::::::
-
-:::::: {.fragment .current-visible}
-
-__unsupervised: clustering__
-
-Women buying dresses during the year:
-
-![](ml_graphs/clustering_dress.png)
-
-::::::
+- To interpret B as a consequence of A, we would like to consider the counter-factual:
+  - a patient is not administered a drug, government doesn't close schools
+  - patient does not recover, virus circulation is stable
 
 :::::
 
@@ -295,408 +290,411 @@ Women buying dresses during the year:
 
 :::
 
-
-## Difference with traditional regression {auto-animate="true"}
-
-$$\underbrace{y}_{\text{explained variable}} = a \underbrace{x}_{\text{explanatory variable}} + b$$
-
-## Difference with traditional regression {auto-animate="true"}
-
-$$\underbrace{y}_{\text{labels}} = a \underbrace{x}_{\text{features}} + b$$
-
 . . .
 
-| Econometrics                       |  Machine learning  | 
-|------------------------------------|--------------------|
-| Regressand / independent variable / explanatory variable  |  Features          | 
-| Regressor / dependent variable / explained variable    |  Labels            |
-| Regression                         |  Model Training    |
+An important task in econometrics is to construct a counter-factual
+
+- as the name suggests is it sometimes never observed!
 
 
+## Scientific Experiment
 
-## Difference with traditional regression
+![\ ](assets/lab_experiment.jpg)
 
-
-- Big data requires other means to process the data:
-    - data is long: so many observations $x$ doesn't fit in the memory
-        - need to use incremental training method to use only a subsample at a time
-    - data is wide: so many features, the model is crudely overspecified
-        - need to build dimension reduction into the objective
-    - data is nonlinear: 
-        - use nonlinear model (and nonlinear training)
-    - data is not a simple vector...
-        - same as nonlinear
-
-
-# Regression with long data
-
-
-## Long data
-
-::: {.callout-block}
-
-## Long data
-
-Long data is characterized by a high number of observations.
-
-:::
-
-::: r-stack
-
-[![Big Data](assets/long_data.png)]{.fragment .current-visible  fragment-index=1}
-
-[![Big Data](assets/long_data_subset.png)]{.fragment .current-visible fragment-index=2}
-
-:::
-
-- Modern society is gathering *a lot* of data.
-  - in doesn't fit in the computer memory so we can't run a basic regression
-- In some cases we would also like to update our model continuously:
-  - incremental regression
-
-::: {.fragment .current-visible fragment-index=2} 
-We need a way to fit a model on a subset of the data at a time.
-:::
+- In science we establish causality by performing experiments
+  - and create the counterfactual
+- A good experiment is reproducible
+  - same variables
+  - same state of the world (other variables)
+  - reproduce several times (in case output is noisy or random)
+- Change one factor at a time
+  - to create a counter-factual
 
 ----
 
-## Long data 
-    
+## Measuring effect of treatment
+
+
+::: columns
+
+:::: column
 
 ::: r-stack
 
-::: {.fragment .current-visible}
+![](assets/blue_red_pill.jpeg){.fragment .current-visible  fragment-index=1}
 
-- Traditional regression:
-    - full sample $X,Y=(x_i,y_i)_{i=1:N}$
-    - OLS: $\min_{a,b} \sum_{i=1}^N (a x_i + b - y_i)^2$
-    - closed-form solution: $a = X^{\prime}X Y$ and $b= ...$
-    - hard to compute if $X$ is very big
+![](assets/neo.png){.fragment .current-visible fragment-index=2}
 
-:::
-::: {.fragment .current-visible}
+![](assets/neo.png){.fragment .current-visible fragment-index=3}
 
-- Incremental learning:
-    - given initial $a_n$, $b_n$
-    - pick $N$ random observations (the batch)
-      - regress them to get new estimate $a$, $b$
-      - this minimizes the square of errors
-    - update with learning rate $\beta$:
-      -  $a_{n+1} \leftarrow a_n (1-\beta_n) + \beta_n a$
-      -  $b_{n+1} \leftarrow b_n (1-\beta_n) + \beta_n b$
-    - process is not biased (that is $a$ converges to the true value) as long as one decreases $\beta$ sufficiently fast over time (ex: $\beta_n=\frac{1}{n}$)
+![](assets/manyneo.png){.fragment .current-visible  fragment-index=4}
 
 :::
-:::
-
-
-## Formalisation: a typical machine learning task
-
-- vector of unknowns: $\theta=(a,b)$
-- dataset $X,Y=(x_i,y_i)_{i=1:N}$
-- for a random draw $\omega = (a_{\sigma(i)}, b_{\sigma(i)})_{i=[1,N]} \subset (X,Y)$
-  - $\omega$ is just a random __batch__ of size $N$
-- define the *empirical* risk (or empirical *cost*)
-  $$\xi(\theta, \omega) = \sum_{(x,y) \in \omega} (y - (a x + b))^2$$
-- we want to minimize *theoretical risk*:
-  $$\Xi(\theta) = \mathbb{E} \left[ \xi(\theta, \omega)\right]$$
-
-
-## Training: Gradient Descent
-
-::: columns
-
-:::: column
-
-- How do we minimize a function $f(a,b)$?
-
-- Gradient descent:
-  - $a_k, b_k$ given
-  - compute the gradient (slope) $\nabla_{a,b} f = \begin{bmatrix} \frac{\partial f}{\partial a} \\\\ \frac{\partial f}{\partial b}\end{bmatrix}$
-  - follow the steepest slope: (Newton Algorithm)
-    - $$ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} - \nabla_{a,b} f$$
-  - but not too fast: use learning rate $\lambda$:
-   $$ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  (1-\lambda) \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} + \lambda (- \nabla_{a,b} f )$$
-
 
 ::::
 :::: column
- 
-![](ml_graphs/training.gif)
 
-::::
+::: {.fragment fragment-index=1}
+- Assume we have discovered two medications: R and B
+:::
+::: {.fragment fragment-index=2}
+- Give one of them (R) to a patient and observe the outcome
+:::
+::: {.fragment fragment-index=3}
+- Would would have been the effect of (B) on the same patient?
+  - ????
+:::
+::: {.fragment fragment-index=4}
+- What if we had many patients and let them choose the medication?
 :::
 
-
-## Not everything goes wrong all the time
-
-![](ml_graphs/contours_evaluation_optimizers.gif)
-![](ml_graphs/saddle_point_evaluation_optimizers.gif)
-
-- In practice, choosing the right learning rate $\lambda$ is crucial
-- $\lambda$ is a __metaparameter__ of the model training.
-
-
-<!-- ## Stochastic Gradient Descent
-
-- Stochastic gradient descent
-  - As long as the batch is taken randomly
-  - As long as the learning rate is small enough
-  - Or the batch size big enough
-  - The gradient is *unbiased* (i.e. $\mathbb{E}\left[ \nabla \xi(\omega, \theta) \right] = \nabla \Xi(\theta)$)
-- We don't need the whole dataset.
- -->
-
-# Regression with wide data
-
-
-## Wide data
-
-::: {.callout-block}
-
-Wide Data is characterized by a high number of features compared to the number of observations.
+::::
 
 :::
 
 . . .
 
+Maybe the effect would be the consequence of the choice of patients rather than of the medication?
 
-Problem: 
-- with many independent variables $x_1, ... x_K$, $K>>N$ and one dependent variable $y$
-the regression
-  $$y = a_1 x_1 + a_2 x_2 + \cdots + a_N x_N + b$$ is grossly __overidentified__.
+----
 
 
+## An exmple from behavioural economics
 
-## Wide data regression
+::: columns
 
-- Main Idea: penalize non-zero coefficients to encourage scarcity
-  - Ridge: $$\Xi(a,b) = \min_{a,b} \sum_{i=1}^N ( \sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|^2$$
-    - shrinks parameters towards zero
-    - closed form
-  - Lasso: $$\Xi(a,b) = \min_{a,b} \sum_{i=1}^N (\sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|$$
-    - eliminates zero coefficients
-  - Elastic: Ridge + Lasso
+:::: column
 
-- Remarks:
-  - $\mu$ is called a regularization term.
-  - it is a hyperparameter
-  - $\mu \uparrow$, bias increases, variance decreases
+- Example: cognitive dissonance
+  - Experiment in GATE Lab
+  - Volunteers play an investment game.
+  - They are asked beforehand whether they support OM, PSG, or none.
 
+<div class="r-stack">
 
-## Training
-
-To perform Lasso and ridge regression:
-
-- AI approach:
-  - minimize objective $\Xi(a,b)$ directly.
-  - approach is known as (stochastic) Gradient Descent
-
-- Use special algorithms
+<div class="fragment current-visible" data-fragment-index=2>
 
 
-## Example: IMF challenge
+- Experiment 1: 
+  - Before the experiment, randomly selected volunteers are given a football shirt of their preferred team (treatment 1)
+  - Other volunteers receive nothing (treatment 0)
 
-- An internal IMF challenge to predict crises in countries
-- Lots of different approaches
-- Lots of data:
-  - which one is relevant
-  - machine must select relevant informations
-- Example: [*Lasso Regressions and Forecasting Models in Applied Stress Testing*](https://www.imf.org/en/Publications/WP/Issues/2017/05/05/Lasso-Regressions-and-Forecasting-Models-in-Applied-Stress-Testing-44887) by Jorge A. Chan-Lau
-  - in a given developing country
-  - tries to predict probability of default in various sectors
+- Result: 
+  - having a football shirt seems to boost investment performance...
 
-# Nonlinear Regression
+</div>
 
-## Nonlinear Regression
+<div class="fragment current-visible" data-fragment-index=3>
 
-- So far, we have assumed, 
-  - $y_i = a + b x_i$
-  - $y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_2 (|a| + |b|)$
-  - defined $\Xi(a,b)$ and tried to minimize it
-- Same approach works for fully nonlinear models
-  - $y_i = a x_i + a^2 x_i^2 + c$
-  - $y_i = \varphi(x; \theta)$ ()
-- Special case: neural network:
-  - primer [tensor playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.85189&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
 
-# Model validation
+- Experiment 2: subjects are given randomly a shirt of either Olympique  de Marseille or PSG. 
 
-## how to evaluate the machine learning
+- Result:
+  - Having the good shirt improves performance.
+  - Having the wrong one deteriorates it badly.
 
-In machine learning we can't perform statistical inference easily. How do we assess the validity of a model?
+</div>
 
-- Basic idea (independent of how complex the algorithm is)
-  - separate data in
-    - training set (in-sample)
-    - test set (out of sample)
-  - train using only the training set
-  - evaluate *performance* on the test set
+<div class="fragment current-visible" data-fragment-index=4>
 
-- Performance can be:
-  - fitness, number of classification errors (false positive, false negative)
 
-## how to evaluate the machine learning
+- How would you code up this experiment?
+- Can we conclude on some form of causality?
 
-In case the training method depends itself on many parameters (the hyperparameters) we make three samples instead:
+</div>
+</div>
 
-- training set (in-sample)
-- validation set (to update hyperparameters)
-- test set (out of sample)
 
-__Golden Rule__:  the test set should not be used to estimate the model, and should not affect the choice *any* training parameter (hyperparameter).
+::::
 
-<!-- 
-## How to judge a model validity?
+:::: column
 
-- not easy
-- modeling *asumptions* (specification):
-    - functional space -> fit, variance (econ: $R^2$)
-    - statistical modeling: data generating process -> bias (econ: stdev)
-- There is a very general _tradeoff bias/variance_
-- Many ML methods allow to estimate bias (possibly via bootstrapping) -->
+![](gate_lab.jpg)
+
+![](assets/psg.webp){width=200}
+![](assets/marseille.webp){width=200}
+
+
+::::
+
+:::
+
+
+##  Formalisation of the problem
+
+
+
+<!-- treatment 1: matching group -->
+<!-- treatment 2: wrong group -->
+<!-- reference group: no shirt -->
+
+::: columns
+
+:::: column
+
+- Cause (A): two groups of people  
+  - those given a shirt (treatment 1)
+  - those not given a shirt (treatment 0)
+
+- Possible consequence (B): performance
+
+- Take a given agent <em>Alice</em>: she performs well with a PSG shirt. 
+  - maybe she is a good investor?
+  - or maybe she <em>is</em> playing for her team?
+
+- Let's try to have her play again without the football shirt
+  - now the experiment has changed: she has gained experience, is more tired, misses the shirt...
+  - it is impossible to get a perfect counterfactual (i.e. where only A changes)
+
+::::
+:::: column
+
+
+
+- Let's take somebody else then? Bob was really bad without a PSG shirt.
+  - he might be a bad investor? or he didn't understand the rules?
+  - some other variables have changed, not only the treatment
+
+- How to make a perfect experiment? 
+  - Choose *randomly* whether assigning a shirt or not
+  - by construction the treatment will not be correlated with other variables
+
+::::
+:::
+
+---
+
+## Randomized Control Trial
+
+
+::: {.callout-tip}
+
+### Randomized Control Trial (RCT)
+The best way to ensure that treatment is independent from other factors 
+is to *randomize* it.
+
+:::
+
+::: columns
+
+:::: column
+
+
+- In medecine
+  - some patients receive the treatment (red pill) 
+  - some other receive the control treatment (blue pill / placebo)
+
+- In economics: 
+  - randomized field experiments
+  - randomized phase-ins for new policies
+    - very useful for policy evaluation
+
+::::
+
+:::: column
+
+![Esther Duflo](assets/duflo.jpg){.fragment fragment-index=3 width=50%}
+
+::::
+
+:::
+
+::: aside
+
+It is common in economics, instead of assigning treatments randomly, we often say that we assign individuals randomly to the treatment and to the control group. It is equivalent.
+
+:::
+
+
+
+## Natural experiment
+
+
+::: {.callout-tip}
+
+## Natural Experiment
+A natural experiment satisfies conditions that treatment is assigned randomly
+
+- without interference by the econometrician
+
+:::
+
+
+[TODO]: recheck
+
+- An exemple of a Natural Experiment:
+  - *gender bias in french local elections*
+(jean-pierre eymeoud, paul vertier) [link](https://spire.sciencespo.fr/hdl:/2441/3k0m7r593p8gs9njjtpupmlknu/resources/wp-78-eymeoud-vertier.pdf)
+  - are women discriminated against by voters in local elections?
+
+. . .
+
+- Result: yes, they get 1.5% less votes by right-wing voters
+
+. . .
+
+- What was the natural experiment
+
+
+
+
+
+
+# Instrumental variables
+
+## 
+
+
+{{< video https://youtu.be/g0TuQGpMvjM >}}
+
+
+
+## Example
+
+
+*Lifetime Earnings and the Vietnam Era Draft Lottery*, by JD Angrist
+
+
+::: columns
+
+:::: column
+
+- Fact: 
+  - veterans of the vietnam war (55-75) earn (in the 80s) an income that is 15% less in average than those who didn't go to the war.
+  - What can we conclude?
+  - Hard to say: maybe those sent to the war came back with lower productivity (because of PTSD, public stigma, ...)? maybe they were not the most productive in the first place (*selection bias*)?
+
+- Problem (for the economist):
+  - we didn't sent people to war randomly
+::::
+
+:::: column
+
+- Genius idea: 
+  - here is a variable which randomly affected whether people were sent: the Draft  
+  - <!-- .element class="fragment" -->between 1947, and 1973, a lottery was run to determine who would go to war
+  - <!-- .element class="fragment" -->the draft number was determined, based on date of birth, and first letters of name
+  - <!-- .element class="fragment" -->and was correlated with the probability that a given person would go to war
+  - and it was so to say random or at least independent from anything relevant to the problem
+
+
+::::
+
+:::
+
+. . .
+
+Can we use the Draft to generate randomness ?
 
 ##
 
-![Traintest](ml_graphs/2000px-Traintest.svg.png)
+![](assets/nobel.jpeg)
 
-. . .
 
-The test set reveals that orange model is overfitting.
+## Problem
 
-## How to choose the validation set?
+- Take the linear regression:
+$$y = \alpha + \beta x + \epsilon$$
+  - $y$: salary
+  - $x$: went to war
+- We want to establish causality from x to y
+  - we would like to interpret $x$ as the "treatment"
+- But there can be *confounding factors*:
+  - variable $z$ which causes both x and y
+  - exemple: socio-economic background, IQ, ...
 
-- Holdout validation approach:
-  - keeps x% of the data for the training, (100-x)% for the test
+- If we could identify $z$ we could *control* for it:
+$$y = \alpha + \beta_1 x + \beta_2 z + \epsilon$$
+  - we would get a better predictor of $y$ but more uncertainty about $\beta_1$ ($x$ and $z$ are correlated)
 
-- How to choose the sizes of the subsets?
-  - small dataset: 90-10
-  - big data set: 70-30 (we can afford to waste more training data for the test)
-
-. . .
-
-- Problem:
-  - are we sure the validation size is correct? Are the results determined by an (un-) lucky draw?
-  - a problem for smaller datasets
-
-## How to choose the validation set?
-
-A more robust solution: $k$-fold validation
-
+## Reformulate the problem
 
 ::: columns
 
 :::: column
 
-
-- split dataset randomly in $K$ subsets of equal size $S_1, ... S_K$
-- use subset $S_i$ as test set, the rest as training set, compute the score
-- compare the scores obtained for all $i\in[1,K]$
-  - they should be similar (compute standard deviation)
-- average them
+- Let's assume treatment $x$ is a binary variable $\in{0,1}$
+- We want to estimate
+  $$y = \alpha + \beta x + z + \epsilon$$
+  where $z$ is potentially correlated to $x$ and $y$
+- There are two groups:
+  - those who receive the treatment
+$$y = \alpha + \beta + z_{T=1} + \epsilon$$
+  - the others
+$$y = \alpha + 0 +  z_{T=0} + \epsilon$$
 
 ::::
 :::: column
 
-![](graphs/k-fold.gif)
+- Problem:
+  -  if $z$ is higher in the treatment group, its effect can't be separated from the treatment effect.
+- Intuition: what if we make groups differently?
+  - completely independent from $z$ (and $\epsilon$)
+  - not independently from $x$ so that one group will receive more treatment than the other
+- To make this group we need a new variable $q$ that is:
+  - correlated with $x$ so that it will correspond to some treatment effect
+  - uncorrelated to $z$ or $\epsilon$ (exogenous)
+  
+::::
+
+:::
+
+
+## Two stage regression
+
+::: columns
+
+
+:::: column
+
+- We would like to redo the treatment groups in a way that is independent from $z$ (and everything contained in $\epsilon$)
+  - $q$ is a binary variable: drafted or not
+- <!-- .element class="fragment" --> First stage: regress group assignment on the instrument: $$x = \alpha_0 + \beta_0 q + \eta$$
+  - we can now predict group assignment in a way that is independent from $z$ (and everything in $\epsilon$) $$\tilde{x} = \alpha_0 + \beta_0 q$$
+- <!-- .element class="fragment" --> Second stage: use the predicted value instead of the original one
+$$y = \alpha + \beta_1 \tilde{x} + z + \epsilon$$
+
+::::
+:::: column
+
+- <!-- .element class="fragment" --> Result:
+  - If $\beta_1$ is significantly nonzero, there is a causal effect between $x$ and $y$.
+  - Note that $\tilde{x}$ is imperfectly correlated with the treatment: $\beta_1$ can't be interpreted directly
+  - The actual effect will be $\frac{\beta_1}{\beta_0}$ (in 1d)
+- <!-- .element class="fragment" -->We say that we <strong>instrument</strong> $x$ by $q$.
 
 ::::
 :::
 
-# How to use sklearn for regressions
+## Choosing a good instrument
 
-## Wait
+![](assets/good_instrument.png)
 
-- *Another* library to do regression ?
+::: {.callout-tip}
+### Choosing an instrumental variable
 
-- `statsmodels`: 
-  - explanatory analysis
-  - statistical tests
-  - formula interface for many estimation algorithms
-    - stateless approach (`model.fit()` returns another object)
+A good instrument when trying to explain y by x, is a variable that is correlated to the treatment (x) but does not have any effect on the outcome of interest (y), appart from its effect through x.
 
-- `linearmodels`
-  - *extends* `statsmodels` (very similar interface)
-    - (panel models, IV, systems...)
 
-- `sklearn`: 
-  - prediction
-  - faster for big datasets
-  - common interface for several machine learning tasks
-    - stateful approach (model is modified by `.fit` operation)
-  - defacto standard for machine learning
+:::
 
 
 ## In practice
 
-::: columns
+- Both `statsmodels` and  `linearmodels` support instrumental variables
+  - library (look for IV2SLS)
 
-:::: column
+- Library `linearmodels` has a handy formula syntax: `salary ~ 1 + [war ~ draft]`
+  - API is similar but not exactly identical to statsmodels
+  - for instance `linearmodels` does not include constants by default
 
 
-Basic sklearn workflow:
-
-::::: incremental
-
-- import data
-  - features: a matrix X (2d numpy array)
-  - labels: a vector y (1d numpy array)
-- split the data, between training and test datasets
-  - split needs to be random to avoid any bias
-- normalize the data
-  - most ML algorithm are sensitive to scale
-
-- create a model (independent from data)
-- train the model on training dataset
-- evaluate accuracy on test dataset (here $R^2$)
-- use the model to make predictions
-
-:::::
-
-The workflow is always the same, no matter what the model is
-
-- try  `sklearn.linear_model.Lasso` instead of `LinearRegression`
-
-::::
-:::: column
-
+- Example from the doc
 ```python
-from sklearn.datasets import load_diabetes
-dataset = load_diabetes()
-X = dataset['data']
-y = dataset['target']
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.1)
-
-#Feature Scaling
-from sklearn.preprocessing import StandardScaler
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
-from sklearn.linear_model import LinearRegression
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-model.score(X_test, y_test)
-model.predict(X_new)
-```
-
-::::
-
-:::
-
-
-## $k$-fold validation with sklearn
-
-```python
-from sklearn.model_selection import KFold
-kf = KFold(n_splits=10)
-
-for train_index, test_index in kf.split(X):
-   X_train, X_test = X[train_index], X[test_index]
-   y_train, y_test = y[train_index], y[test_index]
-
-   ## train a model in X_train, y_train
-   ## test it on X_test, y_test
-
+formula = (
+    "np.log(drugexp) ~ 1 + totchr + age + linc + blhisp + [hi_empunion ~ ssiratio]"
+)
+ols = IV2SLS.from_formula(formula, data)
+ols_res = ols.fit(cov_type="robust")
+print(ols_res)
 ```

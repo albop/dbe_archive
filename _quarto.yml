@@ -15,6 +15,23 @@ website:
             - session_2/index.qmd
             - session_3/index.qmd
             - session_4/index.qmd
+            - session_6/index.qmd
+            - session_7/index.qmd
+        - section: "Handouts"
+          contents:
+            # - session_1/transcript.qmd
+            # - session_2/index.qmd
+            # - session_3/index.qmd
+            - session_4/transcript.qmd
+            - session_6/transcript.qmd
+            - session_7/transcript.qmd
+        - section: "Tutorials"
+          contents:
+            - session_3/Philips_curve_correction.ipynb
+            - session_4/Regressions_correction_2022.ipynb
+            - session_6/instrumental_variables_correction.ipynb
+            - session_7/machine_learning_regressions_correction.ipynb
+            - session_8/Classification_Correction.ipynb
 format:
   html:
     theme: flatly

@@ -1,5 +1,5 @@
 ---
-title: "Advanced Macro: Numerical Methods"
+title: "Data-Based Economics (2022-2023)"
 ---
 
 {{< include README.md >}}
