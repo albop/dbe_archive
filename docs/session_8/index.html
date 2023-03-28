@@ -454,23 +454,25 @@ Year 2022-2023
 <img src="graphs/datacamp.jpeg" width="60%" class="r-stretch"></section>
 <section id="multinomial-regression" class="slide level2">
 <h2>Multinomial regression</h2>
+<div>
 <ul>
-<li>If there are <span class="math inline">\(P\)</span> categories to predict:
+<li class="fragment">If there are <span class="math inline">\(P\)</span> categories to predict:
 <ul>
-<li>build a linear predictor <span class="math inline">\(f_p\)</span> for each category <span class="math inline">\(p\)</span></li>
-<li>linear predictor is also called score</li>
+<li class="fragment">build a linear predictor <span class="math inline">\(f_p\)</span> for each category <span class="math inline">\(p\)</span></li>
+<li class="fragment">linear predictor is also called score</li>
 </ul></li>
-<li>To predict:
+<li class="fragment">To predict:
 <ul>
-<li>evaluate the score of all categories</li>
-<li>choose the one with highest score</li>
+<li class="fragment">evaluate the score of all categories</li>
+<li class="fragment">choose the one with highest score</li>
 </ul></li>
-<li>To train the model:
+<li class="fragment">To train the model:
 <ul>
-<li>train separately all scores (works for any predictor, not just linear)</li>
-<li>… there are more subtle approaches (not here)</li>
+<li class="fragment">train separately all scores (works for any predictor, not just linear)</li>
+<li class="fragment">… there are more subtle approaches (not here)</li>
 </ul></li>
 </ul>
+</div>
 </section></section>
 <section>
 <section id="other-classifiers" class="title-slide slide level1 center">
@@ -560,14 +562,26 @@ Can use a nonlinear kernel.</li>
 </section>
 <section id="all-these-algorithms-are-super-easy-to-use" class="slide level2">
 <h2>All these algorithms are super easy to use!</h2>
+<p>Examples:</p>
+<ul>
+<li>Decision Tree</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
 <span id="cb1-2"><a href="#cb1-2"></a>clf <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>…</p>
+<div class="fragment">
+<ul>
+<li>Support Vector</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
 <span id="cb2-2"><a href="#cb2-2"></a>clf <span class="op">=</span> SVC(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>…</p>
+</div>
+<div class="fragment">
+<ul>
+<li>Ridge Regression</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
 <span id="cb3-2"><a href="#cb3-2"></a>clf <span class="op">=</span> Ridge(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -617,21 +631,34 @@ Can use a nonlinear kernel.</li>
 </tr>
 </tbody>
 </table>
+<div class="fragment">
+<p>We can then define different measures:</p>
 <ul>
-<li><p>Overall accuracy: <span class="math inline">\(\frac{\text{TN}+\text{TP}}{\text{total}}\)</span></p></li>
-<li><p>Sensitivity: <span class="math inline">\(\frac{TP}{FP+TP}\)</span></p></li>
-<li><p>False Positive Rate (FPR): <span class="math inline">\(\frac{FP}{TN+FP}\)</span></p></li>
-<li><p>In some cases, sensitivity is the actual objective, at the expense of lower FPR</p>
-<ul>
-<li>example: fraud detection</li>
-</ul></li>
-<li><p>Example:</p>
-<ul>
-<li>facial recognition by London police: 2% accuracy</li>
-<li>facial recognition by South Wales police: 9% accuracy</li>
-<li>a success?</li>
-</ul></li>
+<li>Sensitivity aka True Positive Rate (TPR): <span class="math inline">\(\frac{TP}{FP+TP}\)</span></li>
+<li>False Positive Rate (FPR): <span class="math inline">\(\frac{FP}{TN+FP}\)</span></li>
+<li>Overall accuracy: <span class="math inline">\(\frac{\text{TN}+\text{TP}}{\text{total}}\)</span></li>
 </ul>
+</div>
+<div class="fragment">
+<p>Which one to favour depends on the use case</p>
+</div>
+</section>
+<section id="example-london-police" class="slide level2">
+<h2>Example: London Police</h2>
+
+<img data-src="graphs/london-cctv.webp" class="r-stretch quarto-figure-center"><p class="caption">Police cameras in London</p><p>According to <a href="https://www.google.com/search?q=accuracy+facial+recognition+london+police&amp;oq=accuracy+facial+recognition+london+police&amp;aqs=chrome..69i57.6437j1j7&amp;sourceid=chrome&amp;ie=UTF-8">London Police</a> the cameras in London have</p>
+<ul>
+<li>True Positive Identification rate of over 80% at a fixed number of False Positive Alerts.29 nov. 2022</li>
+</ul>
+<div class="fragment">
+<p>Interpretation? Is failure rate <a href="https://time.com/5770976/london-facial-recognition-police/">too high</a>?</p>
+</div>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+
+<img data-src="graphs/classification_score.png" class="r-stretch quarto-figure-center"><p class="caption">In-sample confusion matrix</p><p>Based on consumer data, an algorithm tries to predict the credit score from.</p>
+<p>Can you calculate: FPR, TPR and overall accuracy?</p>
 </section>
 <section id="confusion-matrix-with-sklearn" class="slide level2">
 <h2>Confusion matrix with sklearn</h2>

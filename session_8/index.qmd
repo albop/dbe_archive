@@ -60,6 +60,8 @@ $$ f(x_1, ..., x_n) = \sigma( \underbrace{a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x
 
 ## Multinomial regression
 
+::: incremental
+
 - If there are $P$ categories to predict:
   - build a linear predictor $f_p$ for each category $p$
   - linear predictor is also called score
@@ -72,6 +74,7 @@ $$ f(x_1, ..., x_n) = \sigma( \underbrace{a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x
   - train separately all scores (works for any predictor, not just linear)
   - ... there are more subtle approaches (not here)
 
+:::
 
 # Other Classifiers
 
@@ -132,7 +135,6 @@ There are many:
 ::::
 :::: column
 
-
 ![](graphs/decision_tree.png)
 
 ::::
@@ -166,21 +168,27 @@ There are many:
 
 ## All these algorithms are super easy to use!
 
+Examples:
 
+- Decision Tree
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
 clf = DecisionTreeClassifier(random_state=0)
 ```
 
-...
+. . .
+
+- Support Vector 
 
 ```python
 from sklearn.svm import SVC
 clf = SVC(random_state=0)
 ```
 
-...
+. . .
+
+- Ridge Regression
 
 ```python
 from sklearn.linear_model import Ridge
@@ -217,18 +225,43 @@ clf = Ridge(random_state=0)
 | 0         | true negatives (TN) | false negatives (FN) |
 | 1         | false positives  (FP) | true positives (TP) |
 
-- Overall accuracy: $\frac{\text{TN}+\text{TP}}{\text{total}}$
-- Sensitivity: $\frac{TP}{FP+TP}$
-- False Positive Rate (FPR): $\frac{FP}{TN+FP}$
+. . .
 
-- In some cases, sensitivity is the actual objective, at the expense of lower FPR
-  - example: fraud detection
-- Example:
-    -  facial recognition by London police: 2% accuracy
-    -  facial recognition by South Wales police: 9% accuracy
-    -  a success?
+We can then define different measures:
+
+- Sensitivity aka True Positive Rate (TPR): $\frac{TP}{FP+TP}$
+- False Positive Rate (FPR): $\frac{FP}{TN+FP}$
+- Overall accuracy: $\frac{\text{TN}+\text{TP}}{\text{total}}$
+
+. . .
+
+Which one to favour depends on the use case
+
+
+## Example: London Police
+
+![Police cameras in London](graphs/london-cctv.webp)
+
+According to [London Police](https://www.google.com/search?q=accuracy+facial+recognition+london+police&oq=accuracy+facial+recognition+london+police&aqs=chrome..69i57.6437j1j7&sourceid=chrome&ie=UTF-8) the cameras in London have
+
+- True Positive Identification rate of over 80% at a fixed number of False Positive Alerts.29 nov. 2022
+
+. . .
+
+Interpretation? Is failure rate [too high](https://time.com/5770976/london-facial-recognition-police/)?
 
 ----
+
+## Example
+
+![In-sample confusion matrix](graphs/classification_score.png)
+
+Based on consumer data, an algorithm tries to predict the credit score from.
+
+Can you calculate: FPR, TPR and overall accuracy?
+
+
+
 
 ## Confusion matrix with sklearn
 
