@@ -1229,7 +1229,7 @@
     "href": "session_9/text_analysis.html#clarification",
     "title": "Text Analysis",
     "section": "Clarification",
-    "text": "Clarification\n\nText analysis / text mining are somewhat used interchangeably \nIn general they consist in quantifying information used in a text…\n… so that it can be incorporated in machine learning analysis\nRecently, deep learning (and GPT-3) has changed this state of facts:\n\nsome models get trained direcly on text (intermediary phases are not explicited)"
+    "text": "Clarification\n\n\nText analysis / text mining are somewhat used interchangeably\nIn general they consist in quantifying information used in a text…\n… so that it can be incorporated in machine learning analysis\nRecently, deep learning (and GPT-3) has changed this state of facts:\n\nsome models get trained direcly on text (intermediary phases are not explicited)"
   },
   {
     "objectID": "session_9/text_analysis.html#the-even-less-glamorous-part",
@@ -1302,11 +1302,11 @@
     "text": "Machine learning\n\nIdea: we would like the weights to be endogenously determined \\[ \\underbrace{\\text{the}}_{x_1} \\underbrace{\\text{ central}}_{x_2} \\underbrace{\\text{ bank}}_{x_3} \\underbrace{\\text{ forecasts}}_{x_4} \\underbrace{\\text{ increased} }_{x_5} \\underbrace{\\text{ inflation}}_{x_6}\\]\nSuppose we had several texts: we can generate features by counting words in each of them\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nthe\ncentral\nbank\nforecasts\nincreased\ninflation\neconomy\nexchange rate\ncrisis\nsentiment\n\n\n\n\ntext1\n1\n1\n2\n1\n1\n2\n\n\n\n-1\n\n\ntext2\n3\n\n\n\n\n1\n1\n2\n\n+1\n\n\ntext3\n4\n\n1\n\n\n1\n\n1\n1\n-1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe can the train the model: \\(y = x_1 f(w_1) + \\cdots x_K f(w_K)\\) where \\(y\\) is the sentiment and \\(w_i\\) is wordcount of word \\(w_i\\)\n\nof course, we need a similar procedure as before (split the training set and evaluation set, …)\nwe can use any model (like naive bayesian updating)\n\nThis approach is called Bag of Words (BOW)"
   },
   {
-    "objectID": "session_9/text_analysis.html#comments",
-    "href": "session_9/text_analysis.html#comments",
+    "objectID": "session_9/text_analysis.html#some-issues",
+    "href": "session_9/text_analysis.html#some-issues",
     "title": "Text Analysis",
-    "section": "Comments",
-    "text": "Comments\n\nBag of words has a few pitfalls:\n\nit requires a big training set with labels\nit overweights long documents\nthere is noise due to the very frequent words that don’t affect sentiment\n\nImprovement: TF-IDF\n\nstands for Term-Frequency*Inverse-Distribution-Frequency\nreplace word frequency \\(f(w)\\) by \\[\\text{tf-idf} = f(w)\\frac{\\text{number of documents}}{\\text{number of documents containing $w$}}\\]"
+    "section": "Some issues",
+    "text": "Some issues\n\nBag of words has a few pitfalls:\n\nit requires a big training set with labels\nit overweights long documents\nthere is noise due to the very frequent words that don’t affect sentiment\n\nImprovement: TF-IDF\n\nstands for Term-Frequency*Inverse-Distribution-Frequency\nreplace word frequency \\(f(w)\\) by \\[\\text{tf-idf} = f(w)\\frac{\\text{number of documents}}{\\text{number of documents containing $w$}}\\]"
   },
   {
     "objectID": "session_9/graphs/inference.html",

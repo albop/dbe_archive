@@ -103,8 +103,9 @@ Jan 2006 *Chicago Federal Reserve President Michael Moskow*
 
 ## Clarification
 
-- Text analysis / text mining are somewhat used interchangeably
 ![](graphs/processing_text.svg)
+
+- Text analysis / text mining are somewhat used interchangeably
 - In general they consist in quantifying information used in a text...
 - ... so that it can be incorporated in machine learning analysis
 - Recently, *deep learning* (and [GPT-3](https://gpt3examples.com/#examples)) has changed this state of facts:
@@ -407,7 +408,7 @@ $$ \underbrace{\text{the}}_{x_1} \underbrace{\text{ central}}_{x_2} \underbrace{
 
 - This approach is called *Bag of Words* (BOW)
 
-## Comments
+## Some issues
 
 - Bag of words has a few pitfalls:
     - it requires a big training set with labels
