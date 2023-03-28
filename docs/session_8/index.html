@@ -434,9 +434,11 @@ Year 2022-2023
 <div class="columns">
 <div class="column">
 <ul>
-<li>Given a regression model (a linear predictor)</li>
+<li>Given a regression model (a linear predictor) <span class="math display">\[ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n \]</span></li>
+<li>one can build a classification model: <span class="math display">\[ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )\]</span> where <span class="math inline">\(\sigma(x)=\frac{1}{1+\exp(-x)}\)</span> is the logistic function a.k.a. sigmoid</li>
+<li>The loss function to minimize is: <span class="math display">\[L() = \sum_n (c_n - \sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \cdots a_k x_{k,n} ) )^2\]</span></li>
+<li>This works for any regression model (LASSO, RIDGE, nonlinear…)</li>
 </ul>
-<p><span class="math display">\[ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n \]</span> - one can build a classification model: <span class="math display">\[ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )\]</span> where <span class="math inline">\(\sigma(x)=\frac{1}{1+\exp(-x)}\)</span> is the logistic function a.k.a. sigmoid - The loss function to minimize is: <span class="math display">\[L() = \sum_n (c_n - \sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \cdots a_k x_{k,n} ) )^2\]</span> - This works for any regression model (LASSO, RIDGE, nonlinear…)</p>
 </div><div class="column">
 <p><img data-src="graphs/sigmoid.png"></p>
 </div>
@@ -549,7 +551,9 @@ Can use a nonlinear kernel.</li>
 </ul>
 </div><div class="column">
 <div class="r-stack">
-<p><img class="fragment current-visible" src="graphs/hyperplanes.png" data-fragment-index="1"> <img class="fragment current-visible" src="graphs/margin.jpg" data-fragment-index="2"> <img class="fragment current-visible" src="graphs/nonlinear_svm.png" data-fragment-index="3"></p>
+<p><img data-src="graphs/hyperplanes.png" class="fragment current-visible"></p>
+<p><img data-src="graphs/margin.jpg" class="fragment current-visible"></p>
+<p><img data-src="graphs/nonlinear_svm.png" class="fragment current-visible"></p>
 </div>
 </div>
 </div>

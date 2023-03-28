@@ -7,9 +7,9 @@
 | 3 | 01/02 | [linear regression](session_3/index.qmd) | data exploration, visualization | push-ups (3) |
 | 4 | 08/02 | [multiple regression](session_4/index.qmd) |  |                                           |
 | 5 | 15/02 | [multiple regression](session_4/index.qmd) |  |  |
-| 6 | 22/02 | [instrumental variables](session_5/index.qmd) |  | coursework (1) |
-| 7 | 01/02 | [machine learning introduction](session_6/index.qmd) (1) |  |  |
-| 8 | 21/03 | machine learning introduction (2) |  |  |
+| 6 | 22/02 | [instrumental variables](session_6/index.qmd) |  | coursework (1) |
+| 7 | 01/02 | [machine learning introduction](session_7/index.qmd) (1) |  |  |
+| 8 | 21/03 | [machine learning introduction (2)](session_8/index.qmd) |  |  |
 | 9 | 28/03 | text analysis |  |  |
 | 10 | 04/04 | final exam |  |
 

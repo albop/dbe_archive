@@ -30,9 +30,7 @@ aspectratio: 169
 
 :::: column
 
-- Given a regression model (a linear predictor)
-
-$$ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n $$
+- Given a regression model (a linear predictor) $$ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n $$
 - one can build a classification model:
 $$ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )$$
 where $\sigma(x)=\frac{1}{1+\exp(-x)}$ is the logistic function a.k.a. sigmoid 
@@ -153,13 +151,15 @@ There are many:
 ::::
 :::: column
 
-<div class="r-stack">
+::::: r-stack
 
-<img class="fragment current-visible" src="graphs/hyperplanes.png" data-fragment-index=1>
-<img class="fragment current-visible" src="graphs/margin.jpg" data-fragment-index=2>
-<img class="fragment current-visible" src="graphs/nonlinear_svm.png" data-fragment-index=3>
+![](graphs/hyperplanes.png){.fragment .current-visible}
 
-</div>
+![](graphs/margin.jpg){.fragment .current-visible}
+
+![](graphs/nonlinear_svm.png){.fragment .current-visible}
+
+:::::
 
 ::::
 :::

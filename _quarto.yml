@@ -17,6 +17,8 @@ website:
             - session_4/index.qmd
             - session_6/index.qmd
             - session_7/index.qmd
+            - session_8/index.qmd
+
         - section: "Handouts"
           contents:
             # - session_1/transcript.qmd

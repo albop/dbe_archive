@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.2.335">
 
   <meta name="author" content="Year 2022-2023">
-  <title>Data-Based Economics - Introduction to Machine Learning</title>
+  <title>Data-Based Economics - Introduction to Instrumental Variables</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -388,7 +388,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Introduction to Machine Learning</h1>
+  <h1 class="title">Introduction to Instrumental Variables</h1>
   <p class="subtitle">Data-Based Economics</p>
 
 <div class="quarto-title-authors">
@@ -403,1172 +403,814 @@ Year 2022-2023
 <nav role="doc-toc"> 
 <h2 id="toc-title">Plan</h2>
 <ul>
-<li><a href="#/what-is-machine-learning" id="/toc-what-is-machine-learning">What is machine learning?</a></li>
-<li><a href="#/big-data" id="/toc-big-data">Big Data</a></li>
-<li><a href="#/machine-learning-tasks" id="/toc-machine-learning-tasks">Machine Learning Tasks</a></li>
-<li><a href="#/regression-with-long-data" id="/toc-regression-with-long-data">Regression with long data</a></li>
-<li><a href="#/regression-with-wide-data" id="/toc-regression-with-wide-data">Regression with wide data</a></li>
-<li><a href="#/nonlinear-regression" id="/toc-nonlinear-regression">Nonlinear Regression</a></li>
-<li><a href="#/model-validation" id="/toc-model-validation">Model validation</a></li>
-<li><a href="#/how-to-use-sklearn-for-regressions" id="/toc-how-to-use-sklearn-for-regressions">How to use sklearn for regressions</a></li>
-<li><a href="#/classification-problems" id="/toc-classification-problems">Classification Problems</a></li>
-<li><a href="#/other-classifiers" id="/toc-other-classifiers">Other Classifiers</a></li>
-<li><a href="#/validation" id="/toc-validation">Validation</a></li>
+<li><a href="#/categorical-variables" id="/toc-categorical-variables">Categorical Variables</a></li>
+<li><a href="#/causality" id="/toc-causality">Causality</a></li>
+<li><a href="#/experiments" id="/toc-experiments">Experiments</a></li>
+<li><a href="#/instrumental-variables" id="/toc-instrumental-variables">Instrumental variables</a></li>
 </ul>
 </nav>
 </section>
 <section>
-<section id="what-is-machine-learning" class="title-slide slide level1 center">
-<h1>What is machine learning?</h1>
+<section id="categorical-variables" class="title-slide slide level1 center">
+<h1>Categorical Variables</h1>
 
 </section>
-<section id="what-is-machine-learning-1" class="slide level2">
-<h2>What is Machine learning?</h2>
-<p>Definition Candidates:</p>
-<p>Arthur Samuel: <em>Field of study that gives computers the ability to learn without being explicitly programmed</em></p>
-<p>Tom Mitchell: <em>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experience E.</em></p>
-</section>
-<section id="what-about-artificial-intelligence" class="slide level2">
-<h2>What about artificial intelligence ?</h2>
-<div class="columns">
-<div class="column">
+<section id="data" class="slide level2">
+<h2>Data</h2>
 <ul>
-<li>AIs
+<li><p>Our multilinear regression: <span class="math display">\[y = \alpha + \beta x_1 + \cdots + \beta x_n\]</span></p></li>
+<li><p>So far, we have only considered real variables: (<span class="math inline">\(x_i \in \mathbb{R}\)</span>).</p>
 <ul>
-<li>think and learn</li>
-<li>mimmic human cognition</li>
+<li>ex: <span class="math inline">\(x_{\text{gdp}} = \alpha + \beta_1 x_{\text{unemployment}} + \beta_2 x_{\text{inflation}}\)</span></li>
 </ul></li>
-</ul>
-</div><div class="column">
-<p><img data-src="ml_graphs/AI_ML.png"></p>
-</div>
-</div>
-</section>
-<section id="econometrics-vs-machine-learning" class="slide level2">
-<h2>Econometrics vs Machine Learning</h2>
+<li><p>How do we deal with the following cases?</p>
 <ul>
-<li>Econometrics is essentially a subfield of machine learning with a different jargon and a focus on:
+<li><strong>binary variable</strong>: <span class="math inline">\(x\in \{0,1\}\)</span> (or <span class="math inline">\(\{True, False}\)</span>)
 <ul>
-<li>studying properties and validity of results
-<ul>
-<li>data is scarce</li>
-<li>inference</li>
+<li>ex: <span class="math inline">\(\text{gonetowar}\)</span>, <span class="math inline">\(\text{hasdegree}\)</span></li>
 </ul></li>
-<li>singling out effects of specific explanatory variables</li>
-<li>establishing causality</li>
+<li><strong>categorical variable</strong>:
+<ul>
+<li>ex: survey result (0: I don’t know, 1: I strongly disagree, 2: I disagree, 3: I agree, 4: I strongly agree)</li>
+<li>there is no ranking of answers</li>
+<li>when there is ranking: hierarchical index</li>
 </ul></li>
-<li>Machine learning:
+<li><strong>nonnumerical variables</strong>:
 <ul>
-<li>structure data</li>
-<li>make predictions (interpolate data)</li>
+<li>ex: (flower type: <span class="math inline">\(x\in \text{myosotis}, \text{rose}, ...\)</span>)</li>
 </ul></li>
-</ul>
-</section></section>
-<section>
-<section id="big-data" class="title-slide slide level1 center">
-<h1>Big Data</h1>
-
-</section>
-<section id="data-types" class="slide level2">
-<h2>Data types</h2>
-<ul>
-<li>structured:
-<ul>
-<li>tabular
-<ul>
-<li>long</li>
-<li>wide</li>
-</ul></li>
-</ul></li>
-<li>unstructured:
-<ul>
-<li>files</li>
-<li>networks</li>
-<li>text, mails</li>
-<li>images, sound</li>
 </ul></li>
 </ul>
 </section>
-<section id="tabular-data" class="slide level2">
-<h2>Tabular Data</h2>
-
-<img data-src="ml_graphs/tabular.png" class="r-stretch quarto-figure-center"><p class="caption">tabular data</p></section>
-<section id="networks" class="slide level2">
-<h2>Networks</h2>
+<section id="binary-variable" class="slide level2">
+<h2>Binary variable</h2>
 <ul>
-<li>Banking networks</li>
-<li>Production network</li>
-</ul>
-
-<img data-src="ml_graphs/StarWarsSocialNetwork1.png" class="r-stretch"></section>
-<section id="big-data-1" class="slide level2">
-<h2>Big Data</h2>
+<li>Nothing to be done: just make sure variables take values 0 or 1. <span class="math display">\[y_\text{salary} = \alpha + \beta x_{\text{gonetowar}}\]</span></li>
+<li>Interpretation:
 <ul>
-<li><strong>Big</strong> data:
-<ul>
-<li>wide data (K&gt;&gt;N)</li>
-<li>long data (N&gt;&gt;K)</li>
-<li>heterogenous, unstructured data</li>
-</ul></li>
-<li>Might not even fit in memory
-<ul>
-<li>out of core computations</li>
-<li>learn from a subset of the data</li>
+<li>having gone to war is associated with a <span class="math inline">\(\beta\)</span> increase (or decrease?) in salary (still no causality)</li>
 </ul></li>
 </ul>
-</section></section>
-<section>
-<section id="machine-learning-tasks" class="title-slide slide level1 center">
-<h1>Machine Learning Tasks</h1>
-
 </section>
-<section id="big-subfields-of-machine-learning" class="slide level2">
-<h2>Big Subfields of Machine Learning</h2>
-<div class="columns">
-<div class="column">
+<section id="categorical-variable" class="slide level2">
+<h2>Categorical variable</h2>
 <ul>
-<li>Traditional classification
+<li><p>Look at the model: <span class="math display">\[y_{\text{CO2 emission}} = \alpha + \beta x_{\text{yellow vest support}} \]</span></p></li>
+<li><p>Where <span class="math inline">\(y_{\text{CO2 emission}}\)</span> is an individual’s CO2 emissions and <span class="math inline">\(x_{\text{yellow vest support}}\)</span> is the response the the question <em>Are you in agreement with the yellow vests demands?</em>.</p></li>
+<li><p>Response is coded up as:</p>
 <ul>
-<li>supervised (labelled data)
-<ul>
-<li>regression: predict quantity</li>
-<li>classification: predict index (categorical variable)</li>
+<li>0: Strongly disagree</li>
+<li>1: Disagree</li>
+<li>2: Neutral</li>
+<li>3: Agree</li>
+<li>4: Strongly agree</li>
 </ul></li>
-<li>unsupervised (no labels)
+<li><p>If the variable was used directly, how would you intepret the coefficient <span class="math inline">\(\beta\)</span> ?</p>
 <ul>
-<li>dimension reduction</li>
-<li>clustering</li>
-</ul></li>
-<li>semi-supervised / self-supervised</li>
-<li>reinforcement learning</li>
-</ul></li>
-<li>Bazillions of different algorithms: https://scikit-learn.org/stable/user_guide.html</li>
-</ul>
-</div><div class="column">
-<div class="r-stack">
-<div class="fragment current-visible" data-fragment-index="1">
-<ul>
-<li><strong>regression</strong>:
-<ul>
-<li>Predict: <span class="math inline">\(y = f(x; \theta)\)</span></li>
+<li>index is hierarchical</li>
+<li>but the distances between 1 and 2 or 2 and 3 are not comparable…</li>
 </ul></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="ml_graphs/regression.png"></p>
-<p></p><figcaption>supervised: regression</figcaption><p></p>
-</figure>
-</div>
-
-<table>
-<tbody><tr>
-<th>
-Age
-</th>
-<th>
-Activity
-</th>
-<th>
-<mark>Salary</mark>
-</th>
-</tr>
-<tr>
-<td>
-23
-</td>
-<td>
-Explorer
-</td>
-<td>
-1200
-</td>
-</tr>
-<tr>
-<td>
-40
-</td>
-<td>
-Mortician
-</td>
-<td>
-2000
-</td>
-</tr>
-<tr>
-<td>
-45
-</td>
-<td>
-Mortician
-</td>
-<td>
-2500
-</td>
-</tr>
-<tr>
-<td>
-33
-</td>
-<td>
-Movie Star
-</td>
-<td>
-3000
-</td>
-</tr>
-<tr>
-<td>
-35
-</td>
-<td>
-Explorer
-</td>
-<td>
-???
-</td>
-</tr>
-
-</tbody></table>
-</div>
-<div class="fragment current-visible">
-<ul>
-<li><strong>supervised: classification</strong>
-<ul>
-<li>Output is discrete</li>
-<li>Regular trick: <span class="math inline">\(\sigma(f(x; \theta))\)</span> where <span class="math inline">\(\sigma(x)=\frac{1}{1-e^{-x}}\)</span></li>
-</ul></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="ml_graphs/classification.png"></p>
-<p></p><figcaption>classification</figcaption><p></p>
-</figure>
-</div>
-
-<table>
-<tbody><tr>
-<th>
-Age
-</th>
-<th>
-Salary
-</th>
-<th>
-<mark>Activity</mark>
-</th>
-</tr>
-<tr>
-<td>
-23
-</td>
-<td>
-1200
-</td>
-<td>
-Explorer
-</td>
-</tr>
-<tr>
-<td>
-40
-</td>
-<td>
-2000
-</td>
-<td>
-Mortician
-</td>
-</tr>
-<tr>
-<td>
-45
-</td>
-<td>
-2500
-</td>
-<td>
-Mortician
-</td>
-</tr>
-<tr>
-<td>
-33
-</td>
-<td>
-3000
-</td>
-<td>
-Movie Star
-</td>
-</tr>
-<tr>
-<td>
-35
-</td>
-<td>
-3000
-</td>
-<td>
-???
-</td>
-</tr>
-
-</tbody></table>
-</div>
-<div class="fragment current-visible">
-<p><strong>unsupervised</strong></p>
-<ul>
-<li>organize data without labels
-<ul>
-<li>dimension reduction: describe data with less parameters</li>
-<li>clustering: sort data into “similar groups” (<a href="https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html">exemple</a>)</li>
-</ul></li>
-</ul>
-
-<table>
-<tbody><tr>
-<th>
-Age
-</th>
-<th>
-Salary
-</th>
-<th>
-Activity
-</th>
-</tr>
-<tr>
-<td>
-23
-</td>
-<td>
-1200
-</td>
-<td>
-Explorer
-</td>
-</tr>
-<tr>
-<td>
-40
-</td>
-<td>
-2000
-</td>
-<td>
-Mortician
-</td>
-</tr>
-<tr>
-<td>
-45
-</td>
-<td>
-2500
-</td>
-<td>
-Mortician
-</td>
-</tr>
-<tr>
-<td>
-33
-</td>
-<td>
-3000
-</td>
-<td>
-Movie Star
-</td>
-</tr>
-<tr>
-<td>
-35
-</td>
-<td>
-3000
-</td>
-<td>
-Explorer
-</td>
-</tr>
-
-</tbody></table>
-</div>
-<div class="fragment current-visible">
-<p><strong>unsupervised: clustering</strong></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="ml_graphs/kmeansclustering.gif"></p>
-<p></p><figcaption>kmeansclustering</figcaption><p></p>
-</figure>
-</div>
-</div>
-<div class="fragment current-visible">
-<p><strong>unsupervised: clustering</strong></p>
-<p>Women buying dresses during the year:</p>
-<p><img data-src="ml_graphs/clustering_dress.png"></p>
-</div>
-</div>
-</div>
-</div>
 </section>
-<section id="difference-with-traditional-regression" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Difference with traditional regression</h2>
-<p><span class="math display">\[\underbrace{y}_{\text{explained variable}} = a \underbrace{x}_{\text{explanatory variable}} + b\]</span></p>
-</section>
-<section id="difference-with-traditional-regression-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Difference with traditional regression</h2>
-<p><span class="math display">\[\underbrace{y}_{\text{labels}} = a \underbrace{x}_{\text{features}} + b\]</span></p>
-<div class="fragment">
+<section id="hierarchical-index-2" class="slide level2">
+<h2>Hierarchical index (2):</h2>
+<ul>
+<li>We use one <strong>dummy variable</strong> per possible answer.</li>
+</ul>
 <table>
 <colgroup>
-<col style="width: 64%">
-<col style="width: 35%">
+<col style="width: 25%">
+<col style="width: 18%">
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Econometrics</th>
-<th>Machine learning</th>
+<th><span class="math inline">\(D_{\text{Strongly Disagree}}\)</span></th>
+<th><span class="math inline">\(D_{\text{Disagree}}\)</span></th>
+<th><span class="math inline">\(D_{\text{Neutral}}\)</span></th>
+<th><span class="math inline">\(D_{\text{Agree}}\)</span></th>
+<th><span class="math inline">\(D_{\text{Strongly Agree}}\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Regressand / independent variable / explanatory variable</td>
-<td>Features</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr class="even">
-<td>Regressor / dependent variable / explained variable</td>
-<td>Labels</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr class="odd">
-<td>Regression</td>
-<td>Model Training</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
-</div>
-</section>
-<section id="difference-with-traditional-regression-2" class="slide level2">
-<h2>Difference with traditional regression</h2>
 <ul>
-<li>Big data requires other means to process the data:
+<li>Values are linked by the specific <strong>dummy coding</strong>.
 <ul>
-<li>data is long: so many observations <span class="math inline">\(x\)</span> doesn’t fit in the memory
+<li>the choice of the reference group (with 0) is not completely neutral
 <ul>
-<li>need to use incremental training method to use only a subsample at a time</li>
+<li>for linear regressions, we can ignore its implications</li>
 </ul></li>
-<li>data is wide: so many features, the model is crudely overspecified
-<ul>
-<li>need to build dimension reduction into the objective</li>
+<li>it must be frequent enough in the data</li>
+<li><strong>effects</strong> coding: reference group takes -1 instead of 0</li>
 </ul></li>
-<li>data is nonlinear:
+<li>Note that hierarchy is lost. The same treatment can be applied to non-hierachical variables</li>
+<li>Now our variables are perfectly <strong>colinear</strong>:
 <ul>
-<li>use nonlinear model (and nonlinear training)</li>
-</ul></li>
-<li>data is not a simple vector…
-<ul>
-<li>same as nonlinear</li>
-</ul></li>
+<li>we can deduce one from all the others</li>
+<li>we drop one from the regression: the reference group TODO</li>
 </ul></li>
 </ul>
-</section></section>
-<section>
-<section id="regression-with-long-data" class="title-slide slide level1 center">
-<h1>Regression with long data</h1>
-
 </section>
-<section id="long-data" class="slide level2">
-<h2>Long data</h2>
-<div class="callout callout-block callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Long data</strong></p>
-</div>
-<div class="callout-content">
-<p>Long data is characterized by a high number of observations.</p>
-</div>
-</div>
-</div>
-<div class="r-stack">
-<p><span class="fragment current-visible" data-fragment-index="1"><img data-src="assets/long_data.png" alt="Big Data"></span></p>
-<p><span class="fragment current-visible" data-fragment-index="2"><img data-src="assets/long_data_subset.png" alt="Big Data"></span></p>
-</div>
+<section id="hierarchical-index-3" class="slide level2">
+<h2>Hierarchical index (3)</h2>
+<p><span class="math display">\[y_{\text{CO2 emission}} = \alpha + \beta_1 x_{\text{strdis}} + \beta_2 x_{\text{dis}} + \beta_3 x_{\text{agr}} + \beta_4 x_{\text{stragr}}\]</span></p>
 <ul>
-<li>Modern society is gathering <em>a lot</em> of data.
+<li>Interpretation:
 <ul>
-<li>in doesn’t fit in the computer memory so we can’t run a basic regression</li>
-</ul></li>
-<li>In some cases we would also like to update our model continuously:
-<ul>
-<li>incremental regression</li>
+<li>being in the group which strongly agrees to the yellow vest’s claim is associated with an additional <span class="math inline">\(\beta_4\)</span> increase in CO2 consumption compared with members of the neutral group</li>
 </ul></li>
 </ul>
-<div class="fragment current-visible" data-fragment-index="2">
-<p>We need a way to fit a model on a subset of the data at a time.</p>
-</div>
 </section>
-<section id="long-data-2" class="slide level2">
-<h2>Long data</h2>
-<div class="r-stack">
-<div class="fragment current-visible">
-<ul>
-<li>Traditional regression:
-<ul>
-<li>full sample <span class="math inline">\(X,Y=(x_i,y_i)_{i=1:N}\)</span></li>
-<li>OLS: <span class="math inline">\(\min_{a,b} \sum_{i=1}^N (a x_i + b - y_i)^2\)</span></li>
-<li>closed-form solution: <span class="math inline">\(a = X^{\prime}X Y\)</span> and <span class="math inline">\(b= ...\)</span></li>
-<li>hard to compute if <span class="math inline">\(X\)</span> is very big</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment current-visible">
-<ul>
-<li>Incremental learning:
-<ul>
-<li>given initial <span class="math inline">\(a_n\)</span>, <span class="math inline">\(b_n\)</span></li>
-<li>pick <span class="math inline">\(N\)</span> random observations (the batch)
-<ul>
-<li>regress them to get new estimate <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span></li>
-<li>this minimizes the square of errors</li>
-</ul></li>
-<li>update with learning rate <span class="math inline">\(\beta\)</span>:
-<ul>
-<li><span class="math inline">\(a_{n+1} \leftarrow a_n (1-\beta_n) + \beta_n a\)</span></li>
-<li><span class="math inline">\(b_{n+1} \leftarrow b_n (1-\beta_n) + \beta_n b\)</span></li>
-</ul></li>
-<li>process is not biased (that is <span class="math inline">\(a\)</span> converges to the true value) as long as one decreases <span class="math inline">\(\beta\)</span> sufficiently fast over time (ex: <span class="math inline">\(\beta_n=\frac{1}{n}\)</span>)</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="formalisation-a-typical-machine-learning-task" class="slide level2">
-<h2>Formalisation: a typical machine learning task</h2>
-<ul>
-<li>vector of unknowns: <span class="math inline">\(\theta=(a,b)\)</span></li>
-<li>dataset <span class="math inline">\(X,Y=(x_i,y_i)_{i=1:N}\)</span></li>
-<li>for a random draw <span class="math inline">\(\omega = (a_{\sigma(i)}, b_{\sigma(i)})_{i=[1,N]} \subset (X,Y)\)</span>
-<ul>
-<li><span class="math inline">\(\omega\)</span> is just a random <strong>batch</strong> of size <span class="math inline">\(N\)</span></li>
-</ul></li>
-<li>define the <em>empirical</em> risk (or empirical <em>cost</em>) <span class="math display">\[\xi(\theta, \omega) = \sum_{(x,y) \in \omega} (y - (a x + b))^2\]</span></li>
-<li>we want to minimize <em>theoretical risk</em>: <span class="math display">\[\Xi(\theta) = \mathbb{E} \left[ \xi(\theta, \omega)\right]\]</span></li>
-</ul>
-</section>
-<section id="training-gradient-descent" class="slide level2">
-<h2>Training: Gradient Descent</h2>
+<section id="nonnumerical-variables" class="slide level2">
+<h2>Nonnumerical variables</h2>
 <div class="columns">
 <div class="column">
 <ul>
-<li><p>How do we minimize a function <span class="math inline">\(f(a,b)\)</span>?</p></li>
-<li><p>Gradient descent:</p>
-<ul>
-<li><span class="math inline">\(a_k, b_k\)</span> given</li>
-<li>compute the gradient (slope) <span class="math inline">\(\nabla_{a,b} f = \begin{bmatrix} \frac{\partial f}{\partial a} \\\\ \frac{\partial f}{\partial b}\end{bmatrix}\)</span></li>
-<li>follow the steepest slope: (Newton Algorithm)
-<ul>
-<li><span class="math display">\[ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} - \nabla_{a,b} f\]</span></li>
-</ul></li>
-<li>but not too fast: use learning rate <span class="math inline">\(\lambda\)</span>: <span class="math display">\[ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  (1-\lambda) \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} + \lambda (- \nabla_{a,b} f )\]</span></li>
-</ul></li>
-</ul>
-</div><div class="column">
-<p><img data-src="ml_graphs/training.gif"></p>
-</div>
-</div>
-</section>
-<section id="not-everything-goes-wrong-all-the-time" class="slide level2">
-<h2>Not everything goes wrong all the time</h2>
-<p><img data-src="ml_graphs/contours_evaluation_optimizers.gif"> <img data-src="ml_graphs/saddle_point_evaluation_optimizers.gif"></p>
-<ul>
-<li>In practice, choosing the right learning rate <span class="math inline">\(\lambda\)</span> is crucial</li>
-<li><span class="math inline">\(\lambda\)</span> is a <strong>metaparameter</strong> of the model training.</li>
-</ul>
-<!-- ## Stochastic Gradient Descent
-
-- Stochastic gradient descent
-  - As long as the batch is taken randomly
-  - As long as the learning rate is small enough
-  - Or the batch size big enough
-  - The gradient is *unbiased* (i.e. $\mathbb{E}\left[ \nabla \xi(\omega, \theta) \right] = \nabla \Xi(\theta)$)
-- We don't need the whole dataset.
- -->
-</section></section>
-<section>
-<section id="regression-with-wide-data" class="title-slide slide level1 center">
-<h1>Regression with wide data</h1>
-
-</section>
-<section id="wide-data" class="slide level2">
-<h2>Wide data</h2>
-<div class="callout callout-block callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Block</strong></p>
-</div>
-<div class="callout-content">
-<p>Wide Data is characterized by a high number of features compared to the number of observations.</p>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p>Problem: - with many independent variables <span class="math inline">\(x_1, ... x_K\)</span>, <span class="math inline">\(K&gt;&gt;N\)</span> and one dependent variable <span class="math inline">\(y\)</span> the regression <span class="math display">\[y = a_1 x_1 + a_2 x_2 + \cdots + a_N x_N + b\]</span> is grossly <strong>overidentified</strong>.</p>
-</div>
-</section>
-<section id="wide-data-regression" class="slide level2">
-<h2>Wide data regression</h2>
-<ul>
-<li>Main Idea: penalize non-zero coefficients to encourage scarcity
-<ul>
-<li>Ridge: <span class="math display">\[\Xi(a,b) = \min_{a,b} \sum_{i=1}^N ( \sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|^2\]</span>
-<ul>
-<li>shrinks parameters towards zero</li>
-<li>closed form</li>
-</ul></li>
-<li>Lasso: <span class="math display">\[\Xi(a,b) = \min_{a,b} \sum_{i=1}^N (\sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|\]</span>
-<ul>
-<li>eliminates zero coefficients</li>
-</ul></li>
-<li>Elastic: Ridge + Lasso</li>
-</ul></li>
-<li>Remarks:
-<ul>
-<li><span class="math inline">\(\mu\)</span> is called a regularization term.</li>
-<li>it is a hyperparameter</li>
-<li><span class="math inline">\(\mu \uparrow\)</span>, bias increases, variance decreases</li>
-</ul></li>
-</ul>
-</section>
-<section id="training" class="slide level2">
-<h2>Training</h2>
-<p>To perform Lasso and ridge regression:</p>
-<ul>
-<li>AI approach:
-<ul>
-<li>minimize objective <span class="math inline">\(\Xi(a,b)\)</span> directly.</li>
-<li>approach is known as (stochastic) Gradient Descent</li>
-</ul></li>
-<li>Use special algorithms</li>
-</ul>
-</section>
-<section id="example-imf-challenge" class="slide level2">
-<h2>Example: IMF challenge</h2>
-<ul>
-<li>An internal IMF challenge to predict crises in countries</li>
-<li>Lots of different approaches</li>
-<li>Lots of data:
-<ul>
-<li>which one is relevant</li>
-<li>machine must select relevant informations</li>
-</ul></li>
-<li>Example: <a href="https://www.imf.org/en/Publications/WP/Issues/2017/05/05/Lasso-Regressions-and-Forecasting-Models-in-Applied-Stress-Testing-44887"><em>Lasso Regressions and Forecasting Models in Applied Stress Testing</em></a> by Jorge A. Chan-Lau
-<ul>
-<li>in a given developing country</li>
-<li>tries to predict probability of default in various sectors</li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="nonlinear-regression" class="title-slide slide level1 center">
-<h1>Nonlinear Regression</h1>
-
-</section>
-<section id="nonlinear-regression-1" class="slide level2">
-<h2>Nonlinear Regression</h2>
-<ul>
-<li>So far, we have assumed,
-<ul>
-<li><span class="math inline">\(y_i = a + b x_i\)</span></li>
-<li><span class="math inline">\(y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_2 (|a| + |b|)\)</span></li>
-<li>defined <span class="math inline">\(\Xi(a,b)\)</span> and tried to minimize it</li>
-</ul></li>
-<li>Same approach works for fully nonlinear models
-<ul>
-<li><span class="math inline">\(y_i = a x_i + a^2 x_i^2 + c\)</span></li>
-<li><span class="math inline">\(y_i = \varphi(x; \theta)\)</span> ()</li>
-</ul></li>
-<li>Special case: neural network:
-<ul>
-<li>primer <a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.85189&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">tensor playground</a></li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="model-validation" class="title-slide slide level1 center">
-<h1>Model validation</h1>
-
-</section>
-<section id="how-to-evaluate-the-machine-learning" class="slide level2">
-<h2>how to evaluate the machine learning</h2>
-<p>In machine learning we can’t perform statistical inference easily. How do we assess the validity of a model?</p>
-<ul>
-<li>Basic idea (independent of how complex the algorithm is)
-<ul>
-<li>separate data in
-<ul>
-<li>training set (in-sample)</li>
-<li>test set (out of sample)</li>
-</ul></li>
-<li>train using only the training set</li>
-<li>evaluate <em>performance</em> on the test set</li>
-</ul></li>
-<li>Performance can be:
-<ul>
-<li>fitness, number of classification errors (false positive, false negative)</li>
-</ul></li>
-</ul>
-</section>
-<section id="how-to-evaluate-the-machine-learning-1" class="slide level2">
-<h2>how to evaluate the machine learning</h2>
-<p>In case the training method depends itself on many parameters (the hyperparameters) we make three samples instead:</p>
-<ul>
-<li>training set (in-sample)</li>
-<li>validation set (to update hyperparameters)</li>
-<li>test set (out of sample)</li>
-</ul>
-<p><strong>Golden Rule</strong>: the test set should not be used to estimate the model, and should not affect the choice <em>any</em> training parameter (hyperparameter).</p>
-<!-- 
-## How to judge a model validity?
-
-- not easy
-- modeling *asumptions* (specification):
-    - functional space -> fit, variance (econ: $R^2$)
-    - statistical modeling: data generating process -> bias (econ: stdev)
-- There is a very general _tradeoff bias/variance_
-- Many ML methods allow to estimate bias (possibly via bootstrapping) -->
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
-
-<img data-src="ml_graphs/2000px-Traintest.svg.png" class="r-stretch quarto-figure-center"><p class="caption">Traintest</p><div class="fragment">
-<p>The test set reveals that orange model is overfitting.</p>
-</div>
-</section>
-<section id="how-to-choose-the-validation-set" class="slide level2">
-<h2>How to choose the validation set?</h2>
-<ul>
-<li>Holdout validation approach:
-<ul>
-<li>keeps x% of the data for the training, (100-x)% for the test</li>
-</ul></li>
-<li>How to choose the sizes of the subsets?
-<ul>
-<li>small dataset: 90-10</li>
-<li>big data set: 70-30 (we can afford to waste more training data for the test)</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<ul>
-<li>Problem:
-<ul>
-<li>are we sure the validation size is correct? Are the results determined by an (un-) lucky draw?</li>
-<li>a problem for smaller datasets</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="how-to-choose-the-validation-set-1" class="slide level2">
-<h2>How to choose the validation set?</h2>
-<p>A more robust solution: <span class="math inline">\(k\)</span>-fold validation</p>
-<div class="columns">
-<div class="column">
-<ul>
-<li>split dataset randomly in <span class="math inline">\(K\)</span> subsets of equal size <span class="math inline">\(S_1, ... S_K\)</span></li>
-<li>use subset <span class="math inline">\(S_i\)</span> as test set, the rest as training set, compute the score</li>
-<li>compare the scores obtained for all <span class="math inline">\(i\in[1,K]\)</span>
-<ul>
-<li>they should be similar (compute standard deviation)</li>
-</ul></li>
-<li>average them</li>
-</ul>
-</div><div class="column">
-<p><img data-src="graphs/k-fold.gif"></p>
-</div>
-</div>
-</section></section>
-<section>
-<section id="how-to-use-sklearn-for-regressions" class="title-slide slide level1 center">
-<h1>How to use sklearn for regressions</h1>
-
-</section>
-<section id="wait" class="slide level2">
-<h2>Wait</h2>
-<ul>
-<li><p><em>Another</em> library to do regression ?</p></li>
-<li><p><code>statsmodels</code>:</p>
-<ul>
-<li>explanatory analysis</li>
-<li>statistical tests</li>
-<li>formula interface for many estimation algorithms
-<ul>
-<li>stateless approach (<code>model.fit()</code> returns another object)</li>
-</ul></li>
-</ul></li>
-<li><p><code>linearmodels</code></p>
-<ul>
-<li><em>extends</em> <code>statsmodels</code> (very similar interface)
-<ul>
-<li>(panel models, IV, systems…)</li>
-</ul></li>
-</ul></li>
-<li><p><code>sklearn</code>:</p>
-<ul>
-<li>prediction</li>
-<li>faster for big datasets</li>
-<li>common interface for several machine learning tasks
-<ul>
-<li>stateful approach (model is modified by <code>.fit</code> operation)</li>
-</ul></li>
-<li>defacto standard for machine learning</li>
-</ul></li>
-</ul>
-</section>
-<section id="in-practice" class="slide level2">
-<h2>In practice</h2>
-<div class="columns">
-<div class="column">
-<p>Basic sklearn workflow:</p>
-<div>
-<ul>
-<li class="fragment">import data
-<ul>
-<li class="fragment">features: a matrix X (2d numpy array)</li>
-<li class="fragment">labels: a vector y (1d numpy array)</li>
-</ul></li>
-<li class="fragment">split the data, between training and test datasets
-<ul>
-<li class="fragment">split needs to be random to avoid any bias</li>
-</ul></li>
-<li class="fragment">normalize the data
-<ul>
-<li class="fragment">most ML algorithm are sensitive to scale</li>
-</ul></li>
-<li class="fragment">create a model (independent from data)</li>
-<li class="fragment">train the model on training dataset</li>
-<li class="fragment">evaluate accuracy on test dataset (here <span class="math inline">\(R^2\)</span>)</li>
-<li class="fragment">use the model to make predictions</li>
-</ul>
-</div>
-<p>The workflow is always the same, no matter what the model is</p>
-<ul>
-<li>try <code>sklearn.linear_model.Lasso</code> instead of <code>LinearRegression</code></li>
-</ul>
-</div><div class="column">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
-<span id="cb1-2"><a href="#cb1-2"></a>dataset <span class="op">=</span> load_diabetes()</span>
-<span id="cb1-3"><a href="#cb1-3"></a>X <span class="op">=</span> dataset[<span class="st">'data'</span>]</span>
-<span id="cb1-4"><a href="#cb1-4"></a>y <span class="op">=</span> dataset[<span class="st">'target'</span>]</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-6"><a href="#cb1-6"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X,y, test_size<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#Feature Scaling</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb1-10"><a href="#cb1-10"></a>sc <span class="op">=</span> StandardScaler()</span>
-<span id="cb1-11"><a href="#cb1-11"></a>X_train <span class="op">=</span> sc.fit_transform(X_train)</span>
-<span id="cb1-12"><a href="#cb1-12"></a>X_test <span class="op">=</span> sc.transform(X_test)</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb1-14"><a href="#cb1-14"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb1-15"><a href="#cb1-15"></a>model.fit(X_train, y_train)</span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a>model.score(X_test, y_test)</span>
-<span id="cb1-18"><a href="#cb1-18"></a>model.predict(X_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="k-fold-validation-with-sklearn" class="slide level2">
-<h2><span class="math inline">\(k\)</span>-fold validation with sklearn</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
-<span id="cb2-2"><a href="#cb2-2"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="cf">for</span> train_index, test_index <span class="kw">in</span> kf.split(X):</span>
-<span id="cb2-5"><a href="#cb2-5"></a>   X_train, X_test <span class="op">=</span> X[train_index], X[test_index]</span>
-<span id="cb2-6"><a href="#cb2-6"></a>   y_train, y_test <span class="op">=</span> y[train_index], y[test_index]</span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a>   <span class="co">## train a model in X_train, y_train</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>   <span class="co">## test it on X_test, y_test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
-<section id="classification-problems" class="title-slide slide level1 center">
-<h1>Classification Problems</h1>
-
-</section>
-<section id="classification-problem" class="slide level2">
-<h2>Classification problem</h2>
-<ul>
-<li>Binary Classification
-<ul>
-<li>Goal is to make a <em>prediction</em> <span class="math inline">\(c_n = f(x_{1,1}, ... x_{k,n})\)</span> …</li>
-<li>…where <span class="math inline">\(c_i\)</span> is a binary variable (<span class="math inline">\(\in\{0,1\}\)</span>)</li>
-<li>… and <span class="math inline">\((x_{i,n})_k\)</span>, <span class="math inline">\(k\)</span> different features to predict <span class="math inline">\(c_n\)</span></li>
-</ul></li>
-<li>Multicategory Classification
-<ul>
-<li>The variable to predict takes values in a non ordered set with <span class="math inline">\(p\)</span> different values</li>
-</ul></li>
-</ul>
-</section>
-<section id="logistic-regression" class="slide level2">
-<h2>Logistic regression</h2>
-<div class="columns">
-<div class="column">
-<ul>
-<li>Given a regression model (a linear predictor)</li>
-</ul>
-<p><span class="math display">\[ a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n \]</span></p>
-<ul>
-<li><p>one can build a classification model: <span class="math display">\[ f(x_1, ..., x_n) = \sigma( a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n )\]</span> where <span class="math inline">\(\sigma(x)=\frac{1}{1+\exp(-x)}\)</span> is the logistic function a.k.a. sigmoid</p></li>
-<li><p>The loss function to minimize is: <span class="math display">\[L() = \sum_n (c_n - \sigma( a_{0} + a_1 x_{1,n} + a_2 x_{2,n} + \cdots a_k x_{k,n} ) )^2\]</span></p></li>
-<li><p>This works for any regression model (LASSO, RIDGE, nonlinear…)</p></li>
-</ul>
-</div><div class="column">
-<p><img data-src="graphs/sigmoid.png"></p>
-</div>
-</div>
-</section>
-<section id="logistic-regression-1" class="slide level2">
-<h2>Logistic regression</h2>
-<ul>
-<li>The linear model predicts an intensity/score (not a category) <span class="math display">\[ f(x_1, ..., x_n) = \sigma( \underbrace{a_0 + a_1 x_1 + a_2 x_2 + \cdots a_n x_n }_{\text{score}})\]</span></li>
-<li>To make a prediction: round to 0 or 1.</li>
-</ul>
-
-<img src="graphs/datacamp.jpeg" width="60%" class="r-stretch"></section>
-<section id="multinomial-regression" class="slide level2">
-<h2>Multinomial regression</h2>
-<ul>
-<li>If there are <span class="math inline">\(P\)</span> categories to predict:
-<ul>
-<li>build a linear predictor <span class="math inline">\(f_p\)</span> for each category <span class="math inline">\(p\)</span></li>
-<li>linear predictor is also called score</li>
-</ul></li>
-<li>To predict:
-<ul>
-<li>evaluate the score of all categories</li>
-<li>choose the one with highest score</li>
-</ul></li>
-<li>To train the model:
-<ul>
-<li>train separately all scores (works for any predictor, not just linear)</li>
-<li>… there are more subtle approaches (not here)</li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="other-classifiers" class="title-slide slide level1 center">
-<h1>Other Classifiers</h1>
-
-</section>
-<section id="common-classification-algorithms" class="slide level2">
-<h2>Common classification algorithms</h2>
-<p>There are many:</p>
-<ul>
-<li>Logistic Regression</li>
-<li>Naive Bayes Classifier</li>
-<li>Nearest Distance</li>
-<li>neural networks (replace score in sigmoid by n.n.)</li>
-<li>Decision Trees</li>
-<li>Support Vector Machines</li>
-</ul>
-</section>
-<section id="nearest-distance" class="slide level2">
-<h2>Nearest distance</h2>
-<div class="columns">
-<div class="column">
-<ul>
-<li>Idea:
-<ul>
-<li>in order to predict category <span class="math inline">\(c\)</span> corresponding to <span class="math inline">\(x\)</span> find the closest point <span class="math inline">\(x_0\)</span> in the training set</li>
-<li>Assign to <span class="math inline">\(x\)</span> the same category as <span class="math inline">\(x_0\)</span></li>
-</ul></li>
-<li>But this would be very susceptible to noise</li>
-</ul>
-<div class="fragment">
-<ul>
-<li>Amended idea: <span class="math inline">\(k-nearest\)</span> neighbours
-<ul>
-<li>look for the <span class="math inline">\(k\)</span> points closest to <span class="math inline">\(x\)</span></li>
-<li>label <span class="math inline">\(x\)</span> with the same category as the majority of them</li>
-</ul></li>
-<li>Remark: this algorithm uses Euclidean distance. This is why it is important to normalize the dataset.</li>
-</ul>
-</div>
-</div><div class="column">
-<p><img data-src="graphs/k-nearest.png"></p>
-</div>
-</div>
-</section>
-<section id="decision-tree-random-forests" class="slide level2">
-<h2>Decision Tree / Random Forests</h2>
-<div class="columns">
-<div class="column">
-<div>
-<ul>
-<li class="fragment">Decision Tree
-<ul>
-<li class="fragment">recursively find simple criteria to subdivide dataset</li>
-</ul></li>
-<li class="fragment">Problems:
-<ul>
-<li class="fragment">Greedy: algorithm does not simplify branches</li>
-<li class="fragment">easily overfits</li>
-</ul></li>
-<li class="fragment">Extension : random tree forest
-<ul>
-<li class="fragment">uses several (randomly generated) trees to generate a prediction</li>
-<li class="fragment">solves the overfitting problem</li>
-</ul></li>
-</ul>
-</div>
-</div><div class="column">
-<p><img data-src="graphs/decision_tree.png"></p>
-</div>
-</div>
-</section>
-<section id="support-vector-classification" class="slide level2">
-<h2>Support Vector Classification</h2>
-<div class="columns">
-<div class="column">
-<ul>
-<li><!-- .element: class="fragment" data-fragment-index="1" -->
-Separates data by one line (hyperplane).</li>
-<li><!-- .element: class="fragment" data-fragment-index="2" -->
-Chooses the largest margin according to <emph>support vectors</emph></li>
-<li><!-- .element: class="fragment" data-fragment-index="3" -->
-Can use a nonlinear kernel.</li>
-</ul>
-</div><div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="graphs/hyperplanes.png" class="fragment current-visible"></p>
-<p></p><figcaption>F</figcaption><p></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="graphs/margin.jpg" class="fragment current-visible"></p>
-<p></p><figcaption>F</figcaption><p></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="graphs/nonlinear_svm.png" class="fragment current-visible"></p>
-<p></p><figcaption>F</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="all-these-algorithms-are-super-easy-to-use" class="slide level2">
-<h2>All these algorithms are super easy to use!</h2>
-<ul>
-<li>Decision Tree:</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb3-2"><a href="#cb3-2"></a>clf <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="fragment">
-<ul>
-<li>Support Vector Machine</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
-<span id="cb4-2"><a href="#cb4-2"></a>clf <span class="op">=</span> SVC(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment">
-<ul>
-<li>Ridge Regression:</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
-<span id="cb5-2"><a href="#cb5-2"></a>clf <span class="op">=</span> Ridge(random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section>
-<section>
-<section id="validation" class="title-slide slide level1 center">
-<h1>Validation</h1>
-
-</section>
-<section id="validity-of-a-classification-algorithm" class="slide level2">
-<h2>Validity of a classification algorithm</h2>
-<ul>
-<li><p>Independently of how the classification is made, its validity can be assessed with a similar procedure as in the regression.</p></li>
-<li><p>Separate training set and test set</p>
-<ul>
-<li>do not touch test set at all during the training</li>
-</ul></li>
-<li><p>Compute score: number of correctly identified categories</p>
-<ul>
-<li>note that it is different from loss function minimized during the training</li>
-</ul></li>
-</ul>
-</section>
-<section id="classification-matrix" class="slide level2">
-<h2>Classification matrix</h2>
-<ul>
-<li>For binary classification, we focus on the <em>classification matrix</em> or <em>confusion matrix</em>.</li>
+<li><!-- .element class="fragment" -->
+What about nonnumerical variables?</li>
+<li><!-- .element class="fragment" -->
+When variables take nonnumerical variables, we convert them to numerical variables.</li>
+<li><!-- .element class="fragment" -->
+Example:</li>
 </ul>
 <table>
 <thead>
 <tr class="header">
-<th>Predicted</th>
-<th>(0) Actual</th>
-<th>(1) Actual</th>
+<th>activity</th>
+<th>code</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>0</td>
-<td>true negatives (TN)</td>
-<td>false negatives (FN)</td>
+<td>massage therapist</td>
+<td>1</td>
 </tr>
 <tr class="even">
-<td>1</td>
-<td>false positives (FP)</td>
-<td>true positives (TP)</td>
+<td>mortician</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>archeologist</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>financial clerks</td>
+<td>4</td>
 </tr>
 </tbody>
 </table>
-<div class="r-stack">
-<div class="fragment current-visible">
+</div><div class="column">
 <ul>
-<li>Overall accuracy: <span class="math inline">\(\frac{\text{TN}+\text{TP}}{\text{total}}\)</span></li>
-<li>Sensitivity: <span class="math inline">\(\frac{TP}{FP+TP}\)</span></li>
-<li>False Positive Rate (FPR): <span class="math inline">\(\frac{FP}{TN+FP}\)</span></li>
+<li><!-- .element class="fragment" -->
+Then we convert to dummy variables exactly like hierarchical indices
+<ul>
+<li>here <span class="math inline">\(\text{massage therapist}\)</span> is taken as reference</li>
+</ul></li>
 </ul>
-<p>The relevant statistics depends on the application.</p>
+<table>
+<colgroup>
+<col style="width: 29%">
+<col style="width: 32%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(D_{\text{mortician}}\)</span></th>
+<th><span class="math inline">\(D_{\text{archeologist}}\)</span></th>
+<th><span class="math inline">\(D_{\text{financial clerks}}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="fragment current-visible">
+</div>
+</section>
+<section id="hands-on" class="slide level2">
+<h2>Hands-on</h2>
+<p>Use <code>statsmodels</code> to create dummy variables with formula API.</p>
 <ul>
-<li>Example:
+<li>Replace</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>salary <span class="op">~</span> activity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>facial recognition by London police: 2% accuracy</li>
-<li>facial recognition by South Wales police: 9% accuracy</li>
-<li>a success?</li>
+<li>by:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>salary <span class="op">~</span> C(activity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There is an options to choose the reference group</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>salary <span class="op">~</span> C(activity, Treatment(reference<span class="op">=</span><span class="st">"archeologist"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="causality" class="title-slide slide level1 center">
+<h1>Causality</h1>
+
+</section>
+<section id="what-is-causality" class="slide level2">
+<h2>What is causality?</h2>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/groucho_marx.jpg"></p>
+<p></p><figcaption>Groucho Marx</figcaption><p></p>
+</figure>
+</div>
+<p>Clear? Huh! Why a four-year-old child could understand this report! Run out and find me a four-year-old child, I can’t make head or tail of it.</p>
+</div>
+</section>
+<section id="spurious-correlation" class="slide level2">
+<h2>Spurious correlation</h2>
+
+<img data-src="assets/spurious.png" class="r-stretch quarto-figure-center"><p class="caption">Spurious Correlation</p><ul>
+<li>We have seen spurious correlation before
+<ul>
+<li>it happens when two series comove without being actually correlated</li>
+</ul></li>
+<li>Also, two series might be correlated without one causing the other
+<ul>
+<li>ex: countries eating more chocolate have more nobel prices…</li>
+</ul></li>
+</ul>
+</section>
+<section id="definitions" class="slide level2">
+<h2>Definitions?</h2>
+<p>But how do we define</p>
+<ul>
+<li>correlation</li>
+<li>causality</li>
+</ul>
+<p>?</p>
+<p>Both concepts are actually hard to define:</p>
+<ul>
+<li>in statistics (and econometrices) they refer to the <strong>generating process</strong></li>
+<li>if the data was generated again, would you observe the same relations?</li>
+</ul>
+<p>For instance correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is just the average correlation taken over many draws <span class="math inline">\(\omega\)</span> of the data: <span class="math display">\[E_{\omega}\left[ (X-E[X])(Y-E[Y])\right]\]</span></p>
+</section>
+<section id="how-do-we-define-causality-1" class="slide level2">
+<h2>How do we define causality (1)</h2>
+<ul>
+<li>In math, we have implication: <span class="math inline">\(A \implies B\)</span>
+<ul>
+<li>applies to <em>statements</em> that can be either true or false</li>
+<li>given <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(A\)</span> implies <span class="math inline">\(B\)</span> unless <span class="math inline">\(A\)</span> is true and <span class="math inline">\(B\)</span> is false</li>
+<li><em>paradox of the drinker</em>: at any time, there exists a person such that: if this person drinks, then everybody drinks</li>
+</ul></li>
+<li>In a <em>mathematical</em> universe taking values <span class="math inline">\(\omega\)</span>, we can define causality between statement <span class="math inline">\(A(\omega)\)</span> and <span class="math inline">\(B(\omega)\)</span> as : <span class="math display">\[\forall \omega, A(\omega) \implies B(\omega)\]</span></li>
+</ul>
+</section>
+<section id="how-do-we-define-causality-2" class="slide level2">
+<h2>How do we define causality (2)</h2>
+<p>But causality in the <em>real</em> world is problematic</p>
+<p>Usually, we observe <span class="math inline">\(A(\omega)\)</span> only once…</p>
+<div class="fragment">
+<div class="columns">
+<div class="column">
+<p>Example:</p>
+<ul>
+<li>state of the world <span class="math inline">\(\omega\)</span>: 2008, big financial crisis, …</li>
+<li>A: Ben Bernanke chairman of the Fed</li>
+<li>B: successful economic interventions</li>
+<li>Was Ben Bernanke a good central banker?</li>
+<li>Impossible to say.</li>
+</ul>
+</div><div class="column">
+<p><img data-src="assets/bernanke.jpg" style="width:60.0%"></p>
+</div>
+</div>
+
+</div>
+<aside><div>
+<p>Then there is the uncertain concept of time… But let’s take it as granted to not overcomplicate…</p>
+</div></aside></section>
+<section id="causality-in-statistics" class="slide level2">
+<h2>Causality in Statistics</h2>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Statistical definition of causality</strong></p>
+</div>
+<div class="callout-content">
+<p>Variable <span class="math inline">\(A\)</span> causes <span class="math inline">\(B\)</span> in a statistical sense if - <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are correlated - <span class="math inline">\(A\)</span> is known before <span class="math inline">\(B\)</span> - correlation between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is unaffected by other variables</p>
+</div>
+</div>
+</div>
+<ul>
+<li>There are other related statistical definitions:
+<ul>
+<li>like Granger causality…</li>
+<li>… but not for this course</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="experiments" class="title-slide slide level1 center">
+<h1>Experiments</h1>
+
+</section>
+<section id="factual-and-counterfactual" class="slide level2">
+<h2>Factual and counterfactual</h2>
+<div class="columns">
+<div class="column">
+<p>&nbsp;</p>
+<div class="r-stack">
+<p><span class="fragment current-visible" data-fragment-index="1"><img data-src="assets/counterfactual_1.png" width="600"></span></p>
+<p><span class="fragment" data-fragment-index="2"><img data-src="assets/counterfactual_2.png" width="600"></span></p>
+</div>
+</div><div class="column">
+<div class="fragment" data-fragment-index="1">
+<ul>
+<li>Suppose we observe an event A
+<ul>
+<li>A: a patient is administered a drug, government closes all schools during Covid</li>
+</ul></li>
+<li>We observe a another event B
+<ul>
+<li>B: the patient recovers, virus circulation decreases</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li>To interpret B as a consequence of A, we would like to consider the counter-factual:
+<ul>
+<li>a patient is not administered a drug, government doesn’t close schools</li>
+<li>patient does not recover, virus circulation is stable</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>An important task in econometrics is to construct a counter-factual</p>
+<ul>
+<li>as the name suggests is it sometimes never observed!</li>
+</ul>
+</div>
+</section>
+<section id="scientific-experiment" class="slide level2">
+<h2>Scientific Experiment</h2>
+
+<img data-src="assets/lab_experiment.jpg" class="r-stretch quarto-figure-center"><p class="caption">&nbsp;</p><ul>
+<li>In science we establish causality by performing experiments
+<ul>
+<li>and create the counterfactual</li>
+</ul></li>
+<li>A good experiment is reproducible
+<ul>
+<li>same variables</li>
+<li>same state of the world (other variables)</li>
+<li>reproduce several times (in case output is noisy or random)</li>
+</ul></li>
+<li>Change one factor at a time
+<ul>
+<li>to create a counter-factual</li>
+</ul></li>
+</ul>
+</section>
+<section id="measuring-effect-of-treatment" class="slide level2">
+<h2>Measuring effect of treatment</h2>
+<div class="columns">
+<div class="column">
+<div class="r-stack">
+<p><img data-src="assets/blue_red_pill.jpeg" class="fragment current-visible" data-fragment-index="1"></p>
+<p><img data-src="assets/neo.png" class="fragment current-visible" data-fragment-index="2"></p>
+<p><img data-src="assets/neo.png" class="fragment current-visible" data-fragment-index="3"></p>
+<p><img data-src="assets/manyneo.png" class="fragment current-visible" data-fragment-index="4"></p>
+</div>
+</div><div class="column">
+<div class="fragment" data-fragment-index="1">
+<ul>
+<li>Assume we have discovered two medications: R and B</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li>Give one of them (R) to a patient and observe the outcome</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="3">
+<ul>
+<li>Would would have been the effect of (B) on the same patient?
+<ul>
+<li>????</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="4">
+<ul>
+<li>What if we had many patients and let them choose the medication?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Maybe the effect would be the consequence of the choice of patients rather than of the medication?</p>
+</div>
+</section>
+<section id="an-exmple-from-behavioural-economics" class="slide level2">
+<h2>An exmple from behavioural economics</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Example: cognitive dissonance
+<ul>
+<li>Experiment in GATE Lab</li>
+<li>Volunteers play an investment game.</li>
+<li>They are asked beforehand whether they support OM, PSG, or none.</li>
+</ul></li>
+</ul>
+<div class="r-stack">
+<div class="fragment current-visible" data-fragment-index="2">
+<ul>
+<li>Experiment 1:
+<ul>
+<li>Before the experiment, randomly selected volunteers are given a football shirt of their preferred team (treatment 1)</li>
+<li>Other volunteers receive nothing (treatment 0)</li>
+</ul></li>
+<li>Result:
+<ul>
+<li>having a football shirt seems to boost investment performance…</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment current-visible" data-fragment-index="3">
+<ul>
+<li><p>Experiment 2: subjects are given randomly a shirt of either Olympique de Marseille or PSG.</p></li>
+<li><p>Result:</p>
+<ul>
+<li>Having the good shirt improves performance.</li>
+<li>Having the wrong one deteriorates it badly.</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment current-visible" data-fragment-index="4">
+<ul>
+<li>How would you code up this experiment?</li>
+<li>Can we conclude on some form of causality?</li>
+</ul>
+</div>
+</div>
+</div><div class="column">
+<p><img data-src="gate_lab.jpg"></p>
+<p><img data-src="assets/psg.webp" width="200"> <img data-src="assets/marseille.webp" width="200"></p>
+</div>
+</div>
+</section>
+<section id="formalisation-of-the-problem" class="slide level2">
+<h2>Formalisation of the problem</h2>
+<!-- treatment 1: matching group -->
+<!-- treatment 2: wrong group -->
+<!-- reference group: no shirt -->
+<div class="columns">
+<div class="column">
+<ul>
+<li><p>Cause (A): two groups of people</p>
+<ul>
+<li>those given a shirt (treatment 1)</li>
+<li>those not given a shirt (treatment 0)</li>
+</ul></li>
+<li><p>Possible consequence (B): performance</p></li>
+<li><p>Take a given agent <em>Alice</em>: she performs well with a PSG shirt.</p>
+<ul>
+<li>maybe she is a good investor?</li>
+<li>or maybe she <em>is</em> playing for her team?</li>
+</ul></li>
+<li><p>Let’s try to have her play again without the football shirt</p>
+<ul>
+<li>now the experiment has changed: she has gained experience, is more tired, misses the shirt…</li>
+<li>it is impossible to get a perfect counterfactual (i.e.&nbsp;where only A changes)</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<ul>
+<li>Let’s take somebody else then? Bob was really bad without a PSG shirt.
+<ul>
+<li>he might be a bad investor? or he didn’t understand the rules?</li>
+<li>some other variables have changed, not only the treatment</li>
+</ul></li>
+<li>How to make a perfect experiment?
+<ul>
+<li>Choose <em>randomly</em> whether assigning a shirt or not</li>
+<li>by construction the treatment will not be correlated with other variables</li>
 </ul></li>
 </ul>
 </div>
 </div>
 </section>
-<section id="confusion-matrix-with-sklearn" class="slide level2">
-<h2>Confusion matrix with sklearn</h2>
+<section id="randomized-control-trial" class="slide level2">
+<h2>Randomized Control Trial</h2>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Randomized Control Trial (RCT)</strong></p>
+</div>
+<div class="callout-content">
+<p>The best way to ensure that treatment is independent from other factors is to <em>randomize</em> it.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
 <ul>
-<li>Predict on the test set:</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>y_pred <span class="op">=</span> model.predict(x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<li>In medecine
 <ul>
-<li>Compute confusion matrix:</li>
+<li>some patients receive the treatment (red pill)</li>
+<li>some other receive the control treatment (blue pill / placebo)</li>
+</ul></li>
+<li>In economics:
+<ul>
+<li>randomized field experiments</li>
+<li>randomized phase-ins for new policies
+<ul>
+<li>very useful for policy evaluation</li>
+</ul></li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
-<span id="cb7-2"><a href="#cb7-2"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="assets/duflo.jpg" class="fragment" style="width:50.0%" data-fragment-index="3"></p>
+<p></p><figcaption>Esther Duflo</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 
+<aside><div>
+<p>It is common in economics, instead of assigning treatments randomly, we often say that we assign individuals randomly to the treatment and to the control group. It is equivalent.</p>
+</div></aside></section>
+<section id="natural-experiment" class="slide level2">
+<h2>Natural experiment</h2>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Natural Experiment</strong></p>
+</div>
+<div class="callout-content">
+<p>A natural experiment satisfies conditions that treatment is assigned randomly</p>
+<ul>
+<li>without interference by the econometrician</li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>An exemple of a Natural Experiment:
+<ul>
+<li><em>gender bias in french local elections</em> (jean-pierre eymeoud, paul vertier) <a href="https://spire.sciencespo.fr/hdl:/2441/3k0m7r593p8gs9njjtpupmlknu/resources/wp-78-eymeoud-vertier.pdf">link</a></li>
+<li>are women discriminated against by voters in local elections?</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Result: yes, they get 1.5% less votes by right-wing voters</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>What was the natural experiment</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="instrumental-variables" class="title-slide slide level1 center">
+<h1>Instrumental variables</h1>
+
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<iframe src="https://www.youtube.com/embed/g0TuQGpMvjM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p><em>Lifetime Earnings and the Vietnam Era Draft Lottery</em>, by JD Angrist</p>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Fact:
+<ul>
+<li>veterans of the vietnam war (55-75) earn (in the 80s) an income that is 15% less in average than those who didn’t go to the war.</li>
+<li>What can we conclude?</li>
+<li>Hard to say: maybe those sent to the war came back with lower productivity (because of PTSD, public stigma, …)? maybe they were not the most productive in the first place (<em>selection bias</em>)?</li>
+</ul></li>
+<li>Problem (for the economist):
+<ul>
+<li>we didn’t sent people to war randomly</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<ul>
+<li>Genius idea:
+<ul>
+<li>here is a variable which randomly affected whether people were sent: the Draft<br>
+</li>
+<li><!-- .element class="fragment" -->
+between 1947, and 1973, a lottery was run to determine who would go to war</li>
+<li><!-- .element class="fragment" -->
+the draft number was determined, based on date of birth, and first letters of name</li>
+<li><!-- .element class="fragment" -->
+and was correlated with the probability that a given person would go to war</li>
+<li>and it was so to say random or at least independent from anything relevant to the problem</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<p>Can we use the Draft to generate randomness ?</p>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="assets/nobel.jpeg" class="r-stretch"></section>
+<section id="problem" class="slide level2">
+<h2>Problem</h2>
+<ul>
+<li>Take the linear regression: <span class="math display">\[y = \alpha + \beta x + \epsilon\]</span>
+<ul>
+<li><span class="math inline">\(y\)</span>: salary</li>
+<li><span class="math inline">\(x\)</span>: went to war</li>
+</ul></li>
+<li>We want to establish causality from x to y
+<ul>
+<li>we would like to interpret <span class="math inline">\(x\)</span> as the “treatment”</li>
+</ul></li>
+<li>But there can be <em>confounding factors</em>:
+<ul>
+<li>variable <span class="math inline">\(z\)</span> which causes both x and y</li>
+<li>exemple: socio-economic background, IQ, …</li>
+</ul></li>
+<li>If we could identify <span class="math inline">\(z\)</span> we could <em>control</em> for it: <span class="math display">\[y = \alpha + \beta_1 x + \beta_2 z + \epsilon\]</span>
+<ul>
+<li>we would get a better predictor of <span class="math inline">\(y\)</span> but more uncertainty about <span class="math inline">\(\beta_1\)</span> (<span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> are correlated)</li>
+</ul></li>
+</ul>
+</section>
+<section id="reformulate-the-problem" class="slide level2">
+<h2>Reformulate the problem</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Let’s assume treatment <span class="math inline">\(x\)</span> is a binary variable <span class="math inline">\(\in{0,1}\)</span></li>
+<li>We want to estimate <span class="math display">\[y = \alpha + \beta x + z + \epsilon\]</span> where <span class="math inline">\(z\)</span> is potentially correlated to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span></li>
+<li>There are two groups:
+<ul>
+<li>those who receive the treatment <span class="math display">\[y = \alpha + \beta + z_{T=1} + \epsilon\]</span></li>
+<li>the others <span class="math display">\[y = \alpha + 0 +  z_{T=0} + \epsilon\]</span></li>
+</ul></li>
+</ul>
+</div><div class="column">
+<ul>
+<li>Problem:
+<ul>
+<li>if <span class="math inline">\(z\)</span> is higher in the treatment group, its effect can’t be separated from the treatment effect.</li>
+</ul></li>
+<li>Intuition: what if we make groups differently?
+<ul>
+<li>completely independent from <span class="math inline">\(z\)</span> (and <span class="math inline">\(\epsilon\)</span>)</li>
+<li>not independently from <span class="math inline">\(x\)</span> so that one group will receive more treatment than the other</li>
+</ul></li>
+<li>To make this group we need a new variable <span class="math inline">\(q\)</span> that is:
+<ul>
+<li>correlated with <span class="math inline">\(x\)</span> so that it will correspond to some treatment effect</li>
+<li>uncorrelated to <span class="math inline">\(z\)</span> or <span class="math inline">\(\epsilon\)</span> (exogenous)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="two-stage-regression" class="slide level2">
+<h2>Two stage regression</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>We would like to redo the treatment groups in a way that is independent from <span class="math inline">\(z\)</span> (and everything contained in <span class="math inline">\(\epsilon\)</span>)
+<ul>
+<li><span class="math inline">\(q\)</span> is a binary variable: drafted or not</li>
+</ul></li>
+<li><!-- .element class="fragment" -->
+First stage: regress group assignment on the instrument: <span class="math display">\[x = \alpha_0 + \beta_0 q + \eta\]</span>
+<ul>
+<li>we can now predict group assignment in a way that is independent from <span class="math inline">\(z\)</span> (and everything in <span class="math inline">\(\epsilon\)</span>) <span class="math display">\[\tilde{x} = \alpha_0 + \beta_0 q\]</span></li>
+</ul></li>
+<li><!-- .element class="fragment" -->
+Second stage: use the predicted value instead of the original one <span class="math display">\[y = \alpha + \beta_1 \tilde{x} + z + \epsilon\]</span></li>
+</ul>
+</div><div class="column">
+<ul>
+<li><!-- .element class="fragment" -->
+Result:
+<ul>
+<li>If <span class="math inline">\(\beta_1\)</span> is significantly nonzero, there is a causal effect between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
+<li>Note that <span class="math inline">\(\tilde{x}\)</span> is imperfectly correlated with the treatment: <span class="math inline">\(\beta_1\)</span> can’t be interpreted directly</li>
+<li>The actual effect will be <span class="math inline">\(\frac{\beta_1}{\beta_0}\)</span> (in 1d)</li>
+</ul></li>
+<li><!-- .element class="fragment" -->
+We say that we <strong>instrument</strong> <span class="math inline">\(x\)</span> by <span class="math inline">\(q\)</span>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="choosing-a-good-instrument" class="slide level2">
+<h2>Choosing a good instrument</h2>
+
+<img data-src="assets/good_instrument.png" class="r-stretch"><div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Choosing an instrumental variable</strong></p>
+</div>
+<div class="callout-content">
+<p>A good instrument when trying to explain y by x, is a variable that is correlated to the treatment (x) but does not have any effect on the outcome of interest (y), appart from its effect through x.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="in-practice" class="slide level2">
+<h2>In practice</h2>
+<ul>
+<li>Both <code>statsmodels</code> and <code>linearmodels</code> support instrumental variables
+<ul>
+<li>library (look for IV2SLS)</li>
+</ul></li>
+<li>Library <code>linearmodels</code> has a handy formula syntax: <code>salary ~ 1 + [war ~ draft]</code>
+<ul>
+<li>API is similar but not exactly identical to statsmodels</li>
+<li>for instance <code>linearmodels</code> does not include constants by default</li>
+</ul></li>
+<li>Example from the doc</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>formula <span class="op">=</span> (</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="st">"np.log(drugexp) ~ 1 + totchr + age + linc + blhisp + [hi_empunion ~ ssiratio]"</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>ols <span class="op">=</span> IV2SLS.from_formula(formula, data)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>ols_res <span class="op">=</span> ols.fit(cov_type<span class="op">=</span><span class="st">"robust"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">print</span>(ols_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="footer footer-default">
 

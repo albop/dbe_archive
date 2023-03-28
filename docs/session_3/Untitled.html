@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data-Based Economics – regressions</title>
+<title>Data-Based Economics – untitled</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -125,7 +125,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -264,40 +263,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#regressions" id="toc-regressions" class="nav-link active" data-scroll-target="#regressions">Regressions</a>
-  <ul class="collapse">
-  <li><a href="#linear-regressions" id="toc-linear-regressions" class="nav-link" data-scroll-target="#linear-regressions">Linear regressions</a></li>
-  <li><a href="#finding-the-right-model" id="toc-finding-the-right-model" class="nav-link" data-scroll-target="#finding-the-right-model">Finding the right model</a></li>
-  <li><a href="#taylor-rule" id="toc-taylor-rule" class="nav-link" data-scroll-target="#taylor-rule">Taylor Rule</a>
-  <ul class="collapse">
-  <li><a href="#importing-the-data" id="toc-importing-the-data" class="nav-link" data-scroll-target="#importing-the-data">Importing the Data</a></li>
-  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data">Preparing the Data</a></li>
-  </ul></li>
-  <li><a href="#run-the-regression" id="toc-run-the-regression" class="nav-link" data-scroll-target="#run-the-regression">Run the regression</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 
-<section id="regressions" class="level1">
-<h1>Regressions</h1>
-<section id="linear-regressions" class="level2">
-<h2 class="anchored" data-anchor-id="linear-regressions">Linear regressions</h2>
-<p><strong>Import the Duncan/carData dataset</strong></p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> sm.datasets.get_rdataset(<span class="st">"Duncan"</span>, <span class="st">"carData"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dataset.data</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install statsmodels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Collecting statsmodels
+  Downloading statsmodels-0.13.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 5.1 MB/s eta 0:00:00m eta 0:00:01[36m0:00:01
+Requirement already satisfied: pandas&gt;=0.25 in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from statsmodels) (1.4.4)
+Requirement already satisfied: numpy&gt;=1.17 in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from statsmodels) (1.22.4)
+Requirement already satisfied: scipy&gt;=1.3 in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from statsmodels) (1.9.1)
+Collecting patsy&gt;=0.5.2
+  Downloading patsy-0.5.3-py2.py3-none-any.whl (233 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 233.8/233.8 kB 4.7 MB/s eta 0:00:00 MB/s eta 0:00:01
+Requirement already satisfied: packaging&gt;=21.3 in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from statsmodels) (21.3)
+Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from packaging&gt;=21.3-&gt;statsmodels) (3.0.9)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from pandas&gt;=0.25-&gt;statsmodels) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from pandas&gt;=0.25-&gt;statsmodels) (2022.2.1)
+Requirement already satisfied: six in /home/pablo/.local/opt/mambaforge/lib/python3.10/site-packages (from patsy&gt;=0.5.2-&gt;statsmodels) (1.16.0)
+Installing collected packages: patsy, statsmodels
+Successfully installed patsy-0.5.3 statsmodels-0.13.5</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> sm.datasets.get_rdataset(<span class="st">"Duncan"</span>, <span class="st">"carData"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dataset.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 
 <div>
 
@@ -352,23 +353,206 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><strong>Estimate by hand the model <span class="math inline">\(\text{income} = \alpha + \beta \times \text{education}\)</span> . Plot.</strong></p>
-<p><strong>Compute total, explained, unexplained variance. Compute R^2 statistics</strong></p>
-<p><strong>Use statsmodels (formula API) to estimate <span class="math inline">\(\text{income} = \alpha + \beta \times \text{education}\)</span>. Comment regression statistics.</strong></p>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#https://www.statsmodels.org/stable/generated/statsmodels.formula.api.ols.html</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.formula <span class="im">import</span> api <span class="im">as</span> smf</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model_1 <span class="op">=</span> smf.ols(<span class="st">"income ~ education"</span>, df)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>res_1 <span class="op">=</span> model_1.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>&lt;statsmodels.regression.linear_model.RegressionResultsWrapper at 0x7ffad5b135e0&gt;</code></pre>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="op">=</span> df.sort_values(<span class="st">'income'</span>, ascending<span class="op">=</span><span class="va">False</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_20796/3698961737.py:1: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with 'numeric_only=None') is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
+  df.mean()</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>income       41.866667
+education    52.555556
+prestige     47.688889
+dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>res_1.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.median()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_20796/530051474.py:1: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with 'numeric_only=None') is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
+  df.median()</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>income       42.0
+education    45.0
+prestige     41.0
+dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>income</th>
+      <th>education</th>
+      <th>prestige</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>41.866667</td>
+      <td>52.555556</td>
+      <td>47.688889</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>24.435072</td>
+      <td>29.760831</td>
+      <td>31.510332</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>7.000000</td>
+      <td>7.000000</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>21.000000</td>
+      <td>26.000000</td>
+      <td>16.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>42.000000</td>
+      <td>45.000000</td>
+      <td>41.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>64.000000</td>
+      <td>84.000000</td>
+      <td>81.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>81.000000</td>
+      <td>100.000000</td>
+      <td>97.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dfs[<span class="st">'income'</span>].plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>&lt;AxesSubplot: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Untitled_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'income'</span>].hist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>&lt;AxesSubplot: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Untitled_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'education'</span>].hist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>&lt;AxesSubplot: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Untitled_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'prestige'</span>].hist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>&lt;AxesSubplot: &gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Untitled_files/figure-html/cell-12-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df[<span class="st">'education'</span>], df[<span class="st">'income'</span>],<span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Untitled_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df[<span class="st">'prestige'</span>], df[<span class="st">'income'</span>],<span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Untitled_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>income</th>
+      <th>education</th>
+      <th>prestige</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>income</th>
+      <td>1.000000</td>
+      <td>0.724512</td>
+      <td>0.837801</td>
+    </tr>
+    <tr>
+      <th>education</th>
+      <td>0.724512</td>
+      <td>1.000000</td>
+      <td>0.851916</td>
+    </tr>
+    <tr>
+      <th>prestige</th>
+      <td>0.837801</td>
+      <td>0.851916</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> sm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.ols(formula<span class="op">=</span><span class="st">"income ~ education"</span>, data<span class="op">=</span>df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>result.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
 
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
@@ -382,10 +566,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   47.51</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Tue, 02 Feb 2021</td> <th>  Prob (F-statistic):</th> <td>1.84e-08</td>
+  <th>Date:</th>             <td>Wed, 01 Feb 2023</td> <th>  Prob (F-statistic):</th> <td>1.84e-08</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>11:29:50</td>     <th>  Log-Likelihood:    </th> <td> -190.42</td>
+  <th>Time:</th>                 <td>09:38:54</td>     <th>  Log-Likelihood:    </th> <td> -190.42</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    45</td>      <th>  AIC:               </th> <td>   384.8</td>
@@ -427,390 +611,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
-<p>The estimated regresssion is <code>income = 10.6 + 0.59 education</code>. At a 5% p-value level both the intercept and the coefficient are significant. R-squared is 0.52: the model explains half of the variance.</p>
-<p><strong>Use statsmodels to estimate <span class="math inline">\(\text{income} = \alpha + \beta \times \text{prestige}\)</span>. Comment regression statistics.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">"income ~ education"</span>   <span class="op">~~</span>   income <span class="op">=</span> α <span class="op">+</span> β <span class="op">*</span> education</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>__Use statsmodels to estimate $ = + + _2 $. Comment regression statistics.__</p>
-<p><strong>WHich model would you recommend? For which purpose?</strong></p>
-<p><strong>Plot the regression with prestige</strong></p>
-<p><strong>Check visually normality of residuals</strong></p>
-</section>
-<section id="finding-the-right-model" class="level2">
-<h2 class="anchored" data-anchor-id="finding-the-right-model">Finding the right model</h2>
-<p><strong>Import dataset from <code>data.dta</code>. Explore dataset (statistics, plots)</strong></p>
-<p><strong>Our goal is to explain <code>z</code> by <code>x</code> and <code>y</code>. Run a regression.</strong></p>
-<p><strong>Examine the residuals of the regression. What’s wrong? Remedy?</strong></p>
-</section>
-<section id="taylor-rule" class="level2">
-<h2 class="anchored" data-anchor-id="taylor-rule">Taylor Rule</h2>
-<p>In 1993, John taylor, estimated, using US data the regression: <span class="math inline">\(i_t = i^{\star} + \alpha_{\pi} \pi_t + \alpha_{\pi} y_t\)</span> where <span class="math inline">\(\pi_t\)</span> is inflation and <span class="math inline">\(y_t\)</span> the output gap (let’s say deviation from real gdp from the trend). He found that both coefficients were not significantly different from <span class="math inline">\(0.5\)</span>. Our goal, is to replicate the same analysis.</p>
-<section id="importing-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="importing-the-data">Importing the Data</h3>
-<p><strong>Import <code>macrodata</code> dataset from statsmodels (https://www.statsmodels.org/devel/datasets/generated/macrodata.html). Describe briefly its content using the metadata.</strong></p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> sm.datasets.macrodata.load_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the dataset object contains some data on the dataset: explore them (dataset.+Tab)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Extract the dataframe from the dataset object. Print first lines and summary statistics.</strong></p>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dataset.data</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-
-<div>
-
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>year</th>
-      <th>quarter</th>
-      <th>realgdp</th>
-      <th>realcons</th>
-      <th>realinv</th>
-      <th>realgovt</th>
-      <th>realdpi</th>
-      <th>cpi</th>
-      <th>m1</th>
-      <th>tbilrate</th>
-      <th>unemp</th>
-      <th>pop</th>
-      <th>infl</th>
-      <th>realint</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1959.0</td>
-      <td>1.0</td>
-      <td>2710.349</td>
-      <td>1707.4</td>
-      <td>286.898</td>
-      <td>470.045</td>
-      <td>1886.9</td>
-      <td>28.980</td>
-      <td>139.7</td>
-      <td>2.82</td>
-      <td>5.8</td>
-      <td>177.146</td>
-      <td>0.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1959.0</td>
-      <td>2.0</td>
-      <td>2778.801</td>
-      <td>1733.7</td>
-      <td>310.859</td>
-      <td>481.301</td>
-      <td>1919.7</td>
-      <td>29.150</td>
-      <td>141.7</td>
-      <td>3.08</td>
-      <td>5.1</td>
-      <td>177.830</td>
-      <td>2.34</td>
-      <td>0.74</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1959.0</td>
-      <td>3.0</td>
-      <td>2775.488</td>
-      <td>1751.8</td>
-      <td>289.226</td>
-      <td>491.260</td>
-      <td>1916.4</td>
-      <td>29.350</td>
-      <td>140.5</td>
-      <td>3.82</td>
-      <td>5.3</td>
-      <td>178.657</td>
-      <td>2.74</td>
-      <td>1.09</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1959.0</td>
-      <td>4.0</td>
-      <td>2785.204</td>
-      <td>1753.7</td>
-      <td>299.356</td>
-      <td>484.052</td>
-      <td>1931.3</td>
-      <td>29.370</td>
-      <td>140.0</td>
-      <td>4.33</td>
-      <td>5.6</td>
-      <td>179.386</td>
-      <td>0.27</td>
-      <td>4.06</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1960.0</td>
-      <td>1.0</td>
-      <td>2847.699</td>
-      <td>1770.5</td>
-      <td>331.722</td>
-      <td>462.199</td>
-      <td>1955.5</td>
-      <td>29.540</td>
-      <td>139.6</td>
-      <td>3.50</td>
-      <td>5.2</td>
-      <td>180.007</td>
-      <td>2.31</td>
-      <td>1.19</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>198</th>
-      <td>2008.0</td>
-      <td>3.0</td>
-      <td>13324.600</td>
-      <td>9267.7</td>
-      <td>1990.693</td>
-      <td>991.551</td>
-      <td>9838.3</td>
-      <td>216.889</td>
-      <td>1474.7</td>
-      <td>1.17</td>
-      <td>6.0</td>
-      <td>305.270</td>
-      <td>-3.16</td>
-      <td>4.33</td>
-    </tr>
-    <tr>
-      <th>199</th>
-      <td>2008.0</td>
-      <td>4.0</td>
-      <td>13141.920</td>
-      <td>9195.3</td>
-      <td>1857.661</td>
-      <td>1007.273</td>
-      <td>9920.4</td>
-      <td>212.174</td>
-      <td>1576.5</td>
-      <td>0.12</td>
-      <td>6.9</td>
-      <td>305.952</td>
-      <td>-8.79</td>
-      <td>8.91</td>
-    </tr>
-    <tr>
-      <th>200</th>
-      <td>2009.0</td>
-      <td>1.0</td>
-      <td>12925.410</td>
-      <td>9209.2</td>
-      <td>1558.494</td>
-      <td>996.287</td>
-      <td>9926.4</td>
-      <td>212.671</td>
-      <td>1592.8</td>
-      <td>0.22</td>
-      <td>8.1</td>
-      <td>306.547</td>
-      <td>0.94</td>
-      <td>-0.71</td>
-    </tr>
-    <tr>
-      <th>201</th>
-      <td>2009.0</td>
-      <td>2.0</td>
-      <td>12901.504</td>
-      <td>9189.0</td>
-      <td>1456.678</td>
-      <td>1023.528</td>
-      <td>10077.5</td>
-      <td>214.469</td>
-      <td>1653.6</td>
-      <td>0.18</td>
-      <td>9.2</td>
-      <td>307.226</td>
-      <td>3.37</td>
-      <td>-3.19</td>
-    </tr>
-    <tr>
-      <th>202</th>
-      <td>2009.0</td>
-      <td>3.0</td>
-      <td>12990.341</td>
-      <td>9256.0</td>
-      <td>1486.398</td>
-      <td>1044.088</td>
-      <td>10040.6</td>
-      <td>216.385</td>
-      <td>1673.9</td>
-      <td>0.12</td>
-      <td>9.6</td>
-      <td>308.013</td>
-      <td>3.56</td>
-      <td>-3.44</td>
-    </tr>
-  </tbody>
-</table>
-<p>203 rows × 14 columns</p>
-</div>
-</div>
-</div>
-<div class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="34">
-
-<div>
-
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>year</th>
-      <th>quarter</th>
-      <th>realgdp</th>
-      <th>realcons</th>
-      <th>realinv</th>
-      <th>realgovt</th>
-      <th>realdpi</th>
-      <th>cpi</th>
-      <th>m1</th>
-      <th>tbilrate</th>
-      <th>unemp</th>
-      <th>pop</th>
-      <th>infl</th>
-      <th>realint</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1959.0</td>
-      <td>1.0</td>
-      <td>2710.349</td>
-      <td>1707.4</td>
-      <td>286.898</td>
-      <td>470.045</td>
-      <td>1886.9</td>
-      <td>28.98</td>
-      <td>139.7</td>
-      <td>2.82</td>
-      <td>5.8</td>
-      <td>177.146</td>
-      <td>0.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1959.0</td>
-      <td>2.0</td>
-      <td>2778.801</td>
-      <td>1733.7</td>
-      <td>310.859</td>
-      <td>481.301</td>
-      <td>1919.7</td>
-      <td>29.15</td>
-      <td>141.7</td>
-      <td>3.08</td>
-      <td>5.1</td>
-      <td>177.830</td>
-      <td>2.34</td>
-      <td>0.74</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1959.0</td>
-      <td>3.0</td>
-      <td>2775.488</td>
-      <td>1751.8</td>
-      <td>289.226</td>
-      <td>491.260</td>
-      <td>1916.4</td>
-      <td>29.35</td>
-      <td>140.5</td>
-      <td>3.82</td>
-      <td>5.3</td>
-      <td>178.657</td>
-      <td>2.74</td>
-      <td>1.09</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1959.0</td>
-      <td>4.0</td>
-      <td>2785.204</td>
-      <td>1753.7</td>
-      <td>299.356</td>
-      <td>484.052</td>
-      <td>1931.3</td>
-      <td>29.37</td>
-      <td>140.0</td>
-      <td>4.33</td>
-      <td>5.6</td>
-      <td>179.386</td>
-      <td>0.27</td>
-      <td>4.06</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1960.0</td>
-      <td>1.0</td>
-      <td>2847.699</td>
-      <td>1770.5</td>
-      <td>331.722</td>
-      <td>462.199</td>
-      <td>1955.5</td>
-      <td>29.54</td>
-      <td>139.6</td>
-      <td>3.50</td>
-      <td>5.2</td>
-      <td>180.007</td>
-      <td>2.31</td>
-      <td>1.19</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="preparing-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-the-data">Preparing the Data</h3>
-<p><strong>Compute inflation as the growth and store it in the dataframe as variable <code>π</code>.</strong></p>
-<p><strong>Add nominal interest rate to the database (use the Fisher relation).</strong></p>
-<p><strong><em>Detrend</em> GDP using Hodrick-Prescott filter. If needed, Check wikipedia and the <a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.filters.hp_filter.hpfilter.html">documentation</a>. The result is a trend tau and a residual epsilon. Store <code>log(tau/residual)</code> as <code>y</code></strong></p>
-</section>
-</section>
-<section id="run-the-regression" class="level2">
-<h2 class="anchored" data-anchor-id="run-the-regression">Run the regression</h2>
-<p><strong>Run the basic regression. Interpret the results.</strong></p>
-<p><strong>Which control variables would you propose to add? Does it increase prediction power? How do you interpret that?</strong></p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
