@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Pablo Winant">
+
+<title>Data-Based Economics - Introduction to Machine Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Introduction to Machine Learning</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Data-Based Economics</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Slides</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">Dataframes</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">Linear Regression</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Handouts</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_4/transcript.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_6/transcript.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_7/transcript.html" class="sidebar-item-text sidebar-link active">Introduction to Machine Learning</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">Visualizing the Philips Curve using matplotlib and altair</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">Regressions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">Instrumental variables</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">Machine learning: regressions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">Classification and clustering</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#regressions" id="toc-regressions" class="nav-link active" data-scroll-target="#regressions">Regressions</a></li>
+  <li><a href="#what-is-machine-learning" id="toc-what-is-machine-learning" class="nav-link" data-scroll-target="#what-is-machine-learning">What is machine learning?</a>
+  <ul class="collapse">
+  <li><a href="#what-is-machine-learning-1" id="toc-what-is-machine-learning-1" class="nav-link" data-scroll-target="#what-is-machine-learning-1">What is Machine learning?</a></li>
+  <li><a href="#what-about-artificial-intelligence" id="toc-what-about-artificial-intelligence" class="nav-link" data-scroll-target="#what-about-artificial-intelligence">What about artificial intelligence ?</a></li>
+  <li><a href="#econometrics-vs-machine-learning" id="toc-econometrics-vs-machine-learning" class="nav-link" data-scroll-target="#econometrics-vs-machine-learning">Econometrics vs Machine Learning</a></li>
+  </ul></li>
+  <li><a href="#big-data" id="toc-big-data" class="nav-link" data-scroll-target="#big-data">Big Data</a>
+  <ul class="collapse">
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">Data types</a></li>
+  <li><a href="#tabular-data" id="toc-tabular-data" class="nav-link" data-scroll-target="#tabular-data">Tabular Data</a></li>
+  <li><a href="#networks" id="toc-networks" class="nav-link" data-scroll-target="#networks">Networks</a></li>
+  <li><a href="#big-data-1" id="toc-big-data-1" class="nav-link" data-scroll-target="#big-data-1">Big Data</a></li>
+  </ul></li>
+  <li><a href="#machine-learning-tasks" id="toc-machine-learning-tasks" class="nav-link" data-scroll-target="#machine-learning-tasks">Machine Learning Tasks</a>
+  <ul class="collapse">
+  <li><a href="#big-subfields-of-machine-learning" id="toc-big-subfields-of-machine-learning" class="nav-link" data-scroll-target="#big-subfields-of-machine-learning">Big Subfields of Machine Learning</a></li>
+  <li><a href="#difference-with-traditional-regression" id="toc-difference-with-traditional-regression" class="nav-link" data-scroll-target="#difference-with-traditional-regression">Difference with traditional regression</a></li>
+  <li><a href="#difference-with-traditional-regression-1" id="toc-difference-with-traditional-regression-1" class="nav-link" data-scroll-target="#difference-with-traditional-regression-1">Difference with traditional regression</a></li>
+  <li><a href="#difference-with-traditional-regression-2" id="toc-difference-with-traditional-regression-2" class="nav-link" data-scroll-target="#difference-with-traditional-regression-2">Difference with traditional regression</a></li>
+  </ul></li>
+  <li><a href="#regression-with-long-data" id="toc-regression-with-long-data" class="nav-link" data-scroll-target="#regression-with-long-data">Regression with long data</a>
+  <ul class="collapse">
+  <li><a href="#long-data" id="toc-long-data" class="nav-link" data-scroll-target="#long-data">Long data</a></li>
+  <li><a href="#long-data-2" id="toc-long-data-2" class="nav-link" data-scroll-target="#long-data-2">Long data</a></li>
+  <li><a href="#formalisation-a-typical-machine-learning-task" id="toc-formalisation-a-typical-machine-learning-task" class="nav-link" data-scroll-target="#formalisation-a-typical-machine-learning-task">Formalisation: a typical machine learning task</a></li>
+  <li><a href="#training-gradient-descent" id="toc-training-gradient-descent" class="nav-link" data-scroll-target="#training-gradient-descent">Training: Gradient Descent</a></li>
+  <li><a href="#not-everything-goes-wrong-all-the-time" id="toc-not-everything-goes-wrong-all-the-time" class="nav-link" data-scroll-target="#not-everything-goes-wrong-all-the-time">Not everything goes wrong all the time</a></li>
+  </ul></li>
+  <li><a href="#regression-with-wide-data" id="toc-regression-with-wide-data" class="nav-link" data-scroll-target="#regression-with-wide-data">Regression with wide data</a>
+  <ul class="collapse">
+  <li><a href="#wide-data" id="toc-wide-data" class="nav-link" data-scroll-target="#wide-data">Wide data</a></li>
+  <li><a href="#wide-data-regression" id="toc-wide-data-regression" class="nav-link" data-scroll-target="#wide-data-regression">Wide data regression</a></li>
+  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training">Training</a></li>
+  <li><a href="#example-imf-challenge" id="toc-example-imf-challenge" class="nav-link" data-scroll-target="#example-imf-challenge">Example: IMF challenge</a></li>
+  </ul></li>
+  <li><a href="#nonlinear-regression" id="toc-nonlinear-regression" class="nav-link" data-scroll-target="#nonlinear-regression">Nonlinear Regression</a>
+  <ul class="collapse">
+  <li><a href="#nonlinear-regression-1" id="toc-nonlinear-regression-1" class="nav-link" data-scroll-target="#nonlinear-regression-1">Nonlinear Regression</a></li>
+  </ul></li>
+  <li><a href="#model-validation" id="toc-model-validation" class="nav-link" data-scroll-target="#model-validation">Model validation</a>
+  <ul class="collapse">
+  <li><a href="#how-to-evaluate-the-machine-learning" id="toc-how-to-evaluate-the-machine-learning" class="nav-link" data-scroll-target="#how-to-evaluate-the-machine-learning">how to evaluate the machine learning</a></li>
+  <li><a href="#how-to-evaluate-the-machine-learning-1" id="toc-how-to-evaluate-the-machine-learning-1" class="nav-link" data-scroll-target="#how-to-evaluate-the-machine-learning-1">how to evaluate the machine learning</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#how-to-choose-the-validation-set" id="toc-how-to-choose-the-validation-set" class="nav-link" data-scroll-target="#how-to-choose-the-validation-set">How to choose the validation set?</a></li>
+  <li><a href="#how-to-choose-the-validation-set-1" id="toc-how-to-choose-the-validation-set-1" class="nav-link" data-scroll-target="#how-to-choose-the-validation-set-1">How to choose the validation set?</a></li>
+  </ul></li>
+  <li><a href="#how-to-use-sklearn-for-regressions" id="toc-how-to-use-sklearn-for-regressions" class="nav-link" data-scroll-target="#how-to-use-sklearn-for-regressions">How to use sklearn for regressions</a>
+  <ul class="collapse">
+  <li><a href="#wait" id="toc-wait" class="nav-link" data-scroll-target="#wait">Wait</a></li>
+  <li><a href="#in-practice" id="toc-in-practice" class="nav-link" data-scroll-target="#in-practice">In practice</a></li>
+  <li><a href="#k-fold-validation-with-sklearn" id="toc-k-fold-validation-with-sklearn" class="nav-link" data-scroll-target="#k-fold-validation-with-sklearn"><span class="math inline">\(k\)</span>-fold validation with sklearn</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Introduction to Machine Learning</h1>
+<p class="subtitle lead">Data-Based Economics (2022-2023)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Pablo Winant </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="regressions" class="level2">
+<h2 class="anchored" data-anchor-id="regressions">Regressions</h2>
+</section>
+<section id="what-is-machine-learning" class="level1">
+<h1>What is machine learning?</h1>
+<section id="what-is-machine-learning-1" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-machine-learning-1">What is Machine learning?</h2>
+<p>Definition Candidates:</p>
+<p>Arthur Samuel: <em>Field of study that gives computers the ability to learn without being explicitly programmed</em></p>
+<p>Tom Mitchell: <em>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experience E.</em></p>
+</section>
+<section id="what-about-artificial-intelligence" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-artificial-intelligence">What about artificial intelligence ?</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>AIs
+<ul>
+<li>think and learn</li>
+<li>mimmic human cognition</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<p><img src="ml_graphs/AI_ML.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="econometrics-vs-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="econometrics-vs-machine-learning">Econometrics vs Machine Learning</h2>
+<ul>
+<li>Econometrics is essentially a subfield of machine learning with a different jargon and a focus on:
+<ul>
+<li>studying properties and validity of results
+<ul>
+<li>data is scarce</li>
+<li>inference</li>
+</ul></li>
+<li>singling out effects of specific explanatory variables</li>
+<li>establishing causality</li>
+</ul></li>
+<li>Machine learning:
+<ul>
+<li>structure data</li>
+<li>make predictions (interpolate data)</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="big-data" class="level1">
+<h1>Big Data</h1>
+<section id="data-types" class="level2">
+<h2 class="anchored" data-anchor-id="data-types">Data types</h2>
+<ul>
+<li>structured:
+<ul>
+<li>tabular
+<ul>
+<li>long</li>
+<li>wide</li>
+</ul></li>
+</ul></li>
+<li>unstructured:
+<ul>
+<li>files</li>
+<li>networks</li>
+<li>text, mails</li>
+<li>images, sound</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="tabular-data" class="level2">
+<h2 class="anchored" data-anchor-id="tabular-data">Tabular Data</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ml_graphs/tabular.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">tabular data</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="networks" class="level2">
+<h2 class="anchored" data-anchor-id="networks">Networks</h2>
+<ul>
+<li>Banking networks</li>
+<li>Production network</li>
+</ul>
+<p><img src="ml_graphs/StarWarsSocialNetwork1.png" class="img-fluid"></p>
+</section>
+<section id="big-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="big-data-1">Big Data</h2>
+<ul>
+<li><strong>Big</strong> data:
+<ul>
+<li>wide data (K&gt;&gt;N)</li>
+<li>long data (N&gt;&gt;K)</li>
+<li>heterogenous, unstructured data</li>
+</ul></li>
+<li>Might not even fit in memory
+<ul>
+<li>out of core computations</li>
+<li>learn from a subset of the data</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="machine-learning-tasks" class="level1">
+<h1>Machine Learning Tasks</h1>
+<section id="big-subfields-of-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="big-subfields-of-machine-learning">Big Subfields of Machine Learning</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Traditional classification
+<ul>
+<li>supervised (labelled data)
+<ul>
+<li>regression: predict quantity</li>
+<li>classification: predict index (categorical variable)</li>
+</ul></li>
+<li>unsupervised (no labels)
+<ul>
+<li>dimension reduction</li>
+<li>clustering</li>
+</ul></li>
+<li>semi-supervised / self-supervised</li>
+<li>reinforcement learning</li>
+</ul></li>
+<li>Bazillions of different algorithms: https://scikit-learn.org/stable/user_guide.html</li>
+</ul>
+</div><div class="column">
+<div class="r-stack">
+<div class="fragment current-visible" data-fragment-index="1">
+<ul>
+<li><strong>regression</strong>:
+<ul>
+<li>Predict: <span class="math inline">\(y = f(x; \theta)\)</span></li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ml_graphs/regression.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">supervised: regression</figcaption><p></p>
+</figure>
+</div>
+
+<table>
+<tbody><tr>
+<th>
+Age
+</th>
+<th>
+Activity
+</th>
+<th>
+<mark>Salary</mark>
+</th>
+</tr>
+<tr>
+<td>
+23
+</td>
+<td>
+Explorer
+</td>
+<td>
+1200
+</td>
+</tr>
+<tr>
+<td>
+40
+</td>
+<td>
+Mortician
+</td>
+<td>
+2000
+</td>
+</tr>
+<tr>
+<td>
+45
+</td>
+<td>
+Mortician
+</td>
+<td>
+2500
+</td>
+</tr>
+<tr>
+<td>
+33
+</td>
+<td>
+Movie Star
+</td>
+<td>
+3000
+</td>
+</tr>
+<tr>
+<td>
+35
+</td>
+<td>
+Explorer
+</td>
+<td>
+???
+</td>
+</tr>
+
+</tbody></table>
+</div>
+<div class="fragment current-visible">
+<ul>
+<li><strong>supervised: classification</strong>
+<ul>
+<li>Output is discrete</li>
+<li>Regular trick: <span class="math inline">\(\sigma(f(x; \theta))\)</span> where <span class="math inline">\(\sigma(x)=\frac{1}{1-e^{-x}}\)</span></li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ml_graphs/classification.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">classification</figcaption><p></p>
+</figure>
+</div>
+
+<table>
+<tbody><tr>
+<th>
+Age
+</th>
+<th>
+Salary
+</th>
+<th>
+<mark>Activity</mark>
+</th>
+</tr>
+<tr>
+<td>
+23
+</td>
+<td>
+1200
+</td>
+<td>
+Explorer
+</td>
+</tr>
+<tr>
+<td>
+40
+</td>
+<td>
+2000
+</td>
+<td>
+Mortician
+</td>
+</tr>
+<tr>
+<td>
+45
+</td>
+<td>
+2500
+</td>
+<td>
+Mortician
+</td>
+</tr>
+<tr>
+<td>
+33
+</td>
+<td>
+3000
+</td>
+<td>
+Movie Star
+</td>
+</tr>
+<tr>
+<td>
+35
+</td>
+<td>
+3000
+</td>
+<td>
+???
+</td>
+</tr>
+
+</tbody></table>
+</div>
+<div class="fragment current-visible">
+<p><strong>unsupervised</strong></p>
+<ul>
+<li>organize data without labels
+<ul>
+<li>dimension reduction: describe data with less parameters</li>
+<li>clustering: sort data into “similar groups” (<a href="https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html">exemple</a>)</li>
+</ul></li>
+</ul>
+
+<table>
+<tbody><tr>
+<th>
+Age
+</th>
+<th>
+Salary
+</th>
+<th>
+Activity
+</th>
+</tr>
+<tr>
+<td>
+23
+</td>
+<td>
+1200
+</td>
+<td>
+Explorer
+</td>
+</tr>
+<tr>
+<td>
+40
+</td>
+<td>
+2000
+</td>
+<td>
+Mortician
+</td>
+</tr>
+<tr>
+<td>
+45
+</td>
+<td>
+2500
+</td>
+<td>
+Mortician
+</td>
+</tr>
+<tr>
+<td>
+33
+</td>
+<td>
+3000
+</td>
+<td>
+Movie Star
+</td>
+</tr>
+<tr>
+<td>
+35
+</td>
+<td>
+3000
+</td>
+<td>
+Explorer
+</td>
+</tr>
+
+</tbody></table>
+</div>
+<div class="fragment current-visible">
+<p><strong>unsupervised: clustering</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ml_graphs/kmeansclustering.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">kmeansclustering</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="fragment current-visible">
+<p><strong>unsupervised: clustering</strong></p>
+<p>Women buying dresses during the year:</p>
+<p><img src="ml_graphs/clustering_dress.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="difference-with-traditional-regression" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="difference-with-traditional-regression">Difference with traditional regression</h2>
+<p><span class="math display">\[\underbrace{y}_{\text{explained variable}} = a \underbrace{x}_{\text{explanatory variable}} + b\]</span></p>
+</section>
+<section id="difference-with-traditional-regression-1" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="difference-with-traditional-regression-1">Difference with traditional regression</h2>
+<p><span class="math display">\[\underbrace{y}_{\text{labels}} = a \underbrace{x}_{\text{features}} + b\]</span></p>
+<div class="incremental">
+<table class="table">
+<colgroup>
+<col style="width: 64%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Econometrics</th>
+<th>Machine learning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Regressand / independent variable / explanatory variable</td>
+<td>Features</td>
+</tr>
+<tr class="even">
+<td>Regressor / dependent variable / explained variable</td>
+<td>Labels</td>
+</tr>
+<tr class="odd">
+<td>Regression</td>
+<td>Model Training</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="difference-with-traditional-regression-2" class="level2">
+<h2 class="anchored" data-anchor-id="difference-with-traditional-regression-2">Difference with traditional regression</h2>
+<ul>
+<li>Big data requires other means to process the data:
+<ul>
+<li>data is long: so many observations <span class="math inline">\(x\)</span> doesn’t fit in the memory
+<ul>
+<li>need to use incremental training method to use only a subsample at a time</li>
+</ul></li>
+<li>data is wide: so many features, the model is crudely overspecified
+<ul>
+<li>need to build dimension reduction into the objective</li>
+</ul></li>
+<li>data is nonlinear:
+<ul>
+<li>use nonlinear model (and nonlinear training)</li>
+</ul></li>
+<li>data is not a simple vector…
+<ul>
+<li>same as nonlinear</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="regression-with-long-data" class="level1">
+<h1>Regression with long data</h1>
+<section id="long-data" class="level2">
+<h2 class="anchored" data-anchor-id="long-data">Long data</h2>
+<div class="callout-block callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Long data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Long data is characterized by a high number of observations.</p>
+</div>
+</div>
+<div class="r-stack">
+<p><span class="fragment current-visible" data-fragment-index="1"><img src="assets/long_data.png" class="img-fluid" alt="Big Data"></span></p>
+<p><span class="fragment current-visible" data-fragment-index="2"><img src="assets/long_data_subset.png" class="img-fluid" alt="Big Data"></span></p>
+</div>
+<ul>
+<li>Modern society is gathering <em>a lot</em> of data.
+<ul>
+<li>in doesn’t fit in the computer memory so we can’t run a basic regression</li>
+</ul></li>
+<li>In some cases we would also like to update our model continuously:
+<ul>
+<li>incremental regression</li>
+</ul></li>
+</ul>
+<div class="fragment current-visible" data-fragment-index="2">
+<p>We need a way to fit a model on a subset of the data at a time.</p>
+</div>
+<hr>
+</section>
+<section id="long-data-2" class="level2">
+<h2 class="anchored" data-anchor-id="long-data-2">Long data</h2>
+<div class="r-stack">
+<div class="fragment current-visible">
+<ul>
+<li>Traditional regression:
+<ul>
+<li>full sample <span class="math inline">\(X,Y=(x_i,y_i)_{i=1:N}\)</span></li>
+<li>OLS: <span class="math inline">\(\min_{a,b} \sum_{i=1}^N (a x_i + b - y_i)^2\)</span></li>
+<li>closed-form solution: <span class="math inline">\(a = X^{\prime}X Y\)</span> and <span class="math inline">\(b= ...\)</span></li>
+<li>hard to compute if <span class="math inline">\(X\)</span> is very big</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment current-visible">
+<ul>
+<li>Incremental learning:
+<ul>
+<li>given initial <span class="math inline">\(a_n\)</span>, <span class="math inline">\(b_n\)</span></li>
+<li>pick <span class="math inline">\(N\)</span> random observations (the batch)
+<ul>
+<li>regress them to get new estimate <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span></li>
+<li>this minimizes the square of errors</li>
+</ul></li>
+<li>update with learning rate <span class="math inline">\(\beta\)</span>:
+<ul>
+<li><span class="math inline">\(a_{n+1} \leftarrow a_n (1-\beta_n) + \beta_n a\)</span></li>
+<li><span class="math inline">\(b_{n+1} \leftarrow b_n (1-\beta_n) + \beta_n b\)</span></li>
+</ul></li>
+<li>process is not biased (that is <span class="math inline">\(a\)</span> converges to the true value) as long as one decreases <span class="math inline">\(\beta\)</span> sufficiently fast over time (ex: <span class="math inline">\(\beta_n=\frac{1}{n}\)</span>)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="formalisation-a-typical-machine-learning-task" class="level2">
+<h2 class="anchored" data-anchor-id="formalisation-a-typical-machine-learning-task">Formalisation: a typical machine learning task</h2>
+<ul>
+<li>vector of unknowns: <span class="math inline">\(\theta=(a,b)\)</span></li>
+<li>dataset <span class="math inline">\(X,Y=(x_i,y_i)_{i=1:N}\)</span></li>
+<li>for a random draw <span class="math inline">\(\omega = (a_{\sigma(i)}, b_{\sigma(i)})_{i=[1,N]} \subset (X,Y)\)</span>
+<ul>
+<li><span class="math inline">\(\omega\)</span> is just a random <strong>batch</strong> of size <span class="math inline">\(N\)</span></li>
+</ul></li>
+<li>define the <em>empirical</em> risk (or empirical <em>cost</em>) <span class="math display">\[\xi(\theta, \omega) = \sum_{(x,y) \in \omega} (y - (a x + b))^2\]</span></li>
+<li>we want to minimize <em>theoretical risk</em>: <span class="math display">\[\Xi(\theta) = \mathbb{E} \left[ \xi(\theta, \omega)\right]\]</span></li>
+</ul>
+</section>
+<section id="training-gradient-descent" class="level2">
+<h2 class="anchored" data-anchor-id="training-gradient-descent">Training: Gradient Descent</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li><p>How do we minimize a function <span class="math inline">\(f(a,b)\)</span>?</p></li>
+<li><p>Gradient descent:</p>
+<ul>
+<li><span class="math inline">\(a_k, b_k\)</span> given</li>
+<li>compute the gradient (slope) <span class="math inline">\(\nabla_{a,b} f = \begin{bmatrix} \frac{\partial f}{\partial a} \\\\ \frac{\partial f}{\partial b}\end{bmatrix}\)</span></li>
+<li>follow the steepest slope: (Newton Algorithm)
+<ul>
+<li><span class="math display">\[ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} - \nabla_{a,b} f\]</span></li>
+</ul></li>
+<li>but not too fast: use learning rate <span class="math inline">\(\lambda\)</span>: <span class="math display">\[ \begin{bmatrix} a_{k+1} \\\\ b_{k+1} \end{bmatrix} \leftarrow  (1-\lambda) \begin{bmatrix} a_k \\\\ b_k \end{bmatrix} + \lambda (- \nabla_{a,b} f )\]</span></li>
+</ul></li>
+</ul>
+</div><div class="column">
+<p><img src="ml_graphs/training.gif" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="not-everything-goes-wrong-all-the-time" class="level2">
+<h2 class="anchored" data-anchor-id="not-everything-goes-wrong-all-the-time">Not everything goes wrong all the time</h2>
+<p><img src="ml_graphs/contours_evaluation_optimizers.gif" class="img-fluid"> <img src="ml_graphs/saddle_point_evaluation_optimizers.gif" class="img-fluid"></p>
+<ul>
+<li>In practice, choosing the right learning rate <span class="math inline">\(\lambda\)</span> is crucial</li>
+<li><span class="math inline">\(\lambda\)</span> is a <strong>metaparameter</strong> of the model training.</li>
+</ul>
+<!-- ## Stochastic Gradient Descent
+
+- Stochastic gradient descent
+  - As long as the batch is taken randomly
+  - As long as the learning rate is small enough
+  - Or the batch size big enough
+  - The gradient is *unbiased* (i.e. $\mathbb{E}\left[ \nabla \xi(\omega, \theta) \right] = \nabla \Xi(\theta)$)
+- We don't need the whole dataset.
+ -->
+</section>
+</section>
+<section id="regression-with-wide-data" class="level1">
+<h1>Regression with wide data</h1>
+<section id="wide-data" class="level2">
+<h2 class="anchored" data-anchor-id="wide-data">Wide data</h2>
+<div class="callout-block callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Block
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wide Data is characterized by a high number of features compared to the number of observations.</p>
+</div>
+</div>
+<div class="incremental">
+<p>Problem: - with many independent variables <span class="math inline">\(x_1, ... x_K\)</span>, <span class="math inline">\(K&gt;&gt;N\)</span> and one dependent variable <span class="math inline">\(y\)</span> the regression <span class="math display">\[y = a_1 x_1 + a_2 x_2 + \cdots + a_N x_N + b\]</span> is grossly <strong>overidentified</strong>.</p>
+</div>
+</section>
+<section id="wide-data-regression" class="level2">
+<h2 class="anchored" data-anchor-id="wide-data-regression">Wide data regression</h2>
+<ul>
+<li>Main Idea: penalize non-zero coefficients to encourage scarcity
+<ul>
+<li>Ridge: <span class="math display">\[\Xi(a,b) = \min_{a,b} \sum_{i=1}^N ( \sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|^2\]</span>
+<ul>
+<li>shrinks parameters towards zero</li>
+<li>closed form</li>
+</ul></li>
+<li>Lasso: <span class="math display">\[\Xi(a,b) = \min_{a,b} \sum_{i=1}^N (\sum_j a_j x_j + b - y_i)^2 + \mu \sum_i |a_i|\]</span>
+<ul>
+<li>eliminates zero coefficients</li>
+</ul></li>
+<li>Elastic: Ridge + Lasso</li>
+</ul></li>
+<li>Remarks:
+<ul>
+<li><span class="math inline">\(\mu\)</span> is called a regularization term.</li>
+<li>it is a hyperparameter</li>
+<li><span class="math inline">\(\mu \uparrow\)</span>, bias increases, variance decreases</li>
+</ul></li>
+</ul>
+</section>
+<section id="training" class="level2">
+<h2 class="anchored" data-anchor-id="training">Training</h2>
+<p>To perform Lasso and ridge regression:</p>
+<ul>
+<li>AI approach:
+<ul>
+<li>minimize objective <span class="math inline">\(\Xi(a,b)\)</span> directly.</li>
+<li>approach is known as (stochastic) Gradient Descent</li>
+</ul></li>
+<li>Use special algorithms</li>
+</ul>
+</section>
+<section id="example-imf-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="example-imf-challenge">Example: IMF challenge</h2>
+<ul>
+<li>An internal IMF challenge to predict crises in countries</li>
+<li>Lots of different approaches</li>
+<li>Lots of data:
+<ul>
+<li>which one is relevant</li>
+<li>machine must select relevant informations</li>
+</ul></li>
+<li>Example: <a href="https://www.imf.org/en/Publications/WP/Issues/2017/05/05/Lasso-Regressions-and-Forecasting-Models-in-Applied-Stress-Testing-44887"><em>Lasso Regressions and Forecasting Models in Applied Stress Testing</em></a> by Jorge A. Chan-Lau
+<ul>
+<li>in a given developing country</li>
+<li>tries to predict probability of default in various sectors</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="nonlinear-regression" class="level1">
+<h1>Nonlinear Regression</h1>
+<section id="nonlinear-regression-1" class="level2">
+<h2 class="anchored" data-anchor-id="nonlinear-regression-1">Nonlinear Regression</h2>
+<ul>
+<li>So far, we have assumed,
+<ul>
+<li><span class="math inline">\(y_i = a + b x_i\)</span></li>
+<li><span class="math inline">\(y_i = a + b x_i + μ_1 (a^2 + b^2) + μ_2 (|a| + |b|)\)</span></li>
+<li>defined <span class="math inline">\(\Xi(a,b)\)</span> and tried to minimize it</li>
+</ul></li>
+<li>Same approach works for fully nonlinear models
+<ul>
+<li><span class="math inline">\(y_i = a x_i + a^2 x_i^2 + c\)</span></li>
+<li><span class="math inline">\(y_i = \varphi(x; \theta)\)</span> ()</li>
+</ul></li>
+<li>Special case: neural network:
+<ul>
+<li>primer <a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.85189&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">tensor playground</a></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="model-validation" class="level1">
+<h1>Model validation</h1>
+<section id="how-to-evaluate-the-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-evaluate-the-machine-learning">how to evaluate the machine learning</h2>
+<p>In machine learning we can’t perform statistical inference easily. How do we assess the validity of a model?</p>
+<ul>
+<li>Basic idea (independent of how complex the algorithm is)
+<ul>
+<li>separate data in
+<ul>
+<li>training set (in-sample)</li>
+<li>test set (out of sample)</li>
+</ul></li>
+<li>train using only the training set</li>
+<li>evaluate <em>performance</em> on the test set</li>
+</ul></li>
+<li>Performance can be:
+<ul>
+<li>fitness, number of classification errors (false positive, false negative)</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-to-evaluate-the-machine-learning-1" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-evaluate-the-machine-learning-1">how to evaluate the machine learning</h2>
+<p>In case the training method depends itself on many parameters (the hyperparameters) we make three samples instead:</p>
+<ul>
+<li>training set (in-sample)</li>
+<li>validation set (to update hyperparameters)</li>
+<li>test set (out of sample)</li>
+</ul>
+<p><strong>Golden Rule</strong>: the test set should not be used to estimate the model, and should not affect the choice <em>any</em> training parameter (hyperparameter).</p>
+<!-- 
+## How to judge a model validity?
+
+- not easy
+- modeling *asumptions* (specification):
+    - functional space -> fit, variance (econ: $R^2$)
+    - statistical modeling: data generating process -> bias (econ: stdev)
+- There is a very general _tradeoff bias/variance_
+- Many ML methods allow to estimate bias (possibly via bootstrapping) -->
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ml_graphs/2000px-Traintest.svg.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Traintest</figcaption><p></p>
+</figure>
+</div>
+<div class="incremental">
+<p>The test set reveals that orange model is overfitting.</p>
+</div>
+</section>
+<section id="how-to-choose-the-validation-set" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-choose-the-validation-set">How to choose the validation set?</h2>
+<ul>
+<li>Holdout validation approach:
+<ul>
+<li>keeps x% of the data for the training, (100-x)% for the test</li>
+</ul></li>
+<li>How to choose the sizes of the subsets?
+<ul>
+<li>small dataset: 90-10</li>
+<li>big data set: 70-30 (we can afford to waste more training data for the test)</li>
+</ul></li>
+</ul>
+<div class="incremental">
+<ul>
+<li>Problem:
+<ul>
+<li>are we sure the validation size is correct? Are the results determined by an (un-) lucky draw?</li>
+<li>a problem for smaller datasets</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="how-to-choose-the-validation-set-1" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-choose-the-validation-set-1">How to choose the validation set?</h2>
+<p>A more robust solution: <span class="math inline">\(k\)</span>-fold validation</p>
+<div class="columns">
+<div class="column">
+<ul>
+<li>split dataset randomly in <span class="math inline">\(K\)</span> subsets of equal size <span class="math inline">\(S_1, ... S_K\)</span></li>
+<li>use subset <span class="math inline">\(S_i\)</span> as test set, the rest as training set, compute the score</li>
+<li>compare the scores obtained for all <span class="math inline">\(i\in[1,K]\)</span>
+<ul>
+<li>they should be similar (compute standard deviation)</li>
+</ul></li>
+<li>average them</li>
+</ul>
+</div><div class="column">
+<p><img src="graphs/k-fold.gif" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="how-to-use-sklearn-for-regressions" class="level1">
+<h1>How to use sklearn for regressions</h1>
+<section id="wait" class="level2">
+<h2 class="anchored" data-anchor-id="wait">Wait</h2>
+<ul>
+<li><p><em>Another</em> library to do regression ?</p></li>
+<li><p><code>statsmodels</code>:</p>
+<ul>
+<li>explanatory analysis</li>
+<li>statistical tests</li>
+<li>formula interface for many estimation algorithms
+<ul>
+<li>stateless approach (<code>model.fit()</code> returns another object)</li>
+</ul></li>
+</ul></li>
+<li><p><code>linearmodels</code></p>
+<ul>
+<li><em>extends</em> <code>statsmodels</code> (very similar interface)
+<ul>
+<li>(panel models, IV, systems…)</li>
+</ul></li>
+</ul></li>
+<li><p><code>sklearn</code>:</p>
+<ul>
+<li>prediction</li>
+<li>faster for big datasets</li>
+<li>common interface for several machine learning tasks
+<ul>
+<li>stateful approach (model is modified by <code>.fit</code> operation)</li>
+</ul></li>
+<li>defacto standard for machine learning</li>
+</ul></li>
+</ul>
+</section>
+<section id="in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="in-practice">In practice</h2>
+<div class="columns">
+<div class="column">
+<p>Basic sklearn workflow:</p>
+<div class="incremental">
+<ul class="incremental">
+<li>import data
+<ul class="incremental">
+<li>features: a matrix X (2d numpy array)</li>
+<li>labels: a vector y (1d numpy array)</li>
+</ul></li>
+<li>split the data, between training and test datasets
+<ul class="incremental">
+<li>split needs to be random to avoid any bias</li>
+</ul></li>
+<li>normalize the data
+<ul class="incremental">
+<li>most ML algorithm are sensitive to scale</li>
+</ul></li>
+<li>create a model (independent from data)</li>
+<li>train the model on training dataset</li>
+<li>evaluate accuracy on test dataset (here <span class="math inline">\(R^2\)</span>)</li>
+<li>use the model to make predictions</li>
+</ul>
+</div>
+<p>The workflow is always the same, no matter what the model is</p>
+<ul>
+<li>try <code>sklearn.linear_model.Lasso</code> instead of <code>LinearRegression</code></li>
+</ul>
+</div><div class="column">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> load_diabetes()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset[<span class="st">'data'</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset[<span class="st">'target'</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X,y, test_size<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Feature Scaling</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> sc.fit_transform(X_train)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> sc.transform(X_test)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>model.score(X_test, y_test)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>model.predict(X_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="k-fold-validation-with-sklearn" class="level2">
+<h2 class="anchored" data-anchor-id="k-fold-validation-with-sklearn"><span class="math inline">\(k\)</span>-fold validation with sklearn</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> train_index, test_index <span class="kw">in</span> kf.split(X):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>   X_train, X_test <span class="op">=</span> X[train_index], X[test_index]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   y_train, y_test <span class="op">=</span> y[train_index], y[test_index]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>   <span class="co">## train a model in X_train, y_train</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>   <span class="co">## test it on X_test, y_test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
