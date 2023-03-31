@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.299">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data-Based Economics – panel_data</title>
+<title>Data-Based Economics - Exercise on panel data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -125,6 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
@@ -134,11 +106,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Data-Based Economics</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data-Based Economics</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -146,120 +123,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Data-Based Economics</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Slides</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Handouts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">Dataframes</a>
+  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dataframes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">Linear Regression</a>
+  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple Regressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
+  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Instrumental Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning</a>
+  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Machine Learning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning (2)</a>
+  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Machine Learning (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_9/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Text Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ai/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Short Intro to Language Models</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Handouts</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/transcript.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visualizing the Philips Curve using matplotlib and altair</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/transcript.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
+  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/transcript.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning</a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Tutorials</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">Visualizing the Philips Curve using matplotlib and altair</a>
+  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrumental variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">Regressions</a>
+  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine learning: regressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">Instrumental variables</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">Machine learning: regressions</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">Classification and clustering</a>
+  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification and clustering</span></a>
   </div>
 </li>
       </ul>
@@ -267,26 +245,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#exercise-on-panel-data" id="toc-exercise-on-panel-data" class="nav-link active" data-scroll-target="#exercise-on-panel-data">Exercise on panel data</a>
-  <ul class="collapse">
-  <li><a href="#whose-wages-do-union-raise" id="toc-whose-wages-do-union-raise" class="nav-link" data-scroll-target="#whose-wages-do-union-raise">Whose Wages do Union Raise?</a></li>
-  </ul></li>
+  <li><a href="#whose-wages-do-union-raise" id="toc-whose-wages-do-union-raise" class="nav-link active" data-scroll-target="#whose-wages-do-union-raise">Whose Wages do Union Raise?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exercise on panel data</h1>
+</div>
 
 
-<section id="exercise-on-panel-data" class="level1">
-<h1>Exercise on panel data</h1>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <section id="whose-wages-do-union-raise" class="level2">
 <h2 class="anchored" data-anchor-id="whose-wages-do-union-raise">Whose Wages do Union Raise?</h2>
 <p>Our goal here, is to redo some of the analysis from:</p>
@@ -301,195 +290,196 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>nr</th>
-      <th>year</th>
-      <th>black</th>
-      <th>exper</th>
-      <th>hisp</th>
-      <th>hours</th>
-      <th>married</th>
-      <th>educ</th>
-      <th>union</th>
-      <th>lwage</th>
-      <th>expersq</th>
-      <th>occupation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>13</td>
-      <td>1980</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>2672</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.197540</td>
-      <td>1</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>13</td>
-      <td>1981</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2320</td>
-      <td>0</td>
-      <td>14</td>
-      <td>1</td>
-      <td>1.853060</td>
-      <td>4</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>13</td>
-      <td>1982</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>2940</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.344462</td>
-      <td>9</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>13</td>
-      <td>1983</td>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-      <td>2960</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.433213</td>
-      <td>16</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>13</td>
-      <td>1984</td>
-      <td>0</td>
-      <td>5</td>
-      <td>0</td>
-      <td>3071</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.568125</td>
-      <td>25</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>4355</th>
-      <td>12548</td>
-      <td>1983</td>
-      <td>0</td>
-      <td>8</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>0</td>
-      <td>1.591879</td>
-      <td>64</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>4356</th>
-      <td>12548</td>
-      <td>1984</td>
-      <td>0</td>
-      <td>9</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>1</td>
-      <td>1.212543</td>
-      <td>81</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>4357</th>
-      <td>12548</td>
-      <td>1985</td>
-      <td>0</td>
-      <td>10</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>0</td>
-      <td>1.765962</td>
-      <td>100</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>4358</th>
-      <td>12548</td>
-      <td>1986</td>
-      <td>0</td>
-      <td>11</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>1</td>
-      <td>1.745894</td>
-      <td>121</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>4359</th>
-      <td>12548</td>
-      <td>1987</td>
-      <td>0</td>
-      <td>12</td>
-      <td>0</td>
-      <td>3380</td>
-      <td>1</td>
-      <td>9</td>
-      <td>1</td>
-      <td>1.466543</td>
-      <td>144</td>
-      <td>5</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">nr</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">black</th>
+<th data-quarto-table-cell-role="th">exper</th>
+<th data-quarto-table-cell-role="th">hisp</th>
+<th data-quarto-table-cell-role="th">hours</th>
+<th data-quarto-table-cell-role="th">married</th>
+<th data-quarto-table-cell-role="th">educ</th>
+<th data-quarto-table-cell-role="th">union</th>
+<th data-quarto-table-cell-role="th">lwage</th>
+<th data-quarto-table-cell-role="th">expersq</th>
+<th data-quarto-table-cell-role="th">occupation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>13</td>
+<td>1980</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>2672</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.197540</td>
+<td>1</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>13</td>
+<td>1981</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>2320</td>
+<td>0</td>
+<td>14</td>
+<td>1</td>
+<td>1.853060</td>
+<td>4</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>13</td>
+<td>1982</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>2940</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.344462</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>13</td>
+<td>1983</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>2960</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.433213</td>
+<td>16</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>13</td>
+<td>1984</td>
+<td>0</td>
+<td>5</td>
+<td>0</td>
+<td>3071</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.568125</td>
+<td>25</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4355</td>
+<td>12548</td>
+<td>1983</td>
+<td>0</td>
+<td>8</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>0</td>
+<td>1.591879</td>
+<td>64</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4356</td>
+<td>12548</td>
+<td>1984</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>1</td>
+<td>1.212543</td>
+<td>81</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4357</td>
+<td>12548</td>
+<td>1985</td>
+<td>0</td>
+<td>10</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>0</td>
+<td>1.765962</td>
+<td>100</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4358</td>
+<td>12548</td>
+<td>1986</td>
+<td>0</td>
+<td>11</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>1</td>
+<td>1.745894</td>
+<td>121</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4359</td>
+<td>12548</td>
+<td>1987</td>
+<td>0</td>
+<td>12</td>
+<td>0</td>
+<td>3380</td>
+<td>1</td>
+<td>9</td>
+<td>1</td>
+<td>1.466543</td>
+<td>144</td>
+<td>5</td>
+</tr>
+</tbody>
 </table>
+
 <p>4360 rows × 12 columns</p>
 </div>
 </div>
@@ -499,189 +489,190 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.set_index([<span class="st">"nr"</span>, <span class="st">"year"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>black</th>
-      <th>exper</th>
-      <th>hisp</th>
-      <th>hours</th>
-      <th>married</th>
-      <th>educ</th>
-      <th>union</th>
-      <th>lwage</th>
-      <th>expersq</th>
-      <th>occupation</th>
-    </tr>
-    <tr>
-      <th>nr</th>
-      <th>year</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="5" valign="top">13</th>
-      <th>1980</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>2672</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.197540</td>
-      <td>1</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>1981</th>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2320</td>
-      <td>0</td>
-      <td>14</td>
-      <td>1</td>
-      <td>1.853060</td>
-      <td>4</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>1982</th>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>2940</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.344462</td>
-      <td>9</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>1983</th>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-      <td>2960</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.433213</td>
-      <td>16</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>1984</th>
-      <td>0</td>
-      <td>5</td>
-      <td>0</td>
-      <td>3071</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>1.568125</td>
-      <td>25</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th rowspan="5" valign="top">12548</th>
-      <th>1983</th>
-      <td>0</td>
-      <td>8</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>0</td>
-      <td>1.591879</td>
-      <td>64</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>1984</th>
-      <td>0</td>
-      <td>9</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>1</td>
-      <td>1.212543</td>
-      <td>81</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>1985</th>
-      <td>0</td>
-      <td>10</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>0</td>
-      <td>1.765962</td>
-      <td>100</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>1986</th>
-      <td>0</td>
-      <td>11</td>
-      <td>0</td>
-      <td>2080</td>
-      <td>1</td>
-      <td>9</td>
-      <td>1</td>
-      <td>1.745894</td>
-      <td>121</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>1987</th>
-      <td>0</td>
-      <td>12</td>
-      <td>0</td>
-      <td>3380</td>
-      <td>1</td>
-      <td>9</td>
-      <td>1</td>
-      <td>1.466543</td>
-      <td>144</td>
-      <td>5</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">black</th>
+<th data-quarto-table-cell-role="th">exper</th>
+<th data-quarto-table-cell-role="th">hisp</th>
+<th data-quarto-table-cell-role="th">hours</th>
+<th data-quarto-table-cell-role="th">married</th>
+<th data-quarto-table-cell-role="th">educ</th>
+<th data-quarto-table-cell-role="th">union</th>
+<th data-quarto-table-cell-role="th">lwage</th>
+<th data-quarto-table-cell-role="th">expersq</th>
+<th data-quarto-table-cell-role="th">occupation</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">nr</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td rowspan="5" data-quarto-table-cell-role="th" data-valign="top">13</td>
+<td data-quarto-table-cell-role="th">1980</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>2672</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.197540</td>
+<td>1</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1981</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>2320</td>
+<td>0</td>
+<td>14</td>
+<td>1</td>
+<td>1.853060</td>
+<td>4</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1982</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>2940</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.344462</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1983</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>2960</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.433213</td>
+<td>16</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1984</td>
+<td>0</td>
+<td>5</td>
+<td>0</td>
+<td>3071</td>
+<td>0</td>
+<td>14</td>
+<td>0</td>
+<td>1.568125</td>
+<td>25</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td rowspan="5" data-quarto-table-cell-role="th" data-valign="top">12548</td>
+<td data-quarto-table-cell-role="th">1983</td>
+<td>0</td>
+<td>8</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>0</td>
+<td>1.591879</td>
+<td>64</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1984</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>1</td>
+<td>1.212543</td>
+<td>81</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1985</td>
+<td>0</td>
+<td>10</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>0</td>
+<td>1.765962</td>
+<td>100</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1986</td>
+<td>0</td>
+<td>11</td>
+<td>0</td>
+<td>2080</td>
+<td>1</td>
+<td>9</td>
+<td>1</td>
+<td>1.745894</td>
+<td>121</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1987</td>
+<td>0</td>
+<td>12</td>
+<td>0</td>
+<td>3380</td>
+<td>1</td>
+<td>9</td>
+<td>1</td>
+<td>1.466543</td>
+<td>144</td>
+<td>5</td>
+</tr>
+</tbody>
 </table>
+
 <p>4360 rows × 10 columns</p>
 </div>
 </div>
@@ -689,132 +680,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>black</th>
-      <th>exper</th>
-      <th>hisp</th>
-      <th>hours</th>
-      <th>married</th>
-      <th>educ</th>
-      <th>union</th>
-      <th>lwage</th>
-      <th>expersq</th>
-      <th>occupation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-      <td>4360.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>0.115596</td>
-      <td>6.514679</td>
-      <td>0.155963</td>
-      <td>2191.257339</td>
-      <td>0.438991</td>
-      <td>11.766972</td>
-      <td>0.244037</td>
-      <td>1.649147</td>
-      <td>50.424771</td>
-      <td>4.988532</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.319777</td>
-      <td>2.825873</td>
-      <td>0.362862</td>
-      <td>566.352301</td>
-      <td>0.496321</td>
-      <td>1.746181</td>
-      <td>0.429564</td>
-      <td>0.532609</td>
-      <td>40.781991</td>
-      <td>2.319978</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>120.000000</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>0.000000</td>
-      <td>-3.579079</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>0.000000</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-      <td>2040.000000</td>
-      <td>0.000000</td>
-      <td>11.000000</td>
-      <td>0.000000</td>
-      <td>1.350717</td>
-      <td>16.000000</td>
-      <td>4.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>0.000000</td>
-      <td>6.000000</td>
-      <td>0.000000</td>
-      <td>2080.000000</td>
-      <td>0.000000</td>
-      <td>12.000000</td>
-      <td>0.000000</td>
-      <td>1.671143</td>
-      <td>36.000000</td>
-      <td>5.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>0.000000</td>
-      <td>9.000000</td>
-      <td>0.000000</td>
-      <td>2414.250000</td>
-      <td>1.000000</td>
-      <td>12.000000</td>
-      <td>0.000000</td>
-      <td>1.991086</td>
-      <td>81.000000</td>
-      <td>6.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>1.000000</td>
-      <td>18.000000</td>
-      <td>1.000000</td>
-      <td>4992.000000</td>
-      <td>1.000000</td>
-      <td>16.000000</td>
-      <td>1.000000</td>
-      <td>4.051860</td>
-      <td>324.000000</td>
-      <td>9.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">black</th>
+<th data-quarto-table-cell-role="th">exper</th>
+<th data-quarto-table-cell-role="th">hisp</th>
+<th data-quarto-table-cell-role="th">hours</th>
+<th data-quarto-table-cell-role="th">married</th>
+<th data-quarto-table-cell-role="th">educ</th>
+<th data-quarto-table-cell-role="th">union</th>
+<th data-quarto-table-cell-role="th">lwage</th>
+<th data-quarto-table-cell-role="th">expersq</th>
+<th data-quarto-table-cell-role="th">occupation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+<td>4360.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.115596</td>
+<td>6.514679</td>
+<td>0.155963</td>
+<td>2191.257339</td>
+<td>0.438991</td>
+<td>11.766972</td>
+<td>0.244037</td>
+<td>1.649147</td>
+<td>50.424771</td>
+<td>4.988532</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.319777</td>
+<td>2.825873</td>
+<td>0.362862</td>
+<td>566.352301</td>
+<td>0.496321</td>
+<td>1.746181</td>
+<td>0.429564</td>
+<td>0.532609</td>
+<td>40.781991</td>
+<td>2.319978</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>120.000000</td>
+<td>0.000000</td>
+<td>3.000000</td>
+<td>0.000000</td>
+<td>-3.579079</td>
+<td>0.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.000000</td>
+<td>4.000000</td>
+<td>0.000000</td>
+<td>2040.000000</td>
+<td>0.000000</td>
+<td>11.000000</td>
+<td>0.000000</td>
+<td>1.350717</td>
+<td>16.000000</td>
+<td>4.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.000000</td>
+<td>6.000000</td>
+<td>0.000000</td>
+<td>2080.000000</td>
+<td>0.000000</td>
+<td>12.000000</td>
+<td>0.000000</td>
+<td>1.671143</td>
+<td>36.000000</td>
+<td>5.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.000000</td>
+<td>9.000000</td>
+<td>0.000000</td>
+<td>2414.250000</td>
+<td>1.000000</td>
+<td>12.000000</td>
+<td>0.000000</td>
+<td>1.991086</td>
+<td>81.000000</td>
+<td>6.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>1.000000</td>
+<td>18.000000</td>
+<td>1.000000</td>
+<td>4992.000000</td>
+<td>1.000000</td>
+<td>16.000000</td>
+<td>1.000000</td>
+<td>4.051860</td>
+<td>324.000000</td>
+<td>9.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -876,94 +868,209 @@ Name: union, dtype: float64</code></pre>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>mod.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
-
-<table class="simpletable">
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>PanelOLS Estimation Summary</caption>
-<tbody><tr>
-  <th>Dep. Variable:</th>          <td>lwage</td>      <th>  R-squared:         </th>    <td>0.9250</td>  
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Dep. Variable:</td>
+<td>lwage</td>
+<td data-quarto-table-cell-role="th">R-squared:</td>
+<td>0.9250</td>
 </tr>
-<tr>
-  <th>Estimator:</th>            <td>PanelOLS</td>     <th>  R-squared (Between):</th>   <td>0.9592</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">Estimator:</td>
+<td>PanelOLS</td>
+<td data-quarto-table-cell-role="th">R-squared (Between):</td>
+<td>0.9592</td>
 </tr>
-<tr>
-  <th>No. Observations:</th>       <td>4360</td>       <th>  R-squared (Within):</th>    <td>0.1763</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th">No. Observations:</td>
+<td>4360</td>
+<td data-quarto-table-cell-role="th">R-squared (Within):</td>
+<td>0.1763</td>
 </tr>
-<tr>
-  <th>Date:</th>             <td>Tue, Mar 15 2022</td> <th>  R-squared (Overall):</th>   <td>0.9250</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">Date:</td>
+<td>Tue, Mar 15 2022</td>
+<td data-quarto-table-cell-role="th">R-squared (Overall):</td>
+<td>0.9250</td>
 </tr>
-<tr>
-  <th>Time:</th>                 <td>11:45:22</td>     <th>  Log-likelihood     </th>    <td>-2938.0</td> 
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time:</td>
+<td>11:45:22</td>
+<td data-quarto-table-cell-role="th">Log-likelihood</td>
+<td>-2938.0</td>
 </tr>
-<tr>
-  <th>Cov. Estimator:</th>      <td>Unadjusted</td>    <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Cov. Estimator:</td>
+<td>Unadjusted</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>  F-statistic:       </th>    <td>5960.1</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">F-statistic:</td>
+<td>5960.1</td>
 </tr>
-<tr>
-  <th>Entities:</th>                <td>545</td>       <th>  P-value            </th>    <td>0.0000</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">Entities:</td>
+<td>545</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
 </tr>
-<tr>
-  <th>Avg Obs:</th>               <td>8.0000</td>      <th>  Distribution:      </th>   <td>F(9,4351)</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(9,4351)</td>
 </tr>
-<tr>
-  <th>Min Obs:</th>               <td>8.0000</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Max Obs:</th>               <td>8.0000</td>      <th>  F-statistic (robust):</th>  <td>5960.1</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th">F-statistic (robust):</td>
+<td>5960.1</td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>  P-value            </th>    <td>0.0000</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
 </tr>
-<tr>
-  <th>Time periods:</th>             <td>8</td>        <th>  Distribution:      </th>   <td>F(9,4351)</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time periods:</td>
+<td>8</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(9,4351)</td>
 </tr>
-<tr>
-  <th>Avg Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Min Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Max Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>                     </th>       <td></td>     
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-</tbody></table>
-<table class="simpletable">
+</tbody>
+</table>
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Parameter Estimates</caption>
-<tbody><tr>
-       <td></td>       <th>Parameter</th> <th>Std. Err.</th> <th>T-stat</th>  <th>P-value</th>  <th>Lower CI</th>   <th>Upper CI</th> 
+<tbody>
+<tr class="odd">
+<td></td>
+<td data-quarto-table-cell-role="th">Parameter</td>
+<td data-quarto-table-cell-role="th">Std. Err.</td>
+<td data-quarto-table-cell-role="th">T-stat</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td data-quarto-table-cell-role="th">Lower CI</td>
+<td data-quarto-table-cell-role="th">Upper CI</td>
 </tr>
-<tr>
-  <th>black</th>        <td>-0.1195</td>   <td>0.0234</td>   <td>-5.1075</td> <td>0.0000</td>    <td>-0.1653</td>    <td>-0.0736</td> 
+<tr class="even">
+<td data-quarto-table-cell-role="th">black</td>
+<td>-0.1195</td>
+<td>0.0234</td>
+<td>-5.1075</td>
+<td>0.0000</td>
+<td>-0.1653</td>
+<td>-0.0736</td>
 </tr>
-<tr>
-  <th>hisp</th>         <td>0.0483</td>    <td>0.0204</td>   <td>2.3700</td>  <td>0.0178</td>    <td>0.0083</td>     <td>0.0882</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th">hisp</td>
+<td>0.0483</td>
+<td>0.0204</td>
+<td>2.3700</td>
+<td>0.0178</td>
+<td>0.0083</td>
+<td>0.0882</td>
 </tr>
-<tr>
-  <th>exper</th>        <td>0.1097</td>    <td>0.0097</td>   <td>11.305</td>  <td>0.0000</td>    <td>0.0906</td>     <td>0.1287</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">exper</td>
+<td>0.1097</td>
+<td>0.0097</td>
+<td>11.305</td>
+<td>0.0000</td>
+<td>0.0906</td>
+<td>0.1287</td>
 </tr>
-<tr>
-  <th>hours</th>      <td>-5.894e-05</td> <td>1.28e-05</td>  <td>-4.6029</td> <td>0.0000</td>  <td>-8.404e-05</td> <td>-3.384e-05</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">hours</td>
+<td>-5.894e-05</td>
+<td>1.28e-05</td>
+<td>-4.6029</td>
+<td>0.0000</td>
+<td>-8.404e-05</td>
+<td>-3.384e-05</td>
 </tr>
-<tr>
-  <th>married</th>      <td>0.1066</td>    <td>0.0156</td>   <td>6.8501</td>  <td>0.0000</td>    <td>0.0761</td>     <td>0.1371</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">married</td>
+<td>0.1066</td>
+<td>0.0156</td>
+<td>6.8501</td>
+<td>0.0000</td>
+<td>0.0761</td>
+<td>0.1371</td>
 </tr>
-<tr>
-  <th>educ</th>         <td>0.1093</td>    <td>0.0028</td>   <td>38.939</td>  <td>0.0000</td>    <td>0.1038</td>     <td>0.1149</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th">educ</td>
+<td>0.1093</td>
+<td>0.0028</td>
+<td>38.939</td>
+<td>0.0000</td>
+<td>0.1038</td>
+<td>0.1149</td>
 </tr>
-<tr>
-  <th>union</th>        <td>0.2017</td>    <td>0.0172</td>   <td>11.714</td>  <td>0.0000</td>    <td>0.1680</td>     <td>0.2355</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">union</td>
+<td>0.2017</td>
+<td>0.0172</td>
+<td>11.714</td>
+<td>0.0000</td>
+<td>0.1680</td>
+<td>0.2355</td>
 </tr>
-<tr>
-  <th>expersq</th>      <td>-0.0038</td>   <td>0.0007</td>   <td>-5.4359</td> <td>0.0000</td>    <td>-0.0051</td>    <td>-0.0024</td> 
+<tr class="odd">
+<td data-quarto-table-cell-role="th">expersq</td>
+<td>-0.0038</td>
+<td>0.0007</td>
+<td>-5.4359</td>
+<td>0.0000</td>
+<td>-0.0051</td>
+<td>-0.0024</td>
 </tr>
-<tr>
-  <th>occupation</th>   <td>-0.0253</td>   <td>0.0029</td>   <td>-8.5924</td> <td>0.0000</td>    <td>-0.0311</td>    <td>-0.0196</td> 
+<tr class="even">
+<td data-quarto-table-cell-role="th">occupation</td>
+<td>-0.0253</td>
+<td>0.0029</td>
+<td>-8.5924</td>
+<td>0.0000</td>
+<td>-0.0311</td>
+<td>-0.0196</td>
 </tr>
-</tbody></table><br><br><br>id: 0x7f6b2d76f040
+</tbody>
+</table>
+<br><br><br>id: 0x7f6b2d76f040
 </div>
 </div>
 <p>The regression is significant: R2 is significantly different from zero (p-value&lt; 1e-5). All coefficients are significant at the 5% level, including the coefficient in front of <code>lwage</code> (log of wages).</p>
@@ -1008,85 +1115,182 @@ black, hisp, educ
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="25">
-
-<table class="simpletable">
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>PanelOLS Estimation Summary</caption>
-<tbody><tr>
-  <th>Dep. Variable:</th>          <td>lwage</td>      <th>  R-squared:         </th>    <td>0.2005</td>  
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Dep. Variable:</td>
+<td>lwage</td>
+<td data-quarto-table-cell-role="th">R-squared:</td>
+<td>0.2005</td>
 </tr>
-<tr>
-  <th>Estimator:</th>            <td>PanelOLS</td>     <th>  R-squared (Between):</th>   <td>0.3244</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">Estimator:</td>
+<td>PanelOLS</td>
+<td data-quarto-table-cell-role="th">R-squared (Between):</td>
+<td>0.3244</td>
 </tr>
-<tr>
-  <th>No. Observations:</th>       <td>4360</td>       <th>  R-squared (Within):</th>    <td>0.2005</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th">No. Observations:</td>
+<td>4360</td>
+<td data-quarto-table-cell-role="th">R-squared (Within):</td>
+<td>0.2005</td>
 </tr>
-<tr>
-  <th>Date:</th>             <td>Tue, Mar 15 2022</td> <th>  R-squared (Overall):</th>   <td>0.3190</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">Date:</td>
+<td>Tue, Mar 15 2022</td>
+<td data-quarto-table-cell-role="th">R-squared (Overall):</td>
+<td>0.3190</td>
 </tr>
-<tr>
-  <th>Time:</th>                 <td>11:52:33</td>     <th>  Log-likelihood     </th>    <td>-1271.2</td> 
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time:</td>
+<td>11:52:33</td>
+<td data-quarto-table-cell-role="th">Log-likelihood</td>
+<td>-1271.2</td>
 </tr>
-<tr>
-  <th>Cov. Estimator:</th>      <td>Unadjusted</td>    <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Cov. Estimator:</td>
+<td>Unadjusted</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>  F-statistic:       </th>    <td>159.19</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">F-statistic:</td>
+<td>159.19</td>
 </tr>
-<tr>
-  <th>Entities:</th>                <td>545</td>       <th>  P-value            </th>    <td>0.0000</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">Entities:</td>
+<td>545</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
 </tr>
-<tr>
-  <th>Avg Obs:</th>               <td>8.0000</td>      <th>  Distribution:      </th>   <td>F(6,3809)</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(6,3809)</td>
 </tr>
-<tr>
-  <th>Min Obs:</th>               <td>8.0000</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Max Obs:</th>               <td>8.0000</td>      <th>  F-statistic (robust):</th>  <td>159.19</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th">F-statistic (robust):</td>
+<td>159.19</td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>  P-value            </th>    <td>0.0000</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
 </tr>
-<tr>
-  <th>Time periods:</th>             <td>8</td>        <th>  Distribution:      </th>   <td>F(6,3809)</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time periods:</td>
+<td>8</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(6,3809)</td>
 </tr>
-<tr>
-  <th>Avg Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Min Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Max Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>                     </th>       <td></td>     
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-</tbody></table>
-<table class="simpletable">
+</tbody>
+</table>
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Parameter Estimates</caption>
-<tbody><tr>
-       <td></td>      <th>Parameter</th> <th>Std. Err.</th> <th>T-stat</th>  <th>P-value</th> <th>Lower CI</th> <th>Upper CI</th>
+<tbody>
+<tr class="odd">
+<td></td>
+<td data-quarto-table-cell-role="th">Parameter</td>
+<td data-quarto-table-cell-role="th">Std. Err.</td>
+<td data-quarto-table-cell-role="th">T-stat</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td data-quarto-table-cell-role="th">Lower CI</td>
+<td data-quarto-table-cell-role="th">Upper CI</td>
 </tr>
-<tr>
-  <th>exper</th>       <td>0.1349</td>    <td>0.0086</td>   <td>15.710</td>  <td>0.0000</td>   <td>0.1181</td>   <td>0.1518</td> 
+<tr class="even">
+<td data-quarto-table-cell-role="th">exper</td>
+<td>0.1349</td>
+<td>0.0086</td>
+<td>15.710</td>
+<td>0.0000</td>
+<td>0.1181</td>
+<td>0.1518</td>
 </tr>
-<tr>
-  <th>hours</th>       <td>-0.0001</td>  <td>1.342e-05</td> <td>-10.273</td> <td>0.0000</td>   <td>-0.0002</td>  <td>-0.0001</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">hours</td>
+<td>-0.0001</td>
+<td>1.342e-05</td>
+<td>-10.273</td>
+<td>0.0000</td>
+<td>-0.0002</td>
+<td>-0.0001</td>
 </tr>
-<tr>
-  <th>married</th>     <td>0.0457</td>    <td>0.0181</td>   <td>2.5276</td>  <td>0.0115</td>   <td>0.0102</td>   <td>0.0811</td> 
+<tr class="even">
+<td data-quarto-table-cell-role="th">married</td>
+<td>0.0457</td>
+<td>0.0181</td>
+<td>2.5276</td>
+<td>0.0115</td>
+<td>0.0102</td>
+<td>0.0811</td>
 </tr>
-<tr>
-  <th>union</th>       <td>0.0786</td>    <td>0.0191</td>   <td>4.1134</td>  <td>0.0000</td>   <td>0.0411</td>   <td>0.1160</td> 
+<tr class="odd">
+<td data-quarto-table-cell-role="th">union</td>
+<td>0.0786</td>
+<td>0.0191</td>
+<td>4.1134</td>
+<td>0.0000</td>
+<td>0.0411</td>
+<td>0.1160</td>
 </tr>
-<tr>
-  <th>expersq</th>     <td>-0.0052</td>   <td>0.0006</td>   <td>-8.5424</td> <td>0.0000</td>   <td>-0.0064</td>  <td>-0.0040</td>
+<tr class="even">
+<td data-quarto-table-cell-role="th">expersq</td>
+<td>-0.0052</td>
+<td>0.0006</td>
+<td>-8.5424</td>
+<td>0.0000</td>
+<td>-0.0064</td>
+<td>-0.0040</td>
 </tr>
-<tr>
-  <th>occupation</th>  <td>-0.0080</td>   <td>0.0035</td>   <td>-2.2798</td> <td>0.0227</td>   <td>-0.0149</td>  <td>-0.0011</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">occupation</td>
+<td>-0.0080</td>
+<td>0.0035</td>
+<td>-2.2798</td>
+<td>0.0227</td>
+<td>-0.0149</td>
+<td>-0.0011</td>
 </tr>
-</tbody></table><br><br>F-test for Poolability: 9.1024<br>P-value: 0.0000<br>Distribution: F(544,3809)<br><br>Included effects: Entity<br>id: 0x7f6b29688c70
+</tbody>
+</table>
+<br><br>F-test for Poolability: 9.1024<br>P-value: 0.0000<br>Distribution: F(544,3809)<br><br>Included effects: Entity<br>id: 0x7f6b29688c70
 </div>
 </div>
 <p>We observe that the variables in this regression have a worse predictive power than the former one. This is not a surprise: we have replaced many observed characteristics by fixed effect that are fitted to every single individual. For predictions there is no way to guess the fixed effect, which is why the R2 is low. Note that the effect of belonging to a union, is reduced by half (8% increase in salary explained by unionization), which points to an important effect of unobserved heterogeneity.</p>
@@ -1108,88 +1312,178 @@ black, hisp, exper, educ
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="27">
-
-<table class="simpletable">
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>PanelOLS Estimation Summary</caption>
-<tbody><tr>
-  <th>Dep. Variable:</th>          <td>lwage</td>      <th>  R-squared:         </th>    <td>0.0487</td>  
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Dep. Variable:</td>
+<td>lwage</td>
+<td data-quarto-table-cell-role="th">R-squared:</td>
+<td>0.0487</td>
 </tr>
-<tr>
-  <th>Estimator:</th>            <td>PanelOLS</td>     <th>  R-squared (Between):</th>   <td>-0.8389</td> 
+<tr class="even">
+<td data-quarto-table-cell-role="th">Estimator:</td>
+<td>PanelOLS</td>
+<td data-quarto-table-cell-role="th">R-squared (Between):</td>
+<td>-0.8389</td>
 </tr>
-<tr>
-  <th>No. Observations:</th>       <td>4360</td>       <th>  R-squared (Within):</th>    <td>-0.6698</td> 
+<tr class="odd">
+<td data-quarto-table-cell-role="th">No. Observations:</td>
+<td>4360</td>
+<td data-quarto-table-cell-role="th">R-squared (Within):</td>
+<td>-0.6698</td>
 </tr>
-<tr>
-  <th>Date:</th>             <td>Tue, Mar 15 2022</td> <th>  R-squared (Overall):</th>   <td>-0.8315</td> 
+<tr class="even">
+<td data-quarto-table-cell-role="th">Date:</td>
+<td>Tue, Mar 15 2022</td>
+<td data-quarto-table-cell-role="th">R-squared (Overall):</td>
+<td>-0.8315</td>
 </tr>
-<tr>
-  <th>Time:</th>                 <td>11:55:45</td>     <th>  Log-likelihood     </th>    <td>-1263.6</td> 
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time:</td>
+<td>11:55:45</td>
+<td data-quarto-table-cell-role="th">Log-likelihood</td>
+<td>-1263.6</td>
 </tr>
-<tr>
-  <th>Cov. Estimator:</th>      <td>Unadjusted</td>    <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Cov. Estimator:</td>
+<td>Unadjusted</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>  F-statistic:       </th>    <td>38.919</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">F-statistic:</td>
+<td>38.919</td>
 </tr>
-<tr>
-  <th>Entities:</th>                <td>545</td>       <th>  P-value            </th>    <td>0.0000</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th">Entities:</td>
+<td>545</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
 </tr>
-<tr>
-  <th>Avg Obs:</th>               <td>8.0000</td>      <th>  Distribution:      </th>   <td>F(5,3803)</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(5,3803)</td>
 </tr>
-<tr>
-  <th>Min Obs:</th>               <td>8.0000</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Max Obs:</th>               <td>8.0000</td>      <th>  F-statistic (robust):</th>  <td>38.919</td>  
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>8.0000</td>
+<td data-quarto-table-cell-role="th">F-statistic (robust):</td>
+<td>38.919</td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>  P-value            </th>    <td>0.0000</td>  
+<tr class="even">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td>0.0000</td>
 </tr>
-<tr>
-  <th>Time periods:</th>             <td>8</td>        <th>  Distribution:      </th>   <td>F(5,3803)</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time periods:</td>
+<td>8</td>
+<td data-quarto-table-cell-role="th">Distribution:</td>
+<td>F(5,3803)</td>
 </tr>
-<tr>
-  <th>Avg Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Avg Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Min Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Min Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th>Max Obs:</th>               <td>545.00</td>      <th>                     </th>       <td></td>     
+<tr class="even">
+<td data-quarto-table-cell-role="th">Max Obs:</td>
+<td>545.00</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-<tr>
-  <th></th>                          <td></td>         <th>                     </th>       <td></td>     
+<tr class="odd">
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
 </tr>
-</tbody></table>
-<table class="simpletable">
+</tbody>
+</table>
+<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Parameter Estimates</caption>
-<tbody><tr>
-       <td></td>      <th>Parameter</th> <th>Std. Err.</th> <th>T-stat</th>  <th>P-value</th> <th>Lower CI</th> <th>Upper CI</th>
+<tbody>
+<tr class="odd">
+<td></td>
+<td data-quarto-table-cell-role="th">Parameter</td>
+<td data-quarto-table-cell-role="th">Std. Err.</td>
+<td data-quarto-table-cell-role="th">T-stat</td>
+<td data-quarto-table-cell-role="th">P-value</td>
+<td data-quarto-table-cell-role="th">Lower CI</td>
+<td data-quarto-table-cell-role="th">Upper CI</td>
 </tr>
-<tr>
-  <th>hours</th>       <td>-0.0001</td>  <td>1.342e-05</td> <td>-10.351</td> <td>0.0000</td>   <td>-0.0002</td>  <td>-0.0001</td>
+<tr class="even">
+<td data-quarto-table-cell-role="th">hours</td>
+<td>-0.0001</td>
+<td>1.342e-05</td>
+<td>-10.351</td>
+<td>0.0000</td>
+<td>-0.0002</td>
+<td>-0.0001</td>
 </tr>
-<tr>
-  <th>married</th>     <td>0.0470</td>    <td>0.0181</td>   <td>2.6047</td>  <td>0.0092</td>   <td>0.0116</td>   <td>0.0825</td> 
+<tr class="odd">
+<td data-quarto-table-cell-role="th">married</td>
+<td>0.0470</td>
+<td>0.0181</td>
+<td>2.6047</td>
+<td>0.0092</td>
+<td>0.0116</td>
+<td>0.0825</td>
 </tr>
-<tr>
-  <th>union</th>       <td>0.0762</td>    <td>0.0191</td>   <td>3.9822</td>  <td>0.0001</td>   <td>0.0387</td>   <td>0.1136</td> 
+<tr class="even">
+<td data-quarto-table-cell-role="th">union</td>
+<td>0.0762</td>
+<td>0.0191</td>
+<td>3.9822</td>
+<td>0.0001</td>
+<td>0.0387</td>
+<td>0.1136</td>
 </tr>
-<tr>
-  <th>expersq</th>     <td>-0.0061</td>   <td>0.0007</td>   <td>-8.7238</td> <td>0.0000</td>   <td>-0.0075</td>  <td>-0.0048</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">expersq</td>
+<td>-0.0061</td>
+<td>0.0007</td>
+<td>-8.7238</td>
+<td>0.0000</td>
+<td>-0.0075</td>
+<td>-0.0048</td>
 </tr>
-<tr>
-  <th>occupation</th>  <td>-0.0078</td>   <td>0.0035</td>   <td>-2.2274</td> <td>0.0260</td>   <td>-0.0147</td>  <td>-0.0009</td>
+<tr class="even">
+<td data-quarto-table-cell-role="th">occupation</td>
+<td>-0.0078</td>
+<td>0.0035</td>
+<td>-2.2274</td>
+<td>0.0260</td>
+<td>-0.0147</td>
+<td>-0.0009</td>
 </tr>
-</tbody></table><br><br>F-test for Poolability: 9.4090<br>P-value: 0.0000<br>Distribution: F(551,3803)<br><br>Included effects: Entity, Time<br>id: 0x7f6b29619790
+</tbody>
+</table>
+<br><br>F-test for Poolability: 9.4090<br>P-value: 0.0000<br>Distribution: F(551,3803)<br><br>Included effects: Entity, Time<br>id: 0x7f6b29619790
 </div>
 </div>
 <p>Here the addition of time fixed effects, reduces the explanatory power a bit further, but does not change much the estimate for the effect of unionization (still around 8%).</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1220,9 +1514,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1287,6 +1595,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

@@ -3,6 +3,7 @@ title: Introduction to Machine Learning
 subtitle: Data-Based Economics
 author: Year 2022-2023
 format:
+  html: default
   revealjs:
     toc: true
     toc-depth: 1
@@ -10,6 +11,7 @@ format:
     navigation: grid
     width: 1920
     height: 1080
+    output-file: slides.html
 aspectratio: 169
 ---
 

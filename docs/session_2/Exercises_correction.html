@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.299">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data-Based Economics – exercises_correction</title>
+<title>Data-Based Economics - Exercises</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -125,6 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
@@ -134,11 +106,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Data-Based Economics</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data-Based Economics</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -146,120 +123,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Data-Based Economics</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Slides</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Handouts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">Dataframes</a>
+  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dataframes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">Linear Regression</a>
+  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple Regressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
+  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Instrumental Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning</a>
+  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Machine Learning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning (2)</a>
+  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Machine Learning (2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../session_9/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Text Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ai/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Short Intro to Language Models</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Handouts</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/transcript.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
+  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visualizing the Philips Curve using matplotlib and altair</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/transcript.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
+  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/transcript.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning</a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Tutorials</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">Visualizing the Philips Curve using matplotlib and altair</a>
+  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrumental variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">Regressions</a>
+  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine learning: regressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">Instrumental variables</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">Machine learning: regressions</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">Classification and clustering</a>
+  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification and clustering</span></a>
   </div>
 </li>
       </ul>
@@ -267,32 +245,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#numerical-python" id="toc-numerical-python" class="nav-link" data-scroll-target="#numerical-python">Numerical Python</a>
+  <li><a href="#numerical-python" id="toc-numerical-python" class="nav-link active" data-scroll-target="#numerical-python">Numerical Python</a>
   <ul class="collapse">
   <li><a href="#plotting-a-function" id="toc-plotting-a-function" class="nav-link" data-scroll-target="#plotting-a-function">Plotting a function</a></li>
   <li><a href="#autocorrelated-process" id="toc-autocorrelated-process" class="nav-link" data-scroll-target="#autocorrelated-process">Autocorrelated process</a></li>
   </ul></li>
   <li><a href="#iris-data-set" id="toc-iris-data-set" class="nav-link" data-scroll-target="#iris-data-set">Iris Data Set</a></li>
   <li><a href="#philips-curve-and-okuns-law" id="toc-philips-curve-and-okuns-law" class="nav-link" data-scroll-target="#philips-curve-and-okuns-law">Philips Curve and Okun’s Law</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exercises</h1>
+</div>
 
 
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <section id="numerical-python" class="level2">
 <h2 class="anchored" data-anchor-id="numerical-python">Numerical Python</h2>
 <section id="plotting-a-function" class="level3">
@@ -446,111 +435,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> vega_datasets.data.iris()</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>sepalLength</th>
-      <th>sepalWidth</th>
-      <th>petalLength</th>
-      <th>petalWidth</th>
-      <th>species</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>5.1</td>
-      <td>3.5</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>setosa</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4.9</td>
-      <td>3.0</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>setosa</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4.7</td>
-      <td>3.2</td>
-      <td>1.3</td>
-      <td>0.2</td>
-      <td>setosa</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4.6</td>
-      <td>3.1</td>
-      <td>1.5</td>
-      <td>0.2</td>
-      <td>setosa</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5.0</td>
-      <td>3.6</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>setosa</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>145</th>
-      <td>6.7</td>
-      <td>3.0</td>
-      <td>5.2</td>
-      <td>2.3</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>146</th>
-      <td>6.3</td>
-      <td>2.5</td>
-      <td>5.0</td>
-      <td>1.9</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>147</th>
-      <td>6.5</td>
-      <td>3.0</td>
-      <td>5.2</td>
-      <td>2.0</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>148</th>
-      <td>6.2</td>
-      <td>3.4</td>
-      <td>5.4</td>
-      <td>2.3</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>149</th>
-      <td>5.9</td>
-      <td>3.0</td>
-      <td>5.1</td>
-      <td>1.8</td>
-      <td>virginica</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepalLength</th>
+<th data-quarto-table-cell-role="th">sepalWidth</th>
+<th data-quarto-table-cell-role="th">petalLength</th>
+<th data-quarto-table-cell-role="th">petalWidth</th>
+<th data-quarto-table-cell-role="th">species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">145</td>
+<td>6.7</td>
+<td>3.0</td>
+<td>5.2</td>
+<td>2.3</td>
+<td>virginica</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">146</td>
+<td>6.3</td>
+<td>2.5</td>
+<td>5.0</td>
+<td>1.9</td>
+<td>virginica</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">147</td>
+<td>6.5</td>
+<td>3.0</td>
+<td>5.2</td>
+<td>2.0</td>
+<td>virginica</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">148</td>
+<td>6.2</td>
+<td>3.4</td>
+<td>5.4</td>
+<td>2.3</td>
+<td>virginica</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">149</td>
+<td>5.9</td>
+<td>3.0</td>
+<td>5.1</td>
+<td>1.8</td>
+<td>virginica</td>
+</tr>
+</tbody>
 </table>
+
 <p>150 rows × 5 columns</p>
 </div>
 </div>
@@ -559,78 +549,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can print a summary for the whole database</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>sepalLength</th>
-      <th>sepalWidth</th>
-      <th>petalLength</th>
-      <th>petalWidth</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>150.000000</td>
-      <td>150.000000</td>
-      <td>150.000000</td>
-      <td>150.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>5.843333</td>
-      <td>3.057333</td>
-      <td>3.758000</td>
-      <td>1.199333</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.828066</td>
-      <td>0.435866</td>
-      <td>1.765298</td>
-      <td>0.762238</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>4.300000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>0.100000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>5.100000</td>
-      <td>2.800000</td>
-      <td>1.600000</td>
-      <td>0.300000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>5.800000</td>
-      <td>3.000000</td>
-      <td>4.350000</td>
-      <td>1.300000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>6.400000</td>
-      <td>3.300000</td>
-      <td>5.100000</td>
-      <td>1.800000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>7.900000</td>
-      <td>4.400000</td>
-      <td>6.900000</td>
-      <td>2.500000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepalLength</th>
+<th data-quarto-table-cell-role="th">sepalWidth</th>
+<th data-quarto-table-cell-role="th">petalLength</th>
+<th data-quarto-table-cell-role="th">petalWidth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>150.000000</td>
+<td>150.000000</td>
+<td>150.000000</td>
+<td>150.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>5.843333</td>
+<td>3.057333</td>
+<td>3.758000</td>
+<td>1.199333</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.828066</td>
+<td>0.435866</td>
+<td>1.765298</td>
+<td>0.762238</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>4.300000</td>
+<td>2.000000</td>
+<td>1.000000</td>
+<td>0.100000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>5.100000</td>
+<td>2.800000</td>
+<td>1.600000</td>
+<td>0.300000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>5.800000</td>
+<td>3.000000</td>
+<td>4.350000</td>
+<td>1.300000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>6.400000</td>
+<td>3.300000</td>
+<td>5.100000</td>
+<td>1.800000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>7.900000</td>
+<td>4.400000</td>
+<td>6.900000</td>
+<td>2.500000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -639,78 +630,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># here is how we do it for the 'setosa' type:</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'species'</span>]<span class="op">==</span><span class="st">'setosa'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>sepalLength</th>
-      <th>sepalWidth</th>
-      <th>petalLength</th>
-      <th>petalWidth</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>50.00000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>5.00600</td>
-      <td>3.428000</td>
-      <td>1.462000</td>
-      <td>0.246000</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.35249</td>
-      <td>0.379064</td>
-      <td>0.173664</td>
-      <td>0.105386</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>4.30000</td>
-      <td>2.300000</td>
-      <td>1.000000</td>
-      <td>0.100000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>4.80000</td>
-      <td>3.200000</td>
-      <td>1.400000</td>
-      <td>0.200000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>5.00000</td>
-      <td>3.400000</td>
-      <td>1.500000</td>
-      <td>0.200000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>5.20000</td>
-      <td>3.675000</td>
-      <td>1.575000</td>
-      <td>0.300000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>5.80000</td>
-      <td>4.400000</td>
-      <td>1.900000</td>
-      <td>0.600000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepalLength</th>
+<th data-quarto-table-cell-role="th">sepalWidth</th>
+<th data-quarto-table-cell-role="th">petalLength</th>
+<th data-quarto-table-cell-role="th">petalWidth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>50.00000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>5.00600</td>
+<td>3.428000</td>
+<td>1.462000</td>
+<td>0.246000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.35249</td>
+<td>0.379064</td>
+<td>0.173664</td>
+<td>0.105386</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>4.30000</td>
+<td>2.300000</td>
+<td>1.000000</td>
+<td>0.100000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>4.80000</td>
+<td>3.200000</td>
+<td>1.400000</td>
+<td>0.200000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>5.00000</td>
+<td>3.400000</td>
+<td>1.500000</td>
+<td>0.200000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>5.20000</td>
+<td>3.675000</td>
+<td>1.575000</td>
+<td>0.300000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>5.80000</td>
+<td>4.400000</td>
+<td>1.900000</td>
+<td>0.600000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -748,50 +740,51 @@ dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the same result can be obtained using pandas' groubpy function</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'species'</span>).<span class="bu">apply</span>( <span class="kw">lambda</span> x: x.mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>sepalLength</th>
-      <th>sepalWidth</th>
-      <th>petalLength</th>
-      <th>petalWidth</th>
-    </tr>
-    <tr>
-      <th>species</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>setosa</th>
-      <td>5.006</td>
-      <td>3.428</td>
-      <td>1.462</td>
-      <td>0.246</td>
-    </tr>
-    <tr>
-      <th>versicolor</th>
-      <td>5.936</td>
-      <td>2.770</td>
-      <td>4.260</td>
-      <td>1.326</td>
-    </tr>
-    <tr>
-      <th>virginica</th>
-      <td>6.588</td>
-      <td>2.974</td>
-      <td>5.552</td>
-      <td>2.026</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepalLength</th>
+<th data-quarto-table-cell-role="th">sepalWidth</th>
+<th data-quarto-table-cell-role="th">petalLength</th>
+<th data-quarto-table-cell-role="th">petalWidth</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">setosa</td>
+<td>5.006</td>
+<td>3.428</td>
+<td>1.462</td>
+<td>0.246</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">versicolor</td>
+<td>5.936</td>
+<td>2.770</td>
+<td>4.260</td>
+<td>1.326</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">virginica</td>
+<td>6.588</td>
+<td>2.974</td>
+<td>5.552</td>
+<td>2.026</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -799,50 +792,51 @@ dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># same for the standard deviation</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'species'</span>).<span class="bu">apply</span>( <span class="kw">lambda</span> x: x.std())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>sepalLength</th>
-      <th>sepalWidth</th>
-      <th>petalLength</th>
-      <th>petalWidth</th>
-    </tr>
-    <tr>
-      <th>species</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>setosa</th>
-      <td>0.352490</td>
-      <td>0.379064</td>
-      <td>0.173664</td>
-      <td>0.105386</td>
-    </tr>
-    <tr>
-      <th>versicolor</th>
-      <td>0.516171</td>
-      <td>0.313798</td>
-      <td>0.469911</td>
-      <td>0.197753</td>
-    </tr>
-    <tr>
-      <th>virginica</th>
-      <td>0.635880</td>
-      <td>0.322497</td>
-      <td>0.551895</td>
-      <td>0.274650</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepalLength</th>
+<th data-quarto-table-cell-role="th">sepalWidth</th>
+<th data-quarto-table-cell-role="th">petalLength</th>
+<th data-quarto-table-cell-role="th">petalWidth</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">setosa</td>
+<td>0.352490</td>
+<td>0.379064</td>
+<td>0.173664</td>
+<td>0.105386</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">versicolor</td>
+<td>0.516171</td>
+<td>0.313798</td>
+<td>0.469911</td>
+<td>0.197753</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">virginica</td>
+<td>0.635880</td>
+<td>0.322497</td>
+<td>0.551895</td>
+<td>0.274650</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -850,202 +844,203 @@ dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can get all statistics at once, by group, with .describe</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">'species'</span>).<span class="bu">apply</span>( <span class="kw">lambda</span> x: x.describe())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>sepalLength</th>
-      <th>sepalWidth</th>
-      <th>petalLength</th>
-      <th>petalWidth</th>
-    </tr>
-    <tr>
-      <th>species</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="8" valign="top">setosa</th>
-      <th>count</th>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>5.006000</td>
-      <td>3.428000</td>
-      <td>1.462000</td>
-      <td>0.246000</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.352490</td>
-      <td>0.379064</td>
-      <td>0.173664</td>
-      <td>0.105386</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>4.300000</td>
-      <td>2.300000</td>
-      <td>1.000000</td>
-      <td>0.100000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>4.800000</td>
-      <td>3.200000</td>
-      <td>1.400000</td>
-      <td>0.200000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>5.000000</td>
-      <td>3.400000</td>
-      <td>1.500000</td>
-      <td>0.200000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>5.200000</td>
-      <td>3.675000</td>
-      <td>1.575000</td>
-      <td>0.300000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>5.800000</td>
-      <td>4.400000</td>
-      <td>1.900000</td>
-      <td>0.600000</td>
-    </tr>
-    <tr>
-      <th rowspan="8" valign="top">versicolor</th>
-      <th>count</th>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>5.936000</td>
-      <td>2.770000</td>
-      <td>4.260000</td>
-      <td>1.326000</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.516171</td>
-      <td>0.313798</td>
-      <td>0.469911</td>
-      <td>0.197753</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>4.900000</td>
-      <td>2.000000</td>
-      <td>3.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>5.600000</td>
-      <td>2.525000</td>
-      <td>4.000000</td>
-      <td>1.200000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>5.900000</td>
-      <td>2.800000</td>
-      <td>4.350000</td>
-      <td>1.300000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>6.300000</td>
-      <td>3.000000</td>
-      <td>4.600000</td>
-      <td>1.500000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>7.000000</td>
-      <td>3.400000</td>
-      <td>5.100000</td>
-      <td>1.800000</td>
-    </tr>
-    <tr>
-      <th rowspan="8" valign="top">virginica</th>
-      <th>count</th>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>6.588000</td>
-      <td>2.974000</td>
-      <td>5.552000</td>
-      <td>2.026000</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.635880</td>
-      <td>0.322497</td>
-      <td>0.551895</td>
-      <td>0.274650</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>4.900000</td>
-      <td>2.200000</td>
-      <td>4.500000</td>
-      <td>1.400000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>6.225000</td>
-      <td>2.800000</td>
-      <td>5.100000</td>
-      <td>1.800000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>6.500000</td>
-      <td>3.000000</td>
-      <td>5.550000</td>
-      <td>2.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>6.900000</td>
-      <td>3.175000</td>
-      <td>5.875000</td>
-      <td>2.300000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>7.900000</td>
-      <td>3.800000</td>
-      <td>6.900000</td>
-      <td>2.500000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepalLength</th>
+<th data-quarto-table-cell-role="th">sepalWidth</th>
+<th data-quarto-table-cell-role="th">petalLength</th>
+<th data-quarto-table-cell-role="th">petalWidth</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td rowspan="8" data-quarto-table-cell-role="th" data-valign="top">setosa</td>
+<td data-quarto-table-cell-role="th">count</td>
+<td>50.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>5.006000</td>
+<td>3.428000</td>
+<td>1.462000</td>
+<td>0.246000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.352490</td>
+<td>0.379064</td>
+<td>0.173664</td>
+<td>0.105386</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>4.300000</td>
+<td>2.300000</td>
+<td>1.000000</td>
+<td>0.100000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>4.800000</td>
+<td>3.200000</td>
+<td>1.400000</td>
+<td>0.200000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>5.000000</td>
+<td>3.400000</td>
+<td>1.500000</td>
+<td>0.200000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>5.200000</td>
+<td>3.675000</td>
+<td>1.575000</td>
+<td>0.300000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>5.800000</td>
+<td>4.400000</td>
+<td>1.900000</td>
+<td>0.600000</td>
+</tr>
+<tr class="odd">
+<td rowspan="8" data-quarto-table-cell-role="th" data-valign="top">versicolor</td>
+<td data-quarto-table-cell-role="th">count</td>
+<td>50.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>5.936000</td>
+<td>2.770000</td>
+<td>4.260000</td>
+<td>1.326000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.516171</td>
+<td>0.313798</td>
+<td>0.469911</td>
+<td>0.197753</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>4.900000</td>
+<td>2.000000</td>
+<td>3.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>5.600000</td>
+<td>2.525000</td>
+<td>4.000000</td>
+<td>1.200000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>5.900000</td>
+<td>2.800000</td>
+<td>4.350000</td>
+<td>1.300000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>6.300000</td>
+<td>3.000000</td>
+<td>4.600000</td>
+<td>1.500000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>7.000000</td>
+<td>3.400000</td>
+<td>5.100000</td>
+<td>1.800000</td>
+</tr>
+<tr class="odd">
+<td rowspan="8" data-quarto-table-cell-role="th" data-valign="top">virginica</td>
+<td data-quarto-table-cell-role="th">count</td>
+<td>50.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>6.588000</td>
+<td>2.974000</td>
+<td>5.552000</td>
+<td>2.026000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.635880</td>
+<td>0.322497</td>
+<td>0.551895</td>
+<td>0.274650</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>4.900000</td>
+<td>2.200000</td>
+<td>4.500000</td>
+<td>1.400000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>6.225000</td>
+<td>2.800000</td>
+<td>5.100000</td>
+<td>1.800000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>6.500000</td>
+<td>3.000000</td>
+<td>5.550000</td>
+<td>2.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>6.900000</td>
+<td>3.175000</td>
+<td>5.875000</td>
+<td>2.300000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>7.900000</td>
+<td>3.800000</td>
+<td>6.900000</td>
+<td>2.500000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1132,51 +1127,52 @@ dtype: float64</code></pre>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                  id_vars<span class="op">=</span><span class="st">"species"</span> )</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>df_long.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>species</th>
-      <th>variable</th>
-      <th>value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>setosa</td>
-      <td>sepalLength</td>
-      <td>5.1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>setosa</td>
-      <td>sepalLength</td>
-      <td>4.9</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>setosa</td>
-      <td>sepalLength</td>
-      <td>4.7</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>setosa</td>
-      <td>sepalLength</td>
-      <td>4.6</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>setosa</td>
-      <td>sepalLength</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">variable</th>
+<th data-quarto-table-cell-role="th">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>setosa</td>
+<td>sepalLength</td>
+<td>5.1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>setosa</td>
+<td>sepalLength</td>
+<td>4.9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>setosa</td>
+<td>sepalLength</td>
+<td>4.7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>setosa</td>
+<td>sepalLength</td>
+<td>4.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>setosa</td>
+<td>sepalLength</td>
+<td>5.0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1336,141 +1332,142 @@ dtype: float64</code></pre>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df_inflation <span class="op">=</span> dbnomics.fetch_series(<span class="st">'OECD'</span>, <span class="st">'KEI'</span>, <span class="st">'CPALTT01.FRA.GY.A'</span>)</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>df_inflation.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>@frequency</th>
-      <th>provider_code</th>
-      <th>dataset_code</th>
-      <th>dataset_name</th>
-      <th>series_code</th>
-      <th>series_name</th>
-      <th>original_period</th>
-      <th>period</th>
-      <th>original_value</th>
-      <th>value</th>
-      <th>SUBJECT</th>
-      <th>LOCATION</th>
-      <th>MEASURE</th>
-      <th>FREQUENCY</th>
-      <th>Subject</th>
-      <th>Country</th>
-      <th>Measure</th>
-      <th>Frequency</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1956</td>
-      <td>1956-01-01</td>
-      <td>1.897315</td>
-      <td>1.897315</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1957</td>
-      <td>1957-01-01</td>
-      <td>3.057669</td>
-      <td>3.057669</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1958</td>
-      <td>1958-01-01</td>
-      <td>15.260526</td>
-      <td>15.260526</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1959</td>
-      <td>1959-01-01</td>
-      <td>5.815255</td>
-      <td>5.815255</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1960</td>
-      <td>1960-01-01</td>
-      <td>4.139938</td>
-      <td>4.139938</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">@frequency</th>
+<th data-quarto-table-cell-role="th">provider_code</th>
+<th data-quarto-table-cell-role="th">dataset_code</th>
+<th data-quarto-table-cell-role="th">dataset_name</th>
+<th data-quarto-table-cell-role="th">series_code</th>
+<th data-quarto-table-cell-role="th">series_name</th>
+<th data-quarto-table-cell-role="th">original_period</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">original_value</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">SUBJECT</th>
+<th data-quarto-table-cell-role="th">LOCATION</th>
+<th data-quarto-table-cell-role="th">MEASURE</th>
+<th data-quarto-table-cell-role="th">FREQUENCY</th>
+<th data-quarto-table-cell-role="th">Subject</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Measure</th>
+<th data-quarto-table-cell-role="th">Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1956</td>
+<td>1956-01-01</td>
+<td>1.897315</td>
+<td>1.897315</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1957</td>
+<td>1957-01-01</td>
+<td>3.057669</td>
+<td>3.057669</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1958</td>
+<td>1958-01-01</td>
+<td>15.260526</td>
+<td>15.260526</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1959</td>
+<td>1959-01-01</td>
+<td>5.815255</td>
+<td>5.815255</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1960</td>
+<td>1960-01-01</td>
+<td>4.139938</td>
+<td>4.139938</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1483,141 +1480,142 @@ dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's check it is not empty:</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>df_inflation.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>@frequency</th>
-      <th>provider_code</th>
-      <th>dataset_code</th>
-      <th>dataset_name</th>
-      <th>series_code</th>
-      <th>series_name</th>
-      <th>original_period</th>
-      <th>period</th>
-      <th>original_value</th>
-      <th>value</th>
-      <th>SUBJECT</th>
-      <th>LOCATION</th>
-      <th>MEASURE</th>
-      <th>FREQUENCY</th>
-      <th>Subject</th>
-      <th>Country</th>
-      <th>Measure</th>
-      <th>Frequency</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1956</td>
-      <td>1956-01-01</td>
-      <td>1.897315</td>
-      <td>1.897315</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1957</td>
-      <td>1957-01-01</td>
-      <td>3.057669</td>
-      <td>3.057669</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1958</td>
-      <td>1958-01-01</td>
-      <td>15.260526</td>
-      <td>15.260526</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1959</td>
-      <td>1959-01-01</td>
-      <td>5.815255</td>
-      <td>5.815255</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1960</td>
-      <td>1960-01-01</td>
-      <td>4.139938</td>
-      <td>4.139938</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">@frequency</th>
+<th data-quarto-table-cell-role="th">provider_code</th>
+<th data-quarto-table-cell-role="th">dataset_code</th>
+<th data-quarto-table-cell-role="th">dataset_name</th>
+<th data-quarto-table-cell-role="th">series_code</th>
+<th data-quarto-table-cell-role="th">series_name</th>
+<th data-quarto-table-cell-role="th">original_period</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">original_value</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">SUBJECT</th>
+<th data-quarto-table-cell-role="th">LOCATION</th>
+<th data-quarto-table-cell-role="th">MEASURE</th>
+<th data-quarto-table-cell-role="th">FREQUENCY</th>
+<th data-quarto-table-cell-role="th">Subject</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Measure</th>
+<th data-quarto-table-cell-role="th">Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1956</td>
+<td>1956-01-01</td>
+<td>1.897315</td>
+<td>1.897315</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1957</td>
+<td>1957-01-01</td>
+<td>3.057669</td>
+<td>3.057669</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1958</td>
+<td>1958-01-01</td>
+<td>15.260526</td>
+<td>15.260526</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1959</td>
+<td>1959-01-01</td>
+<td>5.815255</td>
+<td>5.815255</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1960</td>
+<td>1960-01-01</td>
+<td>4.139938</td>
+<td>4.139938</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1677,147 +1675,148 @@ Name: period, dtype: datetime64[ns]</code></pre>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>df_inflation[<span class="st">'inflation'</span>] <span class="op">=</span> df_inflation[<span class="st">'value'</span>]</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>df_inflation.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>@frequency</th>
-      <th>provider_code</th>
-      <th>dataset_code</th>
-      <th>dataset_name</th>
-      <th>series_code</th>
-      <th>series_name</th>
-      <th>original_period</th>
-      <th>period</th>
-      <th>original_value</th>
-      <th>value</th>
-      <th>SUBJECT</th>
-      <th>LOCATION</th>
-      <th>MEASURE</th>
-      <th>FREQUENCY</th>
-      <th>Subject</th>
-      <th>Country</th>
-      <th>Measure</th>
-      <th>Frequency</th>
-      <th>inflation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1956</td>
-      <td>1956-01-01</td>
-      <td>1.897315</td>
-      <td>1.897315</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>1.897315</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1957</td>
-      <td>1957-01-01</td>
-      <td>3.057669</td>
-      <td>3.057669</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>3.057669</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1958</td>
-      <td>1958-01-01</td>
-      <td>15.260526</td>
-      <td>15.260526</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>15.260526</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1959</td>
-      <td>1959-01-01</td>
-      <td>5.815255</td>
-      <td>5.815255</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>5.815255</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.FRA.GY.A</td>
-      <td>Consumer prices: all items – France – Growth o...</td>
-      <td>1960</td>
-      <td>1960-01-01</td>
-      <td>4.139938</td>
-      <td>4.139938</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>4.139938</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">@frequency</th>
+<th data-quarto-table-cell-role="th">provider_code</th>
+<th data-quarto-table-cell-role="th">dataset_code</th>
+<th data-quarto-table-cell-role="th">dataset_name</th>
+<th data-quarto-table-cell-role="th">series_code</th>
+<th data-quarto-table-cell-role="th">series_name</th>
+<th data-quarto-table-cell-role="th">original_period</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">original_value</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">SUBJECT</th>
+<th data-quarto-table-cell-role="th">LOCATION</th>
+<th data-quarto-table-cell-role="th">MEASURE</th>
+<th data-quarto-table-cell-role="th">FREQUENCY</th>
+<th data-quarto-table-cell-role="th">Subject</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Measure</th>
+<th data-quarto-table-cell-role="th">Frequency</th>
+<th data-quarto-table-cell-role="th">inflation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1956</td>
+<td>1956-01-01</td>
+<td>1.897315</td>
+<td>1.897315</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>1.897315</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1957</td>
+<td>1957-01-01</td>
+<td>3.057669</td>
+<td>3.057669</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>3.057669</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1958</td>
+<td>1958-01-01</td>
+<td>15.260526</td>
+<td>15.260526</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>15.260526</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1959</td>
+<td>1959-01-01</td>
+<td>5.815255</td>
+<td>5.815255</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>5.815255</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.FRA.GY.A</td>
+<td>Consumer prices: all items – France – Growth o...</td>
+<td>1960</td>
+<td>1960-01-01</td>
+<td>4.139938</td>
+<td>4.139938</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>4.139938</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1833,159 +1832,160 @@ Name: period, dtype: datetime64[ns]</code></pre>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>ddf <span class="op">=</span> df_gdp.merge(df_inflation, on<span class="op">=</span><span class="st">'period'</span>)</span>
 <span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>ddf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>@frequency_x</th>
-      <th>provider_code_x</th>
-      <th>dataset_code_x</th>
-      <th>dataset_name_x</th>
-      <th>series_code_x</th>
-      <th>series_name_x</th>
-      <th>original_period_x</th>
-      <th>period</th>
-      <th>original_value_x</th>
-      <th>value_x</th>
-      <th>...</th>
-      <th>value_y</th>
-      <th>SUBJECT_y</th>
-      <th>LOCATION_y</th>
-      <th>MEASURE_y</th>
-      <th>FREQUENCY_y</th>
-      <th>Subject_y</th>
-      <th>Country_y</th>
-      <th>Measure_y</th>
-      <th>Frequency_y</th>
-      <th>inflation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>1980</td>
-      <td>1980-01-01</td>
-      <td>451.772</td>
-      <td>451.772</td>
-      <td>...</td>
-      <td>13.562578</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>13.562578</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>1981</td>
-      <td>1981-01-01</td>
-      <td>509.984</td>
-      <td>509.984</td>
-      <td>...</td>
-      <td>13.314400</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>13.314400</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>1982</td>
-      <td>1982-01-01</td>
-      <td>585.990</td>
-      <td>585.990</td>
-      <td>...</td>
-      <td>11.978476</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>11.978476</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>1983</td>
-      <td>1983-01-01</td>
-      <td>650.514</td>
-      <td>650.514</td>
-      <td>...</td>
-      <td>9.459548</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>9.459548</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>1984</td>
-      <td>1984-01-01</td>
-      <td>707.030</td>
-      <td>707.030</td>
-      <td>...</td>
-      <td>7.673803</td>
-      <td>CPALTT01</td>
-      <td>FRA</td>
-      <td>GY</td>
-      <td>A</td>
-      <td>Consumer prices: all items</td>
-      <td>France</td>
-      <td>Growth on the same period of the previous year</td>
-      <td>Annual</td>
-      <td>7.673803</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">@frequency_x</th>
+<th data-quarto-table-cell-role="th">provider_code_x</th>
+<th data-quarto-table-cell-role="th">dataset_code_x</th>
+<th data-quarto-table-cell-role="th">dataset_name_x</th>
+<th data-quarto-table-cell-role="th">series_code_x</th>
+<th data-quarto-table-cell-role="th">series_name_x</th>
+<th data-quarto-table-cell-role="th">original_period_x</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">original_value_x</th>
+<th data-quarto-table-cell-role="th">value_x</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">value_y</th>
+<th data-quarto-table-cell-role="th">SUBJECT_y</th>
+<th data-quarto-table-cell-role="th">LOCATION_y</th>
+<th data-quarto-table-cell-role="th">MEASURE_y</th>
+<th data-quarto-table-cell-role="th">FREQUENCY_y</th>
+<th data-quarto-table-cell-role="th">Subject_y</th>
+<th data-quarto-table-cell-role="th">Country_y</th>
+<th data-quarto-table-cell-role="th">Measure_y</th>
+<th data-quarto-table-cell-role="th">Frequency_y</th>
+<th data-quarto-table-cell-role="th">inflation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>1980</td>
+<td>1980-01-01</td>
+<td>451.772</td>
+<td>451.772</td>
+<td>...</td>
+<td>13.562578</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>13.562578</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>1981</td>
+<td>1981-01-01</td>
+<td>509.984</td>
+<td>509.984</td>
+<td>...</td>
+<td>13.314400</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>13.314400</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>1982</td>
+<td>1982-01-01</td>
+<td>585.990</td>
+<td>585.990</td>
+<td>...</td>
+<td>11.978476</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>11.978476</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>1983</td>
+<td>1983-01-01</td>
+<td>650.514</td>
+<td>650.514</td>
+<td>...</td>
+<td>9.459548</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>9.459548</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>1984</td>
+<td>1984-01-01</td>
+<td>707.030</td>
+<td>707.030</td>
+<td>...</td>
+<td>7.673803</td>
+<td>CPALTT01</td>
+<td>FRA</td>
+<td>GY</td>
+<td>A</td>
+<td>Consumer prices: all items</td>
+<td>France</td>
+<td>Growth on the same period of the previous year</td>
+<td>Annual</td>
+<td>7.673803</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 37 columns</p>
 </div>
 </div>
@@ -2024,159 +2024,160 @@ Name: period, dtype: datetime64[ns]</code></pre>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>ddf <span class="op">=</span> ddf.merge(df_unemployment, on<span class="op">=</span><span class="st">'period'</span>)</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>ddf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>@frequency_x</th>
-      <th>provider_code_x</th>
-      <th>dataset_code_x</th>
-      <th>dataset_name_x</th>
-      <th>series_code_x</th>
-      <th>series_name_x</th>
-      <th>original_period_x</th>
-      <th>period</th>
-      <th>original_value_x</th>
-      <th>value_x</th>
-      <th>...</th>
-      <th>series_code</th>
-      <th>series_name</th>
-      <th>original_period</th>
-      <th>original_value</th>
-      <th>value</th>
-      <th>SUB</th>
-      <th>LOCATION</th>
-      <th>Subject</th>
-      <th>Country</th>
-      <th>unemployment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>2003</td>
-      <td>2003-01-01</td>
-      <td>1630.666</td>
-      <td>1630.666</td>
-      <td>...</td>
-      <td>UNEMPLRT_T1C.FRA</td>
-      <td>Unemployment rates: total – France</td>
-      <td>2003</td>
-      <td>8.099563</td>
-      <td>8.099563</td>
-      <td>UNEMPLRT_T1C</td>
-      <td>FRA</td>
-      <td>Unemployment rates: total</td>
-      <td>France</td>
-      <td>8.099563</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>2004</td>
-      <td>2004-01-01</td>
-      <td>1704.017</td>
-      <td>1704.017</td>
-      <td>...</td>
-      <td>UNEMPLRT_T1C.FRA</td>
-      <td>Unemployment rates: total – France</td>
-      <td>2004</td>
-      <td>8.468398</td>
-      <td>8.468398</td>
-      <td>UNEMPLRT_T1C</td>
-      <td>FRA</td>
-      <td>Unemployment rates: total</td>
-      <td>France</td>
-      <td>8.468398</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>2005</td>
-      <td>2005-01-01</td>
-      <td>1765.903</td>
-      <td>1765.903</td>
-      <td>...</td>
-      <td>UNEMPLRT_T1C.FRA</td>
-      <td>Unemployment rates: total – France</td>
-      <td>2005</td>
-      <td>8.493855</td>
-      <td>8.493855</td>
-      <td>UNEMPLRT_T1C</td>
-      <td>FRA</td>
-      <td>Unemployment rates: total</td>
-      <td>France</td>
-      <td>8.493855</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>2006</td>
-      <td>2006-01-01</td>
-      <td>1848.150</td>
-      <td>1848.150</td>
-      <td>...</td>
-      <td>UNEMPLRT_T1C.FRA</td>
-      <td>Unemployment rates: total – France</td>
-      <td>2006</td>
-      <td>8.449007</td>
-      <td>8.449007</td>
-      <td>UNEMPLRT_T1C</td>
-      <td>FRA</td>
-      <td>Unemployment rates: total</td>
-      <td>France</td>
-      <td>8.449007</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>MEI</td>
-      <td>Main Economic Indicators Publication</td>
-      <td>FRA.NAEXCP01.STSA.A</td>
-      <td>France – National Accounts &gt; GDP by Expenditur...</td>
-      <td>2007</td>
-      <td>2007-01-01</td>
-      <td>1941.361</td>
-      <td>1941.361</td>
-      <td>...</td>
-      <td>UNEMPLRT_T1C.FRA</td>
-      <td>Unemployment rates: total – France</td>
-      <td>2007</td>
-      <td>7.658579</td>
-      <td>7.658579</td>
-      <td>UNEMPLRT_T1C</td>
-      <td>FRA</td>
-      <td>Unemployment rates: total</td>
-      <td>France</td>
-      <td>7.658579</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">@frequency_x</th>
+<th data-quarto-table-cell-role="th">provider_code_x</th>
+<th data-quarto-table-cell-role="th">dataset_code_x</th>
+<th data-quarto-table-cell-role="th">dataset_name_x</th>
+<th data-quarto-table-cell-role="th">series_code_x</th>
+<th data-quarto-table-cell-role="th">series_name_x</th>
+<th data-quarto-table-cell-role="th">original_period_x</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">original_value_x</th>
+<th data-quarto-table-cell-role="th">value_x</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">series_code</th>
+<th data-quarto-table-cell-role="th">series_name</th>
+<th data-quarto-table-cell-role="th">original_period</th>
+<th data-quarto-table-cell-role="th">original_value</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">SUB</th>
+<th data-quarto-table-cell-role="th">LOCATION</th>
+<th data-quarto-table-cell-role="th">Subject</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">unemployment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>2003</td>
+<td>2003-01-01</td>
+<td>1630.666</td>
+<td>1630.666</td>
+<td>...</td>
+<td>UNEMPLRT_T1C.FRA</td>
+<td>Unemployment rates: total – France</td>
+<td>2003</td>
+<td>8.099563</td>
+<td>8.099563</td>
+<td>UNEMPLRT_T1C</td>
+<td>FRA</td>
+<td>Unemployment rates: total</td>
+<td>France</td>
+<td>8.099563</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>2004</td>
+<td>2004-01-01</td>
+<td>1704.017</td>
+<td>1704.017</td>
+<td>...</td>
+<td>UNEMPLRT_T1C.FRA</td>
+<td>Unemployment rates: total – France</td>
+<td>2004</td>
+<td>8.468398</td>
+<td>8.468398</td>
+<td>UNEMPLRT_T1C</td>
+<td>FRA</td>
+<td>Unemployment rates: total</td>
+<td>France</td>
+<td>8.468398</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>2005</td>
+<td>2005-01-01</td>
+<td>1765.903</td>
+<td>1765.903</td>
+<td>...</td>
+<td>UNEMPLRT_T1C.FRA</td>
+<td>Unemployment rates: total – France</td>
+<td>2005</td>
+<td>8.493855</td>
+<td>8.493855</td>
+<td>UNEMPLRT_T1C</td>
+<td>FRA</td>
+<td>Unemployment rates: total</td>
+<td>France</td>
+<td>8.493855</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>2006</td>
+<td>2006-01-01</td>
+<td>1848.150</td>
+<td>1848.150</td>
+<td>...</td>
+<td>UNEMPLRT_T1C.FRA</td>
+<td>Unemployment rates: total – France</td>
+<td>2006</td>
+<td>8.449007</td>
+<td>8.449007</td>
+<td>UNEMPLRT_T1C</td>
+<td>FRA</td>
+<td>Unemployment rates: total</td>
+<td>France</td>
+<td>8.449007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>annual</td>
+<td>OECD</td>
+<td>MEI</td>
+<td>Main Economic Indicators Publication</td>
+<td>FRA.NAEXCP01.STSA.A</td>
+<td>France – National Accounts &gt; GDP by Expenditur...</td>
+<td>2007</td>
+<td>2007-01-01</td>
+<td>1941.361</td>
+<td>1941.361</td>
+<td>...</td>
+<td>UNEMPLRT_T1C.FRA</td>
+<td>Unemployment rates: total – France</td>
+<td>2007</td>
+<td>7.658579</td>
+<td>7.658579</td>
+<td>UNEMPLRT_T1C</td>
+<td>FRA</td>
+<td>Unemployment rates: total</td>
+<td>France</td>
+<td>7.658579</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 51 columns</p>
 </div>
 </div>
@@ -2190,64 +2191,65 @@ Name: period, dtype: datetime64[ns]</code></pre>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>ddf.index <span class="op">=</span> ddf[<span class="st">'period'</span>]</span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>ddf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>period</th>
-      <th>inflation</th>
-      <th>gdp</th>
-      <th>unemployment</th>
-    </tr>
-    <tr>
-      <th>period</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2003-01-01</th>
-      <td>2003-01-01</td>
-      <td>2.098472</td>
-      <td>1630.666</td>
-      <td>8.099563</td>
-    </tr>
-    <tr>
-      <th>2004-01-01</th>
-      <td>2004-01-01</td>
-      <td>2.142090</td>
-      <td>1704.017</td>
-      <td>8.468398</td>
-    </tr>
-    <tr>
-      <th>2005-01-01</th>
-      <td>2005-01-01</td>
-      <td>1.745869</td>
-      <td>1765.903</td>
-      <td>8.493855</td>
-    </tr>
-    <tr>
-      <th>2006-01-01</th>
-      <td>2006-01-01</td>
-      <td>1.675124</td>
-      <td>1848.150</td>
-      <td>8.449007</td>
-    </tr>
-    <tr>
-      <th>2007-01-01</th>
-      <td>2007-01-01</td>
-      <td>1.487998</td>
-      <td>1941.361</td>
-      <td>7.658579</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">inflation</th>
+<th data-quarto-table-cell-role="th">gdp</th>
+<th data-quarto-table-cell-role="th">unemployment</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2003-01-01</td>
+<td>2003-01-01</td>
+<td>2.098472</td>
+<td>1630.666</td>
+<td>8.099563</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2004-01-01</td>
+<td>2004-01-01</td>
+<td>2.142090</td>
+<td>1704.017</td>
+<td>8.468398</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2005-01-01</td>
+<td>2005-01-01</td>
+<td>1.745869</td>
+<td>1765.903</td>
+<td>8.493855</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2006-01-01</td>
+<td>2006-01-01</td>
+<td>1.675124</td>
+<td>1848.150</td>
+<td>8.449007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2007-01-01</td>
+<td>2007-01-01</td>
+<td>1.487998</td>
+<td>1941.361</td>
+<td>7.658579</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2256,57 +2258,58 @@ Name: period, dtype: datetime64[ns]</code></pre>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>ddf <span class="op">=</span> ddf.drop(columns<span class="op">=</span>[<span class="st">'period'</span>])</span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>ddf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>inflation</th>
-      <th>gdp</th>
-      <th>unemployment</th>
-    </tr>
-    <tr>
-      <th>period</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2003-01-01</th>
-      <td>2.098472</td>
-      <td>1630.666</td>
-      <td>8.099563</td>
-    </tr>
-    <tr>
-      <th>2004-01-01</th>
-      <td>2.142090</td>
-      <td>1704.017</td>
-      <td>8.468398</td>
-    </tr>
-    <tr>
-      <th>2005-01-01</th>
-      <td>1.745869</td>
-      <td>1765.903</td>
-      <td>8.493855</td>
-    </tr>
-    <tr>
-      <th>2006-01-01</th>
-      <td>1.675124</td>
-      <td>1848.150</td>
-      <td>8.449007</td>
-    </tr>
-    <tr>
-      <th>2007-01-01</th>
-      <td>1.487998</td>
-      <td>1941.361</td>
-      <td>7.658579</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">inflation</th>
+<th data-quarto-table-cell-role="th">gdp</th>
+<th data-quarto-table-cell-role="th">unemployment</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2003-01-01</td>
+<td>2.098472</td>
+<td>1630.666</td>
+<td>8.099563</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2004-01-01</td>
+<td>2.142090</td>
+<td>1704.017</td>
+<td>8.468398</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2005-01-01</td>
+<td>1.745869</td>
+<td>1765.903</td>
+<td>8.493855</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2006-01-01</td>
+<td>1.675124</td>
+<td>1848.150</td>
+<td>8.449007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2007-01-01</td>
+<td>1.487998</td>
+<td>1941.361</td>
+<td>7.658579</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2319,57 +2322,58 @@ Name: period, dtype: datetime64[ns]</code></pre>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note the missing value for the initial date</span></span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>ddf.shift(<span class="dv">1</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="94">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>inflation</th>
-      <th>gdp</th>
-      <th>unemployment</th>
-    </tr>
-    <tr>
-      <th>period</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2003-01-01</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2004-01-01</th>
-      <td>2.098472</td>
-      <td>1630.666</td>
-      <td>8.099563</td>
-    </tr>
-    <tr>
-      <th>2005-01-01</th>
-      <td>2.142090</td>
-      <td>1704.017</td>
-      <td>8.468398</td>
-    </tr>
-    <tr>
-      <th>2006-01-01</th>
-      <td>1.745869</td>
-      <td>1765.903</td>
-      <td>8.493855</td>
-    </tr>
-    <tr>
-      <th>2007-01-01</th>
-      <td>1.675124</td>
-      <td>1848.150</td>
-      <td>8.449007</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">inflation</th>
+<th data-quarto-table-cell-role="th">gdp</th>
+<th data-quarto-table-cell-role="th">unemployment</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2003-01-01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2004-01-01</td>
+<td>2.098472</td>
+<td>1630.666</td>
+<td>8.099563</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2005-01-01</td>
+<td>2.142090</td>
+<td>1704.017</td>
+<td>8.468398</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2006-01-01</td>
+<td>1.745869</td>
+<td>1765.903</td>
+<td>8.493855</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2007-01-01</td>
+<td>1.675124</td>
+<td>1848.150</td>
+<td>8.449007</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2432,159 +2436,160 @@ Name: gdp_growth, dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>full_df <span class="op">=</span> dbnomics.fetch_series([<span class="st">'OECD/KEI/CPALTT01.USA.GP.A'</span>, <span class="st">'OECD/MEI/FRA.NAEXCP01.STSA.A'</span>, <span class="st">'OECD/CSPCUBE/UNEMPLRT_T1C.FRA'</span>])</span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>full_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>@frequency</th>
-      <th>provider_code</th>
-      <th>dataset_code</th>
-      <th>dataset_name</th>
-      <th>series_code</th>
-      <th>series_name</th>
-      <th>original_period</th>
-      <th>period</th>
-      <th>original_value</th>
-      <th>value</th>
-      <th>...</th>
-      <th>Subject</th>
-      <th>Country</th>
-      <th>Subject</th>
-      <th>Country</th>
-      <th>Measure</th>
-      <th>Frequency</th>
-      <th>Country</th>
-      <th>Subject</th>
-      <th>Measure</th>
-      <th>Frequency</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.USA.GP.A</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1956</td>
-      <td>1956-01-01</td>
-      <td>1.525054</td>
-      <td>1.525054</td>
-      <td>...</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.USA.GP.A</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1957</td>
-      <td>1957-01-01</td>
-      <td>3.341508</td>
-      <td>3.341508</td>
-      <td>...</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.USA.GP.A</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1958</td>
-      <td>1958-01-01</td>
-      <td>2.729160</td>
-      <td>2.729160</td>
-      <td>...</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.USA.GP.A</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1959</td>
-      <td>1959-01-01</td>
-      <td>1.010684</td>
-      <td>1.010684</td>
-      <td>...</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>annual</td>
-      <td>OECD</td>
-      <td>KEI</td>
-      <td>Key Short-Term Economic Indicators</td>
-      <td>CPALTT01.USA.GP.A</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1960</td>
-      <td>1960-01-01</td>
-      <td>1.457976</td>
-      <td>1.457976</td>
-      <td>...</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>United States</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-      <td>United States</td>
-      <td>Consumer prices: all items</td>
-      <td>Growth previous period</td>
-      <td>Annual</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">@frequency</th>
+<th data-quarto-table-cell-role="th">provider_code</th>
+<th data-quarto-table-cell-role="th">dataset_code</th>
+<th data-quarto-table-cell-role="th">dataset_name</th>
+<th data-quarto-table-cell-role="th">series_code</th>
+<th data-quarto-table-cell-role="th">series_name</th>
+<th data-quarto-table-cell-role="th">original_period</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">original_value</th>
+<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Subject</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Subject</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Measure</th>
+<th data-quarto-table-cell-role="th">Frequency</th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Subject</th>
+<th data-quarto-table-cell-role="th">Measure</th>
+<th data-quarto-table-cell-role="th">Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.USA.GP.A</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1956</td>
+<td>1956-01-01</td>
+<td>1.525054</td>
+<td>1.525054</td>
+<td>...</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.USA.GP.A</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1957</td>
+<td>1957-01-01</td>
+<td>3.341508</td>
+<td>3.341508</td>
+<td>...</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.USA.GP.A</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1958</td>
+<td>1958-01-01</td>
+<td>2.729160</td>
+<td>2.729160</td>
+<td>...</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.USA.GP.A</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1959</td>
+<td>1959-01-01</td>
+<td>1.010684</td>
+<td>1.010684</td>
+<td>...</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>annual</td>
+<td>OECD</td>
+<td>KEI</td>
+<td>Key Short-Term Economic Indicators</td>
+<td>CPALTT01.USA.GP.A</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1960</td>
+<td>1960-01-01</td>
+<td>1.457976</td>
+<td>1.457976</td>
+<td>...</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>United States</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+<td>United States</td>
+<td>Consumer prices: all items</td>
+<td>Growth previous period</td>
+<td>Annual</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 30 columns</p>
 </div>
 </div>
@@ -2611,87 +2616,88 @@ Name: gdp_growth, dtype: float64</code></pre>
 <div class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>df_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>period</th>
-      <th>series_name</th>
-      <th>value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1956-01-01</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1.525054</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1957-01-01</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>3.341508</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1958-01-01</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>2.729160</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1959-01-01</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1.010684</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1960-01-01</td>
-      <td>Consumer prices: all items – United States – G...</td>
-      <td>1.457976</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2014-01-01</td>
-      <td>Unemployment rates: total – France</td>
-      <td>10.291710</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2015-01-01</td>
-      <td>Unemployment rates: total – France</td>
-      <td>10.359810</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2016-01-01</td>
-      <td>Unemployment rates: total – France</td>
-      <td>10.056610</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2017-01-01</td>
-      <td>Unemployment rates: total – France</td>
-      <td>9.398605</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2018-01-01</td>
-      <td>Unemployment rates: total – France</td>
-      <td>9.059228</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">series_name</th>
+<th data-quarto-table-cell-role="th">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1956-01-01</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1.525054</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1957-01-01</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>3.341508</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1958-01-01</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>2.729160</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1959-01-01</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1.010684</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1960-01-01</td>
+<td>Consumer prices: all items – United States – G...</td>
+<td>1.457976</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11</td>
+<td>2014-01-01</td>
+<td>Unemployment rates: total – France</td>
+<td>10.291710</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">12</td>
+<td>2015-01-01</td>
+<td>Unemployment rates: total – France</td>
+<td>10.359810</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">13</td>
+<td>2016-01-01</td>
+<td>Unemployment rates: total – France</td>
+<td>10.056610</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">14</td>
+<td>2017-01-01</td>
+<td>Unemployment rates: total – France</td>
+<td>9.398605</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>2018-01-01</td>
+<td>Unemployment rates: total – France</td>
+<td>9.059228</td>
+</tr>
+</tbody>
 </table>
+
 <p>120 rows × 3 columns</p>
 </div>
 </div>
@@ -2703,97 +2709,98 @@ Name: gdp_growth, dtype: float64</code></pre>
 <div class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>df_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="3" halign="left">value</th>
-    </tr>
-    <tr>
-      <th>series_name</th>
-      <th>Consumer prices: all items – United States – Growth previous period – Annual</th>
-      <th>France – National Accounts &gt; GDP by Expenditure &gt; Current Prices &gt; Gross Domestic Product - Total – Level, rate or national currency, s.a. – Annual</th>
-      <th>Unemployment rates: total – France</th>
-    </tr>
-    <tr>
-      <th>period</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1956-01-01</th>
-      <td>1.525054</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1957-01-01</th>
-      <td>3.341508</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1958-01-01</th>
-      <td>2.729160</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1959-01-01</th>
-      <td>1.010684</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1960-01-01</th>
-      <td>1.457976</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2015-01-01</th>
-      <td>0.118627</td>
-      <td>2198.432</td>
-      <td>10.359810</td>
-    </tr>
-    <tr>
-      <th>2016-01-01</th>
-      <td>1.261583</td>
-      <td>2234.129</td>
-      <td>10.056610</td>
-    </tr>
-    <tr>
-      <th>2017-01-01</th>
-      <td>2.130110</td>
-      <td>2297.244</td>
-      <td>9.398605</td>
-    </tr>
-    <tr>
-      <th>2018-01-01</th>
-      <td>2.442583</td>
-      <td>2360.686</td>
-      <td>9.059228</td>
-    </tr>
-    <tr>
-      <th>2019-01-01</th>
-      <td>1.812210</td>
-      <td>2425.710</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">value</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">series_name</th>
+<th data-quarto-table-cell-role="th">Consumer prices: all items – United States – Growth previous period – Annual</th>
+<th data-quarto-table-cell-role="th">France – National Accounts &gt; GDP by Expenditure &gt; Current Prices &gt; Gross Domestic Product - Total – Level, rate or national currency, s.a. – Annual</th>
+<th data-quarto-table-cell-role="th">Unemployment rates: total – France</th>
+</tr>
+<tr class="header">
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1956-01-01</td>
+<td>1.525054</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1957-01-01</td>
+<td>3.341508</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1958-01-01</td>
+<td>2.729160</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1959-01-01</td>
+<td>1.010684</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1960-01-01</td>
+<td>1.457976</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2015-01-01</td>
+<td>0.118627</td>
+<td>2198.432</td>
+<td>10.359810</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2016-01-01</td>
+<td>1.261583</td>
+<td>2234.129</td>
+<td>10.056610</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2017-01-01</td>
+<td>2.130110</td>
+<td>2297.244</td>
+<td>9.398605</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2018-01-01</td>
+<td>2.442583</td>
+<td>2360.686</td>
+<td>9.059228</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2019-01-01</td>
+<td>1.812210</td>
+<td>2425.710</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>64 rows × 3 columns</p>
 </div>
 </div>
@@ -2806,100 +2813,100 @@ Name: gdp_growth, dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># and here is our tidy dataframe !</span></span>
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>df_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="35">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>inflation</th>
-      <th>gdp</th>
-      <th>unemployment</th>
-    </tr>
-    <tr>
-      <th>period</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1956-01-01</th>
-      <td>1.525054</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1957-01-01</th>
-      <td>3.341508</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1958-01-01</th>
-      <td>2.729160</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1959-01-01</th>
-      <td>1.010684</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1960-01-01</th>
-      <td>1.457976</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2015-01-01</th>
-      <td>0.118627</td>
-      <td>2198.432</td>
-      <td>10.359810</td>
-    </tr>
-    <tr>
-      <th>2016-01-01</th>
-      <td>1.261583</td>
-      <td>2234.129</td>
-      <td>10.056610</td>
-    </tr>
-    <tr>
-      <th>2017-01-01</th>
-      <td>2.130110</td>
-      <td>2297.244</td>
-      <td>9.398605</td>
-    </tr>
-    <tr>
-      <th>2018-01-01</th>
-      <td>2.442583</td>
-      <td>2360.686</td>
-      <td>9.059228</td>
-    </tr>
-    <tr>
-      <th>2019-01-01</th>
-      <td>1.812210</td>
-      <td>2425.710</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">inflation</th>
+<th data-quarto-table-cell-role="th">gdp</th>
+<th data-quarto-table-cell-role="th">unemployment</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1956-01-01</td>
+<td>1.525054</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1957-01-01</td>
+<td>3.341508</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1958-01-01</td>
+<td>2.729160</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1959-01-01</td>
+<td>1.010684</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1960-01-01</td>
+<td>1.457976</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2015-01-01</td>
+<td>0.118627</td>
+<td>2198.432</td>
+<td>10.359810</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2016-01-01</td>
+<td>1.261583</td>
+<td>2234.129</td>
+<td>10.056610</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2017-01-01</td>
+<td>2.130110</td>
+<td>2297.244</td>
+<td>9.398605</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2018-01-01</td>
+<td>2.442583</td>
+<td>2360.686</td>
+<td>9.059228</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2019-01-01</td>
+<td>1.812210</td>
+<td>2425.710</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>64 rows × 3 columns</p>
 </div>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -2930,9 +2937,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2997,6 +3018,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

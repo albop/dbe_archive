@@ -10,7 +10,7 @@
 | 6 | 22/02 | [instrumental variables](session_6/index.qmd) |  | coursework (1) |
 | 7 | 01/02 | [machine learning introduction](session_7/index.qmd) (1) |  |  |
 | 8 | 21/03 | [machine learning introduction (2)](session_8/index.qmd) |  |  |
-| 9 | 28/03 | text analysis |  |  |
+| 9 | 28/03 | [text analysis](session_9/index.qmd) |  |  |
 | 10 | 04/04 | final exam |  |
 
 ## About pushups

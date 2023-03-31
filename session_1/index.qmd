@@ -3,11 +3,12 @@ title: Introduction
 subtitle: Data-Based Economics
 author: Year 2022-2023
 format:
+  html: default
   revealjs:
     navigation: grid
     width: 1920
     height: 1080
-aspectratio: 169
+    output-file: slides.html
 ---
 
 <style>

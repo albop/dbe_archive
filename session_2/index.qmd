@@ -3,10 +3,12 @@ title: Dataframes
 subtitle: Data-Based Economics
 author: Year 2022-2023
 format:
+  html: default
   revealjs:
     navigation: grid
     width: 1920
     height: 1080
+    output-file: transcript.html
 aspectratio: 169
 ---
 
@@ -646,7 +648,7 @@ df
 
 ### DBnomics example
 
-- [DBnomics](`https://db.nomics.world/`) aggregates time series from various public sources
+- [DBnomics](https://db.nomics.world/) aggregates time series from various public sources
 - data is organized as provider/database/series
 - try to find the identifer of one or several series
 ```python

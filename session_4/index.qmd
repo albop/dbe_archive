@@ -3,7 +3,9 @@ title: Multiple Regressions
 subtitle: Data-Based Economics
 author: Year 2022-2023
 format:
+  html: default
   revealjs:
+    output-file: slides.html
     navigation: grid
     width: 1920
     height: 1080

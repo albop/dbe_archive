@@ -9,7 +9,7 @@ website:
       style: "docked"
       search: true
       contents:
-        - section: "Slides"
+        - section: "Handouts"
           contents:
             - session_1/index.qmd
             - session_2/index.qmd
@@ -18,15 +18,9 @@ website:
             - session_6/index.qmd
             - session_7/index.qmd
             - session_8/index.qmd
+            - session_9/index.qmd
+            - ai/index.qmd
 
-        - section: "Handouts"
-          contents:
-            # - session_1/transcript.qmd
-            # - session_2/index.qmd
-            # - session_3/index.qmd
-            - session_4/transcript.qmd
-            - session_6/transcript.qmd
-            - session_7/transcript.qmd
         - section: "Tutorials"
           contents:
             - session_3/Philips_curve_correction.ipynb
