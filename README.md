@@ -2,15 +2,15 @@
 
 | Session | Date | Content | Tutorial | Homework |
 | ------- | ---- | ------- | -------- | -------- |
-| 1 | 18/01 | [intro](session_1/index.qmd) | python essentials | push-ups (1) |
-| 2 | 25/01 | [dataframes](session_2/index.qmd), descriptive statistics | python essentials (2) | push-ups (2) |
-| 3 | 01/02 | [linear regression](session_3/index.qmd) | data exploration, visualization | push-ups (3) |
-| 4 | 08/02 | [multiple regression](session_4/index.qmd) |  |                                           |
-| 5 | 15/02 | [multiple regression](session_4/index.qmd) |  |  |
-| 6 | 22/02 | [instrumental variables](session_6/index.qmd) |  | coursework (1) |
-| 7 | 01/02 | [machine learning introduction](session_7/index.qmd) (1) |  |  |
-| 8 | 21/03 | [machine learning introduction (2)](session_8/index.qmd) |  |  |
-| 9 | 28/03 | [text analysis](session_9/index.qmd) |  |  |
+| 1 | 18/01 | [intro](session_1/slides.html) | python essentials | push-ups (1) |
+| 2 | 25/01 | [dataframes](session_2/slides.html), descriptive statistics | python essentials (2) | push-ups (2) |
+| 3 | 01/02 | [linear regression](session_3/slides.html) | data exploration, visualization | push-ups (3) |
+| 4 | 08/02 | [multiple regression](session_4/slides.html) |  |                                           |
+| 5 | 15/02 | [multiple regression](session_4/slides.html) |  |  |
+| 6 | 22/02 | [instrumental variables](session_6/slides.html) |  | coursework (1) |
+| 7 | 01/02 | [machine learning introduction](session_7/slides.html) (1) |  |  |
+| 8 | 21/03 | [machine learning introduction (2)](session_8/slides.html) |  |  |
+| 9 | 28/03 | [text analysis](session_9/slides.html) |  |  |
 | 10 | 04/04 | final exam |  |
 
 ## About pushups
