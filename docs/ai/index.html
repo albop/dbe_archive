@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.299">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,10 +17,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,13 +46,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -93,7 +122,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
@@ -103,16 +131,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session_1/index.html">Handouts</a></li><li class="breadcrumb-item"><a href="../ai/index.html">Short Intro to Language Models</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Short Intro to Language Models</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
   </nav>
@@ -120,121 +143,105 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Data-Based Economics</a> 
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Handouts</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Handouts</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dataframes</span></a>
+  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">Dataframes</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Regression</span></a>
+  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">Linear Regression</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Multiple Regressions</span></a>
+  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Instrumental Variables</span></a>
+  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Machine Learning</span></a>
+  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Machine Learning (2)</span></a>
+  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning (2)</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_9/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Text Analysis</span></a>
+  <a href="../session_9/index.html" class="sidebar-item-text sidebar-link">Text Analysis</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ai/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Short Intro to Language Models</span></a>
+  <a href="../ai/index.html" class="sidebar-item-text sidebar-link active">Short Intro to Language Models</a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing the Philips Curve using matplotlib and altair</span></a>
+  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">Visualizing the Philips Curve using matplotlib and altair</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Regressions</span></a>
+  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">Regressions</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Instrumental variables</span></a>
+  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">Instrumental variables</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine learning: regressions</span></a>
+  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">Machine learning: regressions</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Classification and clustering</span></a>
+  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">Classification and clustering</a>
   </div>
 </li>
       </ul>
@@ -242,7 +249,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -293,14 +299,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#are-we-on-the-way-to-general-artificial-intelligence" id="toc-are-we-on-the-way-to-general-artificial-intelligence" class="nav-link" data-scroll-target="#are-we-on-the-way-to-general-artificial-intelligence">Are we on the way to General Artificial Intelligence?</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Short Intro to Language Models</h1>
+<h1 class="title d-none d-lg-block">Short Intro to Language Models</h1>
 </div>
 
 
@@ -319,32 +325,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>What does GPT-3 do?</h1>
 <section id="do-you-like-poetry" class="level2">
 <h2 class="anchored" data-anchor-id="do-you-like-poetry">Do you like poetry?</h2>
-<p>. . .</p>
+<div class="incremental">
 <blockquote class="blockquote">
 <p>A rose is a rose is <span class="fragment">a rose</span></p>
 </blockquote>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <pre><code>Gertrude Stein</code></pre>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <blockquote class="blockquote">
 <p>Brexit means Brexit means <span class="fragment">Brexit</span></p>
 </blockquote>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <pre><code>John Crace</code></pre>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <blockquote class="blockquote">
 <p>Elementary my dear <span class="fragment">Watson</span></p>
 </blockquote>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <pre><code>P.G. Woodehouse</code></pre>
-<p>. . .</p>
+</div>
 </section>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section"></h2>
 <blockquote class="blockquote">
 <p>There is an easy way for the government to end the strike without withdrawing the pension reform,</p>
 </blockquote>
-<p>. . .</p>
 </section>
 <section id="complete-text" class="level2">
 <h2 class="anchored" data-anchor-id="complete-text">Complete Text</h2>
@@ -416,8 +426,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="section-3"></h2>
 <p>Later in 2001, in a prison, somewhere in California</p>
 <p><img src="assets/prison.png" class="img-fluid"></p>
-<p>. . .</p>
+<div class="incremental">
 <p>Solved by Stanford’s <a href="https://math.uchicago.edu/~shmuel/Network-course-readings/MCMCRev.pdf">Persi Diaconis</a> and his students using Monte Carlo Markov Chains</p>
+</div>
 </section>
 <section id="monte-carlo-markov-chains" class="level2">
 <h2 class="anchored" data-anchor-id="monte-carlo-markov-chains">Monte Carlo Markov Chains</h2>
@@ -540,11 +551,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>transformers (&gt;2018)</li>
 </ul></li>
 </ul>
-<p>. . .</p>
+<div class="incremental">
 <ul>
 <li>Since 2010 main breakthrough came through the development of deep-learning techniques (software/hardware)</li>
 <li>Recently, <em>models</em>/algorithms have improved tremendously</li>
 </ul>
+</div>
 </section>
 <section id="gpt3" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="gpt3">GPT3</h2>
@@ -694,8 +706,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ###
 [Text]: Maxime is a data scientist at Auto Dataset, and he's been working there for 1 year.
 [Position]:</code></pre>
-<p>. . .</p>
+<div class="incremental">
 <p><code>Response: Data Scientist</code></p>
+</div>
 </section>
 <section id="fine-tuning-1" class="level2">
 <h2 class="anchored" data-anchor-id="fine-tuning-1">Fine-tuning (1)</h2>
@@ -750,15 +763,17 @@ Sentiment:</code></pre>
 <p></p><figcaption class="figure-caption">A Benevolent General Purpose Artificial Intelligence. Dall-E-2</figcaption><p></p>
 </figure>
 </div>
-<p>. . .</p>
+<div class="incremental">
 <p>My two cents:</p>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <ul>
 <li>artificial intelligence is already there (we are fooling ourselves…)</li>
 <li>are we ready for artificial humanity?</li>
 </ul>
 
 
+</div>
 </section>
 </section>
 
@@ -797,23 +812,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -878,92 +879,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

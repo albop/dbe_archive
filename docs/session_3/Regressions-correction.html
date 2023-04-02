@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.299">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data-Based Economics - Regressions</title>
+<title>Data-Based Economics – regressions-correction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,10 +17,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,13 +46,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -96,7 +125,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
@@ -106,16 +134,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data-Based Economics</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Data-Based Economics</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
   </nav>
@@ -123,121 +146,105 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Data-Based Economics</a> 
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Handouts</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Handouts</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+  <a href="../session_1/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dataframes</span></a>
+  <a href="../session_2/index.html" class="sidebar-item-text sidebar-link">Dataframes</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Regression</span></a>
+  <a href="../session_3/index.html" class="sidebar-item-text sidebar-link">Linear Regression</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Multiple Regressions</span></a>
+  <a href="../session_4/index.html" class="sidebar-item-text sidebar-link">Multiple Regressions</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Instrumental Variables</span></a>
+  <a href="../session_6/index.html" class="sidebar-item-text sidebar-link">Introduction to Instrumental Variables</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Machine Learning</span></a>
+  <a href="../session_7/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Machine Learning (2)</span></a>
+  <a href="../session_8/index.html" class="sidebar-item-text sidebar-link">Introduction to Machine Learning (2)</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_9/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Text Analysis</span></a>
+  <a href="../session_9/index.html" class="sidebar-item-text sidebar-link">Text Analysis</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ai/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Short Intro to Language Models</span></a>
+  <a href="../ai/index.html" class="sidebar-item-text sidebar-link">Short Intro to Language Models</a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Visualizing the Philips Curve using matplotlib and altair</span></a>
+  <a href="../session_3/Philips_curve_correction.html" class="sidebar-item-text sidebar-link">Visualizing the Philips Curve using matplotlib and altair</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Regressions</span></a>
+  <a href="../session_4/Regressions_correction_2022.html" class="sidebar-item-text sidebar-link">Regressions</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Instrumental variables</span></a>
+  <a href="../session_6/instrumental_variables_correction.html" class="sidebar-item-text sidebar-link">Instrumental variables</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine learning: regressions</span></a>
+  <a href="../session_7/machine_learning_regressions_correction.html" class="sidebar-item-text sidebar-link">Machine learning: regressions</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Classification and clustering</span></a>
+  <a href="../session_8/Classification_Correction.html" class="sidebar-item-text sidebar-link">Classification and clustering</a>
   </div>
 </li>
       </ul>
@@ -245,39 +252,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#linear-regressions" id="toc-linear-regressions" class="nav-link active" data-scroll-target="#linear-regressions">Linear regressions</a></li>
+  <li><a href="#regressions" id="toc-regressions" class="nav-link active" data-scroll-target="#regressions">Regressions</a>
+  <ul class="collapse">
+  <li><a href="#linear-regressions" id="toc-linear-regressions" class="nav-link" data-scroll-target="#linear-regressions">Linear regressions</a></li>
   <li><a href="#finding-the-right-model" id="toc-finding-the-right-model" class="nav-link" data-scroll-target="#finding-the-right-model">Finding the right model</a></li>
   <li><a href="#taylor-rule" id="toc-taylor-rule" class="nav-link" data-scroll-target="#taylor-rule">Taylor Rule</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Regressions</h1>
-</div>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
+<section id="regressions" class="level1">
+<h1>Regressions</h1>
 <section id="linear-regressions" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regressions">Linear regressions</h2>
 <p><strong>Import the Duncan/carData dataset</strong></p>
@@ -287,58 +283,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dataset.data</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">type</th>
-<th data-quarto-table-cell-role="th">income</th>
-<th data-quarto-table-cell-role="th">education</th>
-<th data-quarto-table-cell-role="th">prestige</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">accountant</td>
-<td>prof</td>
-<td>62</td>
-<td>86</td>
-<td>82</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">pilot</td>
-<td>prof</td>
-<td>72</td>
-<td>76</td>
-<td>83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">architect</td>
-<td>prof</td>
-<td>75</td>
-<td>92</td>
-<td>90</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">author</td>
-<td>prof</td>
-<td>55</td>
-<td>90</td>
-<td>76</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">chemist</td>
-<td>prof</td>
-<td>64</td>
-<td>86</td>
-<td>90</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>type</th>
+      <th>income</th>
+      <th>education</th>
+      <th>prestige</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accountant</th>
+      <td>prof</td>
+      <td>62</td>
+      <td>86</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>pilot</th>
+      <td>prof</td>
+      <td>72</td>
+      <td>76</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>architect</th>
+      <td>prof</td>
+      <td>75</td>
+      <td>92</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>author</th>
+      <td>prof</td>
+      <td>55</td>
+      <td>90</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>chemist</th>
+      <td>prof</td>
+      <td>64</td>
+      <td>86</td>
+      <td>90</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -359,125 +354,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>res_1.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+
+<table class="simpletable">
 <caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>income</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.525</td>
+<tbody><tr>
+  <th>Dep. Variable:</th>         <td>income</td>      <th>  R-squared:         </th> <td>   0.525</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.514</td>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.514</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>47.51</td>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   47.51</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 02 Feb 2021</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>1.84e-08</td>
+<tr>
+  <th>Date:</th>             <td>Tue, 02 Feb 2021</td> <th>  Prob (F-statistic):</th> <td>1.84e-08</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>11:29:50</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-190.42</td>
+<tr>
+  <th>Time:</th>                 <td>11:29:50</td>     <th>  Log-Likelihood:    </th> <td> -190.42</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>45</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>384.8</td>
+<tr>
+  <th>No. Observations:</th>      <td>    45</td>      <th>  AIC:               </th> <td>   384.8</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>43</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>388.5</td>
+<tr>
+  <th>Df Residuals:</th>          <td>    43</td>      <th>  BIC:               </th> <td>   388.5</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>1</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>10.6035</td>
-<td>5.198</td>
-<td>2.040</td>
-<td>0.048</td>
-<td>0.120</td>
-<td>21.087</td>
+<tr>
+  <th>Intercept</th> <td>   10.6035</td> <td>    5.198</td> <td>    2.040</td> <td> 0.048</td> <td>    0.120</td> <td>   21.087</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">education</td>
-<td>0.5949</td>
-<td>0.086</td>
-<td>6.893</td>
-<td>0.000</td>
-<td>0.421</td>
-<td>0.769</td>
+<tr>
+  <th>education</th> <td>    0.5949</td> <td>    0.086</td> <td>    6.893</td> <td> 0.000</td> <td>    0.421</td> <td>    0.769</td>
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>9.841</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>1.736</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 9.841</td> <th>  Durbin-Watson:     </th> <td>   1.736</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.007</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>10.609</td>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.007</td> <th>  Jarque-Bera (JB):  </th> <td>  10.609</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.776</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>0.00497</td>
+<tr>
+  <th>Skew:</th>          <td> 0.776</td> <th>  Prob(JB):          </th> <td> 0.00497</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>4.802</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>123.</td>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.802</td> <th>  Cond. No.          </th> <td>    123.</td>
 </tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
 <p>The estimated regresssion is <code>income = 10.6 + 0.59 education</code>. At a 5% p-value level both the intercept and the coefficient are significant. R-squared is 0.52: the model explains half of the variance.</p>
@@ -488,58 +420,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">type</th>
-<th data-quarto-table-cell-role="th">income</th>
-<th data-quarto-table-cell-role="th">education</th>
-<th data-quarto-table-cell-role="th">prestige</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">accountant</td>
-<td>prof</td>
-<td>62</td>
-<td>86</td>
-<td>82</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">pilot</td>
-<td>prof</td>
-<td>72</td>
-<td>76</td>
-<td>83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">architect</td>
-<td>prof</td>
-<td>75</td>
-<td>92</td>
-<td>90</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">author</td>
-<td>prof</td>
-<td>55</td>
-<td>90</td>
-<td>76</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">chemist</td>
-<td>prof</td>
-<td>64</td>
-<td>86</td>
-<td>90</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>type</th>
+      <th>income</th>
+      <th>education</th>
+      <th>prestige</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accountant</th>
+      <td>prof</td>
+      <td>62</td>
+      <td>86</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>pilot</th>
+      <td>prof</td>
+      <td>72</td>
+      <td>76</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>architect</th>
+      <td>prof</td>
+      <td>75</td>
+      <td>92</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>author</th>
+      <td>prof</td>
+      <td>55</td>
+      <td>90</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>chemist</th>
+      <td>prof</td>
+      <td>64</td>
+      <td>86</td>
+      <td>90</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -550,125 +481,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>res_2.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+
+<table class="simpletable">
 <caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>income</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.702</td>
+<tbody><tr>
+  <th>Dep. Variable:</th>         <td>income</td>      <th>  R-squared:         </th> <td>   0.702</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.695</td>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.695</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>101.3</td>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   101.3</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 02 Feb 2021</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>7.14e-13</td>
+<tr>
+  <th>Date:</th>             <td>Tue, 02 Feb 2021</td> <th>  Prob (F-statistic):</th> <td>7.14e-13</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>11:55:59</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-179.93</td>
+<tr>
+  <th>Time:</th>                 <td>11:55:59</td>     <th>  Log-Likelihood:    </th> <td> -179.93</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>45</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>363.9</td>
+<tr>
+  <th>No. Observations:</th>      <td>    45</td>      <th>  AIC:               </th> <td>   363.9</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>43</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>367.5</td>
+<tr>
+  <th>Df Residuals:</th>          <td>    43</td>      <th>  BIC:               </th> <td>   367.5</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>1</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>10.8840</td>
-<td>3.678</td>
-<td>2.959</td>
-<td>0.005</td>
-<td>3.467</td>
-<td>18.301</td>
+<tr>
+  <th>Intercept</th> <td>   10.8840</td> <td>    3.678</td> <td>    2.959</td> <td> 0.005</td> <td>    3.467</td> <td>   18.301</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">prestige</td>
-<td>0.6497</td>
-<td>0.065</td>
-<td>10.062</td>
-<td>0.000</td>
-<td>0.519</td>
-<td>0.780</td>
+<tr>
+  <th>prestige</th>  <td>    0.6497</td> <td>    0.065</td> <td>   10.062</td> <td> 0.000</td> <td>    0.519</td> <td>    0.780</td>
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>8.893</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>2.048</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 8.893</td> <th>  Durbin-Watson:     </th> <td>   2.048</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.012</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>19.848</td>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.012</td> <th>  Jarque-Bera (JB):  </th> <td>  19.848</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.047</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>4.90e-05</td>
+<tr>
+  <th>Skew:</th>          <td> 0.047</td> <th>  Prob(JB):          </th> <td>4.90e-05</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>6.252</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>104.</td>
+<tr>
+  <th>Kurtosis:</th>      <td> 6.252</td> <th>  Cond. No.          </th> <td>    104.</td>
 </tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
 <p>The estimated regresssion is <code>income = 10.6 + 0.59 education</code>. At a 0.5% p-value level both the intercept and the coefficient are significant. R-squared is 0.70: the model predicts income better than the former one.</p>
@@ -680,134 +548,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>res_3.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="50">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+
+<table class="simpletable">
 <caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>income</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.702</td>
+<tbody><tr>
+  <th>Dep. Variable:</th>         <td>income</td>      <th>  R-squared:         </th> <td>   0.702</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.688</td>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.688</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>49.55</td>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   49.55</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 02 Feb 2021</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>8.88e-12</td>
+<tr>
+  <th>Date:</th>             <td>Tue, 02 Feb 2021</td> <th>  Prob (F-statistic):</th> <td>8.88e-12</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>11:56:03</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-179.90</td>
+<tr>
+  <th>Time:</th>                 <td>11:56:03</td>     <th>  Log-Likelihood:    </th> <td> -179.90</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>45</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>365.8</td>
+<tr>
+  <th>No. Observations:</th>      <td>    45</td>      <th>  AIC:               </th> <td>   365.8</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>42</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>371.2</td>
+<tr>
+  <th>Df Residuals:</th>          <td>    42</td>      <th>  BIC:               </th> <td>   371.2</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>2</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>10.4264</td>
-<td>4.164</td>
-<td>2.504</td>
-<td>0.016</td>
-<td>2.024</td>
-<td>18.829</td>
+<tr>
+  <th>Intercept</th> <td>   10.4264</td> <td>    4.164</td> <td>    2.504</td> <td> 0.016</td> <td>    2.024</td> <td>   18.829</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">education</td>
-<td>0.0323</td>
-<td>0.132</td>
-<td>0.244</td>
-<td>0.808</td>
-<td>-0.234</td>
-<td>0.299</td>
+<tr>
+  <th>education</th> <td>    0.0323</td> <td>    0.132</td> <td>    0.244</td> <td> 0.808</td> <td>   -0.234</td> <td>    0.299</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">prestige</td>
-<td>0.6237</td>
-<td>0.125</td>
-<td>5.003</td>
-<td>0.000</td>
-<td>0.372</td>
-<td>0.875</td>
+<tr>
+  <th>prestige</th>  <td>    0.6237</td> <td>    0.125</td> <td>    5.003</td> <td> 0.000</td> <td>    0.372</td> <td>    0.875</td>
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>9.200</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>2.053</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 9.200</td> <th>  Durbin-Watson:     </th> <td>   2.053</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.010</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>21.265</td>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.010</td> <th>  Jarque-Bera (JB):  </th> <td>  21.265</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.075</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>2.41e-05</td>
+<tr>
+  <th>Skew:</th>          <td> 0.075</td> <th>  Prob(JB):          </th> <td>2.41e-05</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>6.364</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>168.</td>
+<tr>
+  <th>Kurtosis:</th>      <td> 6.364</td> <th>  Cond. No.          </th> <td>    168.</td>
 </tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
 <hr>
@@ -817,40 +616,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">income</th>
-<th data-quarto-table-cell-role="th">education</th>
-<th data-quarto-table-cell-role="th">prestige</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">income</td>
-<td>1.000000</td>
-<td>0.724512</td>
-<td>0.837801</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">education</td>
-<td>0.724512</td>
-<td>1.000000</td>
-<td>0.851916</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">prestige</td>
-<td>0.837801</td>
-<td>0.851916</td>
-<td>1.000000</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>income</th>
+      <th>education</th>
+      <th>prestige</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>income</th>
+      <td>1.000000</td>
+      <td>0.724512</td>
+      <td>0.837801</td>
+    </tr>
+    <tr>
+      <th>education</th>
+      <td>0.724512</td>
+      <td>1.000000</td>
+      <td>0.851916</td>
+    </tr>
+    <tr>
+      <th>prestige</th>
+      <td>0.837801</td>
+      <td>0.851916</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -918,58 +716,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pandas.read_stata(<span class="st">'data.dta'</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">index</th>
-<th data-quarto-table-cell-role="th">x</th>
-<th data-quarto-table-cell-role="th">y</th>
-<th data-quarto-table-cell-role="th">z</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>0</td>
-<td>1.504053</td>
-<td>0.543556</td>
-<td>1.917895</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1</td>
-<td>43.619758</td>
-<td>0.543113</td>
-<td>4.058487</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2</td>
-<td>1.226398</td>
-<td>0.736955</td>
-<td>1.785403</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>3</td>
-<td>89.103260</td>
-<td>0.996219</td>
-<td>6.321152</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>4</td>
-<td>32.117073</td>
-<td>0.140142</td>
-<td>3.445228</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>index</th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1.504053</td>
+      <td>0.543556</td>
+      <td>1.917895</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>43.619758</td>
+      <td>0.543113</td>
+      <td>4.058487</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>1.226398</td>
+      <td>0.736955</td>
+      <td>1.785403</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>89.103260</td>
+      <td>0.996219</td>
+      <td>6.321152</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>32.117073</td>
+      <td>0.140142</td>
+      <td>3.445228</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -984,134 +781,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>res.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+
+<table class="simpletable">
 <caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>z</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.800</td>
+<tbody><tr>
+  <th>Dep. Variable:</th>            <td>z</td>        <th>  R-squared:         </th> <td>   0.800</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.791</td>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.791</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>93.90</td>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   93.90</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 23 Feb 2021</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>3.82e-17</td>
+<tr>
+  <th>Date:</th>             <td>Tue, 23 Feb 2021</td> <th>  Prob (F-statistic):</th> <td>3.82e-17</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>10:41:10</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-57.244</td>
+<tr>
+  <th>Time:</th>                 <td>10:41:10</td>     <th>  Log-Likelihood:    </th> <td> -57.244</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>50</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>120.5</td>
+<tr>
+  <th>No. Observations:</th>      <td>    50</td>      <th>  AIC:               </th> <td>   120.5</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>47</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>126.2</td>
+<tr>
+  <th>Df Residuals:</th>          <td>    47</td>      <th>  BIC:               </th> <td>   126.2</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>2</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>1.2177</td>
-<td>0.243</td>
-<td>5.019</td>
-<td>0.000</td>
-<td>0.730</td>
-<td>1.706</td>
+<tr>
+  <th>Intercept</th> <td>    1.2177</td> <td>    0.243</td> <td>    5.019</td> <td> 0.000</td> <td>    0.730</td> <td>    1.706</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">x</td>
-<td>0.0356</td>
-<td>0.003</td>
-<td>12.235</td>
-<td>0.000</td>
-<td>0.030</td>
-<td>0.041</td>
+<tr>
+  <th>x</th>         <td>    0.0356</td> <td>    0.003</td> <td>   12.235</td> <td> 0.000</td> <td>    0.030</td> <td>    0.041</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">y</td>
-<td>1.9128</td>
-<td>0.369</td>
-<td>5.177</td>
-<td>0.000</td>
-<td>1.169</td>
-<td>2.656</td>
+<tr>
+  <th>y</th>         <td>    1.9128</td> <td>    0.369</td> <td>    5.177</td> <td> 0.000</td> <td>    1.169</td> <td>    2.656</td>
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>3.205</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>1.859</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 3.205</td> <th>  Durbin-Watson:     </th> <td>   1.859</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.201</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>2.349</td>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.201</td> <th>  Jarque-Bera (JB):  </th> <td>   2.349</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.277</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>0.309</td>
+<tr>
+  <th>Skew:</th>          <td> 0.277</td> <th>  Prob(JB):          </th> <td>   0.309</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>3.906</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>187.</td>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.906</td> <th>  Cond. No.          </th> <td>    187.</td>
 </tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
 <p><strong>Comments</strong>: regression looks significant. <span class="math inline">\(R^2\)</span> looks good. Fisher statistics, is conclusive (the hypothesis H0 that all coefficients are zero is rejected at a <code>3.82e-17</code> confidence level.. The student statistics are also quite high. For each coefficient, the hypothesis H0 that coefficient is zero is rejected at a 0.001 confidence level.</p>
@@ -1158,134 +886,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>res.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="45">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+
+<table class="simpletable">
 <caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>log(z)</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.957</td>
+<tbody><tr>
+  <th>Dep. Variable:</th>         <td>log(z)</td>      <th>  R-squared:         </th> <td>   0.957</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.955</td>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.955</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>525.6</td>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   525.6</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 23 Feb 2021</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>6.89e-33</td>
+<tr>
+  <th>Date:</th>             <td>Tue, 23 Feb 2021</td> <th>  Prob (F-statistic):</th> <td>6.89e-33</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>10:41:56</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>44.223</td>
+<tr>
+  <th>Time:</th>                 <td>10:41:56</td>     <th>  Log-Likelihood:    </th> <td>  44.223</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>50</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>-82.45</td>
+<tr>
+  <th>No. Observations:</th>      <td>    50</td>      <th>  AIC:               </th> <td>  -82.45</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>47</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>-76.71</td>
+<tr>
+  <th>Df Residuals:</th>          <td>    47</td>      <th>  BIC:               </th> <td>  -76.71</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>2</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>0.0128</td>
-<td>0.039</td>
-<td>0.326</td>
-<td>0.746</td>
-<td>-0.066</td>
-<td>0.092</td>
+<tr>
+  <th>Intercept</th> <td>    0.0128</td> <td>    0.039</td> <td>    0.326</td> <td> 0.746</td> <td>   -0.066</td> <td>    0.092</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">log(x)</td>
-<td>0.2957</td>
-<td>0.010</td>
-<td>29.878</td>
-<td>0.000</td>
-<td>0.276</td>
-<td>0.316</td>
+<tr>
+  <th>log(x)</th>    <td>    0.2957</td> <td>    0.010</td> <td>   29.878</td> <td> 0.000</td> <td>    0.276</td> <td>    0.316</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">y</td>
-<td>0.6164</td>
-<td>0.048</td>
-<td>12.735</td>
-<td>0.000</td>
-<td>0.519</td>
-<td>0.714</td>
+<tr>
+  <th>y</th>         <td>    0.6164</td> <td>    0.048</td> <td>   12.735</td> <td> 0.000</td> <td>    0.519</td> <td>    0.714</td>
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>4.351</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>2.490</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 4.351</td> <th>  Durbin-Watson:     </th> <td>   2.490</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.114</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>1.936</td>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.114</td> <th>  Jarque-Bera (JB):  </th> <td>   1.936</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.089</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>0.380</td>
+<tr>
+  <th>Skew:</th>          <td> 0.089</td> <th>  Prob(JB):          </th> <td>   0.380</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>2.052</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>12.1</td>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.052</td> <th>  Cond. No.          </th> <td>    12.1</td>
 </tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
 <div class="cell" data-execution_count="36">
@@ -1324,118 +983,117 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ds.raw_data</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="71">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">quarter</th>
-<th data-quarto-table-cell-role="th">realgdp</th>
-<th data-quarto-table-cell-role="th">realcons</th>
-<th data-quarto-table-cell-role="th">realinv</th>
-<th data-quarto-table-cell-role="th">realgovt</th>
-<th data-quarto-table-cell-role="th">realdpi</th>
-<th data-quarto-table-cell-role="th">cpi</th>
-<th data-quarto-table-cell-role="th">m1</th>
-<th data-quarto-table-cell-role="th">tbilrate</th>
-<th data-quarto-table-cell-role="th">unemp</th>
-<th data-quarto-table-cell-role="th">pop</th>
-<th data-quarto-table-cell-role="th">infl</th>
-<th data-quarto-table-cell-role="th">realint</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1959.0</td>
-<td>1.0</td>
-<td>2710.349</td>
-<td>1707.4</td>
-<td>286.898</td>
-<td>470.045</td>
-<td>1886.9</td>
-<td>28.98</td>
-<td>139.7</td>
-<td>2.82</td>
-<td>5.8</td>
-<td>177.146</td>
-<td>0.00</td>
-<td>0.00</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1959.0</td>
-<td>2.0</td>
-<td>2778.801</td>
-<td>1733.7</td>
-<td>310.859</td>
-<td>481.301</td>
-<td>1919.7</td>
-<td>29.15</td>
-<td>141.7</td>
-<td>3.08</td>
-<td>5.1</td>
-<td>177.830</td>
-<td>2.34</td>
-<td>0.74</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>1959.0</td>
-<td>3.0</td>
-<td>2775.488</td>
-<td>1751.8</td>
-<td>289.226</td>
-<td>491.260</td>
-<td>1916.4</td>
-<td>29.35</td>
-<td>140.5</td>
-<td>3.82</td>
-<td>5.3</td>
-<td>178.657</td>
-<td>2.74</td>
-<td>1.09</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1959.0</td>
-<td>4.0</td>
-<td>2785.204</td>
-<td>1753.7</td>
-<td>299.356</td>
-<td>484.052</td>
-<td>1931.3</td>
-<td>29.37</td>
-<td>140.0</td>
-<td>4.33</td>
-<td>5.6</td>
-<td>179.386</td>
-<td>0.27</td>
-<td>4.06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1960.0</td>
-<td>1.0</td>
-<td>2847.699</td>
-<td>1770.5</td>
-<td>331.722</td>
-<td>462.199</td>
-<td>1955.5</td>
-<td>29.54</td>
-<td>139.6</td>
-<td>3.50</td>
-<td>5.2</td>
-<td>180.007</td>
-<td>2.31</td>
-<td>1.19</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>year</th>
+      <th>quarter</th>
+      <th>realgdp</th>
+      <th>realcons</th>
+      <th>realinv</th>
+      <th>realgovt</th>
+      <th>realdpi</th>
+      <th>cpi</th>
+      <th>m1</th>
+      <th>tbilrate</th>
+      <th>unemp</th>
+      <th>pop</th>
+      <th>infl</th>
+      <th>realint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1959.0</td>
+      <td>1.0</td>
+      <td>2710.349</td>
+      <td>1707.4</td>
+      <td>286.898</td>
+      <td>470.045</td>
+      <td>1886.9</td>
+      <td>28.98</td>
+      <td>139.7</td>
+      <td>2.82</td>
+      <td>5.8</td>
+      <td>177.146</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1959.0</td>
+      <td>2.0</td>
+      <td>2778.801</td>
+      <td>1733.7</td>
+      <td>310.859</td>
+      <td>481.301</td>
+      <td>1919.7</td>
+      <td>29.15</td>
+      <td>141.7</td>
+      <td>3.08</td>
+      <td>5.1</td>
+      <td>177.830</td>
+      <td>2.34</td>
+      <td>0.74</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1959.0</td>
+      <td>3.0</td>
+      <td>2775.488</td>
+      <td>1751.8</td>
+      <td>289.226</td>
+      <td>491.260</td>
+      <td>1916.4</td>
+      <td>29.35</td>
+      <td>140.5</td>
+      <td>3.82</td>
+      <td>5.3</td>
+      <td>178.657</td>
+      <td>2.74</td>
+      <td>1.09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1959.0</td>
+      <td>4.0</td>
+      <td>2785.204</td>
+      <td>1753.7</td>
+      <td>299.356</td>
+      <td>484.052</td>
+      <td>1931.3</td>
+      <td>29.37</td>
+      <td>140.0</td>
+      <td>4.33</td>
+      <td>5.6</td>
+      <td>179.386</td>
+      <td>0.27</td>
+      <td>4.06</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1960.0</td>
+      <td>1.0</td>
+      <td>2847.699</td>
+      <td>1770.5</td>
+      <td>331.722</td>
+      <td>462.199</td>
+      <td>1955.5</td>
+      <td>29.54</td>
+      <td>139.6</td>
+      <td>3.50</td>
+      <td>5.2</td>
+      <td>180.007</td>
+      <td>2.31</td>
+      <td>1.19</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -1451,118 +1109,117 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ddf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="74">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">quarter</th>
-<th data-quarto-table-cell-role="th">realgdp</th>
-<th data-quarto-table-cell-role="th">realcons</th>
-<th data-quarto-table-cell-role="th">realinv</th>
-<th data-quarto-table-cell-role="th">realgovt</th>
-<th data-quarto-table-cell-role="th">realdpi</th>
-<th data-quarto-table-cell-role="th">cpi</th>
-<th data-quarto-table-cell-role="th">m1</th>
-<th data-quarto-table-cell-role="th">tbilrate</th>
-<th data-quarto-table-cell-role="th">unemp</th>
-<th data-quarto-table-cell-role="th">pop</th>
-<th data-quarto-table-cell-role="th">infl</th>
-<th data-quarto-table-cell-role="th">realint</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1959.0</td>
-<td>1.0</td>
-<td>2710.349</td>
-<td>1707.4</td>
-<td>286.898</td>
-<td>470.045</td>
-<td>1886.9</td>
-<td>28.98</td>
-<td>139.7</td>
-<td>2.82</td>
-<td>5.8</td>
-<td>177.146</td>
-<td>0.00</td>
-<td>0.00</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1959.0</td>
-<td>2.0</td>
-<td>2778.801</td>
-<td>1733.7</td>
-<td>310.859</td>
-<td>481.301</td>
-<td>1919.7</td>
-<td>29.15</td>
-<td>141.7</td>
-<td>3.08</td>
-<td>5.1</td>
-<td>177.830</td>
-<td>2.34</td>
-<td>0.74</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>1959.0</td>
-<td>3.0</td>
-<td>2775.488</td>
-<td>1751.8</td>
-<td>289.226</td>
-<td>491.260</td>
-<td>1916.4</td>
-<td>29.35</td>
-<td>140.5</td>
-<td>3.82</td>
-<td>5.3</td>
-<td>178.657</td>
-<td>2.74</td>
-<td>1.09</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1959.0</td>
-<td>4.0</td>
-<td>2785.204</td>
-<td>1753.7</td>
-<td>299.356</td>
-<td>484.052</td>
-<td>1931.3</td>
-<td>29.37</td>
-<td>140.0</td>
-<td>4.33</td>
-<td>5.6</td>
-<td>179.386</td>
-<td>0.27</td>
-<td>4.06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1960.0</td>
-<td>1.0</td>
-<td>2847.699</td>
-<td>1770.5</td>
-<td>331.722</td>
-<td>462.199</td>
-<td>1955.5</td>
-<td>29.54</td>
-<td>139.6</td>
-<td>3.50</td>
-<td>5.2</td>
-<td>180.007</td>
-<td>2.31</td>
-<td>1.19</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>year</th>
+      <th>quarter</th>
+      <th>realgdp</th>
+      <th>realcons</th>
+      <th>realinv</th>
+      <th>realgovt</th>
+      <th>realdpi</th>
+      <th>cpi</th>
+      <th>m1</th>
+      <th>tbilrate</th>
+      <th>unemp</th>
+      <th>pop</th>
+      <th>infl</th>
+      <th>realint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1959.0</td>
+      <td>1.0</td>
+      <td>2710.349</td>
+      <td>1707.4</td>
+      <td>286.898</td>
+      <td>470.045</td>
+      <td>1886.9</td>
+      <td>28.98</td>
+      <td>139.7</td>
+      <td>2.82</td>
+      <td>5.8</td>
+      <td>177.146</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1959.0</td>
+      <td>2.0</td>
+      <td>2778.801</td>
+      <td>1733.7</td>
+      <td>310.859</td>
+      <td>481.301</td>
+      <td>1919.7</td>
+      <td>29.15</td>
+      <td>141.7</td>
+      <td>3.08</td>
+      <td>5.1</td>
+      <td>177.830</td>
+      <td>2.34</td>
+      <td>0.74</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1959.0</td>
+      <td>3.0</td>
+      <td>2775.488</td>
+      <td>1751.8</td>
+      <td>289.226</td>
+      <td>491.260</td>
+      <td>1916.4</td>
+      <td>29.35</td>
+      <td>140.5</td>
+      <td>3.82</td>
+      <td>5.3</td>
+      <td>178.657</td>
+      <td>2.74</td>
+      <td>1.09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1959.0</td>
+      <td>4.0</td>
+      <td>2785.204</td>
+      <td>1753.7</td>
+      <td>299.356</td>
+      <td>484.052</td>
+      <td>1931.3</td>
+      <td>29.37</td>
+      <td>140.0</td>
+      <td>4.33</td>
+      <td>5.6</td>
+      <td>179.386</td>
+      <td>0.27</td>
+      <td>4.06</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1960.0</td>
+      <td>1.0</td>
+      <td>2847.699</td>
+      <td>1770.5</td>
+      <td>331.722</td>
+      <td>462.199</td>
+      <td>1955.5</td>
+      <td>29.54</td>
+      <td>139.6</td>
+      <td>3.50</td>
+      <td>5.2</td>
+      <td>180.007</td>
+      <td>2.31</td>
+      <td>1.19</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -1583,130 +1240,129 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>ddf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="79">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">quarter</th>
-<th data-quarto-table-cell-role="th">realgdp</th>
-<th data-quarto-table-cell-role="th">realcons</th>
-<th data-quarto-table-cell-role="th">realinv</th>
-<th data-quarto-table-cell-role="th">realgovt</th>
-<th data-quarto-table-cell-role="th">realdpi</th>
-<th data-quarto-table-cell-role="th">cpi</th>
-<th data-quarto-table-cell-role="th">m1</th>
-<th data-quarto-table-cell-role="th">tbilrate</th>
-<th data-quarto-table-cell-role="th">unemp</th>
-<th data-quarto-table-cell-role="th">pop</th>
-<th data-quarto-table-cell-role="th">infl</th>
-<th data-quarto-table-cell-role="th">realint</th>
-<th data-quarto-table-cell-role="th">ir</th>
-<th data-quarto-table-cell-role="th">gdp</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1959.0</td>
-<td>1.0</td>
-<td>2710.349</td>
-<td>1707.4</td>
-<td>286.898</td>
-<td>470.045</td>
-<td>1886.9</td>
-<td>28.98</td>
-<td>139.7</td>
-<td>2.82</td>
-<td>5.8</td>
-<td>177.146</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>1.479383</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1959.0</td>
-<td>2.0</td>
-<td>2778.801</td>
-<td>1733.7</td>
-<td>310.859</td>
-<td>481.301</td>
-<td>1919.7</td>
-<td>29.15</td>
-<td>141.7</td>
-<td>3.08</td>
-<td>5.1</td>
-<td>177.830</td>
-<td>2.34</td>
-<td>0.74</td>
-<td>3.08</td>
-<td>2.967657</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>1959.0</td>
-<td>3.0</td>
-<td>2775.488</td>
-<td>1751.8</td>
-<td>289.226</td>
-<td>491.260</td>
-<td>1916.4</td>
-<td>29.35</td>
-<td>140.5</td>
-<td>3.82</td>
-<td>5.3</td>
-<td>178.657</td>
-<td>2.74</td>
-<td>1.09</td>
-<td>3.83</td>
-<td>1.792534</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1959.0</td>
-<td>4.0</td>
-<td>2785.204</td>
-<td>1753.7</td>
-<td>299.356</td>
-<td>484.052</td>
-<td>1931.3</td>
-<td>29.37</td>
-<td>140.0</td>
-<td>4.33</td>
-<td>5.6</td>
-<td>179.386</td>
-<td>0.27</td>
-<td>4.06</td>
-<td>4.33</td>
-<td>1.110571</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1960.0</td>
-<td>1.0</td>
-<td>2847.699</td>
-<td>1770.5</td>
-<td>331.722</td>
-<td>462.199</td>
-<td>1955.5</td>
-<td>29.54</td>
-<td>139.6</td>
-<td>3.50</td>
-<td>5.2</td>
-<td>180.007</td>
-<td>2.31</td>
-<td>1.19</td>
-<td>3.50</td>
-<td>2.331547</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>year</th>
+      <th>quarter</th>
+      <th>realgdp</th>
+      <th>realcons</th>
+      <th>realinv</th>
+      <th>realgovt</th>
+      <th>realdpi</th>
+      <th>cpi</th>
+      <th>m1</th>
+      <th>tbilrate</th>
+      <th>unemp</th>
+      <th>pop</th>
+      <th>infl</th>
+      <th>realint</th>
+      <th>ir</th>
+      <th>gdp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1959.0</td>
+      <td>1.0</td>
+      <td>2710.349</td>
+      <td>1707.4</td>
+      <td>286.898</td>
+      <td>470.045</td>
+      <td>1886.9</td>
+      <td>28.98</td>
+      <td>139.7</td>
+      <td>2.82</td>
+      <td>5.8</td>
+      <td>177.146</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>1.479383</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1959.0</td>
+      <td>2.0</td>
+      <td>2778.801</td>
+      <td>1733.7</td>
+      <td>310.859</td>
+      <td>481.301</td>
+      <td>1919.7</td>
+      <td>29.15</td>
+      <td>141.7</td>
+      <td>3.08</td>
+      <td>5.1</td>
+      <td>177.830</td>
+      <td>2.34</td>
+      <td>0.74</td>
+      <td>3.08</td>
+      <td>2.967657</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1959.0</td>
+      <td>3.0</td>
+      <td>2775.488</td>
+      <td>1751.8</td>
+      <td>289.226</td>
+      <td>491.260</td>
+      <td>1916.4</td>
+      <td>29.35</td>
+      <td>140.5</td>
+      <td>3.82</td>
+      <td>5.3</td>
+      <td>178.657</td>
+      <td>2.74</td>
+      <td>1.09</td>
+      <td>3.83</td>
+      <td>1.792534</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1959.0</td>
+      <td>4.0</td>
+      <td>2785.204</td>
+      <td>1753.7</td>
+      <td>299.356</td>
+      <td>484.052</td>
+      <td>1931.3</td>
+      <td>29.37</td>
+      <td>140.0</td>
+      <td>4.33</td>
+      <td>5.6</td>
+      <td>179.386</td>
+      <td>0.27</td>
+      <td>4.06</td>
+      <td>4.33</td>
+      <td>1.110571</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1960.0</td>
+      <td>1.0</td>
+      <td>2847.699</td>
+      <td>1770.5</td>
+      <td>331.722</td>
+      <td>462.199</td>
+      <td>1955.5</td>
+      <td>29.54</td>
+      <td>139.6</td>
+      <td>3.50</td>
+      <td>5.2</td>
+      <td>180.007</td>
+      <td>2.31</td>
+      <td>1.19</td>
+      <td>3.50</td>
+      <td>2.331547</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -1719,264 +1375,194 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="84">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+
+<table class="simpletable">
 <caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>ir</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.389</td>
+<tbody><tr>
+  <th>Dep. Variable:</th>           <td>ir</td>        <th>  R-squared:         </th> <td>   0.389</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.383</td>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.383</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>63.65</td>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   63.65</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 02 Mar 2021</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>4.06e-22</td>
+<tr>
+  <th>Date:</th>             <td>Tue, 02 Mar 2021</td> <th>  Prob (F-statistic):</th> <td>4.06e-22</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>11:54:15</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-448.17</td>
+<tr>
+  <th>Time:</th>                 <td>11:54:15</td>     <th>  Log-Likelihood:    </th> <td> -448.17</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>203</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>902.3</td>
+<tr>
+  <th>No. Observations:</th>      <td>   203</td>      <th>  AIC:               </th> <td>   902.3</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>200</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>912.3</td>
+<tr>
+  <th>Df Residuals:</th>          <td>   200</td>      <th>  BIC:               </th> <td>   912.3</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>2</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Intercept</td>
-<td>3.2035</td>
-<td>0.252</td>
-<td>12.696</td>
-<td>0.000</td>
-<td>2.706</td>
-<td>3.701</td>
+<tr>
+  <th>Intercept</th> <td>    3.2035</td> <td>    0.252</td> <td>   12.696</td> <td> 0.000</td> <td>    2.706</td> <td>    3.701</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">infl</td>
-<td>0.5288</td>
-<td>0.050</td>
-<td>10.557</td>
-<td>0.000</td>
-<td>0.430</td>
-<td>0.628</td>
+<tr>
+  <th>infl</th>      <td>    0.5288</td> <td>    0.050</td> <td>   10.557</td> <td> 0.000</td> <td>    0.430</td> <td>    0.628</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">gdp</td>
-<td>0.0795</td>
-<td>0.105</td>
-<td>0.759</td>
-<td>0.449</td>
-<td>-0.127</td>
-<td>0.286</td>
+<tr>
+  <th>gdp</th>       <td>    0.0795</td> <td>    0.105</td> <td>    0.759</td> <td> 0.449</td> <td>   -0.127</td> <td>    0.286</td>
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>30.222</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>0.417</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td>30.222</td> <th>  Durbin-Watson:     </th> <td>   0.417</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.000</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>50.662</td>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  50.662</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.796</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>9.98e-12</td>
+<tr>
+  <th>Skew:</th>          <td> 0.796</td> <th>  Prob(JB):          </th> <td>9.98e-12</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>4.858</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>8.56</td>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.858</td> <th>  Cond. No.          </th> <td>    8.56</td>
 </tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
 <p><strong>Which control variables would you propose to add? Does it increase prediction power? How do you interpret that?</strong></p>
 <div class="cell" data-execution_count="85">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>ddf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="85">
+
 <div>
 
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">quarter</th>
-<th data-quarto-table-cell-role="th">realgdp</th>
-<th data-quarto-table-cell-role="th">realcons</th>
-<th data-quarto-table-cell-role="th">realinv</th>
-<th data-quarto-table-cell-role="th">realgovt</th>
-<th data-quarto-table-cell-role="th">realdpi</th>
-<th data-quarto-table-cell-role="th">cpi</th>
-<th data-quarto-table-cell-role="th">m1</th>
-<th data-quarto-table-cell-role="th">tbilrate</th>
-<th data-quarto-table-cell-role="th">unemp</th>
-<th data-quarto-table-cell-role="th">pop</th>
-<th data-quarto-table-cell-role="th">infl</th>
-<th data-quarto-table-cell-role="th">realint</th>
-<th data-quarto-table-cell-role="th">ir</th>
-<th data-quarto-table-cell-role="th">gdp</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1959.0</td>
-<td>1.0</td>
-<td>2710.349</td>
-<td>1707.4</td>
-<td>286.898</td>
-<td>470.045</td>
-<td>1886.9</td>
-<td>28.98</td>
-<td>139.7</td>
-<td>2.82</td>
-<td>5.8</td>
-<td>177.146</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>1.479383</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>1959.0</td>
-<td>2.0</td>
-<td>2778.801</td>
-<td>1733.7</td>
-<td>310.859</td>
-<td>481.301</td>
-<td>1919.7</td>
-<td>29.15</td>
-<td>141.7</td>
-<td>3.08</td>
-<td>5.1</td>
-<td>177.830</td>
-<td>2.34</td>
-<td>0.74</td>
-<td>3.08</td>
-<td>2.967657</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>1959.0</td>
-<td>3.0</td>
-<td>2775.488</td>
-<td>1751.8</td>
-<td>289.226</td>
-<td>491.260</td>
-<td>1916.4</td>
-<td>29.35</td>
-<td>140.5</td>
-<td>3.82</td>
-<td>5.3</td>
-<td>178.657</td>
-<td>2.74</td>
-<td>1.09</td>
-<td>3.83</td>
-<td>1.792534</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1959.0</td>
-<td>4.0</td>
-<td>2785.204</td>
-<td>1753.7</td>
-<td>299.356</td>
-<td>484.052</td>
-<td>1931.3</td>
-<td>29.37</td>
-<td>140.0</td>
-<td>4.33</td>
-<td>5.6</td>
-<td>179.386</td>
-<td>0.27</td>
-<td>4.06</td>
-<td>4.33</td>
-<td>1.110571</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1960.0</td>
-<td>1.0</td>
-<td>2847.699</td>
-<td>1770.5</td>
-<td>331.722</td>
-<td>462.199</td>
-<td>1955.5</td>
-<td>29.54</td>
-<td>139.6</td>
-<td>3.50</td>
-<td>5.2</td>
-<td>180.007</td>
-<td>2.31</td>
-<td>1.19</td>
-<td>3.50</td>
-<td>2.331547</td>
-</tr>
-</tbody>
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>year</th>
+      <th>quarter</th>
+      <th>realgdp</th>
+      <th>realcons</th>
+      <th>realinv</th>
+      <th>realgovt</th>
+      <th>realdpi</th>
+      <th>cpi</th>
+      <th>m1</th>
+      <th>tbilrate</th>
+      <th>unemp</th>
+      <th>pop</th>
+      <th>infl</th>
+      <th>realint</th>
+      <th>ir</th>
+      <th>gdp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1959.0</td>
+      <td>1.0</td>
+      <td>2710.349</td>
+      <td>1707.4</td>
+      <td>286.898</td>
+      <td>470.045</td>
+      <td>1886.9</td>
+      <td>28.98</td>
+      <td>139.7</td>
+      <td>2.82</td>
+      <td>5.8</td>
+      <td>177.146</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>1.479383</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1959.0</td>
+      <td>2.0</td>
+      <td>2778.801</td>
+      <td>1733.7</td>
+      <td>310.859</td>
+      <td>481.301</td>
+      <td>1919.7</td>
+      <td>29.15</td>
+      <td>141.7</td>
+      <td>3.08</td>
+      <td>5.1</td>
+      <td>177.830</td>
+      <td>2.34</td>
+      <td>0.74</td>
+      <td>3.08</td>
+      <td>2.967657</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1959.0</td>
+      <td>3.0</td>
+      <td>2775.488</td>
+      <td>1751.8</td>
+      <td>289.226</td>
+      <td>491.260</td>
+      <td>1916.4</td>
+      <td>29.35</td>
+      <td>140.5</td>
+      <td>3.82</td>
+      <td>5.3</td>
+      <td>178.657</td>
+      <td>2.74</td>
+      <td>1.09</td>
+      <td>3.83</td>
+      <td>1.792534</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1959.0</td>
+      <td>4.0</td>
+      <td>2785.204</td>
+      <td>1753.7</td>
+      <td>299.356</td>
+      <td>484.052</td>
+      <td>1931.3</td>
+      <td>29.37</td>
+      <td>140.0</td>
+      <td>4.33</td>
+      <td>5.6</td>
+      <td>179.386</td>
+      <td>0.27</td>
+      <td>4.06</td>
+      <td>4.33</td>
+      <td>1.110571</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1960.0</td>
+      <td>1.0</td>
+      <td>2847.699</td>
+      <td>1770.5</td>
+      <td>331.722</td>
+      <td>462.199</td>
+      <td>1955.5</td>
+      <td>29.54</td>
+      <td>139.6</td>
+      <td>3.50</td>
+      <td>5.2</td>
+      <td>180.007</td>
+      <td>2.31</td>
+      <td>1.19</td>
+      <td>3.50</td>
+      <td>2.331547</td>
+    </tr>
+  </tbody>
 </table>
-
 </div>
 </div>
 </div>
@@ -1985,143 +1571,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>results.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="88">
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
+
+<table class="simpletable">
 <caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>ir</td>
-<td data-quarto-table-cell-role="th">R-squared (uncentered):</td>
-<td>0.884</td>
+<tbody><tr>
+  <th>Dep. Variable:</th>           <td>ir</td>        <th>  R-squared (uncentered):</th>      <td>   0.884</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared (uncentered):</td>
-<td>0.882</td>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.882</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>380.2</td>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   380.2</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Tue, 02 Mar 2021</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>5.64e-92</td>
+<tr>
+  <th>Date:</th>             <td>Tue, 02 Mar 2021</td> <th>  Prob (F-statistic):</th>          <td>5.64e-92</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>11:58:05</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-432.84</td>
+<tr>
+  <th>Time:</th>                 <td>11:58:05</td>     <th>  Log-Likelihood:    </th>          <td> -432.84</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>203</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>873.7</td>
+<tr>
+  <th>No. Observations:</th>      <td>   203</td>      <th>  AIC:               </th>          <td>   873.7</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>199</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>886.9</td>
+<tr>
+  <th>Df Residuals:</th>          <td>   199</td>      <th>  BIC:               </th>          <td>   886.9</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>4</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Df Model:</th>              <td>     4</td>      <th>                     </th>              <td> </td>   
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>              <td> </td>   
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">infl</td>
-<td>0.4380</td>
-<td>0.049</td>
-<td>8.895</td>
-<td>0.000</td>
-<td>0.341</td>
-<td>0.535</td>
+<tr>
+  <th>infl</th>  <td>    0.4380</td> <td>    0.049</td> <td>    8.895</td> <td> 0.000</td> <td>    0.341</td> <td>    0.535</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">gdp</td>
-<td>0.5710</td>
-<td>0.120</td>
-<td>4.739</td>
-<td>0.000</td>
-<td>0.333</td>
-<td>0.809</td>
+<tr>
+  <th>gdp</th>   <td>    0.5710</td> <td>    0.120</td> <td>    4.739</td> <td> 0.000</td> <td>    0.333</td> <td>    0.809</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">pop</td>
-<td>-0.0050</td>
-<td>0.002</td>
-<td>-2.068</td>
-<td>0.040</td>
-<td>-0.010</td>
-<td>-0.000</td>
+<tr>
+  <th>pop</th>   <td>   -0.0050</td> <td>    0.002</td> <td>   -2.068</td> <td> 0.040</td> <td>   -0.010</td> <td>   -0.000</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">unemp</td>
-<td>0.8064</td>
-<td>0.108</td>
-<td>7.458</td>
-<td>0.000</td>
-<td>0.593</td>
-<td>1.020</td>
+<tr>
+  <th>unemp</th> <td>    0.8064</td> <td>    0.108</td> <td>    7.458</td> <td> 0.000</td> <td>    0.593</td> <td>    1.020</td>
 </tr>
-</tbody>
-</table>
-<table class="simpletable table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>5.307</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>0.391</td>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 5.307</td> <th>  Durbin-Watson:     </th> <td>   0.391</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.070</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>7.501</td>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.070</td> <th>  Jarque-Bera (JB):  </th> <td>   7.501</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.070</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>0.0235</td>
+<tr>
+  <th>Skew:</th>          <td> 0.070</td> <th>  Prob(JB):          </th> <td>  0.0235</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>3.931</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>247.</td>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.931</td> <th>  Cond. No.          </th> <td>    247.</td>
 </tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br>[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</tbody></table><br><br>Notes:<br>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br>[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </div>
 </div>
 <p>At confidence level 2.5% gdp is between 0.333 and 0.809.</p>
@@ -2129,6 +1640,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The coefficients would be significantly different from 0.5 if 0.5 was not in the condifence interval.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -2159,23 +1671,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -2240,92 +1738,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
