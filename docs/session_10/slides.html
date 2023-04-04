@@ -504,32 +504,32 @@ Year 2022-2023
 <section id="read-a-regression-table" class="slide level2">
 <h2>Read A Regression Table</h2>
 
-<img src="graphs/regression_table.png" width="80%" class="r-stretch"></section>
+<img data-src="graphs/regression_table.png" class="r-stretch quarto-figure-center"><p class="caption">Example of a Regression Table</p></section>
 <section id="can-there-be-too-many-variables" class="slide level2">
 <h2>Can there be too many variables?</h2>
-<ol type="1">
-<li>Overfitting</li>
-</ol>
+<ul>
+<li><p>Overfitting</p>
 <ul>
 <li>bad predictions</li>
-</ul>
-<ol start="2" type="1">
-<li>Colinearity</li>
-</ol>
+</ul></li>
+<li><p>Colinearity</p>
 <ul>
 <li>can bias a coefficient of interest</li>
 <li>not a problem for prediction</li>
 <li>exact colinearity makes traditional OLS fail</li>
+</ul></li>
+<li><p>To choose the right amount of variables find a combination which maximizes adjusted R2 or an information criterium</p></li>
 </ul>
-<p>To choose the right amount of variables find a combination which maximizes adjusted R2 or an information criterium</p>
 </section>
 <section id="colinearity" class="slide level2">
 <h2>Colinearity</h2>
 <ul>
 <li><p><span class="math inline">\(x\)</span> is colinear with <span class="math inline">\(y\)</span> if <span class="math inline">\(cor(x,y)\)</span> very close to 1</p></li>
-<li><p>more generally <span class="math inline">\(x\)</span> is colinear with <span class="math inline">\(y_1, ... y_n\)</span> if <span class="math inline">\(x\)</span> can be deduced linearly from <span class="math inline">\(y_1...y_n\)</span></p></li>
-<li><p>there exists <span class="math inline">\(\lambda_1, ... \lambda_n\)</span> such that <span class="math inline">\(x = \lambda_1 x_1 + ... + \lambda_n x_n\)</span></p></li>
-<li><p>example: hours of sleep / hours awake (sleep=24-awake)</p></li>
+<li><p>more generally <span class="math inline">\(x\)</span> is colinear with <span class="math inline">\(y_1, ... y_n\)</span> if <span class="math inline">\(x\)</span> can be deduced linearly from <span class="math inline">\(y_1...y_n\)</span></p>
+<ul>
+<li>there exists <span class="math inline">\(\lambda_1, ... \lambda_n\)</span> such that <span class="math inline">\(x = \lambda_1 x_1 + ... + \lambda_n x_n\)</span></li>
+<li>example: hours of sleep / hours awake (sleep=24-awake)</li>
+</ul></li>
 <li><p>perfect colinearity is a problem: coefficients are not well defined</p></li>
 <li><p><span class="math inline">\(\text{productivity} = 0.1 + 0.5 \text{sleep} + 0.5 \text{awake}\)</span> or <span class="math inline">\(\text{productivity} = -11.9 + 1 \text{sleep} + 1 \text{awake}\)</span> ?</p></li>
 <li><p>best regressions have regressors that:</p></li>
@@ -555,134 +555,40 @@ Year 2022-2023
 <div class="columns">
 <div class="column">
 <div class="r-stack">
-<p><img class="fragment current-visible" src="graphs/reg_1_full.svg" width="100%" data-fragment-index="1"> <img class="fragment current-visible" src="graphs/reg_2_full.svg" width="100%" data-fragment-index="2"> <img class="fragment current-visible" src="graphs/reg_3_mixed.svg" width="100%" data-fragment-index="3"> <img class="fragment current-visible" src="graphs/reg_4_mixed.svg" width="100%" data-fragment-index="4"> <img class="fragment" src="graphs/reg_5_mixed.svg" width="100%" data-fragment-index="5"></p>
+<div class="fragment current-visible">
+<p><img data-src="graphs/reg_1_full.svg" width="800"></p>
+</div>
+<div class="fragment current-visible">
+<p><img data-src="graphs/reg_2_full.svg" width="800"></p>
+</div>
+<div class="fragment current-visible">
+<p><img data-src="graphs/reg_3_mixed.svg" width="800"></p>
+</div>
+<div class="fragment current-visible">
+<p><img data-src="graphs/reg_4_mixed.svg" width="800"></p>
+</div>
 </div>
 </div><div class="column">
-<div>
 <ul>
-<li class="fragment">Suppose we want to know the effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>.</li>
-<li class="fragment">We run the regression <span class="math inline">\(y = a + b x\)</span>
+<li>Suppose we want to know the effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>.</li>
+<li>We run the regression <span class="math inline">\(y = a + b x\)</span>
 <ul>
-<li class="fragment">we find <span class="math inline">\(y = 0.21 + \color{red}{0.15} x\)</span></li>
+<li>we find <span class="math inline">\(y = 0.21 + \color{red}{0.15} x\)</span></li>
 </ul></li>
-<li class="fragment">We then realize we have access to a categorical variable <span class="math inline">\(gender \in {male, female}\)</span></li>
-<li class="fragment">We then add the <span class="math inline">\(\delta\)</span> dummy variable to the regression: <span class="math inline">\(y = a + bx + c \delta\)</span>
+<li>We then realize we have access to a categorical variable <span class="math inline">\(gender \in {male, female}\)</span></li>
+<li>We then add the <span class="math inline">\(\delta\)</span> dummy variable to the regression: <span class="math inline">\(y = a + bx + c \delta\)</span>
 <ul>
-<li class="fragment">we find $ y = -0.04 + x - 0.98 $</li>
+<li>we find $ y = -0.04 + x - 0.98 $</li>
 </ul></li>
-<li class="fragment">Note that adding the indicator
+<li>Note that adding the indicator
 <ul>
-<li class="fragment">improved the fit (<span class="math inline">\(R^2\)</span> is 0.623 instead of 0.306)</li>
-<li class="fragment">corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)</li>
-<li class="fragment">provided an estimate for the effect of variable gender</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="unobserved-heterogeneity" class="slide level2">
-<h2>Unobserved Heterogeneity</h2>
-<div class="container">
-<div class="col">
-<div class="r-stack">
-<p><img class="fragment current-visible" src="graphs/panel_1.svg" width="100%" data-fragment-index="1"> <img class="fragment current-visible" src="graphs/panel_2.svg" width="100%" data-fragment-index="2"> <img class="fragment current-visible" src="graphs/panel_3.svg" width="100%" data-fragment-index="4"> <img class="fragment current-visible" src="graphs/panel_3.svg" width="100%" data-fragment-index="3"> <img class="fragment" src="graphs/panel_4.svg" width="100%" data-fragment-index="5"></p>
-</div>
-<table>
-<thead>
-<tr class="header">
-<th>Individual</th>
-<th>Gender</th>
-<th>Shirt color</th>
-<th>Education</th>
-<th>…</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>M</td>
-<td>?</td>
-<td>?</td>
-<td>?</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>F</td>
-<td>?</td>
-<td>?</td>
-<td>?</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>M</td>
-<td>?</td>
-<td>?</td>
-<td>?</td>
-</tr>
-<tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="col">
-<ul>
-<li><!-- .element: class="fragment" data-fragment-index="1" -->
-Suppose we want to know the effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>.</li>
-<li><!-- .element: class="fragment" data-fragment-index="2" -->
-We run the regression <span class="math inline">\(y = a + b x\)</span>
-<ul>
-<li>we find <span class="math inline">\(y = 1.09 + \color{red}{0.24} x\)</span></li>
-</ul></li>
-<li><!-- .element: class="fragment" data-fragment-index="3" -->
-But now, the data has a special panel structure.
-<ul>
-<li>we have a categorical variable corresponding to each individual</li>
-<li>it is linked to several omitted variables, most of which we don’t observe</li>
-</ul></li>
-<li><!-- .element: class="fragment"  data-fragment-index="4" -->
-<b>Fixed Effects</b>: use an indicator for each individual</li>
-<li>we need to drop the individual specific dummies that we observe (i.e.&nbsp;gender)</li>
-<li><!-- .element: class="fragment" data-fragment-index="5" -->
-Run the regression $y_{i,n} = a_i + b x_{i,n} $
-<ul>
-<li>we find $ y_{i,n} = a_i + x_{i,n} $</li>
-</ul></li>
-<li><!-- .element: class="fragment" -->
-Note that adding the indicator
-<ul>
-<li><!-- .element: class="fragment" data-fragment-index="6" -->
-improved the fit (<span class="math inline">\(R^2\)</span> is 0.631 instead of 0.278)</li>
-<li><!-- .element: class="fragment" data-fragment-index="7" -->
-corrected for the <strong>unobserved heterogeneity bias</strong> (true value of b is actually 0.2)</li>
+<li>improved the fit (<span class="math inline">\(R^2\)</span> is 0.623 instead of 0.306)</li>
+<li>corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)</li>
+<li>provided an estimate for the effect of variable gender</li>
 </ul></li>
 </ul>
 </div>
 </div>
-</section>
-<section id="fixed-effects" class="slide level2">
-<h2>Fixed Effects</h2>
-<ul>
-<li>Essentially: the intuition behind correcting for unobserved heterogeneity is the same as the one behind ommitted variable bias.</li>
-<li>Fixed Effects are essentially dummies specific to some categories of observations</li>
-<li>In panel data, there are two categories: individual index and time
-<ul>
-<li>individual (<span style="color: red"> Entity Effects</span>)</li>
-<li>time (<span style="color: blue">Time Effects</span>)</li>
-</ul></li>
-<li>We index regressions by them: <span class="math display">\[y_{it} = \color{red}{a_i} + \color{blue}{a_t} + b x_{i t} + ... \]</span></li>
-<li>Fixed effects are not very useful for prediction:
-<ul>
-<li>one can predict <span class="math inline">\(y_{it}\)</span> only for <span class="math inline">\(i,t\)</span> already in the database</li>
-<li>impossible to predict new individuals/new dates</li>
-</ul></li>
-<li>Remedy: random fixed effects</li>
-</ul>
 </section>
 <section id="endogeneity" class="slide level2">
 <h2>Endogeneity</h2>

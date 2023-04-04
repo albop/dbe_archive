@@ -5,10 +5,6 @@ author: Year 2022-2023
 format:
   # html: default
   revealjs:
-    toc: true
-    toc-depth: 1
-    toc-title: Plan
-    navigation: grid
     width: 1920
     height: 1080
     output-file: slides.html
@@ -113,23 +109,24 @@ Kurtosis:                       2.626   Cond. No.                         14.9
 
 ## Read A Regression Table
 
-<img src=graphs/regression_table.png width=80%>
+![Example of a Regression Table](graphs/regression_table.png)
 
 
 
 ## Can there be too many variables?
 
 
-1. Overfitting
+- Overfitting
 
   - bad predictions
 
-2. Colinearity
+- Colinearity
+
   - can bias a coefficient of interest
   - not a problem for prediction
   - exact colinearity makes traditional OLS fail
 
-To choose the right amount of variables find a combination which maximizes adjusted R2 or an information criterium
+- To choose the right amount of variables find a combination which maximizes adjusted R2 or an information criterium
 
 
 ## Colinearity
@@ -137,11 +134,13 @@ To choose the right amount of variables find a combination which maximizes adjus
 -  $x$ is colinear with $y$ if $cor(x,y)$ very close to 1
 -  more generally $x$ is colinear with $y_1, ... y_n$ if $x$ can be deduced linearly from $y_1...y_n$
 
-  - there exists $\lambda_1, ... \lambda_n$ such that $x = \lambda_1 x_1 + ... + \lambda_n x_n$
-  - example: hours of sleep / hours awake (sleep=24-awake)
+    - there exists $\lambda_1, ... \lambda_n$ such that $x = \lambda_1 x_1 + ... + \lambda_n x_n$
+    - example: hours of sleep / hours awake (sleep=24-awake)
+
 -  perfect colinearity is a problem: coefficients are not well defined
   
   - $\text{productivity} = 0.1 + 0.5 \text{sleep} + 0.5 \text{awake}$ or $\text{productivity} = -11.9 + 1 \text{sleep} + 1 \text{awake}$  ?
+
 -  best regressions have regressors that:
 
   - explain independent variable
@@ -168,21 +167,26 @@ $y = a + bx$
 
 :::: column
 
-<div class="r-stack">
+::::: {.r-stack}
 
-<img class="fragment current-visible" src=graphs/reg_1_full.svg  width=100% data-fragment-index=1>
-<img class="fragment current-visible" src=graphs/reg_2_full.svg  width=100% data-fragment-index=2>
-<img class="fragment current-visible" src=graphs/reg_3_mixed.svg width=100% data-fragment-index=3>
-<img class="fragment current-visible" src=graphs/reg_4_mixed.svg width=100% data-fragment-index=4>
-<img class="fragment" src=graphs/reg_5_mixed.svg width=100% data-fragment-index=5>
-
-</div>
+:::::: {.fragment .current-visible}
+![](graphs/reg_1_full.svg){width=800px}
+::::::
+:::::: {.fragment .current-visible}
+![](graphs/reg_2_full.svg){width=800px}
+::::::
+:::::: {.fragment .current-visible}
+![](graphs/reg_3_mixed.svg){width=800px}
+::::::
+:::::: {.fragment .current-visible}
+![](graphs/reg_4_mixed.svg){width=800px}
+::::::
+:::::
 
 ::::
 
 :::: column
 
-::::: incremental
 
 - Suppose we want to know the effect of $x$ on $y$.
 - We run the regression $y = a + b x$
@@ -195,76 +199,10 @@ $y = a + bx$
   - corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)
   - provided an estimate for the effect of variable gender
 
-:::::
-
 ::::
 
 :::
 
----
-
-## Unobserved Heterogeneity
-
-<div class="container">
-<div class="col">
-
-<div class="r-stack">
-
-<img class="fragment current-visible" src=graphs/panel_1.svg  width=100% data-fragment-index=1>
-<img class="fragment current-visible" src=graphs/panel_2.svg  width=100% data-fragment-index=2>
-<img class="fragment current-visible" src=graphs/panel_3.svg  width=100% data-fragment-index=4>
-<img class="fragment current-visible" src=graphs/panel_3.svg  width=100% data-fragment-index=3>
-<img class="fragment" src=graphs/panel_4.svg  width=100% data-fragment-index=5>
-
-</div>
-
-| Individual | Gender | Shirt color | Education | ... |
-| ---------- | ------ | ----------- | --------- | --- |
-| 1          | M      | ?           | ?         | ?   |
-| 2          | F      | ?           | ?         | ?   |
-| 3          | M      | ?           | ?         | ?   |
-| ...        | ...    | ...         | ...       | ... |
-
-
-</div>
-
-<div class="col">
-
-- <!-- .element: class="fragment" data-fragment-index="1" -->Suppose we want to know the effect of $x$ on $y$.
-- <!-- .element: class="fragment" data-fragment-index="2" -->We run the regression $y = a + b x$
-  - we find $y = 1.09 + \color{red}{0.24} x$
-- <!-- .element: class="fragment" data-fragment-index="3" -->But now, the data has a special panel structure.
-  - we have a categorical variable corresponding to each individual
-  - it is linked to several omitted variables, most of which we don't observe
--  <!-- .element: class="fragment"  data-fragment-index="4" --> <b>Fixed Effects</b>: use an indicator for each individual
-  - we need to drop the individual specific dummies that we observe (i.e. gender)
-- <!-- .element: class="fragment" data-fragment-index="5" -->Run the regression $y_{i,n} = a_i + b x_{i,n} $
-  - we find $ y_{i,n} = a_i + \color{red}{0.18} x_{i,n} $
-- <!-- .element: class="fragment" -->Note that adding the indicator
-  - <!-- .element: class="fragment" data-fragment-index="6" -->improved the fit  ($R^2$ is 0.631 instead of 0.278)
-  - <!-- .element: class="fragment" data-fragment-index="7" -->corrected for the <strong>unobserved heterogeneity bias</strong> (true value of b is actually 0.2)
-
-</div>
-
-</div>
-
----
-
-## Fixed Effects
-
-- Essentially: the intuition behind correcting for unobserved heterogeneity is the same as the one behind ommitted variable bias.
-- Fixed Effects are essentially dummies specific to some categories of observations
-- In panel data, there are two categories: individual index and time
-  - individual (<span style="color: red"> Entity Effects</span>)
-  - time (<span style="color: blue">Time Effects</span>)
-- We index regressions by them:
-  $$y_{it} = \color{red}{a_i} + \color{blue}{a_t} + b x_{i t} + ... $$
-- Fixed effects are not very useful for prediction:
-  - one can predict $y_{it}$ only for $i,t$ already in the database
-  - impossible to predict new individuals/new dates
-- Remedy: random fixed effects
-
----
 
 ## Endogeneity
 
