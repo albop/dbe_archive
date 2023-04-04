@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Year 2022-2023">
 
-<title>Data-Based Economics – index</title>
+<title>Data-Based Economics - Some Important Points</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Data-Based Economics</h1>
+      <h1 class="quarto-secondary-nav-title">Some Important Points</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -214,7 +215,29 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Some Important Points</h1>
+<p class="subtitle lead">Data-Based Economics</p>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Year 2022-2023 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
 
 <section id="important-points" class="level2">
 <h2 class="anchored" data-anchor-id="important-points">Important points</h2>
@@ -291,19 +314,13 @@ Skew:                           0.352   Prob(JB):                        0.265
 Kurtosis:                       2.626   Cond. No.                         14.9
 ==============================================================================</code></pre>
 <ul>
-<li><!-- .element: class="fragment" -->
-Understand p-value: chances that a given statistics might have been obtained, under the H0 hypothesis</li>
-<li><!-- .element: class="fragment" -->
-Check:
+<li>Understand p-value: chances that a given statistics might have been obtained, under the H0 hypothesis</li>
+<li>Check:
 <ul>
-<li><!-- .element: class="fragment" -->
-global significance (Fisher test): chances would have obtained this R2 if all real coefficients were actually 0 (H0 hypothesis)</li>
-<li><!-- .element: class="fragment" -->
-<code>R2</code>: provides an indication of predictive power. Does not prevent overfitting.</li>
-<li><!-- .element: class="fragment" -->
-<code>adj. R2</code>: predictive power corrected for excessive degrees of freedom</li>
-<li><!-- .element: class="fragment" -->
-coefficient:
+<li>global significance (Fisher test): chances would have obtained this R2 if all real coefficients were actually 0 (H0 hypothesis)</li>
+<li><code>R2</code>: provides an indication of predictive power. Does not prevent overfitting.</li>
+<li><code>adj. R2</code>: predictive power corrected for excessive degrees of freedom</li>
+<li>coefficient:
 <ul>
 <li><code>p-value</code> probability that coefficient might have been greater than observed, if it was actually 0.</li>
 <li>if p-value is smaller than 5%: the coefficient is significant at a 5% level</li>
@@ -343,17 +360,13 @@ coefficient:
 <section id="colinearity" class="level3">
 <h3 class="anchored" data-anchor-id="colinearity">Colinearity</h3>
 <ul>
-<li><!-- .element: class="fragment" -->
-<span class="math inline">\(x\)</span> is colinear with <span class="math inline">\(y\)</span> if <span class="math inline">\(cor(x,y)\)</span> very close to 1</li>
-<li><!-- .element: class="fragment" -->
-more generally <span class="math inline">\(x\)</span> is colinear with <span class="math inline">\(y_1, ... y_n\)</span> if <span class="math inline">\(x\)</span> can be deduced linearly from <span class="math inline">\(y_1...y_n\)</span></li>
+<li><span class="math inline">\(x\)</span> is colinear with <span class="math inline">\(y\)</span> if <span class="math inline">\(cor(x,y)\)</span> very close to 1</li>
+<li>more generally <span class="math inline">\(x\)</span> is colinear with <span class="math inline">\(y_1, ... y_n\)</span> if <span class="math inline">\(x\)</span> can be deduced linearly from <span class="math inline">\(y_1...y_n\)</span></li>
 <li>there exists <span class="math inline">\(\lambda_1, ... \lambda_n\)</span> such that <span class="math inline">\(x = \lambda_1 x_1 + ... + \lambda_n x_n\)</span></li>
 <li>example: hours of sleep / hours awake (sleep=24-awake)</li>
-<li><!-- .element: class="fragment" -->
-perfect colinearity is a problem: coefficients are not well defined</li>
+<li>perfect colinearity is a problem: coefficients are not well defined</li>
 <li><span class="math inline">\(\text{productivity} = 0.1 + 0.5 \text{sleep} + 0.5 \text{awake}\)</span> or <span class="math inline">\(\text{productivity} = -11.9 + 1 \text{sleep} + 1 \text{awake}\)</span> ?</li>
-<li><!-- .element: class="fragment" -->
-best regressions have regressors that:</li>
+<li>best regressions have regressors that:</li>
 <li>explain independent variable</li>
 <li>are independent from each other (as much as possible)</li>
 </ul>
@@ -375,39 +388,32 @@ best regressions have regressors that:</li>
 </section>
 <section id="omitted-variable" class="level3">
 <h3 class="anchored" data-anchor-id="omitted-variable">omitted variable</h3>
-<div class="container">
-<div class="col">
+<div class="columns">
+<div class="column">
 <div class="r-stack">
 <p><img class="fragment current-visible" src="graphs/reg_1_full.svg" width="100%" data-fragment-index="1"> <img class="fragment current-visible" src="graphs/reg_2_full.svg" width="100%" data-fragment-index="2"> <img class="fragment current-visible" src="graphs/reg_3_mixed.svg" width="100%" data-fragment-index="3"> <img class="fragment current-visible" src="graphs/reg_4_mixed.svg" width="100%" data-fragment-index="4"> <img class="fragment" src="graphs/reg_5_mixed.svg" width="100%" data-fragment-index="5"></p>
 </div>
-</div>
-<div class="col">
-<ul>
-<li><!-- .element: class="fragment" data-fragment-index="1" -->
-Suppose we want to know the effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>.</li>
-<li><!-- .element: class="fragment" data-fragment-index="2" -->
-We run the regression <span class="math inline">\(y = a + b x\)</span>
-<ul>
+</div><div class="column">
+<div class="incremental">
+<ul class="incremental">
+<li>Suppose we want to know the effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>.</li>
+<li>We run the regression <span class="math inline">\(y = a + b x\)</span>
+<ul class="incremental">
 <li>we find <span class="math inline">\(y = 0.21 + \color{red}{0.15} x\)</span></li>
 </ul></li>
-<li><!-- .element: class="fragment" data-fragment-index="3" -->
-We then realize we have access to a categorical variable <span class="math inline">\(gender \in {male, female}\)</span></li>
-<li><!-- .element: class="fragment" data-fragment-index="4" -->
-We then add the <span class="math inline">\(\delta\)</span> dummy variable to the regression: <span class="math inline">\(y = a + bx + c \delta\)</span>
-<ul>
+<li>We then realize we have access to a categorical variable <span class="math inline">\(gender \in {male, female}\)</span></li>
+<li>We then add the <span class="math inline">\(\delta\)</span> dummy variable to the regression: <span class="math inline">\(y = a + bx + c \delta\)</span>
+<ul class="incremental">
 <li>we find $ y = -0.04 + x - 0.98 $</li>
 </ul></li>
-<li><!-- .element: class="fragment" -->
-Note that adding the indicator
-<ul>
-<li><!-- .element: class="fragment" data-fragment-index="5" -->
-improved the fit (<span class="math inline">\(R^2\)</span> is 0.623 instead of 0.306)</li>
-<li><!-- .element: class="fragment" data-fragment-index="6" -->
-corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)</li>
-<li><!-- .element: class="fragment" data-fragment-index="7" -->
-provided an estimate for the effect of variable gender</li>
+<li>Note that adding the indicator
+<ul class="incremental">
+<li>improved the fit (<span class="math inline">\(R^2\)</span> is 0.623 instead of 0.306)</li>
+<li>corrected for the <strong>omitted variable bias</strong> (true value of b is actually 0.2)</li>
+<li>provided an estimate for the effect of variable gender</li>
 </ul></li>
 </ul>
+</div>
 </div>
 </div>
 <hr>
